@@ -72,3 +72,9 @@ CMakeLists.txt.user*
 *.dll
 *.exe
 
+# VSCode generated files
+.vscode/
+*.code-workspace
+
+# Build files
+build/
