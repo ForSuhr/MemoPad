@@ -3,12 +3,24 @@ import QtQuick.Controls
 
 Item {
     id: root
-    width: 100
-    height: 100
+    width: 1000
+    height: 500
 
+    property int dotSize: 1
+    property int dotInterval: 20
     property real zoomFactor: 1.0
-    property real panX: 0
-    property real panY: 0
+    property real zoomMin: 0.5 // zoom out
+    property real zoomMax: 2.0 // zoom in
+
+    transform: [
+        Scale {
+            id: itemScale
+            origin.x: width / 2
+            origin.y: height / 2
+            xScale: zoomFactor
+            yScale: zoomFactor
+        }
+    ]
 
     Canvas {
         id: canvas
@@ -17,62 +29,57 @@ Item {
             var ctx = getContext("2d")
             ctx.clearRect(0, 0, canvas.width, canvas.height)
             ctx.fillStyle = "gainsboro"
-            var dotSize = 1
-            for (var x = 0; x < canvas.width; x += 20) {
-                for (var y = 0; y < canvas.height; y += 20) {
+            for (var x = 0; x < canvas.width; x += dotInterval) {
+                for (var y = 0; y < canvas.height; y += dotInterval) {
                     ctx.beginPath()
                     ctx.arc(x, y, dotSize, 0, 2 * Math.PI) // Draw a dot
                     ctx.fill()
                 }
             }
         }
-        transform: [
-            Scale {
-                origin.x: canvas.width / 2
-                origin.y: canvas.height / 2
-                xScale: zoomFactor
-                yScale: zoomFactor
-            },
-            Translate {
-                x: root.panX
-                y: root.panY
-            }
-        ]
+
+        //        Rectangle {
+        //            width: 100
+        //            height: 100
+        //            color: "red"
+        //            anchors.left: canvas.left
+        //            anchors.top: canvas.top
+        //        }
+        //        Rectangle {
+        //            width: 100
+        //            height: 100
+        //            color: "blue"
+        //            anchors.right: canvas.right
+        //            anchors.bottom: canvas.bottom
+        //        }
     }
 
-    Slider {
-        id: zoomSlider
-        from: 1.0
-        to: 2.0
-        value: 1.0 // initial zoom factor
-        onValueChanged: {
-            zoomFactor = value
-        }
-    }
-
+    /*pan*/
     MouseArea {
         id: panArea
         anchors.fill: canvas
-        drag.target: canvas
+        drag.target: root // drag the whole item instead of canvas
+        // TODO: add boundaries
         acceptedButtons: Qt.RightButton
-        property real lastMouseX: 0
-        property real lastMouseY: 0
+    }
 
-        onPressed: {
-            lastMouseX = mouseX
-            lastMouseY = mouseY
-        }
+    /*scale*/
+    MouseArea {
+        id: scaleArea
+        anchors.fill: canvas
+        acceptedButtons: Qt.MiddleButton
 
-        onPositionChanged: {
-            if (drag.active) {
-                var deltaX = (mouseX - lastMouseX) / root.zoomFactor
-                var deltaY = (mouseY - lastMouseY) / root.zoomFactor
-                root.panX += deltaX
-                root.panY += deltaY
-                lastMouseX = mouseX
-                lastMouseY = mouseY
-                canvas.requestPaint() // Redraw the canvas after pan
-            }
-        }
+        onPressed: mouse => {
+                       root.zoomFactor = 1.0 // reset scale
+                       canvas.x = 0
+                       canvas.y = 0
+                   }
+        onWheel: wheel => {
+                     var scrollAngleDelta = wheel.angleDelta.y / 120 // 120 units equals 15 degrees
+                     root.zoomFactor += 0.1 * scrollAngleDelta
+                     root.zoomFactor = Math.min(zoomMax,
+                                                Math.max(zoomMin,
+                                                         root.zoomFactor))
+                 }
     }
 }
