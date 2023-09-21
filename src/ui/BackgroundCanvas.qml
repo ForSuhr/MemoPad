@@ -3,14 +3,14 @@ import QtQuick.Controls
 
 Item {
     id: root
-    width: 1000
-    height: 500
     x: -parent.width / 2
     y: -parent.height / 2
 
     property real dotSize: 1.5
     property int dotInterval: 20
     property string dotColor: "gainsboro"
+    property bool hasBorder: true // indicate if the canvas has border
+    property string borderColor: "gainsboro"
     property real zoomFactor: 1.0
     property real zoomMin: 0.5 // zoom out
     property real zoomMax: 2.0 // zoom in
@@ -29,6 +29,8 @@ Item {
 
     Canvas {
         id: canvas
+        width: root.width
+        height: root.height
         anchors.fill: parent
         onPaint: {
             var ctx = getContext("2d")
@@ -40,6 +42,16 @@ Item {
                     ctx.arc(x, y, dotSize, 0, 2 * Math.PI) // Draw a dot
                     ctx.fill()
                 }
+            }
+
+            // Draw a border (a rectangle around the Canvas)
+            if (hasBorder) {
+                ctx.strokeStyle = borderColor
+                ctx.lineWidth = 10
+                ctx.beginPath()
+                ctx.rect(0, 0, width, height)
+                ctx.closePath()
+                ctx.stroke()
             }
         }
     }
