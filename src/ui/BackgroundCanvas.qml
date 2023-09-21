@@ -8,8 +8,9 @@ Item {
     x: -parent.width / 2
     y: -parent.height / 2
 
-    property int dotSize: 1
+    property real dotSize: 1.5
     property int dotInterval: 20
+    property string dotColor: "gainsboro"
     property real zoomFactor: 1.0
     property real zoomMin: 0.5 // zoom out
     property real zoomMax: 2.0 // zoom in
@@ -32,7 +33,7 @@ Item {
         onPaint: {
             var ctx = getContext("2d")
             ctx.clearRect(0, 0, canvas.width, canvas.height)
-            ctx.fillStyle = "gainsboro"
+            ctx.fillStyle = dotColor
             for (var x = 0; x < canvas.width; x += dotInterval) {
                 for (var y = 0; y < canvas.height; y += dotInterval) {
                     ctx.beginPath()
