@@ -5,7 +5,6 @@ PreferencesManager::PreferencesManager(QObject* parent)
 {
     QString path = QCoreApplication::applicationDirPath() + "/config/settings.json";
     m_settings = new QSettings(path, JsonFormat);
-    qInfo() << "preferences path: " << path;
 }
 
 QString PreferencesManager::toolBarArea()
@@ -16,4 +15,5 @@ QString PreferencesManager::toolBarArea()
 void PreferencesManager::setToolBarArea(QString toolBarArea)
 {
     m_settings->setValue("layout/toolBarArea", toolBarArea);
+    emit toolBarAreaChanged();
 }

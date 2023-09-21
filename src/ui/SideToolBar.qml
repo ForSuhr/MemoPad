@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Controls
+import QtQuick.Layouts
 
 Item {
     id: root
@@ -63,48 +64,60 @@ Item {
             border.width: 4
         }
 
+        RowLayout {
+            anchors.fill: parent
+            Rectangle {
+                id: dragAreaRect
+                width: toolBar.height - 15
+                height: toolBar.height - 15
+                radius: 10
+                border.width: 2
+                border.color: "whitesmoke"
+                color: "lightgray"
+                MouseArea {
+                    id: dragArea
+                    anchors.fill: dragAreaRect
+                    drag.target: toolBar
+                    drag.minimumX: 0
+                    drag.minimumY: 0
+                    drag.maximumX: root.parent.width - toolBar.width
+                    drag.maximumY: root.parent.height - toolBar.height
+                    property real currentX: 0
+                    property real currentY: 0
+
+                    onPressed: {
+                        topArea.visible = true
+                        bottomArea.visible = true
+                        toolBar.background.color = toolBarPressedColor
+                        currentX = toolBar.x
+                        currentY = toolBar.y
+                    }
+                    onReleased: {
+                        topArea.visible = false
+                        bottomArea.visible = false
+                        toolBar.background.color = toolBarColor
+                        // recovery the position if a drag action was not accepted by a drop area
+                        if (toolBar.Drag.drop() !== Qt.MoveAction) {
+                            toolBar.x = currentX
+                            toolBar.y = currentY
+                        }
+                    }
+                }
+            }
+        }
+
         Drag.active: dragArea.drag.active
         Drag.keys: [topAreaKey, bottomAreaKey]
 
         Behavior on x {
             SmoothedAnimation {
-                velocity: 1000
+                velocity: 2000
             }
         }
 
         Behavior on y {
             SmoothedAnimation {
-                velocity: 1000
-            }
-        }
-
-        MouseArea {
-            id: dragArea
-            anchors.fill: parent
-            drag.target: toolBar
-            drag.minimumX: 0
-            drag.minimumY: 0
-            drag.maximumX: root.parent.width - toolBar.width
-            drag.maximumY: root.parent.height - toolBar.height
-            property real currentX: 0
-            property real currentY: 0
-
-            onPressed: {
-                topArea.visible = true
-                bottomArea.visible = true
-                toolBar.background.color = toolBarPressedColor
-                currentX = toolBar.x
-                currentY = toolBar.y
-            }
-            onReleased: {
-                topArea.visible = false
-                bottomArea.visible = false
-                toolBar.background.color = toolBarColor
-                // recovery the position if a drag action was not accepted by a drop area
-                if (toolBar.Drag.drop() !== Qt.MoveAction) {
-                    toolBar.x = currentX
-                    toolBar.y = currentY
-                }
+                velocity: 2000
             }
         }
     }

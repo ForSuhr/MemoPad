@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 
-project(MemoPad VERSION 0.1 LANGUAGES CXX)
+project(MemoPad VERSION 1.0 LANGUAGES CXX)
 
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -15,6 +15,8 @@ qt_add_qml_module(MemoPad
     URI MemoPad
     VERSION 1.0
     RESOURCES
+        ui/assets/themes/lumos/canvas.svg
+        ui/assets/themes/lumos/note.svg
     SOURCES
         models/texteditor.h
         models/texteditor.cpp
