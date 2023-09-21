@@ -45,9 +45,9 @@ Item {
         }
     }
 
-    ToolBar {
+    Pane {
         id: toolBar
-        width: 200
+        width: 50 * 4 // depends on how many items inside the RowLayout
         height: 50
         x: toolBarArea
            === "bottom area" ? bottomArea.x + (bottomArea.width - toolBar.width)
@@ -65,11 +65,29 @@ Item {
         }
 
         RowLayout {
-            anchors.fill: parent
+            width: toolBar.width - 18
+            height: toolBar.height - 18
+            SideToolBarItem {
+                id: canvasItem
+                implicitWidth: parent.height
+                implicitHeight: parent.height
+                imageSource: "assets/themes/lumos/canvas.svg"
+            }
+            SideToolBarItem {
+                id: noteItem
+                implicitWidth: parent.height
+                implicitHeight: parent.height
+                imageSource: "assets/themes/lumos/note.svg"
+            }
+            Item {
+                id: spacerItem
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+            }
             Rectangle {
                 id: dragAreaRect
-                width: toolBar.height - 15
-                height: toolBar.height - 15
+                implicitWidth: parent.height
+                implicitHeight: parent.height
                 radius: 10
                 border.width: 2
                 border.color: "whitesmoke"

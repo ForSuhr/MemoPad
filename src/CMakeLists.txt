@@ -15,6 +15,7 @@ qt_add_qml_module(MemoPad
     URI MemoPad
     VERSION 1.0
     RESOURCES
+        ui/assets/themes/lumos/blank.svg
         ui/assets/themes/lumos/canvas.svg
         ui/assets/themes/lumos/note.svg
     SOURCES
@@ -30,6 +31,7 @@ qt_add_qml_module(MemoPad
         ui/BackgroundCanvas.qml
         ui/SideToolBar.qml
         ui/SideToolBarArea.qml
+        ui/SideToolBarItem.qml
 )
 
 set_target_properties(MemoPad PROPERTIES
