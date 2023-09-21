@@ -18,6 +18,10 @@ qt_add_qml_module(MemoPad
     SOURCES
         models/texteditor.h
         models/texteditor.cpp
+        utils/preferencesmanager.h
+        utils/preferencesmanager.cpp
+        utils/qsettingsjson.h
+        utils/qsettingsjson.cpp
     QML_FILES
         ui/Main.qml
         ui/TextEditor.qml
