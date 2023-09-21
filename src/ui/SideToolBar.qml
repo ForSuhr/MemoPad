@@ -4,11 +4,14 @@ import QtQuick.Controls
 Item {
     id: root
 
+    signal toolBarAreaChangedUI(string area)
+
     property string toolBarColor: "white"
     property string toolBarPressedColor: "ghostwhite"
     property string toolBarBorderColor: "whitesmoke"
     property string topAreaKey: "top area"
     property string bottomAreaKey: "bottom area"
+    property string toolBarArea: "top area" // area read from settings
     property var defaultArea: topArea
 
     SideToolBarArea {
@@ -22,6 +25,7 @@ Item {
         onToolBarDropped: {
             toolBar.x = topArea.x + (topArea.width - toolBar.width) / 2
             toolBar.y = topArea.y + (topArea.height - toolBar.height) / 2
+            toolBarAreaChangedUI(topAreaKey)
         }
     }
 
@@ -36,6 +40,7 @@ Item {
         onToolBarDropped: {
             toolBar.x = bottomArea.x + (bottomArea.width - toolBar.width) / 2
             toolBar.y = bottomArea.y + (bottomArea.height - toolBar.height) / 2
+            toolBarAreaChangedUI(bottomAreaKey)
         }
     }
 
@@ -43,8 +48,12 @@ Item {
         id: toolBar
         width: 200
         height: 50
-        x: defaultArea.x + (defaultArea.width - toolBar.width) / 2
-        y: defaultArea.y + (defaultArea.height - toolBar.height) / 2
+        x: toolBarArea
+           === "bottom area" ? bottomArea.x + (bottomArea.width - toolBar.width)
+                               / 2 : defaultArea.x + (defaultArea.width - toolBar.width) / 2
+        y: toolBarArea
+           === "bottom area" ? bottomArea.y + (bottomArea.height - toolBar.height)
+                               / 2 : defaultArea.y + (defaultArea.height - toolBar.height) / 2
         opacity: enabled
         background: Rectangle {
             opacity: enabled ? 1 : 0.5
