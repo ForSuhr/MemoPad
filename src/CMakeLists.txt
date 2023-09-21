@@ -23,6 +23,7 @@ qt_add_qml_module(MemoPad
         ui/TextEditor.qml
         ui/BackgroundCanvas.qml
         ui/SideToolBar.qml
+        ui/SideToolBarArea.qml
 )
 
 set_target_properties(MemoPad PROPERTIES
