@@ -14,14 +14,15 @@ qt_add_executable(MemoPad
 qt_add_qml_module(MemoPad
     URI MemoPad
     VERSION 1.0
-    QML_FILES
-        ui/Main.qml
-        ui/TextEditor.qml
     RESOURCES
     SOURCES
         models/texteditor.h
         models/texteditor.cpp
-        QML_FILES ui/BackgroundCanvas.qml
+    QML_FILES
+        ui/Main.qml
+        ui/TextEditor.qml
+        ui/BackgroundCanvas.qml
+        ui/SideToolBar.qml
 )
 
 set_target_properties(MemoPad PROPERTIES
