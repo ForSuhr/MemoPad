@@ -5,18 +5,22 @@ Item {
     id: root
     width: 1000
     height: 500
+    x: -parent.width / 2
+    y: -parent.height / 2
 
     property int dotSize: 1
     property int dotInterval: 20
     property real zoomFactor: 1.0
     property real zoomMin: 0.5 // zoom out
     property real zoomMax: 2.0 // zoom in
+    property real mouseX: 0.0
+    property real mouseY: 0.0
 
     transform: [
         Scale {
             id: itemScale
-            origin.x: width / 2
-            origin.y: height / 2
+            origin.x: root.mouseX
+            origin.y: root.mouseY
             xScale: zoomFactor
             yScale: zoomFactor
         }
@@ -37,21 +41,6 @@ Item {
                 }
             }
         }
-
-        //        Rectangle {
-        //            width: 100
-        //            height: 100
-        //            color: "red"
-        //            anchors.left: canvas.left
-        //            anchors.top: canvas.top
-        //        }
-        //        Rectangle {
-        //            width: 100
-        //            height: 100
-        //            color: "blue"
-        //            anchors.right: canvas.right
-        //            anchors.bottom: canvas.bottom
-        //        }
     }
 
     /*pan*/
@@ -69,12 +58,16 @@ Item {
         anchors.fill: canvas
         acceptedButtons: Qt.MiddleButton
 
-        onPressed: mouse => {
+        onPressed: () => {
                        root.zoomFactor = 1.0 // reset scale
-                       canvas.x = 0
-                       canvas.y = 0
+                       root.x = -root.parent.width / 2
+                       root.y = -root.parent.height / 2
                    }
         onWheel: wheel => {
+                     // get mouse position when wheel is scrolled
+                     root.mouseX = wheel.x
+                     root.mouseY = wheel.y
+                     // zoom in & out
                      var scrollAngleDelta = wheel.angleDelta.y / 120 // 120 units equals 15 degrees
                      root.zoomFactor += 0.1 * scrollAngleDelta
                      root.zoomFactor = Math.min(zoomMax,
