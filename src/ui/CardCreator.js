@@ -5,19 +5,19 @@ var mouseAreaPosInWindow
 
 function startDrag(mouse) {
     // get the mouse area position in window
-    mouseAreaPosInWindow = root.mapToItem(sideToolBar, 0, 0)
+    mouseAreaPosInWindow = root.mapToItem(window.contentItem, 0, 0)
     // store the mouse position(relative to mouse area) when mouse is pressed
     onPressedMouse = {
         "x": mouse.x,
         "y": mouse.y
     }
-    loadComponent()
+    loadComponent(mouse)
 }
 
-function loadComponent() {
+function loadComponent(mouse) {
     // avoid duplicate loadding
     if (cardComponent != null) {
-        createCard()
+        createCard(mouse)
         return
     }
 
@@ -26,16 +26,22 @@ function loadComponent() {
     if (cardComponent.status === Component.Loading)
         cardComponent.statusChanged.connect(createCard)
     else
-        createCard()
+        createCard(mouse)
 }
 
-function createCard() {
+function createCard(mouse) {
     // create card from the loaded component
     if (cardComponent.status === Component.Ready && draggedCard == null) {
         // set card layer as its parent
         draggedCard = cardComponent.createObject(bgCanvas, {
-                                                     "x": mouseAreaPosInWindow.x,
-                                                     "y": mouseAreaPosInWindow.y
+                                                     "x": root.mapToItem(
+                                                              bgCanvas,
+                                                              mouse.x,
+                                                              mouse.y).x - onPressedMouse.x,
+                                                     "y": root.mapToItem(
+                                                              bgCanvas,
+                                                              mouse.x,
+                                                              mouse.y).y - onPressedMouse.y
                                                  })
     }
 }
@@ -44,8 +50,10 @@ function continueDrag(mouse) {
     if (draggedCard == null)
         return
 
-    draggedCard.x = mouse.x + mouseAreaPosInWindow.x - onPressedMouse.x - bgCanvas.x
-    draggedCard.y = mouse.y + mouseAreaPosInWindow.y - onPressedMouse.y - bgCanvas.y
+    draggedCard.x = root.mapToItem(bgCanvas, mouse.x,
+                                   mouse.y).x - onPressedMouse.x
+    draggedCard.y = root.mapToItem(bgCanvas, mouse.x,
+                                   mouse.y).y - onPressedMouse.y
 }
 
 function endDrag(mouse) {
