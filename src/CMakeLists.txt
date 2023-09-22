@@ -32,6 +32,9 @@ qt_add_qml_module(MemoPad
         ui/SideToolBar.qml
         ui/SideToolBarArea.qml
         ui/SideToolBarItem.qml
+        ui/CardCreator.js
+        ui/NoteCard.qml
+        ui/CardLayer.qml
 )
 
 set_target_properties(MemoPad PROPERTIES

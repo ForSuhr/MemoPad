@@ -4,6 +4,7 @@ import QtQuick.Controls
 import QtQuick.Dialogs
 
 Item {
+    id: root
     width: 640
     height: 480
     visible: true

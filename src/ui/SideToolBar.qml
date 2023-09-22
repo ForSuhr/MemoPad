@@ -72,6 +72,7 @@ Item {
                 implicitWidth: parent.height
                 implicitHeight: parent.height
                 toolBarArea: root.toolBarArea
+                componentFile: "NoteCard.qml"
                 imageSource: "assets/themes/lumos/canvas.svg"
             }
             SideToolBarItem {
@@ -79,6 +80,7 @@ Item {
                 implicitWidth: parent.height
                 implicitHeight: parent.height
                 toolBarArea: root.toolBarArea
+                componentFile: "NoteCard.qml"
                 imageSource: "assets/themes/lumos/note.svg"
             }
             Item {

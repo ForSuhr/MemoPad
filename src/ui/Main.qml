@@ -22,6 +22,12 @@ Window {
         height: window.height * 2
     }
 
+    CardLayer {
+        id: cardLayer
+        width: bgCanvas.width
+        height: bgCanvas.height
+    }
+
     SideToolBar {
         id: sideToolBar
         width: window.width
