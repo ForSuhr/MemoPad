@@ -71,12 +71,14 @@ Item {
                 id: canvasItem
                 implicitWidth: parent.height
                 implicitHeight: parent.height
+                toolBarArea: root.toolBarArea
                 imageSource: "assets/themes/lumos/canvas.svg"
             }
             SideToolBarItem {
                 id: noteItem
                 implicitWidth: parent.height
                 implicitHeight: parent.height
+                toolBarArea: root.toolBarArea
                 imageSource: "assets/themes/lumos/note.svg"
             }
             Item {
