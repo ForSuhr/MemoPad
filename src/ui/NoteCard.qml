@@ -1,27 +1,31 @@
 import QtQuick
 
-Item {
+ResizableItem {
     id: root
-    width: 32
-    height: 32
+    width: 128
+    height: 64
 
     property bool created: false
+    property bool selected: false
+
+    onCreatedChanged: console.log("new card created")
+    onSelectedChanged: isVisble = selected
 
     Rectangle {
         id: rect
+        z: 0
         width: root.width
         height: root.height
-        color: "red"
-    }
-
-    onCreatedChanged: {
-        console.log("new card created")
+        color: "snow"
+        border.width: 4
+        border.color: "gainsboro"
+        radius: 10
     }
 
     MouseArea {
-        id: mouseArea
+        id: focusArea
         width: root.width
         height: root.height
-        drag.target: root
+        onClicked: selected = true
     }
 }

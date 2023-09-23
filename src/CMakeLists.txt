@@ -35,6 +35,7 @@ qt_add_qml_module(MemoPad
         ui/CardCreator.js
         ui/NoteCard.qml
         ui/CardLayer.qml
+        ui/ResizableItem.qml
 )
 
 set_target_properties(MemoPad PROPERTIES
