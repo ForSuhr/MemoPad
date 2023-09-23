@@ -10,14 +10,14 @@ Item {
     property real maxWidth: 1000
     property int areaBorderWidth: 6
     property string areaBorderColor: "lightgray"
-    property string areaColor: "whitesmoke"
+    property string areaColor: "transparent"
     property string dotColor: "gray"
     property int dotSize: 15
 
     /*select area*/
     Rectangle {
         id: selectAreaRect
-        z: 1
+        z: 2
         width: root.width
         height: root.height
         border.width: areaBorderWidth
@@ -26,12 +26,16 @@ Item {
         opacity: 1
         radius: 10
         visible: isVisble
+        //        MouseArea {
+        //            anchors.fill: parent
+        //            onClicked: visible = false
+        //        }
     }
 
     /*dots for resize*/
     Rectangle {
         id: topDot
-        z: 1
+        z: 2
         width: dotSize
         height: dotSize
         radius: dotSize / 2
@@ -61,7 +65,7 @@ Item {
 
     Rectangle {
         id: bottomDot
-        z: 1
+        z: 2
         width: dotSize
         height: dotSize
         radius: dotSize / 2
@@ -90,7 +94,7 @@ Item {
 
     Rectangle {
         id: leftDot
-        z: 1
+        z: 2
         width: dotSize
         height: dotSize
         radius: dotSize / 2
@@ -120,7 +124,7 @@ Item {
 
     Rectangle {
         id: rightDot
-        z: 1
+        z: 2
         width: dotSize
         height: dotSize
         radius: dotSize / 2
