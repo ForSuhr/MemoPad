@@ -57,15 +57,7 @@ ResizableItem {
         selectionColor: "aliceblue"
         selectedTextColor: "black"
 
-        /*adjust text area according to contents automatically*/
-        property int lastLineCount
-        Component.onCompleted: lastLineCount = lineCount
-        onLineCountChanged: {
-            if (lastLineCount < lineCount)
-                root.height += contentHeight / lineCount
-            else if (lastLineCount > lineCount)
-                root.height -= contentHeight / lineCount
-            lastLineCount = lineCount
-        }
+        // adjust text area according to contents automatically
+        onContentHeightChanged: root.height = contentHeight + topPadding + bottomPadding
     }
 }

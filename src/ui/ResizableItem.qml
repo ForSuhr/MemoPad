@@ -26,10 +26,6 @@ Item {
         opacity: 1
         radius: 10
         visible: isVisble
-        //        MouseArea {
-        //            anchors.fill: parent
-        //            onClicked: visible = false
-        //        }
     }
 
     /*dots for resize*/
