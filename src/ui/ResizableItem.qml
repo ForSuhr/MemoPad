@@ -12,7 +12,7 @@ Item {
     property string areaBorderColor: "lightgray"
     property string areaColor: "whitesmoke"
     property string dotColor: "gray"
-    property int dotSize: 20
+    property int dotSize: 15
 
     /*select area*/
     Rectangle {
@@ -26,18 +26,6 @@ Item {
         opacity: 1
         radius: 10
         visible: isVisble
-
-        MouseArea {
-            id: dragArea
-            anchors.fill: parent
-            drag.target: root
-            drag.minimumX: 0
-            drag.minimumY: 0
-            drag.maximumX: root.parent.width - root.width
-            drag.maximumY: root.parent.height - root.height
-            onPressed: cursorShape = Qt.ClosedHandCursor
-            onReleased: cursorShape = Qt.ArrowCursor
-        }
     }
 
     /*dots for resize*/
