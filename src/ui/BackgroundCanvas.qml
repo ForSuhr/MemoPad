@@ -6,7 +6,8 @@ Item {
     x: -parent.width / 2
     y: -parent.height / 2
 
-    property real dotSize: 1.5
+    property var cardLayer: cardLayer
+    property real dotSize: 1.0
     property int dotInterval: 20
     property string dotColor: "gainsboro"
     property bool hasBorder: true // indicate if the canvas has border
@@ -29,6 +30,7 @@ Item {
 
     Canvas {
         id: canvas
+        z: 0
         width: root.width
         height: root.height
         anchors.fill: parent
@@ -56,18 +58,15 @@ Item {
         }
     }
 
-    /*pan*/
-    MouseArea {
-        id: panArea
-        anchors.fill: canvas
-        drag.target: root // drag the whole item instead of canvas
-        // TODO: add boundaries
-        acceptedButtons: Qt.RightButton
+    CardLayer {
+        id: cardLayer
+        z: 2
     }
 
     /*scale*/
     MouseArea {
         id: scaleArea
+        z: 1
         anchors.fill: canvas
         acceptedButtons: Qt.MiddleButton
 
@@ -87,5 +86,15 @@ Item {
                                                 Math.max(zoomMin,
                                                          root.zoomFactor))
                  }
+    }
+
+    /*pan*/
+    MouseArea {
+        id: panArea
+        z: 1
+        anchors.fill: canvas
+        drag.target: root // drag the whole item instead of canvas
+        acceptedButtons: Qt.RightButton
+        hoverEnabled: true
     }
 }
