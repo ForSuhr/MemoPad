@@ -4,8 +4,8 @@ import "Snap.js" as Snap
 
 ResizableItem {
     id: root
-    width: 160
-    height: 64
+    width: Globals.dotInterval * 6
+    height: Globals.dotInterval * 3
 
     property bool created: false
     property bool selected: false
@@ -50,13 +50,13 @@ ResizableItem {
         leftPadding: 20
         rightPadding: 20
         background: Rectangle {
-            id: bgRect
             color: "snow"
             border.width: 4
             border.color: "gainsboro"
             radius: 10
         }
-        wrapMode: TextEdit.Wrap
+        wrapMode: TextArea.Wrap
+        textFormat: TextArea.MarkdownText
         font.pixelSize: 24
         color: "black"
         selectByMouse: true
