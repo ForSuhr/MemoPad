@@ -1,6 +1,7 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 
+#include "models/cardmanager.h"
 #include "models/texteditor.h"
 #include "utils/preferencesmanager.h"
 
@@ -9,8 +10,9 @@ int main(int argc, char* argv[])
     QGuiApplication app(argc, argv);
 
     /*qml register*/
-    qmlRegisterType<TextEditor>("ForSuhr.TextEditorModel", 1, 0, "TextEditorModel");
-    qmlRegisterType<PreferencesManager>("ForSuhr.PreferencesManager", 1, 0, "PreferencesManager");
+    qmlRegisterType<TextEditor>("MemoPad.TextEditorModel", 1, 0, "TextEditorModel");
+    qmlRegisterType<PreferencesManager>("MemoPad.PreferencesManager", 1, 0, "PreferencesManager");
+    qmlRegisterType<CardManager>("MemoPad.CardManager", 1, 0, "CardManager");
 
     QQmlApplicationEngine engine;
     const QUrl url(u"qrc:/MemoPad/ui/Main.qml"_qs);

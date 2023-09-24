@@ -1,8 +1,9 @@
 import QtQuick
 import QtQuick.Controls
-import ForSuhr.TextEditorModel
-import ForSuhr.PreferencesManager
 import MemoPad
+import MemoPad.TextEditorModel
+import MemoPad.PreferencesManager
+import MemoPad.CardManager
 
 Window {
     id: window
@@ -14,6 +15,10 @@ Window {
 
     PreferencesManager {
         id: preferencesManager
+    }
+
+    CardManager {
+        id: cardManager
     }
 
     BackgroundCanvas {

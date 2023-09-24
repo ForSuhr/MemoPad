@@ -1,24 +1,35 @@
 import QtQuick
 import QtQuick.Controls
 import "Snap.js" as Snap
+import MemoPad.CardManager
 
 ResizableItem {
     id: root
     width: Globals.dotInterval * 6
     height: Globals.dotInterval * 3
 
+    property int cardIndex
+    property CardManager cardManager
+    property string cardBackgroundColor: "snow"
+    property string cardBorderColor: "gainsboro"
+    property int cardBorderWidth: 4
+    property int cardRadius: 10
     property bool created: false
     property bool selected: false
 
-    onCreatedChanged: console.log("new card created")
+    onCreatedChanged: {
+        console.log("note card created")
+        cardIndex = cardManager.createCard("note")
+        console.log("note", cardIndex)
+    }
     onSelectedChanged: {
         isVisble = selected
         textArea.focus = false
-        dragArea.enabled = true
+        mouseArea.enabled = true
     }
 
     MouseArea {
-        id: dragArea
+        id: mouseArea
         z: 1
         anchors.fill: parent
         drag.target: root
@@ -50,10 +61,10 @@ ResizableItem {
         leftPadding: 20
         rightPadding: 20
         background: Rectangle {
-            color: "snow"
-            border.width: 4
-            border.color: "gainsboro"
-            radius: 10
+            color: cardBackgroundColor
+            border.width: cardBorderWidth
+            border.color: cardBorderColor
+            radius: cardRadius
         }
         wrapMode: TextArea.Wrap
         textFormat: TextArea.MarkdownText

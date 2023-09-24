@@ -21,8 +21,12 @@ qt_add_qml_module(MemoPad
         ui/assets/themes/lumos/canvas.svg
         ui/assets/themes/lumos/note.svg
     SOURCES
+        models/card.h
+        models/card.cpp
         models/texteditor.h
         models/texteditor.cpp
+        models/cardmanager.h
+        models/cardmanager.cpp
         utils/preferencesmanager.h
         utils/preferencesmanager.cpp
         utils/qsettingsjson.h
@@ -30,6 +34,8 @@ qt_add_qml_module(MemoPad
     QML_FILES
         ui/Main.qml
         ui/Globals.qml
+        ui/CardCreator.js
+        ui/Snap.js
         ui/TextEditor.qml
         ui/BackgroundCanvas.qml
         ui/SideToolBar.qml
@@ -38,8 +44,7 @@ qt_add_qml_module(MemoPad
         ui/NoteCard.qml
         ui/CardLayer.qml
         ui/ResizableItem.qml
-        ui/CardCreator.js
-        ui/Snap.js
+        ui/CanvasCard.qml
 )
 
 set_target_properties(MemoPad PROPERTIES

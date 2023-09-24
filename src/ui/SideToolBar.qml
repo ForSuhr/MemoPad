@@ -72,7 +72,7 @@ Item {
                 implicitWidth: parent.height
                 implicitHeight: parent.height
                 toolBarArea: root.toolBarArea
-                componentFile: "NoteCard.qml"
+                componentFile: "CanvasCard.qml"
                 imageSource: "assets/themes/lumos/canvas.svg"
             }
             SideToolBarItem {
