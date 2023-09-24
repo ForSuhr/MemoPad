@@ -1,4 +1,5 @@
 import QtQuick
+import "Snap.js" as Snap
 
 Item {
     id: root

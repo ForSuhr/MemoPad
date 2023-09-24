@@ -11,6 +11,8 @@ qt_add_executable(MemoPad
     main.cpp
 )
 
+set_source_files_properties(ui/Globals.qml PROPERTIES QT_QML_SINGLETON_TYPE TRUE)
+
 qt_add_qml_module(MemoPad
     URI MemoPad
     VERSION 1.0
@@ -27,15 +29,17 @@ qt_add_qml_module(MemoPad
         utils/qsettingsjson.cpp
     QML_FILES
         ui/Main.qml
+        ui/Globals.qml
         ui/TextEditor.qml
         ui/BackgroundCanvas.qml
         ui/SideToolBar.qml
         ui/SideToolBarArea.qml
         ui/SideToolBarItem.qml
-        ui/CardCreator.js
         ui/NoteCard.qml
         ui/CardLayer.qml
         ui/ResizableItem.qml
+        ui/CardCreator.js
+        ui/Snap.js
 )
 
 set_target_properties(MemoPad PROPERTIES

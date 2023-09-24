@@ -7,8 +7,8 @@ Item {
     y: -parent.height / 2
 
     property var cardLayer: cardLayer
-    property real dotSize: 1.0
-    property int dotInterval: 20
+    property real dotSize: Globals.dotSize
+    property int dotInterval: Globals.dotInterval
     property string dotColor: "gainsboro"
     property bool hasBorder: true // indicate if the canvas has border
     property string borderColor: "gainsboro"
@@ -38,8 +38,8 @@ Item {
             var ctx = getContext("2d")
             ctx.clearRect(0, 0, canvas.width, canvas.height)
             ctx.fillStyle = dotColor
-            for (var x = 0; x < canvas.width; x += dotInterval) {
-                for (var y = 0; y < canvas.height; y += dotInterval) {
+            for (var x = dotInterval; x < canvas.width; x += dotInterval) {
+                for (var y = dotInterval; y < canvas.height; y += dotInterval) {
                     ctx.beginPath()
                     ctx.arc(x, y, dotSize, 0, 2 * Math.PI) // Draw a dot
                     ctx.fill()

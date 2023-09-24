@@ -1,3 +1,5 @@
+Qt.include("Snap.js")
+
 var cardComponent = null
 var draggedCard = null
 var onPressedMouse
@@ -60,6 +62,7 @@ function endDrag(mouse) {
     if (draggedCard === null)
         return
 
+    snap(draggedCard)
     draggedCard.created = true
     draggedCard = null
 }

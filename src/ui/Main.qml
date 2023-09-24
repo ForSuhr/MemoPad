@@ -1,8 +1,8 @@
 import QtQuick
 import QtQuick.Controls
-import QtQuick.Dialogs
 import ForSuhr.TextEditorModel
 import ForSuhr.PreferencesManager
+import MemoPad
 
 Window {
     id: window

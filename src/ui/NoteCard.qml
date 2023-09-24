@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Controls
+import "Snap.js" as Snap
 
 ResizableItem {
     id: root
@@ -25,8 +26,12 @@ ResizableItem {
         drag.minimumY: 0
         drag.maximumX: root.parent.width - root.width
         drag.maximumY: root.parent.height - root.height
+        acceptedButtons: Qt.LeftButton
         onPressed: cursorShape = Qt.ClosedHandCursor
-        onReleased: cursorShape = Qt.ArrowCursor
+        onReleased: {
+            cursorShape = Qt.ArrowCursor
+            Snap.snap(root)
+        }
         onClicked: {
             selected = true
             textArea.focus = true
@@ -42,8 +47,8 @@ ResizableItem {
         anchors.centerIn: parent
         topPadding: 15
         bottomPadding: 15
-        leftPadding: 15
-        rightPadding: 15
+        leftPadding: 20
+        rightPadding: 20
         background: Rectangle {
             color: "snow"
             border.width: 4
@@ -56,6 +61,8 @@ ResizableItem {
         selectByMouse: true
         selectionColor: "aliceblue"
         selectedTextColor: "black"
+        activeFocusOnPress: false
+        activeFocusOnTab: false
 
         // adjust text area according to contents automatically
         onContentHeightChanged: root.height = contentHeight + topPadding + bottomPadding

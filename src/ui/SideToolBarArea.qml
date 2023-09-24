@@ -17,6 +17,7 @@ Item {
             height: dropArea.height
             anchors.centerIn: dropArea
             color: "lightgray"
+            opacity: 0.5
         }
 
         keys: [key] // a list of keys that the drop area will accept
