@@ -163,4 +163,180 @@ Item {
             }
         }
     }
+
+    Rectangle {
+        id: topLeftDot
+        z: 2
+        width: dotSize
+        height: dotSize
+        radius: dotSize / 2
+        color: dotColor
+        visible: isVisble
+        anchors.horizontalCenter: selectAreaRect.left
+        anchors.horizontalCenterOffset: selectAreaRect.border.width / 2
+        anchors.verticalCenter: selectAreaRect.top
+        anchors.verticalCenterOffset: selectAreaRect.border.width / 2
+
+        MouseArea {
+            anchors.fill: parent
+            drag.target: parent
+            onPressed: cursorShape = Qt.ClosedHandCursor
+            onReleased: {
+                cursorShape = Qt.ArrowCursor
+                Snap.snap(root)
+            }
+            onMouseXChanged: {
+                if (drag.active) {
+                    if (root.width > minWidth | mouseX < 0) {
+                        root.width -= mouseX
+                        root.x += mouseX
+                        // set minimum and maximum of width
+                        root.width = Math.max(minWidth, Math.min(maxWidth,
+                                                                 root.width))
+                    }
+                }
+            }
+
+            onMouseYChanged: {
+                if (drag.active) {
+                    if (root.height > minHeight | mouseY < 0) {
+                        root.height -= mouseY
+                        root.y += mouseY
+                        // set minimum and maximum of height
+                        root.height = Math.max(minHeight, Math.min(maxHeight,
+                                                                   root.height))
+                    }
+                }
+            }
+        }
+    }
+
+    Rectangle {
+        id: bottomLeftDot
+        z: 2
+        width: dotSize
+        height: dotSize
+        radius: dotSize / 2
+        color: dotColor
+        visible: isVisble
+        anchors.horizontalCenter: selectAreaRect.left
+        anchors.horizontalCenterOffset: selectAreaRect.border.width / 2
+        anchors.verticalCenter: selectAreaRect.bottom
+        anchors.verticalCenterOffset: -selectAreaRect.border.width / 2
+
+        MouseArea {
+            anchors.fill: parent
+            drag.target: parent
+            onPressed: cursorShape = Qt.ClosedHandCursor
+            onReleased: {
+                cursorShape = Qt.ArrowCursor
+                Snap.snap(root)
+            }
+            onMouseXChanged: {
+                if (drag.active) {
+                    if (root.width > minWidth | mouseX < 0) {
+                        root.width -= mouseX
+                        root.x += mouseX
+                        // set minimum and maximum of width
+                        root.width = Math.max(minWidth, Math.min(maxWidth,
+                                                                 root.width))
+                    }
+                }
+            }
+
+            onMouseYChanged: {
+                if (drag.active) {
+                    root.height += mouseY
+                    // set minimum and maximum of height
+                    root.height = Math.max(minHeight, Math.min(maxHeight,
+                                                               root.height))
+                }
+            }
+        }
+    }
+
+    Rectangle {
+        id: topRightDot
+        z: 2
+        width: dotSize
+        height: dotSize
+        radius: dotSize / 2
+        color: dotColor
+        visible: isVisble
+        anchors.horizontalCenter: selectAreaRect.right
+        anchors.horizontalCenterOffset: -selectAreaRect.border.width / 2
+        anchors.verticalCenter: selectAreaRect.top
+        anchors.verticalCenterOffset: selectAreaRect.border.width / 2
+
+        MouseArea {
+            anchors.fill: parent
+            drag.target: parent
+            onPressed: cursorShape = Qt.ClosedHandCursor
+            onReleased: {
+                cursorShape = Qt.ArrowCursor
+                Snap.snap(root)
+            }
+            onMouseXChanged: {
+                if (drag.active) {
+                    root.width += mouseX
+                    // set minimum and maximum of width
+                    root.width = Math.max(minWidth, Math.min(maxWidth,
+                                                             root.width))
+                }
+            }
+
+            onMouseYChanged: {
+                if (drag.active) {
+                    if (root.height > minHeight | mouseY < 0) {
+                        root.height -= mouseY
+                        root.y += mouseY
+                        // set minimum and maximum of height
+                        root.height = Math.max(minHeight, Math.min(maxHeight,
+                                                                   root.height))
+                    }
+                }
+            }
+        }
+    }
+
+    Rectangle {
+        id: bottomRightDot
+        z: 2
+        width: dotSize
+        height: dotSize
+        radius: dotSize / 2
+        color: dotColor
+        visible: isVisble
+        anchors.horizontalCenter: selectAreaRect.right
+        anchors.horizontalCenterOffset: -selectAreaRect.border.width / 2
+        anchors.verticalCenter: selectAreaRect.bottom
+        anchors.verticalCenterOffset: -selectAreaRect.border.width / 2
+
+        MouseArea {
+            anchors.fill: parent
+            drag.target: parent
+            onPressed: cursorShape = Qt.ClosedHandCursor
+            onReleased: {
+                cursorShape = Qt.ArrowCursor
+                Snap.snap(root)
+            }
+            onMouseXChanged: {
+                if (drag.active) {
+                    root.width += mouseX
+                    // set minimum and maximum of width
+                    root.width = Math.max(minWidth, Math.min(maxWidth,
+                                                             root.width))
+                }
+            }
+
+            onMouseYChanged: {
+                if (drag.active) {
+                    root.height += mouseY
+                    // set minimum and maximum of height
+                    root.height = Math.max(minHeight, Math.min(maxHeight,
+                                                               root.height))
+                }
+            }
+        }
+    }
 }
