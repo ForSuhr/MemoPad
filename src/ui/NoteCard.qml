@@ -50,6 +50,7 @@ ResizableItem {
         leftPadding: 20
         rightPadding: 20
         background: Rectangle {
+            id: bgRect
             color: "snow"
             border.width: 4
             border.color: "gainsboro"
@@ -65,6 +66,10 @@ ResizableItem {
         activeFocusOnTab: false
 
         // adjust text area according to contents automatically
-        onContentHeightChanged: root.height = contentHeight + topPadding + bottomPadding
+        onContentHeightChanged: {
+            root.height = (Math.floor(
+                               (contentHeight + topPadding + bottomPadding)
+                               / Globals.dotInterval) + 1) * Globals.dotInterval
+        }
     }
 }

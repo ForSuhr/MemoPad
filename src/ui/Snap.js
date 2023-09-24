@@ -10,4 +10,10 @@ function snap(obj) {
     // snap!!!
     obj.x = gridX
     obj.y = gridY
+
+    // adjust width and height
+    obj.width = Math.floor(
+                (obj.width + dotInterval / 2) / dotInterval) * dotInterval
+    obj.height = Math.floor(
+                (obj.height + dotInterval / 2) / dotInterval) * dotInterval
 }

@@ -5,8 +5,8 @@ Item {
     id: root
 
     property bool isVisble: false
-    property real minHeight: 50
-    property real minWidth: 50
+    property real minHeight: 64
+    property real minWidth: 64
     property real maxHeight: 1000
     property real maxWidth: 1000
     property int areaBorderWidth: 6
@@ -47,14 +47,19 @@ Item {
             drag.target: parent
             drag.axis: Drag.YAxis
             onPressed: cursorShape = Qt.ClosedHandCursor
-            onReleased: cursorShape = Qt.ArrowCursor
+            onReleased: {
+                cursorShape = Qt.ArrowCursor
+                Snap.snap(root)
+            }
             onMouseYChanged: {
                 if (drag.active) {
-                    root.height -= mouseY
-                    root.y += mouseY
-                    // set minimum and maximum of height
-                    root.height = Math.max(minHeight, Math.min(maxHeight,
-                                                               root.height))
+                    if (root.height > minHeight | mouseY < 0) {
+                        root.height -= mouseY
+                        root.y += mouseY
+                        // set minimum and maximum of height
+                        root.height = Math.max(minHeight, Math.min(maxHeight,
+                                                                   root.height))
+                    }
                 }
             }
         }
@@ -77,7 +82,10 @@ Item {
             drag.target: parent
             drag.axis: Drag.YAxis
             onPressed: cursorShape = Qt.ClosedHandCursor
-            onReleased: cursorShape = Qt.ArrowCursor
+            onReleased: {
+                cursorShape = Qt.ArrowCursor
+                Snap.snap(root)
+            }
             onMouseYChanged: {
                 if (drag.active) {
                     root.height += mouseY
@@ -106,14 +114,19 @@ Item {
             drag.target: parent
             drag.axis: Drag.XAxis
             onPressed: cursorShape = Qt.ClosedHandCursor
-            onReleased: cursorShape = Qt.ArrowCursor
+            onReleased: {
+                cursorShape = Qt.ArrowCursor
+                Snap.snap(root)
+            }
             onMouseXChanged: {
                 if (drag.active) {
-                    root.width -= mouseX
-                    root.x += mouseX
-                    // set minimum and maximum of width
-                    root.width = Math.max(minWidth, Math.min(maxWidth,
-                                                             root.width))
+                    if (root.width > minWidth | mouseX < 0) {
+                        root.width -= mouseX
+                        root.x += mouseX
+                        // set minimum and maximum of width
+                        root.width = Math.max(minWidth, Math.min(maxWidth,
+                                                                 root.width))
+                    }
                 }
             }
         }
@@ -136,7 +149,10 @@ Item {
             drag.target: parent
             drag.axis: Drag.XAxis
             onPressed: cursorShape = Qt.ClosedHandCursor
-            onReleased: cursorShape = Qt.ArrowCursor
+            onReleased: {
+                cursorShape = Qt.ArrowCursor
+                Snap.snap(root)
+            }
             onMouseXChanged: {
                 if (drag.active) {
                     root.width += mouseX
