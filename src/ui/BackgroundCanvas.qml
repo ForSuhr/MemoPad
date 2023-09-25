@@ -82,10 +82,10 @@ Item {
                      root.mouseY = wheel.y
                      // zoom in & out
                      var scrollAngleDelta = wheel.angleDelta.y / 120 // 120 units equals 15 degrees
-                     root.zoomFactor += 0.1 * scrollAngleDelta
-                     root.zoomFactor = Math.min(zoomMax,
-                                                Math.max(zoomMin,
-                                                         root.zoomFactor))
+                     root.zoomFactor = Math.min(
+                         zoomMax,
+                         Math.max(zoomMin,
+                                  root.zoomFactor + 0.1 * scrollAngleDelta))
                  }
     }
 

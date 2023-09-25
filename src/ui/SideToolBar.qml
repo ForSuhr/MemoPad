@@ -65,7 +65,7 @@ Item {
         }
 
         RowLayout {
-            width: 32
+            width: toolBar.width - 18
             height: 32
             anchors.verticalCenter: parent.verticalCenter
             SideToolBarItem {
