@@ -65,8 +65,9 @@ Item {
         }
 
         RowLayout {
-            width: toolBar.width - 18
-            height: toolBar.height - 18
+            width: 32
+            height: 32
+            anchors.verticalCenter: parent.verticalCenter
             SideToolBarItem {
                 id: canvasItem
                 implicitWidth: parent.height

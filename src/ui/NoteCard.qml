@@ -37,6 +37,7 @@ ResizableItem {
         isVisble = selected
         textArea.focus = false
         mouseArea.enabled = true
+        palette.visible = selected
     }
 
     MouseArea {
@@ -94,5 +95,10 @@ ResizableItem {
                                (contentHeight + topPadding + bottomPadding)
                                / Globals.dotInterval) + 1) * Globals.dotInterval
         }
+    }
+
+    CardPalette {
+        id: palette
+        borderColor: cardBorderColor
     }
 }

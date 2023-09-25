@@ -78,7 +78,6 @@ int CardManager::createCard(QString cardType)
 /// @brief load cards from canvas file to m_cardList
 void CardManager::loadCards()
 {
-    qInfo() << "loading";
     m_cardIO->beginGroup(m_currentCanvas);
     int cardNum = m_cardIO->value("cardNum").toInt();
     for (int i = 0; i < cardNum; i++) {
