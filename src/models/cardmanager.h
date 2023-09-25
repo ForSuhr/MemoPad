@@ -13,9 +13,16 @@ public:
     explicit CardManager(QObject* parent = nullptr);
     ~CardManager();
 
-    QList<Card> m_cardList = {};
+    Q_INVOKABLE qreal x(int index);
+    Q_INVOKABLE void setX(int index, qreal x);
+    Q_INVOKABLE qreal y(int index);
+    Q_INVOKABLE void setY(int index, qreal y);
+    Q_INVOKABLE qreal width(int index);
+    Q_INVOKABLE void setWidth(int index, qreal width);
+    Q_INVOKABLE qreal height(int index);
+    Q_INVOKABLE void setHeight(int index, qreal height);
 
-signals:
+    QList<Card> m_cardList = {};
 
 public slots:
     int createCard(QString cardType);

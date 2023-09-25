@@ -1,7 +1,8 @@
 import QtQuick
 import QtQuick.Controls
-import "Snap.js" as Snap
 import MemoPad.CardManager
+import "Snap.js" as Snap
+import "IO.js" as IO
 
 ResizableItem {
     id: root
@@ -16,7 +17,9 @@ ResizableItem {
     onCreatedChanged: {
         console.log("canvas card created")
         cardIndex = cardManager.createCard("canvas")
-        console.log("canvas", cardIndex)
+        Snap.snap(root)
+        IO.savePos(cardIndex, root)
+        IO.saveSize(cardIndex, root)
     }
     onSelectedChanged: {
         isVisble = selected
@@ -37,6 +40,7 @@ ResizableItem {
         onReleased: {
             cursorShape = Qt.ArrowCursor
             Snap.snap(root)
+            IO.savePos(cardIndex, root)
         }
         onClicked: {
             selected = true

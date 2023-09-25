@@ -36,6 +36,7 @@ qt_add_qml_module(MemoPad
         ui/Globals.qml
         ui/CardCreator.js
         ui/Snap.js
+        ui/IO.js
         ui/TextEditor.qml
         ui/BackgroundCanvas.qml
         ui/SideToolBar.qml

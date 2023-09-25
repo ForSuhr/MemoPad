@@ -11,6 +11,10 @@ public:
 
     int m_index;
     QString m_cardType;
+    qreal m_x;
+    qreal m_y;
+    qreal m_width;
+    qreal m_height;
 };
 
 #endif // CARD_H
