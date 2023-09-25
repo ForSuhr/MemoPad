@@ -26,6 +26,7 @@ ResizableItem {
         Snap.snap(root)
         IO.savePos(cardIndex, root)
         IO.saveSize(cardIndex, root)
+        IO.saveColor(cardIndex, root)
     }
     onLoadedChanged: {
         console.log("note card loaded")
