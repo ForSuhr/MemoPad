@@ -15,7 +15,9 @@ ResizableItem {
     property string cardBorderColor: "gainsboro"
     property int cardBorderWidth: 4
     property int cardRadius: 10
+
     property bool created: false
+    property bool loaded: false
     property bool selected: false
 
     onCreatedChanged: {
@@ -24,6 +26,12 @@ ResizableItem {
         Snap.snap(root)
         IO.savePos(cardIndex, root)
         IO.saveSize(cardIndex, root)
+    }
+    onLoadedChanged: {
+        console.log("note card loaded")
+        root.width = cardManager.width(cardIndex)
+        root.height = cardManager.height(cardIndex)
+        Snap.snap(root)
     }
     onSelectedChanged: {
         isVisble = selected

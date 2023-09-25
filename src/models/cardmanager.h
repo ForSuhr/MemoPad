@@ -1,10 +1,12 @@
 #ifndef CARDMANAGER_H
 #define CARDMANAGER_H
 
+#include <QCoreApplication>
 #include <QDebug>
 #include <QList>
 #include <QObject>
 
+#include "../utils/qsettingsjson.h"
 #include "card.h"
 
 class CardManager : public QObject {
@@ -13,6 +15,8 @@ public:
     explicit CardManager(QObject* parent = nullptr);
     ~CardManager();
 
+    Q_INVOKABLE int cardNum();
+    Q_INVOKABLE QString cardType(int index);
     Q_INVOKABLE qreal x(int index);
     Q_INVOKABLE void setX(int index, qreal x);
     Q_INVOKABLE qreal y(int index);
@@ -26,7 +30,12 @@ public:
 
 public slots:
     int createCard(QString cardType);
+    void loadCards();
     void listCards();
+
+private:
+    QString m_currentCanvas = "canvas 0";
+    QSettings* m_cardIO = nullptr;
 };
 
 #endif // CARDMANAGER_H

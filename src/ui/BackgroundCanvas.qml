@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Controls
+import MemoPad.CardManager
 
 Item {
     id: root

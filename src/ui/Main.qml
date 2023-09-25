@@ -4,6 +4,7 @@ import MemoPad
 import MemoPad.TextEditorModel
 import MemoPad.PreferencesManager
 import MemoPad.CardManager
+import "IO.js" as IO
 
 Window {
     id: window
@@ -19,6 +20,7 @@ Window {
 
     CardManager {
         id: cardManager
+        Component.onCompleted: IO.load()
     }
 
     BackgroundCanvas {

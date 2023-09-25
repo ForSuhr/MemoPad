@@ -15,7 +15,7 @@ function startDrag(mouse) {
 }
 
 function loadComponent(mouse) {
-    // avoid duplicate loadding
+    // avoid duplicate loading
     if (cardComponent != null) {
         createCard(mouse)
         return
