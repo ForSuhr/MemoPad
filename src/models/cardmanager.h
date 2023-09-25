@@ -25,6 +25,8 @@ public:
     Q_INVOKABLE void setWidth(int index, qreal width);
     Q_INVOKABLE qreal height(int index);
     Q_INVOKABLE void setHeight(int index, qreal height);
+    Q_INVOKABLE QString backgroundColor(int index);
+    Q_INVOKABLE void setBackgroundColor(int index, QString backgroundColor);
 
     QList<Card> m_cardList = {};
 

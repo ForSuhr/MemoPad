@@ -65,6 +65,17 @@ void CardManager::setHeight(int index, qreal height)
     m_cardIO->setValue(m_currentCanvas + "/" + QString::number(index) + "/height", height);
 }
 
+QString CardManager::backgroundColor(int index)
+{
+    return m_cardList[index].m_backgroundColor;
+}
+
+void CardManager::setBackgroundColor(int index, QString backgroundColor)
+{
+    m_cardList[index].m_backgroundColor = backgroundColor;
+    m_cardIO->setValue(m_currentCanvas + "/" + QString::number(index) + "/backgroundColor", backgroundColor);
+}
+
 int CardManager::createCard(QString cardType)
 {
     int index = m_cardList.count();
@@ -88,6 +99,7 @@ void CardManager::loadCards()
         card.m_y = m_cardIO->value(cardNumString + "/y").toReal();
         card.m_width = m_cardIO->value(cardNumString + "/width").toReal();
         card.m_height = m_cardIO->value(cardNumString + "/height").toReal();
+        card.m_backgroundColor = m_cardIO->value(cardNumString + "/backgroundColor").toString();
         m_cardList.append(card);
     }
     m_cardIO->endGroup();

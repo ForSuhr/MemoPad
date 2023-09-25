@@ -59,3 +59,7 @@ function saveSize(cardIndex, card) {
     cardManager.setWidth(cardIndex, card.width)
     cardManager.setHeight(cardIndex, card.height)
 }
+
+function saveColor(cardIndex, card) {
+    cardManager.setBackgroundColor(cardIndex, card.cardBackgroundColor)
+}

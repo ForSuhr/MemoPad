@@ -31,6 +31,7 @@ ResizableItem {
         console.log("note card loaded")
         root.width = cardManager.width(cardIndex)
         root.height = cardManager.height(cardIndex)
+        root.cardBackgroundColor = cardManager.backgroundColor(cardIndex)
         Snap.snap(root)
     }
     onSelectedChanged: {
@@ -101,4 +102,6 @@ ResizableItem {
         id: palette
         borderColor: cardBorderColor
     }
+
+    onCardBackgroundColorChanged: IO.saveColor(cardIndex, root)
 }
