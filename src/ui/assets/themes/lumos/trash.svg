@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 512 512"
+   version="1.1"
+   id="svg239"
+   sodipodi:docname="trash-solid.svg"
+   width="512"
+   height="512"
+   inkscape:version="1.2.2 (732a01da63, 2022-12-09)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs243" />
+  <sodipodi:namedview
+     id="namedview241"
+     pagecolor="#ffffff"
+     bordercolor="#999999"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showgrid="false"
+     inkscape:zoom="1.28"
+     inkscape:cx="233.20313"
+     inkscape:cy="239.0625"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg239" />
+  <rect
+     style="display:none;fill:#000000;fill-opacity:0;stroke:#666666;stroke-width:40;stroke-linecap:round;stroke-miterlimit:0;stroke-dasharray:none"
+     id="rect1242"
+     width="448"
+     height="448"
+     x="32"
+     y="32"
+     rx="70.779175"
+     ry="70.779175" />
+  <!--! Font Awesome Pro 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+  <path
+     d="m 175.71428,45.803572 -6.42857,12.767857 H 83.571429 C 67.767857,58.571429 55,71.339286 55,87.142858 55,102.94643 67.767857,115.71429 83.571429,115.71429 H 426.42858 C 442.23214,115.71429 455,102.94643 455,87.142858 455,71.339286 442.23214,58.571429 426.42858,58.571429 H 340.71429 L 334.28571,45.803572 C 329.46429,36.071429 319.55356,30 308.75,30 h -107.5 c -10.80358,0 -20.71429,6.071429 -25.53572,15.803572 z m 250.7143,98.482148 H 83.571429 L 102.5,446.96429 c 1.42857,22.58929 20.17857,40.17857 42.76785,40.17857 h 219.46429 c 22.58928,0 41.33928,-17.58928 42.76786,-40.17857 z"
+     id="path129"
+     style="stroke-width:0.892857;fill:#666666;fill-opacity:1" />
+</svg>

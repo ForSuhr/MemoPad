@@ -12,6 +12,7 @@ qt_add_executable(MemoPad
 )
 
 set_source_files_properties(ui/Globals.qml PROPERTIES QT_QML_SINGLETON_TYPE TRUE)
+set_source_files_properties(ui/IconSet.qml PROPERTIES QT_QML_SINGLETON_TYPE TRUE)
 
 qt_add_qml_module(MemoPad
     URI MemoPad
@@ -20,6 +21,7 @@ qt_add_qml_module(MemoPad
         ui/assets/themes/lumos/blank.svg
         ui/assets/themes/lumos/canvas.svg
         ui/assets/themes/lumos/note.svg
+        ui/assets/themes/lumos/trash.svg
     SOURCES
         models/card.h
         models/card.cpp
@@ -32,11 +34,16 @@ qt_add_qml_module(MemoPad
         utils/qsettingsjson.h
         utils/qsettingsjson.cpp
     QML_FILES
+        #[[main]]
         ui/Main.qml
+        #[[singleton]]
         ui/Globals.qml
+        ui/IconSet.qml
+        #[[javascript]]
         ui/CardCreator.js
         ui/Snap.js
         ui/IO.js
+        #[[qml]]
         ui/TextEditor.qml
         ui/BackgroundCanvas.qml
         ui/SideToolBar.qml
@@ -47,6 +54,7 @@ qt_add_qml_module(MemoPad
         ui/NoteCard.qml
         ui/CanvasCard.qml
         ui/CardPalette.qml
+        ui/CardEditBar.qml
 )
 
 set_target_properties(MemoPad PROPERTIES

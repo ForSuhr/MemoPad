@@ -9,7 +9,7 @@ Item {
 
     property string toolBarColor: "white"
     property string toolBarPressedColor: "ghostwhite"
-    property string toolBarBorderColor: "whitesmoke"
+    property string toolBarBorderColor: "gainsboro"
     property string topAreaKey: "top area"
     property string bottomAreaKey: "bottom area"
     property string toolBarArea: "top area" // area read from settings
@@ -74,7 +74,7 @@ Item {
                 implicitHeight: parent.height
                 toolBarArea: root.toolBarArea
                 componentFile: "CanvasCard.qml"
-                imageSource: "assets/themes/lumos/canvas.svg"
+                imageSource: IconSet.canvas
             }
             SideToolBarItem {
                 id: noteItem
@@ -82,7 +82,7 @@ Item {
                 implicitHeight: parent.height
                 toolBarArea: root.toolBarArea
                 componentFile: "NoteCard.qml"
-                imageSource: "assets/themes/lumos/note.svg"
+                imageSource: IconSet.note
             }
             Item {
                 id: spacerItem
