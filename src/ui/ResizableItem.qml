@@ -51,8 +51,8 @@ Item {
             onReleased: {
                 cursorShape = Qt.ArrowCursor
                 Snap.snap(root)
-                IO.savePos(cardIndex, root)
-                IO.saveSize(cardIndex, root)
+                IO.savePos(id, root)
+                IO.saveSize(id, root)
             }
             onMouseYChanged: {
                 if (drag.active) {
@@ -88,8 +88,8 @@ Item {
             onReleased: {
                 cursorShape = Qt.ArrowCursor
                 Snap.snap(root)
-                IO.savePos(cardIndex, root)
-                IO.saveSize(cardIndex, root)
+                IO.savePos(id, root)
+                IO.saveSize(id, root)
             }
             onMouseYChanged: {
                 if (drag.active) {
@@ -122,8 +122,8 @@ Item {
             onReleased: {
                 cursorShape = Qt.ArrowCursor
                 Snap.snap(root)
-                IO.savePos(cardIndex, root)
-                IO.saveSize(cardIndex, root)
+                IO.savePos(id, root)
+                IO.saveSize(id, root)
             }
             onMouseXChanged: {
                 if (drag.active) {
@@ -159,8 +159,8 @@ Item {
             onReleased: {
                 cursorShape = Qt.ArrowCursor
                 Snap.snap(root)
-                IO.savePos(cardIndex, root)
-                IO.saveSize(cardIndex, root)
+                IO.savePos(id, root)
+                IO.saveSize(id, root)
             }
             onMouseXChanged: {
                 if (drag.active) {
@@ -193,8 +193,8 @@ Item {
             onReleased: {
                 cursorShape = Qt.ArrowCursor
                 Snap.snap(root)
-                IO.savePos(cardIndex, root)
-                IO.saveSize(cardIndex, root)
+                IO.savePos(id, root)
+                IO.saveSize(id, root)
             }
             onMouseXChanged: {
                 if (drag.active) {
@@ -242,8 +242,8 @@ Item {
             onReleased: {
                 cursorShape = Qt.ArrowCursor
                 Snap.snap(root)
-                IO.savePos(cardIndex, root)
-                IO.saveSize(cardIndex, root)
+                IO.savePos(id, root)
+                IO.saveSize(id, root)
             }
             onMouseXChanged: {
                 if (drag.active) {
@@ -288,8 +288,8 @@ Item {
             onReleased: {
                 cursorShape = Qt.ArrowCursor
                 Snap.snap(root)
-                IO.savePos(cardIndex, root)
-                IO.saveSize(cardIndex, root)
+                IO.savePos(id, root)
+                IO.saveSize(id, root)
             }
             onMouseXChanged: {
                 if (drag.active) {
@@ -334,8 +334,8 @@ Item {
             onReleased: {
                 cursorShape = Qt.ArrowCursor
                 Snap.snap(root)
-                IO.savePos(cardIndex, root)
-                IO.saveSize(cardIndex, root)
+                IO.savePos(id, root)
+                IO.saveSize(id, root)
             }
             onMouseXChanged: {
                 if (drag.active) {

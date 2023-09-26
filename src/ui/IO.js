@@ -7,23 +7,25 @@ var noteCardComponentFile = "NoteCard.qml"
 function load() {
     cardManager.loadCards()
     var cardNum = cardManager.cardNum()
+    var cardIDs = cardManager.cardIDs()
     for (var i = 0; i < cardNum; i++) {
-        var cardType = cardManager.cardType(i)
+        var id = cardIDs[i]
+        var cardType = cardManager.cardType(id)
         switch (cardType) {
         case "canvas":
-            loadComponent(canvasCardComponent, canvasCardComponentFile, i)
+            loadComponent(canvasCardComponent, canvasCardComponentFile, id)
             break
         case "note":
-            loadComponent(noteCardComponent, noteCardComponentFile, i)
+            loadComponent(noteCardComponent, noteCardComponentFile, id)
             break
         }
     }
 }
 
-function loadComponent(cardComponent, cardComponentFile, index) {
+function loadComponent(cardComponent, cardComponentFile, id) {
     // avoid duplicate loading
     if (cardComponent !== null) {
-        createCard(cardComponent, index)
+        createCard(cardComponent, id)
         return
     }
 
@@ -31,17 +33,17 @@ function loadComponent(cardComponent, cardComponentFile, index) {
     if (cardComponent.status === Component.Loading)
         cardComponent.statusChanged.connect(createCard)
     else
-        createCard(cardComponent, index)
+        createCard(cardComponent, id)
 }
 
-function createCard(cardComponent, index) {
+function createCard(cardComponent, id) {
     // create card from the loaded component
     if (cardComponent.status === Component.Ready) {
         // set card layer as its parent
         var card = cardComponent.createObject(bgCanvas.cardLayer, {
-                                                  "x": cardManager.x(index),
-                                                  "y": cardManager.y(index),
-                                                  "cardIndex": index,
+                                                  "x": cardManager.x(id),
+                                                  "y": cardManager.y(id),
+                                                  "id": id,
                                                   "cardManager": cardManager
                                               })
 
@@ -50,20 +52,26 @@ function createCard(cardComponent, index) {
 }
 
 /*--------------------------save system----------------------------------*/
-function savePos(cardIndex, card) {
-    cardManager.setX(cardIndex, card.x)
-    cardManager.setY(cardIndex, card.y)
+function savePos(id, card) {
+    cardManager.setX(id, card.x)
+    cardManager.setY(id, card.y)
 }
 
-function saveSize(cardIndex, card) {
-    cardManager.setWidth(cardIndex, card.width)
-    cardManager.setHeight(cardIndex, card.height)
+function saveSize(id, card) {
+    cardManager.setWidth(id, card.width)
+    cardManager.setHeight(id, card.height)
 }
 
-function saveText(cardIndex, textArea) {
-    cardManager.setText(cardIndex, textArea.text)
+function saveText(id, textArea) {
+    cardManager.setText(id, textArea.text)
 }
 
-function saveColor(cardIndex, card) {
-    cardManager.setBackgroundColor(cardIndex, card.cardBackgroundColor)
+function saveColor(id, card) {
+    cardManager.setBackgroundColor(id, card.cardBackgroundColor)
+}
+
+/*---------------------------delete--------------------------------------*/
+function deleteCard(id, card) {
+    cardManager.deleteCard(id)
+    card.destroy()
 }

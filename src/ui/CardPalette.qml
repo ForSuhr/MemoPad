@@ -28,6 +28,10 @@ Pane {
         height: 24
         anchors.verticalCenter: parent.verticalCenter
         anchors.horizontalCenter: parent.horizontalCenter
+        Item {
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+        }
         Rectangle {
             id: mistyrose
             width: parent.height
@@ -105,6 +109,10 @@ Pane {
                 anchors.fill: parent
                 onClicked: palette.parent.cardBackgroundColor = parent.color
             }
+        }
+        Item {
+            Layout.fillWidth: true
+            Layout.fillHeight: true
         }
     }
 }

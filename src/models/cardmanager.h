@@ -3,8 +3,9 @@
 
 #include <QCoreApplication>
 #include <QDebug>
-#include <QList>
+#include <QMap>
 #include <QObject>
+#include <QUuid>
 
 #include "../utils/qsettingsjson.h"
 #include "card.h"
@@ -16,28 +17,31 @@ public:
     ~CardManager();
 
     Q_INVOKABLE int cardNum();
-    Q_INVOKABLE QString cardType(int index);
-    Q_INVOKABLE qreal x(int index);
-    Q_INVOKABLE void setX(int index, qreal x);
-    Q_INVOKABLE qreal y(int index);
-    Q_INVOKABLE void setY(int index, qreal y);
-    Q_INVOKABLE qreal width(int index);
-    Q_INVOKABLE void setWidth(int index, qreal width);
-    Q_INVOKABLE qreal height(int index);
-    Q_INVOKABLE void setHeight(int index, qreal height);
-    Q_INVOKABLE QString backgroundColor(int index);
-    Q_INVOKABLE void setBackgroundColor(int index, QString backgroundColor);
-    Q_INVOKABLE QString text(int index);
-    Q_INVOKABLE void setText(int index, QString text);
+    Q_INVOKABLE QStringList cardIDs();
+    Q_INVOKABLE QString cardType(QString id);
+    Q_INVOKABLE qreal x(QString id);
+    Q_INVOKABLE void setX(QString id, qreal x);
+    Q_INVOKABLE qreal y(QString id);
+    Q_INVOKABLE void setY(QString id, qreal y);
+    Q_INVOKABLE qreal width(QString id);
+    Q_INVOKABLE void setWidth(QString id, qreal width);
+    Q_INVOKABLE qreal height(QString id);
+    Q_INVOKABLE void setHeight(QString id, qreal height);
+    Q_INVOKABLE QString backgroundColor(QString id);
+    Q_INVOKABLE void setBackgroundColor(QString id, QString backgroundColor);
+    Q_INVOKABLE QString text(QString id);
+    Q_INVOKABLE void setText(QString id, QString text);
 
-    QList<Card> m_cardList = {};
+    QMap<QString, Card*> m_cardMap = {};
 
 public slots:
-    int createCard(QString cardType);
+    QString createCard(QString cardType);
+    void deleteCard(QString id);
     void loadCards();
-    void listCards();
 
 private:
+    QString uuid();
+
     QString m_currentCanvas = "canvas 0";
     QSettings* m_cardIO = nullptr;
 };

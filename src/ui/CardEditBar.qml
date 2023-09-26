@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+import "IO.js" as IO
 
 Pane {
     id: palette
@@ -14,7 +15,7 @@ Pane {
     anchors.bottom: palette.parent.top
     anchors.bottomMargin: 10
     opacity: enabled
-    visible: true
+    visible: false
     background: Rectangle {
         opacity: enabled ? 1 : 0.5
         radius: 10
@@ -28,10 +29,22 @@ Pane {
         height: 24
         anchors.verticalCenter: parent.verticalCenter
         anchors.horizontalCenter: parent.horizontalCenter
+        Item {
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+        }
         CardEditBarItem {
             width: parent.height
             height: parent.height
             imageSource: IconSet.trash
+            MouseArea {
+                anchors.fill: parent
+                onClicked: IO.deleteCard(palette.parent.id, palette.parent)
+            }
+        }
+        Item {
+            Layout.fillWidth: true
+            Layout.fillHeight: true
         }
     }
 }

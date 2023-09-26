@@ -9,7 +9,7 @@ ResizableItem {
     width: Globals.dotInterval * 6
     height: Globals.dotInterval * 3
 
-    property int cardIndex
+    property string id
     property CardManager cardManager
     property string cardBackgroundColor: "snow"
     property string cardBorderColor: "gainsboro"
@@ -22,27 +22,28 @@ ResizableItem {
 
     onCreatedChanged: {
         console.log("note card created")
-        cardIndex = cardManager.createCard("note")
+        id = cardManager.createCard("note")
         Snap.snap(root)
-        IO.savePos(cardIndex, root)
-        IO.saveSize(cardIndex, root)
-        IO.saveColor(cardIndex, root)
+        IO.savePos(id, root)
+        IO.saveSize(id, root)
+        IO.saveColor(id, root)
     }
     onLoadedChanged: {
         console.log("note card loaded")
-        root.width = cardManager.width(cardIndex)
-        root.height = cardManager.height(cardIndex)
-        textArea.text = cardManager.text(cardIndex)
-        root.cardBackgroundColor = cardManager.backgroundColor(cardIndex)
+        textArea.text = cardManager.text(id)
+        root.width = cardManager.width(id)
+        root.height = cardManager.height(id)
+        root.cardBackgroundColor = cardManager.backgroundColor(id)
         Snap.snap(root)
     }
     onSelectedChanged: {
         isVisble = selected
         textArea.focus = selected
         mouseArea.enabled = !selected
+        editBar.visible = selected
         palette.visible = selected
         if (!selected)
-            IO.saveText(cardIndex, textArea)
+            IO.saveText(id, textArea)
     }
 
     MouseArea {
@@ -59,7 +60,7 @@ ResizableItem {
         onReleased: {
             cursorShape = Qt.ArrowCursor
             Snap.snap(root)
-            IO.savePos(cardIndex, root)
+            IO.savePos(id, root)
         }
         onClicked: {
             selected = true
@@ -89,7 +90,7 @@ ResizableItem {
         font.pixelSize: 24
         color: "black"
         selectByMouse: true
-        selectionColor: "aliceblue"
+        selectionColor: "darkseagreen"
         selectedTextColor: "black"
         activeFocusOnPress: false
         activeFocusOnTab: false
@@ -102,7 +103,7 @@ ResizableItem {
         }
     }
 
-    CardEditBar{
+    CardEditBar {
         id: editBar
         borderColor: cardBorderColor
     }
@@ -112,5 +113,5 @@ ResizableItem {
         borderColor: cardBorderColor
     }
 
-    onCardBackgroundColorChanged: IO.saveColor(cardIndex, root)
+    onCardBackgroundColorChanged: IO.saveColor(id, root)
 }

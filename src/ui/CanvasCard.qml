@@ -9,7 +9,7 @@ ResizableItem {
     width: Globals.dotInterval * 3
     height: Globals.dotInterval * 3
 
-    property int cardIndex
+    property string id
     property CardManager cardManager
 
     property bool created: false
@@ -18,15 +18,15 @@ ResizableItem {
 
     onCreatedChanged: {
         console.log("canvas card created")
-        cardIndex = cardManager.createCard("canvas")
+        id = cardManager.createCard("canvas")
         Snap.snap(root)
-        IO.savePos(cardIndex, root)
-        IO.saveSize(cardIndex, root)
+        IO.savePos(id, root)
+        IO.saveSize(id, root)
     }
     onLoadedChanged: {
         console.log("canvas card loaded")
-        root.width = cardManager.width(cardIndex)
-        root.height = cardManager.height(cardIndex)
+        root.width = cardManager.width(id)
+        root.height = cardManager.height(id)
         Snap.snap(root)
     }
     onSelectedChanged: {
@@ -48,7 +48,7 @@ ResizableItem {
         onReleased: {
             cursorShape = Qt.ArrowCursor
             Snap.snap(root)
-            IO.savePos(cardIndex, root)
+            IO.savePos(id, root)
         }
         onClicked: {
             selected = true

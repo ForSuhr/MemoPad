@@ -13,113 +13,122 @@ CardManager::~CardManager()
 
 int CardManager::cardNum()
 {
-    return m_cardList.count();
+    return m_cardMap.count();
 }
 
-QString CardManager::cardType(int index)
+QStringList CardManager::cardIDs()
 {
-    return m_cardList[index].m_cardType;
+    return m_cardMap.keys();
 }
 
-qreal CardManager::x(int index)
+QString CardManager::cardType(QString id)
 {
-    return m_cardList[index].m_x;
+    return m_cardMap[id]->m_cardType;
 }
 
-void CardManager::setX(int index, qreal x)
+qreal CardManager::x(QString id)
 {
-    m_cardList[index].m_x = x;
-    m_cardIO->setValue(m_currentCanvas + "/" + QString::number(index) + "/x", x);
+    return m_cardMap[id]->m_x;
 }
 
-qreal CardManager::y(int index)
+void CardManager::setX(QString id, qreal x)
 {
-    return m_cardList[index].m_y;
+    m_cardMap[id]->m_x = x;
+    m_cardIO->setValue(m_currentCanvas + "/" + id + "/x", x);
 }
 
-void CardManager::setY(int index, qreal y)
+qreal CardManager::y(QString id)
 {
-    m_cardList[index].m_y = y;
-    m_cardIO->setValue(m_currentCanvas + "/" + QString::number(index) + "/y", y);
+    return m_cardMap[id]->m_y;
 }
 
-qreal CardManager::width(int index)
+void CardManager::setY(QString id, qreal y)
 {
-    return m_cardList[index].m_width;
+    m_cardMap[id]->m_y = y;
+    m_cardIO->setValue(m_currentCanvas + "/" + id + "/y", y);
 }
 
-void CardManager::setWidth(int index, qreal width)
+qreal CardManager::width(QString id)
 {
-    m_cardList[index].m_width = width;
-    m_cardIO->setValue(m_currentCanvas + "/" + QString::number(index) + "/width", width);
+    return m_cardMap[id]->m_width;
 }
 
-qreal CardManager::height(int index)
+void CardManager::setWidth(QString id, qreal width)
 {
-    return m_cardList[index].m_height;
+    m_cardMap[id]->m_width = width;
+    m_cardIO->setValue(m_currentCanvas + "/" + id + "/width", width);
 }
 
-void CardManager::setHeight(int index, qreal height)
+qreal CardManager::height(QString id)
 {
-    m_cardList[index].m_height = height;
-    m_cardIO->setValue(m_currentCanvas + "/" + QString::number(index) + "/height", height);
+    return m_cardMap[id]->m_height;
 }
 
-QString CardManager::backgroundColor(int index)
+void CardManager::setHeight(QString id, qreal height)
 {
-    return m_cardList[index].m_backgroundColor;
+    m_cardMap[id]->m_height = height;
+    m_cardIO->setValue(m_currentCanvas + "/" + id + "/height", height);
 }
 
-void CardManager::setBackgroundColor(int index, QString backgroundColor)
+QString CardManager::backgroundColor(QString id)
 {
-    m_cardList[index].m_backgroundColor = backgroundColor;
-    m_cardIO->setValue(m_currentCanvas + "/" + QString::number(index) + "/backgroundColor", backgroundColor);
+    return m_cardMap[id]->m_backgroundColor;
 }
 
-QString CardManager::text(int index)
+void CardManager::setBackgroundColor(QString id, QString backgroundColor)
 {
-    return m_cardList[index].m_text;
+    m_cardMap[id]->m_backgroundColor = backgroundColor;
+    m_cardIO->setValue(m_currentCanvas + "/" + id + "/backgroundColor", backgroundColor);
 }
 
-void CardManager::setText(int index, QString text)
+QString CardManager::text(QString id)
 {
-    m_cardList[index].m_text = text;
-    m_cardIO->setValue(m_currentCanvas + "/" + QString::number(index) + "/text", text);
+    return m_cardMap[id]->m_text;
 }
 
-int CardManager::createCard(QString cardType)
+void CardManager::setText(QString id, QString text)
 {
-    int index = m_cardList.count();
-    Card card(index, cardType);
-    m_cardList.append(card);
-    m_cardIO->setValue(m_currentCanvas + "/" + QString::number(index) + "/cardType", cardType);
-    m_cardIO->setValue(m_currentCanvas + "/cardNum", m_cardList.count());
-    return index;
+    m_cardMap[id]->m_text = text;
+    m_cardIO->setValue(m_currentCanvas + "/" + id + "/text", text);
 }
 
-/// @brief load cards from canvas file to m_cardList
+QString CardManager::createCard(QString cardType)
+{
+    QString id = uuid();
+    Card* card = new Card(id, cardType);
+    m_cardMap[id] = card;
+    m_cardIO->setValue(m_currentCanvas + "/" + id + "/cardType", cardType);
+    return id;
+}
+
+void CardManager::deleteCard(QString id)
+{
+    m_cardMap.remove(id);
+    m_cardIO->beginGroup(m_currentCanvas);
+    m_cardIO->remove(id);
+    m_cardIO->endGroup();
+}
+
+/// @brief load cards from canvas file to m_cardMap
 void CardManager::loadCards()
 {
     m_cardIO->beginGroup(m_currentCanvas);
-    int cardNum = m_cardIO->value("cardNum").toInt();
-    for (int i = 0; i < cardNum; i++) {
-        QString cardNumString = QString::number(i);
-        QString cardType = m_cardIO->value(cardNumString + "/cardType").toString();
-        Card card(i, cardType);
-        card.m_x = m_cardIO->value(cardNumString + "/x").toReal();
-        card.m_y = m_cardIO->value(cardNumString + "/y").toReal();
-        card.m_width = m_cardIO->value(cardNumString + "/width").toReal();
-        card.m_height = m_cardIO->value(cardNumString + "/height").toReal();
-        card.m_text = m_cardIO->value(cardNumString + "/text").toString();
-        card.m_backgroundColor = m_cardIO->value(cardNumString + "/backgroundColor").toString();
-        m_cardList.append(card);
+    QStringList keys = m_cardIO->childGroups();
+    for (int i = 0; i < keys.count(); i++) {
+        QString cardType = m_cardIO->value(keys[i] + "/cardType").toString();
+        Card* card = new Card(keys[i], cardType);
+        card->m_x = m_cardIO->value(keys[i] + "/x").toReal();
+        card->m_y = m_cardIO->value(keys[i] + "/y").toReal();
+        card->m_width = m_cardIO->value(keys[i] + "/width").toReal();
+        card->m_height = m_cardIO->value(keys[i] + "/height").toReal();
+        card->m_text = m_cardIO->value(keys[i] + "/text").toString();
+        card->m_backgroundColor = m_cardIO->value(keys[i] + "/backgroundColor").toString();
+        m_cardMap[keys[i]] = card;
     }
     m_cardIO->endGroup();
-    listCards();
 }
 
-void CardManager::listCards()
+QString CardManager::uuid()
 {
-    for (int i = 0; i < m_cardList.count(); i++)
-        qInfo() << "index: " << m_cardList[i].m_index << "; cardType: " << m_cardList[i].m_cardType;
+    return QUuid::createUuid().toString(QUuid::Id128);
 }
