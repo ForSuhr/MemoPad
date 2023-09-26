@@ -6,7 +6,7 @@ Item {
 
     // once you drag a item from toolbar, a new card (a card is something you placed in the canvas and take you note) will be created according to this component file
     property string componentFile
-    property string imageSource: "assets/themes/lumos/blank.svg"
+    property string imageSource: IconSet.blank
     property string toolBarArea: "top area"
 
     Rectangle {

@@ -102,6 +102,11 @@ ResizableItem {
         }
     }
 
+    CardEditBar{
+        id: editBar
+        borderColor: cardBorderColor
+    }
+
     CardPalette {
         id: palette
         borderColor: cardBorderColor

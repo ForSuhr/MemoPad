@@ -55,6 +55,7 @@ qt_add_qml_module(MemoPad
         ui/CanvasCard.qml
         ui/CardPalette.qml
         ui/CardEditBar.qml
+        ui/CardEditBarItem.qml
 )
 
 set_target_properties(MemoPad PROPERTIES
