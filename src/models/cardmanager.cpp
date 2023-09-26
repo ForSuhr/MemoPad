@@ -130,5 +130,5 @@ void CardManager::loadCards()
 
 QString CardManager::uuid()
 {
-    return QUuid::createUuid().toString(QUuid::Id128);
+    return QUuid::createUuid().toString(QUuid::WithoutBraces);
 }
