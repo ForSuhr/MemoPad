@@ -60,6 +60,10 @@ function saveSize(cardIndex, card) {
     cardManager.setHeight(cardIndex, card.height)
 }
 
+function saveText(cardIndex, textArea) {
+    cardManager.setText(cardIndex, textArea.text)
+}
+
 function saveColor(cardIndex, card) {
     cardManager.setBackgroundColor(cardIndex, card.cardBackgroundColor)
 }

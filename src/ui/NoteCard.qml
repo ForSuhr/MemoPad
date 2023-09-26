@@ -32,14 +32,17 @@ ResizableItem {
         console.log("note card loaded")
         root.width = cardManager.width(cardIndex)
         root.height = cardManager.height(cardIndex)
+        textArea.text = cardManager.text(cardIndex)
         root.cardBackgroundColor = cardManager.backgroundColor(cardIndex)
         Snap.snap(root)
     }
     onSelectedChanged: {
         isVisble = selected
-        textArea.focus = false
-        mouseArea.enabled = true
+        textArea.focus = selected
+        mouseArea.enabled = !selected
         palette.visible = selected
+        if (!selected)
+            IO.saveText(cardIndex, textArea)
     }
 
     MouseArea {

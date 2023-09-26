@@ -15,6 +15,7 @@ public:
     qreal m_y;
     qreal m_width;
     qreal m_height;
+    QString m_text;
     QString m_backgroundColor;
 };
 

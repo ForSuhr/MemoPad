@@ -76,6 +76,17 @@ void CardManager::setBackgroundColor(int index, QString backgroundColor)
     m_cardIO->setValue(m_currentCanvas + "/" + QString::number(index) + "/backgroundColor", backgroundColor);
 }
 
+QString CardManager::text(int index)
+{
+    return m_cardList[index].m_text;
+}
+
+void CardManager::setText(int index, QString text)
+{
+    m_cardList[index].m_text = text;
+    m_cardIO->setValue(m_currentCanvas + "/" + QString::number(index) + "/text", text);
+}
+
 int CardManager::createCard(QString cardType)
 {
     int index = m_cardList.count();
@@ -99,6 +110,7 @@ void CardManager::loadCards()
         card.m_y = m_cardIO->value(cardNumString + "/y").toReal();
         card.m_width = m_cardIO->value(cardNumString + "/width").toReal();
         card.m_height = m_cardIO->value(cardNumString + "/height").toReal();
+        card.m_text = m_cardIO->value(cardNumString + "/text").toString();
         card.m_backgroundColor = m_cardIO->value(cardNumString + "/backgroundColor").toString();
         m_cardList.append(card);
     }
