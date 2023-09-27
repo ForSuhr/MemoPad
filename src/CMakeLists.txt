@@ -22,6 +22,7 @@ qt_add_qml_module(MemoPad
         ui/assets/themes/lumos/canvas.svg
         ui/assets/themes/lumos/note.svg
         ui/assets/themes/lumos/trash.svg
+        ui/assets/themes/lumos/gear.svg
     SOURCES
         models/card.h
         models/card.cpp
@@ -56,6 +57,9 @@ qt_add_qml_module(MemoPad
         ui/CardPalette.qml
         ui/CardEditBar.qml
         ui/CardEditBarItem.qml
+        ui/PreferencesPopup.qml
+        ui/preferencesPage1.qml
+        ui/preferencesPage2.qml
 )
 
 set_target_properties(MemoPad PROPERTIES
