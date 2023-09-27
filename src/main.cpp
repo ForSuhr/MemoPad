@@ -11,8 +11,9 @@ int main(int argc, char* argv[])
 
     /*qml register*/
     qmlRegisterType<TextEditor>("MemoPad.TextEditorModel", 1, 0, "TextEditorModel");
-    qmlRegisterType<PreferencesManager>("MemoPad.PreferencesManager", 1, 0, "PreferencesManager");
     qmlRegisterType<CardManager>("MemoPad.CardManager", 1, 0, "CardManager");
+    QScopedPointer<PreferencesManager> scopedPointer(new PreferencesManager);
+    qmlRegisterSingletonInstance("MemoPad.PreferencesManager", 1, 0, "PreferencesManager", scopedPointer.get());
 
     QQmlApplicationEngine engine;
     const QUrl url(u"qrc:/MemoPad/ui/Main.qml"_qs);

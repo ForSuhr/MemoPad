@@ -14,10 +14,9 @@ Window {
     title: qsTr("MemoPad")
     color: "floralwhite"
 
-    PreferencesManager {
-        id: preferencesManager
-    }
-
+    //    PreferencesManager {
+    //        id: preferencesManager
+    //    }
     CardManager {
         id: cardManager
         Component.onCompleted: IO.load()
@@ -33,9 +32,9 @@ Window {
         id: sideToolBar
         width: window.width
         height: window.height
-        toolBarArea: preferencesManager.toolBarArea
+        toolBarArea: PreferencesManager.toolBarArea
         onToolBarAreaChangedUI: area => {
-                                    preferencesManager.toolBarArea = area
+                                    PreferencesManager.toolBarArea = area
                                 }
     }
 }
