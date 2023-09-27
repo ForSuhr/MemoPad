@@ -63,7 +63,6 @@ Item {
             border.color: toolBarBorderColor
             border.width: 4
         }
-
         RowLayout {
             width: toolBar.width - 18
             height: 32
@@ -88,6 +87,18 @@ Item {
                 id: spacerItem
                 Layout.fillWidth: true
                 Layout.fillHeight: true
+            }
+            SideToolBarItem {
+                id: preferencesItem
+                implicitWidth: parent.height
+                implicitHeight: parent.height
+                imageSource: IconSet.gear
+                toolBarArea: root.toolBarArea
+                enableMouseArea: false
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: preferencesPopup.visible = true
+                }
             }
             Rectangle {
                 id: dragAreaRect
@@ -143,5 +154,9 @@ Item {
                 velocity: 2000
             }
         }
+    }
+
+    PreferencesPopup {
+        id: preferencesPopup
     }
 }

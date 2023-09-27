@@ -8,6 +8,7 @@ Item {
     property string componentFile
     property string imageSource: IconSet.blank
     property string toolBarArea: "top area"
+    property bool enableMouseArea: true
 
     Rectangle {
         id: rect
@@ -53,6 +54,7 @@ Item {
             width: root.width
             height: root.height
             anchors.fill: rect
+            enabled: enableMouseArea
             hoverEnabled: true
             cursorShape: Qt.PointingHandCursor
             onEntered: {

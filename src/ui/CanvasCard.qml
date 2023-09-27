@@ -17,14 +17,12 @@ ResizableItem {
     property bool selected: false
 
     onCreatedChanged: {
-        console.log("canvas card created")
         id = cardManager.createCard("canvas")
         Snap.snap(root)
         IO.savePos(id, root)
         IO.saveSize(id, root)
     }
     onLoadedChanged: {
-        console.log("canvas card loaded")
         root.width = cardManager.width(id)
         root.height = cardManager.height(id)
         Snap.snap(root)
