@@ -1,6 +1,7 @@
 pragma Singleton
 
 import QtQuick
+import MemoPad.PreferencesManager
 
 QtObject {
     /*canvas*/
@@ -14,5 +15,5 @@ QtObject {
 
     /*----------preferences----------*/
     /*page1*/
-    property bool cardSizeAutoAdjust: false
+    property bool cardSizeAutoAdjust: PreferencesManager.cardSizeAutoAdjust
 }

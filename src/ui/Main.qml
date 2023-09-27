@@ -14,9 +14,6 @@ Window {
     title: qsTr("MemoPad")
     color: "floralwhite"
 
-    //    PreferencesManager {
-    //        id: preferencesManager
-    //    }
     CardManager {
         id: cardManager
         Component.onCompleted: IO.load()

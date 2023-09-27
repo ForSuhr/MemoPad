@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Controls.Basic
 import QtQuick.Layouts
+import MemoPad.PreferencesManager
 
 Page {
     id: commonPage
@@ -42,8 +43,11 @@ Page {
                     }
                     Switch {
                         Layout.alignment: Qt.AlignVCenter
+                        checked: Globals.cardSizeAutoAdjust
                         onCheckedChanged: {
+                            console.log("changed")
                             Globals.cardSizeAutoAdjust = checked
+                            PreferencesManager.cardSizeAutoAdjust = checked
                         }
                     }
                 }

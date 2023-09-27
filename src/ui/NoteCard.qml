@@ -21,7 +21,6 @@ ResizableItem {
     property bool selected: false
 
     onCreatedChanged: {
-        console.log("note card created")
         id = cardManager.createCard("note")
         Snap.snap(root)
         IO.savePos(id, root)
@@ -29,7 +28,6 @@ ResizableItem {
         IO.saveColor(id, root)
     }
     onLoadedChanged: {
-        console.log("note card loaded")
         textArea.text = cardManager.text(id)
         root.width = cardManager.width(id)
         root.height = cardManager.height(id)
@@ -97,9 +95,11 @@ ResizableItem {
 
         // adjust text area according to contents automatically
         onContentHeightChanged: {
-            root.height = (Math.floor(
-                               (contentHeight + topPadding + bottomPadding)
-                               / Globals.dotInterval) + 1) * Globals.dotInterval
+            if (Globals.cardSizeAutoAdjust) {
+                root.height = (Math.floor(
+                                   (contentHeight + topPadding + bottomPadding)
+                                   / Globals.dotInterval) + 1) * Globals.dotInterval
+            }
         }
     }
 
