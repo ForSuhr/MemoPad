@@ -97,7 +97,19 @@ Item {
                 enableMouseArea: false
                 MouseArea {
                     anchors.fill: parent
+                    hoverEnabled: true
                     onClicked: preferencesPopup.visible = true
+                    onEntered: rotationAnimation.start()
+                    onExited: rotationAnimation.stop()
+                }
+                RotationAnimation {
+                    id: rotationAnimation
+                    target: preferencesItem
+                    loops: Animation.Infinite
+                    direction: RotationAnimation.Clockwise
+                    from: parent.rotation
+                    to: 360
+                    duration: 3000
                 }
             }
             Rectangle {

@@ -45,7 +45,6 @@ Page {
                         Layout.alignment: Qt.AlignVCenter
                         checked: Globals.cardSizeAutoAdjust
                         onCheckedChanged: {
-                            console.log("changed")
                             Globals.cardSizeAutoAdjust = checked
                             PreferencesManager.cardSizeAutoAdjust = checked
                         }
