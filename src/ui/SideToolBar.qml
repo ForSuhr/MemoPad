@@ -89,7 +89,7 @@ Item {
                 Layout.fillHeight: true
             }
             SideToolBarItem {
-                id: preferencesItem
+                id: gearItem
                 implicitWidth: parent.height
                 implicitHeight: parent.height
                 imageSource: IconSet.gear
@@ -99,12 +99,18 @@ Item {
                     anchors.fill: parent
                     hoverEnabled: true
                     onClicked: preferencesPopup.visible = true
-                    onEntered: rotationAnimation.start()
-                    onExited: rotationAnimation.stop()
+                    onEntered: {
+                        cursorShape = Qt.PointingHandCursor
+                        rotationAnimation.start()
+                    }
+                    onExited: {
+                        cursorShape = Qt.ArrowCursor
+                        rotationAnimation.stop()
+                    }
                 }
                 RotationAnimation {
                     id: rotationAnimation
-                    target: preferencesItem
+                    target: gearItem
                     loops: Animation.Infinite
                     direction: RotationAnimation.Clockwise
                     from: parent.rotation
@@ -128,10 +134,11 @@ Item {
                     drag.minimumY: 0
                     drag.maximumX: root.parent.width - toolBar.width
                     drag.maximumY: root.parent.height - toolBar.height
+                    hoverEnabled: true
                     property real currentX: 0
                     property real currentY: 0
-
                     onPressed: {
+                        cursorShape = Qt.ClosedHandCursor
                         topArea.visible = true
                         bottomArea.visible = true
                         toolBar.background.color = toolBarPressedColor
@@ -139,6 +146,7 @@ Item {
                         currentY = toolBar.y
                     }
                     onReleased: {
+                        cursorShape = Qt.ArrowCursor
                         topArea.visible = false
                         bottomArea.visible = false
                         toolBar.background.color = toolBarColor
@@ -148,6 +156,8 @@ Item {
                             toolBar.y = currentY
                         }
                     }
+                    onEntered: cursorShape = Qt.OpenHandCursor
+                    onExited: cursorShape = Qt.ArrowCursor
                 }
             }
         }

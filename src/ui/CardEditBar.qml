@@ -39,7 +39,10 @@ Pane {
             imageSource: IconSet.trash
             MouseArea {
                 anchors.fill: parent
+                hoverEnabled: true
                 onClicked: IO.deleteCard(palette.parent.id, palette.parent)
+                onEntered: cursorShape = Qt.PointingHandCursor
+                onExited: cursorShape = Qt.ArrowCursor
             }
         }
         Item {
