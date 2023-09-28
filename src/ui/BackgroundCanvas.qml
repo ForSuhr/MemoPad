@@ -59,11 +59,6 @@ Item {
         }
     }
 
-    CardLayer {
-        id: cardLayer
-        z: 2
-    }
-
     /*scale*/
     MouseArea {
         id: scaleArea
@@ -97,5 +92,23 @@ Item {
         drag.target: root // drag the whole item instead of canvas
         acceptedButtons: Qt.RightButton
         hoverEnabled: true
+    }
+
+    CardLayer {
+        id: cardLayer
+        z: 2
+    }
+
+    /*lose focus*/
+    // once you click on cardlayer(it means that you clicked on somewhere outside the cards),
+    // the cards will lose their focus, and they should be marked as unselected
+    MouseArea {
+        id: loseFocus
+        anchors.fill: parent
+        onPressed: {
+            for (var i = 0; i < cardLayer.children.length; i++) {
+                cardLayer.children[i].selected = false
+            }
+        }
     }
 }
