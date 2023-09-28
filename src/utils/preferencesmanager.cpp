@@ -28,3 +28,14 @@ void PreferencesManager::setCardSizeAutoAdjust(bool cardSizeAutoAdjust)
     m_settings->setValue("common/cardSizeAutoAdjust", cardSizeAutoAdjust);
     emit cardSizeAutoAdjustChanged();
 }
+
+bool PreferencesManager::fullScreenMode()
+{
+    return m_settings->value("common/fullScreenMode").toBool();
+}
+
+void PreferencesManager::setFullScreenMode(bool fullScreenMode)
+{
+    m_settings->setValue("common/fullScreenMode", fullScreenMode);
+    emit fullScreenModeChanged();
+}

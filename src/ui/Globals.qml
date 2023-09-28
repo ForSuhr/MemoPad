@@ -15,5 +15,11 @@ QtObject {
 
     /*----------preferences----------*/
     /*page1*/
-    property bool cardSizeAutoAdjust: PreferencesManager.cardSizeAutoAdjust
+    property bool cardSizeAutoAdjust: false
+    property bool fullScreenMode: false
+
+    Component.onCompleted: {
+        cardSizeAutoAdjust = PreferencesManager.cardSizeAutoAdjust
+        fullScreenMode = PreferencesManager.fullScreenMode
+    }
 }

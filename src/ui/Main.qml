@@ -11,6 +11,7 @@ Window {
     width: 1280
     height: 720
     visible: true
+    visibility: Globals.fullScreenMode ? Window.FullScreen : Window.Windowed
     title: qsTr("MemoPad")
     color: "floralwhite"
 

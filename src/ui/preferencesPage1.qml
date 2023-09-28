@@ -26,12 +26,15 @@ Page {
         ColumnLayout {
             width: 300
             height: 300
+            spacing: 30
 
             Item {
                 id: cardSizeAutoAdjust
+                width: 300
+                height: 30
                 RowLayout {
-                    width: 300
-                    height: 30
+                    width: parent.width
+                    height: parent.height
                     Label {
                         Layout.alignment: Qt.AlignVCenter
                         text: qsTr("Card size adjusts with text")
@@ -42,11 +45,42 @@ Page {
                         Layout.fillHeight: true
                     }
                     Switch {
+                        width: 80
+                        height: 30
                         Layout.alignment: Qt.AlignVCenter
                         checked: Globals.cardSizeAutoAdjust
                         onCheckedChanged: {
                             Globals.cardSizeAutoAdjust = checked
                             PreferencesManager.cardSizeAutoAdjust = checked
+                        }
+                    }
+                }
+            }
+
+            Item {
+                id: fullScreen
+                width: 300
+                height: 30
+                RowLayout {
+                    width: parent.width
+                    height: parent.height
+                    Label {
+                        Layout.alignment: Qt.AlignVCenter
+                        text: qsTr("FullScreen Mode")
+                        font.pixelSize: fontPixelSize
+                    }
+                    Item {
+                        Layout.fillWidth: true
+                        Layout.fillHeight: true
+                    }
+                    Switch {
+                        width: 80
+                        height: 30
+                        Layout.alignment: Qt.AlignVCenter
+                        checked: Globals.fullScreenMode
+                        onCheckedChanged: {
+                            Globals.fullScreenMode = checked
+                            PreferencesManager.fullScreenMode = checked
                         }
                     }
                 }
