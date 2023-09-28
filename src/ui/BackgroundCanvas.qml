@@ -100,7 +100,7 @@ Item {
     }
 
     /*lose focus*/
-    // once you click on cardlayer(it means that you clicked on somewhere outside the cards),
+    // once you click on this mouse area(it means that you clicked on somewhere outside any cards),
     // the cards will lose their focus, and they should be marked as unselected
     MouseArea {
         id: loseFocus

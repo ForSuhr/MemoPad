@@ -10,21 +10,20 @@ ResizableItem {
     height: Globals.dotInterval * 3
 
     property string id
-    property CardManager cardManager
 
     property bool created: false
     property bool loaded: false
     property bool selected: false
 
     onCreatedChanged: {
-        id = cardManager.createCard("canvas")
+        id = CardManager.createCard("canvas")
         Snap.snap(root)
         IO.savePos(id, root)
         IO.saveSize(id, root)
     }
     onLoadedChanged: {
-        root.width = cardManager.width(id)
-        root.height = cardManager.height(id)
+        root.width = CardManager.width(id)
+        root.height = CardManager.height(id)
         Snap.snap(root)
     }
     onSelectedChanged: {

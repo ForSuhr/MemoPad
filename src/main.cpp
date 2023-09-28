@@ -11,9 +11,10 @@ int main(int argc, char* argv[])
 
     /*qml register*/
     qmlRegisterType<TextEditor>("MemoPad.TextEditorModel", 1, 0, "TextEditorModel");
-    qmlRegisterType<CardManager>("MemoPad.CardManager", 1, 0, "CardManager");
-    QScopedPointer<PreferencesManager> scopedPointer(new PreferencesManager);
-    qmlRegisterSingletonInstance("MemoPad.PreferencesManager", 1, 0, "PreferencesManager", scopedPointer.get());
+    QScopedPointer<CardManager> scopedPointer1(new CardManager);
+    qmlRegisterSingletonInstance("MemoPad.CardManager", 1, 0, "CardManager", scopedPointer1.get());
+    QScopedPointer<PreferencesManager> scopedPointer2(new PreferencesManager);
+    qmlRegisterSingletonInstance("MemoPad.PreferencesManager", 1, 0, "PreferencesManager", scopedPointer2.get());
 
     QQmlApplicationEngine engine;
     const QUrl url(u"qrc:/MemoPad/ui/Main.qml"_qs);

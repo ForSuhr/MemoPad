@@ -5,12 +5,12 @@ var canvasCardComponentFile = "CanvasCard.qml"
 var noteCardComponentFile = "NoteCard.qml"
 
 function load() {
-    cardManager.loadCards()
-    var cardNum = cardManager.cardNum()
-    var cardIDs = cardManager.cardIDs()
+    CardManager.loadCards()
+    var cardNum = CardManager.cardNum()
+    var cardIDs = CardManager.cardIDs()
     for (var i = 0; i < cardNum; i++) {
         var id = cardIDs[i]
-        var cardType = cardManager.cardType(id)
+        var cardType = CardManager.cardType(id)
         switch (cardType) {
         case "canvas":
             loadComponent(canvasCardComponent, canvasCardComponentFile, id)
@@ -41,10 +41,9 @@ function createCard(cardComponent, id) {
     if (cardComponent.status === Component.Ready) {
         // set card layer as its parent
         var card = cardComponent.createObject(bgCanvas.cardLayer, {
-                                                  "x": cardManager.x(id),
-                                                  "y": cardManager.y(id),
-                                                  "id": id,
-                                                  "cardManager": cardManager
+                                                  "x": CardManager.x(id),
+                                                  "y": CardManager.y(id),
+                                                  "id": id
                                               })
 
         card.loaded = true
@@ -53,25 +52,25 @@ function createCard(cardComponent, id) {
 
 /*--------------------------save system----------------------------------*/
 function savePos(id, card) {
-    cardManager.setX(id, card.x)
-    cardManager.setY(id, card.y)
+    CardManager.setX(id, card.x)
+    CardManager.setY(id, card.y)
 }
 
 function saveSize(id, card) {
-    cardManager.setWidth(id, card.width)
-    cardManager.setHeight(id, card.height)
+    CardManager.setWidth(id, card.width)
+    CardManager.setHeight(id, card.height)
 }
 
 function saveText(id, textArea) {
-    cardManager.setText(id, textArea.text)
+    CardManager.setText(id, textArea.text)
 }
 
 function saveColor(id, card) {
-    cardManager.setBackgroundColor(id, card.cardBackgroundColor)
+    CardManager.setBackgroundColor(id, card.cardBackgroundColor)
 }
 
 /*---------------------------delete--------------------------------------*/
 function deleteCard(id, card) {
-    cardManager.deleteCard(id)
+    CardManager.deleteCard(id)
     card.destroy()
 }

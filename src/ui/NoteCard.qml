@@ -10,7 +10,6 @@ ResizableItem {
     height: Globals.dotInterval * 3
 
     property string id
-    property CardManager cardManager
     property string cardBackgroundColor: "snow"
     property string cardBorderColor: "gainsboro"
     property int cardBorderWidth: 4
@@ -21,17 +20,17 @@ ResizableItem {
     property bool selected: false
 
     onCreatedChanged: {
-        id = cardManager.createCard("note")
+        id = CardManager.createCard("note")
         Snap.snap(root)
         IO.savePos(id, root)
         IO.saveSize(id, root)
         IO.saveColor(id, root)
     }
     onLoadedChanged: {
-        textArea.text = cardManager.text(id)
-        root.width = cardManager.width(id)
-        root.height = cardManager.height(id)
-        root.cardBackgroundColor = cardManager.backgroundColor(id)
+        textArea.text = CardManager.text(id)
+        root.width = CardManager.width(id)
+        root.height = CardManager.height(id)
+        root.cardBackgroundColor = CardManager.backgroundColor(id)
         Snap.snap(root)
     }
     onSelectedChanged: {

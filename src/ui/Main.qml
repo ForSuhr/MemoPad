@@ -15,10 +15,7 @@ Window {
     title: qsTr("MemoPad")
     color: "floralwhite"
 
-    CardManager {
-        id: cardManager
-        Component.onCompleted: IO.load()
-    }
+    Component.onCompleted: IO.load()
 
     BackgroundCanvas {
         id: bgCanvas

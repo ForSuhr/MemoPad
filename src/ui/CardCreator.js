@@ -41,8 +41,7 @@ function createCard(mouse) {
                                                      "y": root.mapToItem(
                                                               bgCanvas.cardLayer,
                                                               mouse.x,
-                                                              mouse.y).y - onPressedMouse.y,
-                                                     "cardManager": cardManager
+                                                              mouse.y).y - onPressedMouse.y
                                                  })
     }
 }
