@@ -23,7 +23,21 @@ Pane {
         border.color: borderColor
     }
 
+    ScaleAnimator {
+        id: scaleUp
+        from: 1
+        to: 1.1
+        duration: 100
+    }
+    ScaleAnimator {
+        id: scaleDown
+        from: 1.1
+        to: 1
+        duration: 100
+    }
+
     RowLayout {
+        id: rowLayout
         width: 32 * colorNum - 16
         height: 24
         anchors.verticalCenter: parent.verticalCenter
@@ -34,15 +48,26 @@ Pane {
         }
         Rectangle {
             id: mistyrose
-            width: parent.height
-            height: parent.height
+            width: rowLayout.height
+            height: rowLayout.height
             radius: width / 2
             border.width: 2
             border.color: "lightgray"
             color: "mistyrose"
             MouseArea {
                 anchors.fill: parent
+                hoverEnabled: true
                 onClicked: palette.parent.cardBackgroundColor = parent.color
+                onEntered: {
+                    scaleUp.target = parent
+                    scaleUp.start()
+                    cursorShape = Qt.PointingHandCursor
+                }
+                onExited: {
+                    scaleDown.target = parent
+                    scaleDown.start()
+                    cursorShape = Qt.ArrowCursor
+                }
             }
         }
         Rectangle {
@@ -55,7 +80,18 @@ Pane {
             color: "aliceblue"
             MouseArea {
                 anchors.fill: parent
+                hoverEnabled: true
                 onClicked: palette.parent.cardBackgroundColor = parent.color
+                onEntered: {
+                    scaleUp.target = parent
+                    scaleUp.start()
+                    cursorShape = Qt.PointingHandCursor
+                }
+                onExited: {
+                    scaleDown.target = parent
+                    scaleDown.start()
+                    cursorShape = Qt.ArrowCursor
+                }
             }
         }
         Rectangle {
@@ -68,7 +104,18 @@ Pane {
             color: "floralwhite"
             MouseArea {
                 anchors.fill: parent
+                hoverEnabled: true
                 onClicked: palette.parent.cardBackgroundColor = parent.color
+                onEntered: {
+                    scaleUp.target = parent
+                    scaleUp.start()
+                    cursorShape = Qt.PointingHandCursor
+                }
+                onExited: {
+                    scaleDown.target = parent
+                    scaleDown.start()
+                    cursorShape = Qt.ArrowCursor
+                }
             }
         }
         Rectangle {
@@ -81,7 +128,18 @@ Pane {
             color: "mintcream"
             MouseArea {
                 anchors.fill: parent
+                hoverEnabled: true
                 onClicked: palette.parent.cardBackgroundColor = parent.color
+                onEntered: {
+                    scaleUp.target = parent
+                    scaleUp.start()
+                    cursorShape = Qt.PointingHandCursor
+                }
+                onExited: {
+                    scaleDown.target = parent
+                    scaleDown.start()
+                    cursorShape = Qt.ArrowCursor
+                }
             }
         }
         Rectangle {
@@ -94,7 +152,18 @@ Pane {
             color: "snow"
             MouseArea {
                 anchors.fill: parent
+                hoverEnabled: true
                 onClicked: palette.parent.cardBackgroundColor = parent.color
+                onEntered: {
+                    scaleUp.target = parent
+                    scaleUp.start()
+                    cursorShape = Qt.PointingHandCursor
+                }
+                onExited: {
+                    scaleDown.target = parent
+                    scaleDown.start()
+                    cursorShape = Qt.ArrowCursor
+                }
             }
         }
         Rectangle {
@@ -107,7 +176,18 @@ Pane {
             color: "whitesmoke"
             MouseArea {
                 anchors.fill: parent
+                hoverEnabled: true
                 onClicked: palette.parent.cardBackgroundColor = parent.color
+                onEntered: {
+                    scaleUp.target = parent
+                    scaleUp.start()
+                    cursorShape = Qt.PointingHandCursor
+                }
+                onExited: {
+                    scaleDown.target = parent
+                    scaleDown.start()
+                    cursorShape = Qt.ArrowCursor
+                }
             }
         }
         Item {
