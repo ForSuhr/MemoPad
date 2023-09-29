@@ -37,7 +37,7 @@ Page {
                     height: parent.height
                     Label {
                         Layout.alignment: Qt.AlignVCenter
-                        text: qsTr("Card size adjusts with text")
+                        text: qsTr("Adjust card size to fit text")
                         font.pixelSize: fontPixelSize
                     }
                     Item {
