@@ -10,6 +10,9 @@ public:
     void execute();
     void undo();
     void redo();
+
+private:
+    Card* m_card = nullptr;
 };
 
 #endif // COMMAND_H

@@ -2,6 +2,7 @@
 
 Command::Command(Card* card)
 {
+    m_card = card;
 }
 
 void Command::execute()
