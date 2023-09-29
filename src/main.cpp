@@ -2,8 +2,8 @@
 #include <QQmlApplicationEngine>
 
 #include "models/cardmanager.h"
+#include "models/preferencesmanager.h"
 #include "models/texteditor.h"
-#include "utils/preferencesmanager.h"
 
 int main(int argc, char* argv[])
 {

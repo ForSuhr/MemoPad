@@ -30,8 +30,8 @@ qt_add_qml_module(MemoPad
         models/texteditor.cpp
         models/cardmanager.h
         models/cardmanager.cpp
-        utils/preferencesmanager.h
-        utils/preferencesmanager.cpp
+        models/preferencesmanager.h
+        models/preferencesmanager.cpp
         utils/qsettingsjson.h
         utils/qsettingsjson.cpp
     QML_FILES

@@ -4,7 +4,7 @@
 #include <QCoreApplication>
 #include <QObject>
 
-#include "qsettingsjson.h"
+#include "../utils/qsettingsjson.h"
 
 class PreferencesManager : public QObject {
     Q_OBJECT
