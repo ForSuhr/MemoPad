@@ -94,21 +94,22 @@ Item {
         hoverEnabled: true
     }
 
-    CardLayer {
-        id: cardLayer
-        z: 2
-    }
-
     /*lose focus*/
     // once you click on this mouse area(it means that you clicked on somewhere outside any cards),
     // the cards will lose their focus, and they should be marked as unselected
     MouseArea {
         id: loseFocus
+        z: 1
         anchors.fill: parent
         onPressed: {
             for (var i = 0; i < cardLayer.children.length; i++) {
                 cardLayer.children[i].selected = false
             }
         }
+    }
+
+    CardLayer {
+        id: cardLayer
+        z: 2
     }
 }

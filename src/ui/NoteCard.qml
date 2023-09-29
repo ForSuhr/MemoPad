@@ -39,8 +39,10 @@ ResizableItem {
         mouseArea.enabled = !selected
         editBar.visible = selected
         palette.visible = selected
-        if (!selected)
+        if (!selected) {
             IO.saveText(id, textArea)
+            mouseArea.cursorShape = Qt.OpenHandCursor
+        }
     }
 
     MouseArea {
@@ -53,9 +55,12 @@ ResizableItem {
         drag.maximumX: root.parent.width - root.width
         drag.maximumY: root.parent.height - root.height
         acceptedButtons: Qt.LeftButton
+        hoverEnabled: true
+        onEntered: cursorShape = Qt.OpenHandCursor
+        onExited: cursorShape = Qt.ArrowCursor
         onPressed: cursorShape = Qt.ClosedHandCursor
         onReleased: {
-            cursorShape = Qt.ArrowCursor
+            cursorShape = Qt.OpenHandCursor
             Snap.snap(root)
             IO.savePos(id, root)
         }
@@ -63,6 +68,7 @@ ResizableItem {
             selected = true
             textArea.focus = true
             enabled = false
+            cursorShape = Qt.IBeamCursor
         }
     }
 
