@@ -5,10 +5,9 @@ CommandManager::CommandManager(QObject* parent)
 {
 }
 
-void CommandManager::execute(Card* card)
+void CommandManager::execute(QString id)
 {
-    std::unique_ptr<Command> command = std::make_unique<Command>(card);
-    command->execute();
+    std::unique_ptr<CommandSavePosState> command = std::unique_ptr<CommandSavePosState>(new CommandSavePosState(id, 1, 2));
     m_undoStack.push(std::move(command));
     m_redoStack = std::stack<std::unique_ptr<Command>>(); // clear the redo stack
 }

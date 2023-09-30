@@ -1,18 +1,6 @@
 #include "command.h"
 
-Command::Command(Card* card)
+Command::Command(QString id)
 {
-    m_card = card;
-}
-
-void Command::execute()
-{
-}
-
-void Command::undo()
-{
-}
-
-void Command::redo()
-{
+    m_id = id;
 }

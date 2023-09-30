@@ -1,18 +1,23 @@
 #ifndef COMMAND_H
 #define COMMAND_H
 
-#include "card.h"
+#include <QString>
+
+enum CommandType {
+    SavePosState
+};
 
 class Command {
 public:
-    Command(Card* card);
+    Command(QString id);
 
-    void execute();
-    void undo();
-    void redo();
+    virtual void execute() = 0;
+    virtual void undo() = 0;
+    virtual void redo() = 0;
 
 private:
-    Card* m_card = nullptr;
+    QString m_id;
+    //    CommandType m_commandType;
 };
 
 #endif // COMMAND_H
