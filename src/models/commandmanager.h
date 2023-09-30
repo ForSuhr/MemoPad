@@ -22,12 +22,14 @@ public:
     Q_INVOKABLE void resizeCard(QString id, qreal lastWidth, qreal lastHeight, qreal currentWidth, qreal currentHeight);
     Q_INVOKABLE void transformCard(QString id, qreal lastX, qreal lastY, qreal currentX, qreal currentY, qreal lastWidth, qreal lastHeight, qreal currentWidth, qreal currentHeight);
     Q_INVOKABLE void changeText(QString id, QString lastText, QString currentText);
+    Q_INVOKABLE void changeBackgroundColor(QString id, QString lastColor, QString currentColor);
 
 signals:
     void moveCardSignal(QString id, qreal x, qreal y);
     void resizeCardSignal(QString id, qreal width, qreal height);
     void transformCardSignal(QString id, qreal x, qreal y, qreal width, qreal height);
     void changeTextSignal(QString id, QString text);
+    void changeBackgroundColorSignal(QString id, QString color);
 
 private:
     std::stack<Command*> m_undoStack;

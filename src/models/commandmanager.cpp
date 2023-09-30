@@ -59,3 +59,10 @@ void CommandManager::changeText(QString id, QString lastText, QString currentTex
     execute(command);
     connect(command, &CommandChangeText::changeTextSignal, this, &CommandManager::changeTextSignal);
 }
+
+void CommandManager::changeBackgroundColor(QString id, QString lastColor, QString currentColor)
+{
+    CommandChangeBackgroundColor* command = new CommandChangeBackgroundColor(id, lastColor, currentColor, this);
+    execute(command);
+    connect(command, &CommandChangeBackgroundColor::changeBackgroundColorSignal, this, &CommandManager::changeBackgroundColorSignal);
+}

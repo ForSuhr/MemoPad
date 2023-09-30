@@ -145,4 +145,33 @@ private:
     QString m_currentText;
 };
 
+class CommandChangeBackgroundColor : public Command {
+    Q_OBJECT
+public:
+    CommandChangeBackgroundColor(QString id, QString lastColor, QString currentColor, QObject* parent = nullptr)
+        : Command { id, parent }
+    {
+        m_id = id;
+        m_lastColor = lastColor;
+        m_currentColor = currentColor;
+    };
+
+    void undo() override
+    {
+        emit changeBackgroundColorSignal(m_id, m_lastColor);
+    };
+    void redo() override
+    {
+        emit changeBackgroundColorSignal(m_id, m_currentColor);
+    };
+
+signals:
+    void changeBackgroundColorSignal(QString id, QString color);
+
+private:
+    QString m_id;
+    QString m_lastColor;
+    QString m_currentColor;
+};
+
 #endif // COMMANDS_H

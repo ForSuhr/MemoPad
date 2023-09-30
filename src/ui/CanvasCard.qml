@@ -19,7 +19,7 @@ ResizableItem {
     onCreatedChanged: {
         id = CardManager.createCard("canvas")
         Snap.snap(root)
-        IO.saveTransform(id, root)
+        IO.saveTransform(id, root, false)
     }
     onLoadedChanged: {
         root.width = CardManager.width(id)

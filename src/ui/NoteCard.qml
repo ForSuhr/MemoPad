@@ -11,10 +11,10 @@ ResizableItem {
     height: Globals.dotInterval * 3
 
     property string id
-    property string cardBackgroundColor: "snow"
-    property string cardBorderColor: "gainsboro"
-    property int cardBorderWidth: 4
-    property int cardRadius: 10
+    property string backgroundColor: "snow"
+    property string borderColor: "gainsboro"
+    property int borderWidth: 4
+    property int cornerRadius: 10
     property alias text: textArea.text
 
     property bool created: false
@@ -24,14 +24,14 @@ ResizableItem {
     onCreatedChanged: {
         id = CardManager.createCard("note")
         Snap.snap(root)
-        IO.saveTransform(id, root)
-        IO.saveBackgroundColor(id, root)
+        IO.saveTransform(id, root, false)
+        IO.saveBackgroundColor(id, root, false)
     }
     onLoadedChanged: {
         textArea.text = CardManager.text(id)
         root.width = CardManager.width(id)
         root.height = CardManager.height(id)
-        root.cardBackgroundColor = CardManager.backgroundColor(id)
+        root.backgroundColor = CardManager.backgroundColor(id)
         Snap.snap(root)
     }
     onSelectedChanged: {
@@ -84,10 +84,10 @@ ResizableItem {
         leftPadding: 20
         rightPadding: 20
         background: Rectangle {
-            color: cardBackgroundColor
-            border.width: cardBorderWidth
-            border.color: cardBorderColor
-            radius: cardRadius
+            color: backgroundColor
+            border.width: borderWidth
+            border.color: borderColor
+            radius: cornerRadius
         }
         wrapMode: TextArea.Wrap
         textFormat: TextArea.MarkdownText
@@ -111,13 +111,11 @@ ResizableItem {
 
     CardEditBar {
         id: editBar
-        borderColor: cardBorderColor
+        borderColor: borderColor
     }
 
     CardPalette {
         id: palette
-        borderColor: cardBorderColor
+        borderColor: borderColor
     }
-
-    onCardBackgroundColorChanged: IO.saveBackgroundColor(id, root)
 }

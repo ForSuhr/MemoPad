@@ -109,8 +109,14 @@ function saveText(id, card, stackCommand = true) {
     }
 }
 
-function saveBackgroundColor(id, card) {
-    CardManager.setBackgroundColor(id, card.cardBackgroundColor)
+function saveBackgroundColor(id, card, stackCommand = true) {
+    var lastColor = CardManager.backgroundColor(id)
+    var currentColor = card.backgroundColor
+    if (lastColor !== currentColor) {
+        if (stackCommand)
+            CommandManager.changeBackgroundColor(id, lastColor, currentColor)
+        CardManager.setBackgroundColor(id, currentColor)
+    }
 }
 
 /*---------------------------delete--------------------------------------*/

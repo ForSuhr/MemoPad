@@ -1,6 +1,9 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+import "IO.js" as IO
+import MemoPad.CardManager
+import MemoPad.CommandManager
 
 Pane {
     id: palette
@@ -57,7 +60,10 @@ Pane {
             MouseArea {
                 anchors.fill: parent
                 hoverEnabled: true
-                onClicked: palette.parent.cardBackgroundColor = parent.color
+                onClicked: {
+                    palette.parent.backgroundColor = parent.color
+                    IO.saveBackgroundColor(id, palette.parent)
+                }
                 onEntered: {
                     scaleUp.target = parent
                     scaleUp.start()
@@ -81,7 +87,10 @@ Pane {
             MouseArea {
                 anchors.fill: parent
                 hoverEnabled: true
-                onClicked: palette.parent.cardBackgroundColor = parent.color
+                onClicked: {
+                    palette.parent.backgroundColor = parent.color
+                    IO.saveBackgroundColor(id, palette.parent)
+                }
                 onEntered: {
                     scaleUp.target = parent
                     scaleUp.start()
@@ -105,7 +114,10 @@ Pane {
             MouseArea {
                 anchors.fill: parent
                 hoverEnabled: true
-                onClicked: palette.parent.cardBackgroundColor = parent.color
+                onClicked: {
+                    palette.parent.backgroundColor = parent.color
+                    IO.saveBackgroundColor(id, palette.parent)
+                }
                 onEntered: {
                     scaleUp.target = parent
                     scaleUp.start()
@@ -129,7 +141,10 @@ Pane {
             MouseArea {
                 anchors.fill: parent
                 hoverEnabled: true
-                onClicked: palette.parent.cardBackgroundColor = parent.color
+                onClicked: {
+                    palette.parent.backgroundColor = parent.color
+                    IO.saveBackgroundColor(id, palette.parent)
+                }
                 onEntered: {
                     scaleUp.target = parent
                     scaleUp.start()
@@ -153,7 +168,10 @@ Pane {
             MouseArea {
                 anchors.fill: parent
                 hoverEnabled: true
-                onClicked: palette.parent.cardBackgroundColor = parent.color
+                onClicked: {
+                    palette.parent.backgroundColor = parent.color
+                    IO.saveBackgroundColor(id, palette.parent)
+                }
                 onEntered: {
                     scaleUp.target = parent
                     scaleUp.start()
@@ -177,7 +195,10 @@ Pane {
             MouseArea {
                 anchors.fill: parent
                 hoverEnabled: true
-                onClicked: palette.parent.cardBackgroundColor = parent.color
+                onClicked: {
+                    palette.parent.backgroundColor = parent.color
+                    IO.saveBackgroundColor(id, palette.parent)
+                }
                 onEntered: {
                     scaleUp.target = parent
                     scaleUp.start()
