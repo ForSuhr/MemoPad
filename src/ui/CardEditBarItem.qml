@@ -18,6 +18,7 @@ Item {
             source: imageSource
             sourceSize: Qt.size(rect.width, rect.height)
             fillMode: Image.PreserveAspectFit
+            mipmap: true
         }
     }
 }

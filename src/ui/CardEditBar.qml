@@ -2,17 +2,18 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import "IO.js" as IO
+import MemoPad.CardManager
 
 Pane {
-    id: palette
+    id: cardEditBar
 
-    property int colorNum: 6
+    property int itemNum: 6
     property string borderColor: "gainsboro"
 
-    width: 32 * colorNum
+    width: 32 * itemNum
     height: 32
-    anchors.horizontalCenter: palette.parent.horizontalCenter
-    anchors.bottom: palette.parent.top
+    anchors.horizontalCenter: cardEditBar.parent.horizontalCenter
+    anchors.bottom: cardEditBar.parent.top
     anchors.bottomMargin: 10
     opacity: enabled
     visible: false
@@ -25,7 +26,7 @@ Pane {
     }
 
     RowLayout {
-        width: 32 * colorNum - 16
+        width: 32 * itemNum - 16
         height: 24
         anchors.verticalCenter: parent.verticalCenter
         anchors.horizontalCenter: parent.horizontalCenter
@@ -40,7 +41,8 @@ Pane {
             MouseArea {
                 anchors.fill: parent
                 hoverEnabled: true
-                onClicked: IO.deleteCard(palette.parent.id, palette.parent)
+                onClicked: IO.deleteCard(cardEditBar.parent.id,
+                                         cardEditBar.parent)
                 onEntered: cursorShape = Qt.PointingHandCursor
                 onExited: cursorShape = Qt.ArrowCursor
             }

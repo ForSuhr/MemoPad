@@ -28,7 +28,8 @@ ResizableItem {
     }
     onSelectedChanged: {
         isVisble = selected
-        mouseArea.enabled = true
+        mouseArea.enabled = !selected
+        editBar.visible = selected
     }
 
     MouseArea {
@@ -56,6 +57,11 @@ ResizableItem {
     Image {
         anchors.fill: parent
         source: "assets/themes/lumos/canvas.svg"
-        antialiasing: true
+        mipmap: true
+    }
+
+    CardEditBar {
+        id: editBar
+        borderColor: "gainsboro"
     }
 }
