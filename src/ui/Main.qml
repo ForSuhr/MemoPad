@@ -24,13 +24,13 @@ Window {
         height: window.height * 2
     }
 
-    SideToolBar {
-        id: sideToolBar
+    FloatingBar {
+        id: floatingBar
         width: window.width
         height: window.height
-        toolBarArea: PreferencesManager.toolBarArea
-        onToolBarAreaChangedUI: area => {
-                                    PreferencesManager.toolBarArea = area
-                                }
+        floatingBarArea: PreferencesManager.floatingBarArea
+        onFloatingBarAreaChangedUI: area => {
+                                        PreferencesManager.floatingBarArea = area
+                                    }
     }
 }

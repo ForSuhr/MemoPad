@@ -5,17 +5,17 @@ import QtQuick.Layouts
 Item {
     id: root
 
-    signal toolBarAreaChangedUI(string area)
+    signal floatingBarAreaChangedUI(string area)
 
-    property string toolBarColor: "white"
-    property string toolBarPressedColor: "ghostwhite"
-    property string toolBarBorderColor: "gainsboro"
+    property string floatingBarColor: "white"
+    property string floatingBarPressedColor: "ghostwhite"
+    property string floatingBarBorderColor: "gainsboro"
     property string topAreaKey: "top area"
     property string bottomAreaKey: "bottom area"
-    property string toolBarArea: "top area" // area read from settings
+    property string floatingBarArea: "top area" // area read from settings
     property var defaultArea: topArea
 
-    SideToolBarArea {
+    FloatingBarArea {
         id: topArea
         x: root.x
         y: root.y
@@ -23,14 +23,14 @@ Item {
         height: root.parent.height / 6
         visible: false
         key: topAreaKey
-        onToolBarDropped: {
-            toolBar.x = topArea.x + (topArea.width - toolBar.width) / 2
-            toolBar.y = topArea.y + (topArea.height - toolBar.height) / 2
-            toolBarAreaChangedUI(topAreaKey)
+        onFloatingBarDropped: {
+            floatingBar.x = topArea.x + (topArea.width - floatingBar.width) / 2
+            floatingBar.y = topArea.y + (topArea.height - floatingBar.height) / 2
+            floatingBarAreaChangedUI(topAreaKey)
         }
     }
 
-    SideToolBarArea {
+    FloatingBarArea {
         id: bottomArea
         x: root.x
         y: root.y + root.height * 5 / 6
@@ -38,48 +38,48 @@ Item {
         height: root.parent.height / 6
         visible: false
         key: bottomAreaKey
-        onToolBarDropped: {
-            toolBar.x = bottomArea.x + (bottomArea.width - toolBar.width) / 2
-            toolBar.y = bottomArea.y + (bottomArea.height - toolBar.height) / 2
-            toolBarAreaChangedUI(bottomAreaKey)
+        onFloatingBarDropped: {
+            floatingBar.x = bottomArea.x + (bottomArea.width - floatingBar.width) / 2
+            floatingBar.y = bottomArea.y + (bottomArea.height - floatingBar.height) / 2
+            floatingBarAreaChangedUI(bottomAreaKey)
         }
     }
 
     Pane {
-        id: toolBar
+        id: floatingBar
         width: 50 * 4 // depends on how many items inside the RowLayout
         height: 50
-        x: toolBarArea
-           === "bottom area" ? bottomArea.x + (bottomArea.width - toolBar.width)
-                               / 2 : defaultArea.x + (defaultArea.width - toolBar.width) / 2
-        y: toolBarArea
-           === "bottom area" ? bottomArea.y + (bottomArea.height - toolBar.height)
-                               / 2 : defaultArea.y + (defaultArea.height - toolBar.height) / 2
+        x: floatingBarArea
+           === "bottom area" ? bottomArea.x + (bottomArea.width - floatingBar.width)
+                               / 2 : defaultArea.x + (defaultArea.width - floatingBar.width) / 2
+        y: floatingBarArea
+           === "bottom area" ? bottomArea.y + (bottomArea.height - floatingBar.height)
+                               / 2 : defaultArea.y + (defaultArea.height - floatingBar.height) / 2
         opacity: enabled
         background: Rectangle {
             opacity: enabled ? 1 : 0.5
             radius: 15
-            color: toolBarColor
-            border.color: toolBarBorderColor
+            color: floatingBarColor
+            border.color: floatingBarBorderColor
             border.width: 4
         }
         RowLayout {
-            width: toolBar.width - 18
+            width: floatingBar.width - 18
             height: 32
             anchors.verticalCenter: parent.verticalCenter
-            SideToolBarItem {
+            FloatingBarItem {
                 id: canvasItem
                 implicitWidth: parent.height
                 implicitHeight: parent.height
-                toolBarArea: root.toolBarArea
+                floatingBarArea: root.floatingBarArea
                 componentFile: "CanvasCard.qml"
                 imageSource: IconSet.canvas
             }
-            SideToolBarItem {
+            FloatingBarItem {
                 id: noteItem
                 implicitWidth: parent.height
                 implicitHeight: parent.height
-                toolBarArea: root.toolBarArea
+                floatingBarArea: root.floatingBarArea
                 componentFile: "NoteCard.qml"
                 imageSource: IconSet.note
             }
@@ -88,12 +88,12 @@ Item {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
             }
-            SideToolBarItem {
+            FloatingBarItem {
                 id: gearItem
                 implicitWidth: parent.height
                 implicitHeight: parent.height
                 imageSource: IconSet.gear
-                toolBarArea: root.toolBarArea
+                floatingBarArea: root.floatingBarArea
                 enableMouseArea: false
                 MouseArea {
                     anchors.fill: parent
@@ -129,11 +129,11 @@ Item {
                 MouseArea {
                     id: dragArea
                     anchors.fill: dragAreaRect
-                    drag.target: toolBar
+                    drag.target: floatingBar
                     drag.minimumX: 0
                     drag.minimumY: 0
-                    drag.maximumX: root.parent.width - toolBar.width
-                    drag.maximumY: root.parent.height - toolBar.height
+                    drag.maximumX: root.parent.width - floatingBar.width
+                    drag.maximumY: root.parent.height - floatingBar.height
                     hoverEnabled: true
                     property real currentX: 0
                     property real currentY: 0
@@ -141,19 +141,19 @@ Item {
                         cursorShape = Qt.ClosedHandCursor
                         topArea.visible = true
                         bottomArea.visible = true
-                        toolBar.background.color = toolBarPressedColor
-                        currentX = toolBar.x
-                        currentY = toolBar.y
+                        floatingBar.background.color = floatingBarPressedColor
+                        currentX = floatingBar.x
+                        currentY = floatingBar.y
                     }
                     onReleased: {
                         cursorShape = Qt.ArrowCursor
                         topArea.visible = false
                         bottomArea.visible = false
-                        toolBar.background.color = toolBarColor
+                        floatingBar.background.color = floatingBarColor
                         // recovery the position if a drag action was not accepted by a drop area
-                        if (toolBar.Drag.drop() !== Qt.MoveAction) {
-                            toolBar.x = currentX
-                            toolBar.y = currentY
+                        if (floatingBar.Drag.drop() !== Qt.MoveAction) {
+                            floatingBar.x = currentX
+                            floatingBar.y = currentY
                         }
                     }
                     onEntered: cursorShape = Qt.OpenHandCursor

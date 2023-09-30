@@ -7,15 +7,15 @@ PreferencesManager::PreferencesManager(QObject* parent)
     m_settings = new QSettings(path, JsonFormat);
 }
 
-QString PreferencesManager::toolBarArea()
+QString PreferencesManager::floatingBarArea()
 {
-    return m_settings->value("layout/toolBarArea").toString();
+    return m_settings->value("layout/floatingBarArea").toString();
 }
 
-void PreferencesManager::setToolBarArea(QString toolBarArea)
+void PreferencesManager::setFloatingBarArea(QString floatingBarArea)
 {
-    m_settings->setValue("layout/toolBarArea", toolBarArea);
-    emit toolBarAreaChanged();
+    m_settings->setValue("layout/floatingBarArea", floatingBarArea);
+    emit floatingBarAreaChanged();
 }
 
 bool PreferencesManager::cardSizeAutoAdjust()

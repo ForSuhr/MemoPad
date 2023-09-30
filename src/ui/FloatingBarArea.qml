@@ -5,7 +5,7 @@ Item {
     opacity: 0.5
 
     property string key: "unknown area"
-    signal toolBarDropped
+    signal floatingBarDropped
 
     DropArea {
         id: dropArea
@@ -23,7 +23,7 @@ Item {
         keys: [key] // a list of keys that the drop area will accept
 
         onDropped: drop => {
-                       toolBarDropped()
+                       floatingBarDropped()
                        drop.acceptProposedAction()
                    }
     }

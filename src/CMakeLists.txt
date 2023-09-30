@@ -53,9 +53,9 @@ qt_add_qml_module(MemoPad
         #[[qml]]
         ui/TextEditor.qml
         ui/Canvas.qml
-        ui/SideToolBar.qml
-        ui/SideToolBarArea.qml
-        ui/SideToolBarItem.qml
+        ui/FloatingBar.qml
+        ui/FloatingBarArea.qml
+        ui/FloatingBarItem.qml
         ui/FloatingButton.qml
         ui/CardLayer.qml
         ui/ResizableItem.qml
