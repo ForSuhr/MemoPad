@@ -37,3 +37,17 @@ void CommandManager::moveCard(QString id, qreal lastX, qreal lastY, qreal curren
     execute(command);
     connect(command, &CommandMoveCard::moveCardSignal, this, &CommandManager::moveCardSignal);
 }
+
+void CommandManager::resizeCard(QString id, qreal lastWidth, qreal lastHeight, qreal currentWidth, qreal currentHeight)
+{
+    CommandResizeCard* command = new CommandResizeCard(id, lastWidth, lastHeight, currentWidth, currentHeight, this);
+    execute(command);
+    connect(command, &CommandResizeCard::resizeCardSignal, this, &CommandManager::resizeCardSignal);
+}
+
+void CommandManager::transformCard(QString id, qreal lastX, qreal lastY, qreal currentX, qreal currentY, qreal lastWidth, qreal lastHeight, qreal currentWidth, qreal currentHeight)
+{
+    CommandTransformCard* command = new CommandTransformCard(id, lastX, lastY, currentX, currentY, lastWidth, lastHeight, currentWidth, currentHeight, this);
+    execute(command);
+    connect(command, &CommandTransformCard::transformCardSignal, this, &CommandManager::transformCardSignal);
+}

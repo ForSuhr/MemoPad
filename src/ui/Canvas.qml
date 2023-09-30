@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Controls
 import MemoPad.CardManager
 import MemoPad.CommandManager
+import "IO.js" as IO
 
 Item {
     id: root
@@ -121,6 +122,27 @@ Item {
                 if (cardLayer.children[i].id === id) {
                     cardLayer.children[i].x = x
                     cardLayer.children[i].y = y
+                    IO.savePos(id, cardLayer.children[i])
+                }
+            }
+        }
+        function onResizeCardSignal(id, width, height) {
+            for (var i = 0; i < cardLayer.children.length; i++) {
+                if (cardLayer.children[i].id === id) {
+                    cardLayer.children[i].width = width
+                    cardLayer.children[i].height = height
+                    IO.saveSize(id, cardLayer.children[i])
+                }
+            }
+        }
+        function onTransformCardSignal(id, x, y, width, height) {
+            for (var i = 0; i < cardLayer.children.length; i++) {
+                if (cardLayer.children[i].id === id) {
+                    cardLayer.children[i].x = x
+                    cardLayer.children[i].y = y
+                    cardLayer.children[i].width = width
+                    cardLayer.children[i].height = height
+                    IO.saveTransform(id, cardLayer.children[i])
                 }
             }
         }

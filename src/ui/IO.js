@@ -57,13 +57,43 @@ function savePos(id, card) {
     var currentX = card.x
     var currentY = card.y
     if (lastX !== currentX | lastY !== currentY) {
+        // stack command
         CommandManager.moveCard(id, lastX, lastY, currentX, currentY)
+        // save to settings file
         CardManager.setPos(id, currentX, currentY)
     }
 }
 
 function saveSize(id, card) {
-    CardManager.setSize(id, card.width, card.height)
+    var lastWidth = CardManager.width(id)
+    var lastHeight = CardManager.height(id)
+    var currentWidth = card.width
+    var currentHeight = card.height
+    if (lastWidth !== currentWidth | lastHeight !== currentHeight) {
+        CommandManager.resizeCard(id, lastWidth, lastHeight, currentWidth,
+                                  currentHeight)
+        CardManager.setSize(id, currentWidth, currentHeight)
+    }
+}
+
+// transform = move + resize
+function saveTransform(id, card) {
+    var lastX = CardManager.x(id)
+    var lastY = CardManager.y(id)
+    var currentX = card.x
+    var currentY = card.y
+    var lastWidth = CardManager.width(id)
+    var lastHeight = CardManager.height(id)
+    var currentWidth = card.width
+    var currentHeight = card.height
+    if (lastX !== currentX | lastY !== currentY | lastWidth !== currentWidth
+            | lastHeight !== currentHeight) {
+        CommandManager.transformCard(id, lastX, lastY, currentX, currentY,
+                                     lastWidth, lastHeight, currentWidth,
+                                     currentHeight)
+        CardManager.setPos(id, currentX, currentY)
+        CardManager.setSize(id, currentWidth, currentHeight)
+    }
 }
 
 function saveText(id, textArea) {

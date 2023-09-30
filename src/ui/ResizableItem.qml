@@ -53,8 +53,7 @@ Item {
             onReleased: {
                 cursorShape = Qt.ArrowCursor
                 Snap.snap(root)
-                IO.savePos(id, root)
-                IO.saveSize(id, root)
+                IO.saveTransform(id, root)
             }
             onMouseYChanged: {
                 if (drag.active) {
@@ -90,8 +89,7 @@ Item {
             onReleased: {
                 cursorShape = Qt.ArrowCursor
                 Snap.snap(root)
-                IO.savePos(id, root)
-                IO.saveSize(id, root)
+                IO.saveTransform(id, root)
             }
             onMouseYChanged: {
                 if (drag.active) {
@@ -124,8 +122,7 @@ Item {
             onReleased: {
                 cursorShape = Qt.ArrowCursor
                 Snap.snap(root)
-                IO.savePos(id, root)
-                IO.saveSize(id, root)
+                IO.saveTransform(id, root)
             }
             onMouseXChanged: {
                 if (drag.active) {
@@ -161,8 +158,7 @@ Item {
             onReleased: {
                 cursorShape = Qt.ArrowCursor
                 Snap.snap(root)
-                IO.savePos(id, root)
-                IO.saveSize(id, root)
+                IO.saveTransform(id, root)
             }
             onMouseXChanged: {
                 if (drag.active) {
@@ -195,8 +191,7 @@ Item {
             onReleased: {
                 cursorShape = Qt.ArrowCursor
                 Snap.snap(root)
-                IO.savePos(id, root)
-                IO.saveSize(id, root)
+                IO.saveTransform(id, root)
             }
             onMouseXChanged: {
                 if (drag.active) {
@@ -244,8 +239,7 @@ Item {
             onReleased: {
                 cursorShape = Qt.ArrowCursor
                 Snap.snap(root)
-                IO.savePos(id, root)
-                IO.saveSize(id, root)
+                IO.saveTransform(id, root)
             }
             onMouseXChanged: {
                 if (drag.active) {
@@ -290,8 +284,7 @@ Item {
             onReleased: {
                 cursorShape = Qt.ArrowCursor
                 Snap.snap(root)
-                IO.savePos(id, root)
-                IO.saveSize(id, root)
+                IO.saveTransform(id, root)
             }
             onMouseXChanged: {
                 if (drag.active) {
@@ -336,8 +329,7 @@ Item {
             onReleased: {
                 cursorShape = Qt.ArrowCursor
                 Snap.snap(root)
-                IO.savePos(id, root)
-                IO.saveSize(id, root)
+                IO.saveTransform(id, root)
             }
             onMouseXChanged: {
                 if (drag.active) {
