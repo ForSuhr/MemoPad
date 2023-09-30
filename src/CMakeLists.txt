@@ -52,7 +52,7 @@ qt_add_qml_module(MemoPad
         ui/IO.js
         #[[qml]]
         ui/TextEditor.qml
-        ui/BackgroundCanvas.qml
+        ui/Canvas.qml
         ui/SideToolBar.qml
         ui/SideToolBarArea.qml
         ui/SideToolBarItem.qml

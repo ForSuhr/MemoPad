@@ -18,7 +18,7 @@ Window {
 
     Component.onCompleted: IO.load()
 
-    BackgroundCanvas {
+    Canvas {
         id: bgCanvas
         width: window.width * 2
         height: window.height * 2
