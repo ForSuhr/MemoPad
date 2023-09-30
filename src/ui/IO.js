@@ -52,9 +52,14 @@ function createCard(cardComponent, id) {
 
 /*--------------------------save system----------------------------------*/
 function savePos(id, card) {
-    CommandManager.moveCard(id, CardManager.x(id), CardManager.y(id),
-                            card.x, card.y)
-    CardManager.setPos(id, card.x, card.y)
+    var lastX = CardManager.x(id)
+    var lastY = CardManager.y(id)
+    var currentX = card.x
+    var currentY = card.y
+    if (lastX !== currentX | lastY !== currentY) {
+        CommandManager.moveCard(id, lastX, lastY, currentX, currentY)
+        CardManager.setPos(id, currentX, currentY)
+    }
 }
 
 function saveSize(id, card) {
