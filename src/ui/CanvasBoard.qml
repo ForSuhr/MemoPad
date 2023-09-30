@@ -122,7 +122,7 @@ Item {
                 if (cardLayer.children[i].id === id) {
                     cardLayer.children[i].x = x
                     cardLayer.children[i].y = y
-                    IO.savePos(id, cardLayer.children[i])
+                    IO.savePos(id, cardLayer.children[i], false)
                 }
             }
         }
@@ -131,7 +131,7 @@ Item {
                 if (cardLayer.children[i].id === id) {
                     cardLayer.children[i].width = width
                     cardLayer.children[i].height = height
-                    IO.saveSize(id, cardLayer.children[i])
+                    IO.saveSize(id, cardLayer.children[i], false)
                 }
             }
         }
@@ -142,7 +142,7 @@ Item {
                     cardLayer.children[i].y = y
                     cardLayer.children[i].width = width
                     cardLayer.children[i].height = height
-                    IO.saveTransform(id, cardLayer.children[i])
+                    IO.saveTransform(id, cardLayer.children[i], false)
                 }
             }
         }

@@ -51,33 +51,35 @@ function createCard(cardComponent, id) {
 }
 
 /*--------------------------save system----------------------------------*/
-function savePos(id, card) {
+function savePos(id, card, stackCommand = true) {
     var lastX = CardManager.x(id)
     var lastY = CardManager.y(id)
     var currentX = card.x
     var currentY = card.y
     if (lastX !== currentX | lastY !== currentY) {
         // stack command
-        CommandManager.moveCard(id, lastX, lastY, currentX, currentY)
+        if (stackCommand)
+            CommandManager.moveCard(id, lastX, lastY, currentX, currentY)
         // save to settings file
         CardManager.setPos(id, currentX, currentY)
     }
 }
 
-function saveSize(id, card) {
+function saveSize(id, card, stackCommand = true) {
     var lastWidth = CardManager.width(id)
     var lastHeight = CardManager.height(id)
     var currentWidth = card.width
     var currentHeight = card.height
     if (lastWidth !== currentWidth | lastHeight !== currentHeight) {
-        CommandManager.resizeCard(id, lastWidth, lastHeight, currentWidth,
-                                  currentHeight)
+        if (stackCommand)
+            CommandManager.resizeCard(id, lastWidth, lastHeight, currentWidth,
+                                      currentHeight)
         CardManager.setSize(id, currentWidth, currentHeight)
     }
 }
 
 // transform = move + resize
-function saveTransform(id, card) {
+function saveTransform(id, card, stackCommand = true) {
     var lastX = CardManager.x(id)
     var lastY = CardManager.y(id)
     var currentX = card.x
@@ -88,9 +90,10 @@ function saveTransform(id, card) {
     var currentHeight = card.height
     if (lastX !== currentX | lastY !== currentY | lastWidth !== currentWidth
             | lastHeight !== currentHeight) {
-        CommandManager.transformCard(id, lastX, lastY, currentX, currentY,
-                                     lastWidth, lastHeight, currentWidth,
-                                     currentHeight)
+        if (stackCommand)
+            CommandManager.transformCard(id, lastX, lastY, currentX, currentY,
+                                         lastWidth, lastHeight, currentWidth,
+                                         currentHeight)
         CardManager.setPos(id, currentX, currentY)
         CardManager.setSize(id, currentWidth, currentHeight)
     }
