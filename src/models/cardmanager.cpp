@@ -48,6 +48,17 @@ void CardManager::setY(QString id, qreal y)
     m_cardIO->setValue(m_currentCanvas + "/" + id + "/y", y);
 }
 
+QSizeF CardManager::pos(QString id)
+{
+    return QSizeF(x(id), y(id));
+}
+
+void CardManager::setPos(QString id, qreal x, qreal y)
+{
+    setX(id, x);
+    setY(id, y);
+}
+
 qreal CardManager::width(QString id)
 {
     return m_cardMap[id]->m_width;
@@ -68,6 +79,17 @@ void CardManager::setHeight(QString id, qreal height)
 {
     m_cardMap[id]->m_height = height;
     m_cardIO->setValue(m_currentCanvas + "/" + id + "/height", height);
+}
+
+QSizeF CardManager::size(QString id)
+{
+    return QSizeF(width(id), height(id));
+}
+
+void CardManager::setSize(QString id, qreal width, qreal height)
+{
+    setWidth(id, width);
+    setHeight(id, height);
 }
 
 QString CardManager::backgroundColor(QString id)

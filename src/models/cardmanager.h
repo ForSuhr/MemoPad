@@ -5,6 +5,7 @@
 #include <QDebug>
 #include <QMap>
 #include <QObject>
+#include <QSizeF>
 #include <QUuid>
 
 #include "../utils/qsettingsjson.h"
@@ -23,10 +24,14 @@ public:
     Q_INVOKABLE void setX(QString id, qreal x);
     Q_INVOKABLE qreal y(QString id);
     Q_INVOKABLE void setY(QString id, qreal y);
+    Q_INVOKABLE QSizeF pos(QString id);
+    Q_INVOKABLE void setPos(QString id, qreal x, qreal y);
     Q_INVOKABLE qreal width(QString id);
     Q_INVOKABLE void setWidth(QString id, qreal width);
     Q_INVOKABLE qreal height(QString id);
     Q_INVOKABLE void setHeight(QString id, qreal height);
+    Q_INVOKABLE QSizeF size(QString id);
+    Q_INVOKABLE void setSize(QString id, qreal width, qreal height);
     Q_INVOKABLE QString backgroundColor(QString id);
     Q_INVOKABLE void setBackgroundColor(QString id, QString backgroundColor);
     Q_INVOKABLE QString text(QString id);

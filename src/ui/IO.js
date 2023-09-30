@@ -52,13 +52,11 @@ function createCard(cardComponent, id) {
 
 /*--------------------------save system----------------------------------*/
 function savePos(id, card) {
-    CardManager.setX(id, card.x)
-    CardManager.setY(id, card.y)
+    CardManager.setPos(id, card.x, card.y)
 }
 
 function saveSize(id, card) {
-    CardManager.setWidth(id, card.width)
-    CardManager.setHeight(id, card.height)
+    CardManager.setSize(id, card.width, card.height)
 }
 
 function saveText(id, textArea) {

@@ -79,6 +79,7 @@ CMakeLists.txt.user*
 # Build files
 build/
 builds/
+.cache/
 
 # BackUp
 backup/
