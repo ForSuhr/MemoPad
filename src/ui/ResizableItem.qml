@@ -2,6 +2,7 @@ import QtQuick
 import "Snap.js" as Snap
 import "IO.js" as IO
 import MemoPad.CardManager
+import MemoPad.CommandManager
 
 Item {
     id: root

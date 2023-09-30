@@ -52,6 +52,8 @@ function createCard(cardComponent, id) {
 
 /*--------------------------save system----------------------------------*/
 function savePos(id, card) {
+    CommandManager.moveCard(id, CardManager.x(id), CardManager.y(id),
+                            card.x, card.y)
     CardManager.setPos(id, card.x, card.y)
 }
 

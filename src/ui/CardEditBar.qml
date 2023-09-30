@@ -3,6 +3,7 @@ import QtQuick.Controls
 import QtQuick.Layouts
 import "IO.js" as IO
 import MemoPad.CardManager
+import MemoPad.CommandManager
 
 Pane {
     id: cardEditBar

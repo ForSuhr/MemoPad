@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 import MemoPad.CardManager
+import MemoPad.CommandManager
 
 Item {
     id: root
@@ -111,5 +112,17 @@ Item {
     CardLayer {
         id: cardLayer
         z: 2
+    }
+
+    Connections {
+        target: CommandManager
+        function onMoveCardSignal(id, x, y) {
+            for (var i = 0; i < cardLayer.children.length; i++) {
+                if (cardLayer.children[i].id === id) {
+                    cardLayer.children[i].x = x
+                    cardLayer.children[i].y = y
+                }
+            }
+        }
     }
 }

@@ -2,6 +2,7 @@
 #include <QQmlApplicationEngine>
 
 #include "models/cardmanager.h"
+#include "models/commandmanager.h"
 #include "models/preferencesmanager.h"
 #include "models/texteditor.h"
 
@@ -15,6 +16,8 @@ int main(int argc, char* argv[])
     qmlRegisterSingletonInstance("MemoPad.CardManager", 1, 0, "CardManager", scopedPointer1.get());
     QScopedPointer<PreferencesManager> scopedPointer2(new PreferencesManager);
     qmlRegisterSingletonInstance("MemoPad.PreferencesManager", 1, 0, "PreferencesManager", scopedPointer2.get());
+    QScopedPointer<CommandManager> scopedPointer3(new CommandManager);
+    qmlRegisterSingletonInstance("MemoPad.CommandManager", 1, 0, "CommandManager", scopedPointer3.get());
 
     QQmlApplicationEngine engine;
     const QUrl url(u"qrc:/MemoPad/ui/Main.qml"_qs);

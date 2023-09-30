@@ -5,5 +5,4 @@ Item {
     width: parent.width
     height: parent.height
     anchors.fill: parent
-
 }

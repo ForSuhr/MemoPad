@@ -1,4 +1,5 @@
 import QtQuick
+import MemoPad.CommandManager
 
 Item {
     id: root
@@ -6,6 +7,7 @@ Item {
     height: 32
 
     property string imageSource: IconSet.blank
+    property string buttonAction
 
     Image {
         id: img
@@ -30,6 +32,12 @@ Item {
             cursorShape = Qt.ArrowCursor
             img.opacity = 0.4
             img.scale = 0.9
+        }
+        onClicked: {
+            if (buttonAction === "undo")
+                CommandManager.undo()
+            else if (buttonAction === "redo")
+                CommandManager.redo()
         }
     }
 }

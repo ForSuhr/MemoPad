@@ -13,18 +13,19 @@ class CommandManager : public QObject {
 public:
     explicit CommandManager(QObject* parent = nullptr);
 
-    Q_INVOKABLE void execute(QString id);
+    Q_INVOKABLE void execute(Command* command);
     Q_INVOKABLE void undo();
     Q_INVOKABLE void redo();
 
     /*commands*/
-    //    Q_INVOKABLE void savePosState(QString id, qreal x, qreal y);
+    Q_INVOKABLE void moveCard(QString id, qreal lastX, qreal lastY, qreal currentX, qreal currentY);
 
 signals:
+    void moveCardSignal(QString id, qreal x, qreal y);
 
 private:
-    std::stack<std::unique_ptr<Command>> m_undoStack;
-    std::stack<std::unique_ptr<Command>> m_redoStack;
+    std::stack<Command*> m_undoStack;
+    std::stack<Command*> m_redoStack;
 };
 
 #endif // COMMANDMANAGER_H

@@ -1,25 +1,43 @@
 #ifndef COMMANDS_H
 #define COMMANDS_H
 
+#include <QDebug>
+
 #include "command.h"
 
-class CommandSavePosState : public Command {
-
+class CommandMoveCard : public Command {
+    Q_OBJECT
 public:
-    CommandSavePosState(QString id, qreal x, qreal y)
-        : Command { id }
+    CommandMoveCard(QString id, qreal lastX, qreal lastY, qreal currentX, qreal currentY, QObject* parent = nullptr)
+        : Command { id, parent }
     {
-        m_x = x;
-        m_y = y;
+        m_id = id;
+        m_lastX = lastX;
+        m_lastY = lastY;
+        m_currentX = currentX;
+        m_currentY = currentY;
     };
 
-    void execute() override {};
-    void undo() override {};
-    void redo() override {};
+    void undo() override
+    {
+        qInfo() << "undo: " << m_lastX << " , " << m_lastY;
+        emit moveCardSignal(m_id, m_lastX, m_lastY);
+    };
+    void redo() override
+    {
+        qInfo() << "redo: " << m_currentX << " , " << m_currentY;
+        emit moveCardSignal(m_id, m_currentX, m_currentY);
+    };
+
+signals:
+    void moveCardSignal(QString id, qreal x, qreal y);
 
 private:
-    qreal m_x;
-    qreal m_y;
+    QString m_id;
+    qreal m_lastX;
+    qreal m_lastY;
+    qreal m_currentX;
+    qreal m_currentY;
 };
 
 #endif // COMMANDS_H

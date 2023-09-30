@@ -35,7 +35,6 @@ qt_add_qml_module(MemoPad
         models/preferencesmanager.h
         models/preferencesmanager.cpp
         models/command.h
-        models/command.cpp
         models/commands.h
         models/commandmanager.h
         models/commandmanager.cpp

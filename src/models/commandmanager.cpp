@@ -5,29 +5,35 @@ CommandManager::CommandManager(QObject* parent)
 {
 }
 
-void CommandManager::execute(QString id)
+void CommandManager::execute(Command* command)
 {
-    std::unique_ptr<CommandSavePosState> command = std::unique_ptr<CommandSavePosState>(new CommandSavePosState(id, 1, 2));
-    m_undoStack.push(std::move(command));
-    m_redoStack = std::stack<std::unique_ptr<Command>>(); // clear the redo stack
+    m_undoStack.push(command);
+    m_redoStack = std::stack<Command*>(); // clear the redo stack
 }
 
 void CommandManager::undo()
 {
     if (!m_undoStack.empty()) {
-        std::unique_ptr<Command> lastCommand = std::move(m_undoStack.top());
+        Command* lastCommand = m_undoStack.top();
         lastCommand->undo();
         m_undoStack.pop();
-        m_redoStack.push(std::move(lastCommand));
+        m_redoStack.push(lastCommand);
     }
 }
 
 void CommandManager::redo()
 {
     if (!m_redoStack.empty()) {
-        std::unique_ptr<Command> lastCommand = std::move(m_redoStack.top());
+        Command* lastCommand = m_redoStack.top();
         lastCommand->redo();
         m_redoStack.pop();
-        m_undoStack.push(std::move(lastCommand));
+        m_undoStack.push(lastCommand);
     }
+}
+
+void CommandManager::moveCard(QString id, qreal lastX, qreal lastY, qreal currentX, qreal currentY)
+{
+    CommandMoveCard* command = new CommandMoveCard(id, lastX, lastY, currentX, currentY, this);
+    execute(command);
+    connect(command, &CommandMoveCard::moveCardSignal, this, &CommandManager::moveCardSignal);
 }

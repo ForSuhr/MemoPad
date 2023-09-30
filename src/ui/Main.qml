@@ -4,6 +4,7 @@ import MemoPad
 import MemoPad.TextEditorModel
 import MemoPad.PreferencesManager
 import MemoPad.CardManager
+import MemoPad.CommandManager
 import "IO.js" as IO
 
 Window {

@@ -191,6 +191,7 @@ Item {
         width: 32
         height: 32
         imageSource: IconSet.undo
+        buttonAction: "undo"
     }
 
     FloatingButton {
@@ -200,5 +201,6 @@ Item {
         width: 32
         height: 32
         imageSource: IconSet.redo
+        buttonAction: "redo"
     }
 }
