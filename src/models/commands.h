@@ -116,4 +116,33 @@ private:
     qreal m_currentHeight;
 };
 
+class CommandChangeText : public Command {
+    Q_OBJECT
+public:
+    CommandChangeText(QString id, QString lastText, QString currentText, QObject* parent = nullptr)
+        : Command { id, parent }
+    {
+        m_id = id;
+        m_lastText = lastText;
+        m_currentText = currentText;
+    };
+
+    void undo() override
+    {
+        emit changeTextSignal(m_id, m_lastText);
+    };
+    void redo() override
+    {
+        emit changeTextSignal(m_id, m_currentText);
+    };
+
+signals:
+    void changeTextSignal(QString id, QString text);
+
+private:
+    QString m_id;
+    QString m_lastText;
+    QString m_currentText;
+};
+
 #endif // COMMANDS_H

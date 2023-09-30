@@ -51,3 +51,11 @@ void CommandManager::transformCard(QString id, qreal lastX, qreal lastY, qreal c
     execute(command);
     connect(command, &CommandTransformCard::transformCardSignal, this, &CommandManager::transformCardSignal);
 }
+
+void CommandManager::changeText(QString id, QString lastText, QString currentText)
+{
+
+    CommandChangeText* command = new CommandChangeText(id, lastText, currentText, this);
+    execute(command);
+    connect(command, &CommandChangeText::changeTextSignal, this, &CommandManager::changeTextSignal);
+}

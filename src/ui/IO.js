@@ -99,11 +99,17 @@ function saveTransform(id, card, stackCommand = true) {
     }
 }
 
-function saveText(id, textArea) {
-    CardManager.setText(id, textArea.text)
+function saveText(id, card, stackCommand = true) {
+    var lastText = CardManager.text(id)
+    var currentText = card.text
+    if (lastText !== currentText) {
+        if (stackCommand)
+            CommandManager.changeText(id, lastText, currentText)
+        CardManager.setText(id, currentText)
+    }
 }
 
-function saveColor(id, card) {
+function saveBackgroundColor(id, card) {
     CardManager.setBackgroundColor(id, card.cardBackgroundColor)
 }
 

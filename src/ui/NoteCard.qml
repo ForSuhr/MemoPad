@@ -15,6 +15,7 @@ ResizableItem {
     property string cardBorderColor: "gainsboro"
     property int cardBorderWidth: 4
     property int cardRadius: 10
+    property alias text: textArea.text
 
     property bool created: false
     property bool loaded: false
@@ -24,7 +25,7 @@ ResizableItem {
         id = CardManager.createCard("note")
         Snap.snap(root)
         IO.saveTransform(id, root)
-        IO.saveColor(id, root)
+        IO.saveBackgroundColor(id, root)
     }
     onLoadedChanged: {
         textArea.text = CardManager.text(id)
@@ -40,7 +41,7 @@ ResizableItem {
         editBar.visible = selected
         palette.visible = selected
         if (!selected) {
-            IO.saveText(id, textArea)
+            IO.saveText(id, root)
             mouseArea.cursorShape = Qt.OpenHandCursor
         }
     }
@@ -118,5 +119,5 @@ ResizableItem {
         borderColor: cardBorderColor
     }
 
-    onCardBackgroundColorChanged: IO.saveColor(id, root)
+    onCardBackgroundColorChanged: IO.saveBackgroundColor(id, root)
 }

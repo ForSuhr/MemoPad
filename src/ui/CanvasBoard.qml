@@ -146,5 +146,13 @@ Item {
                 }
             }
         }
+        function onChangeTextSignal(id, text) {
+            for (var i = 0; i < cardLayer.children.length; i++) {
+                if (cardLayer.children[i].id === id) {
+                    cardLayer.children[i].text = text
+                    IO.saveText(id, cardLayer.children[i], false)
+                }
+            }
+        }
     }
 }
