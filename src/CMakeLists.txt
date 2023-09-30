@@ -23,6 +23,8 @@ qt_add_qml_module(MemoPad
         ui/assets/themes/lumos/note.svg
         ui/assets/themes/lumos/trash.svg
         ui/assets/themes/lumos/gear.svg
+        ui/assets/themes/lumos/undo.svg
+        ui/assets/themes/lumos/redo.svg
     SOURCES
         models/card.h
         models/card.cpp
@@ -55,6 +57,7 @@ qt_add_qml_module(MemoPad
         ui/SideToolBar.qml
         ui/SideToolBarArea.qml
         ui/SideToolBarItem.qml
+        ui/FloatingButton.qml
         ui/CardLayer.qml
         ui/ResizableItem.qml
         ui/NoteCard.qml

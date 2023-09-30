@@ -178,7 +178,27 @@ Item {
         }
     }
 
+    /*settings window*/
     PreferencesPopup {
         id: preferencesPopup
+    }
+
+    /*undo&redo button*/
+    FloatingButton {
+        id: undo
+        x: 42
+        y: root.height - height - 42
+        width: 32
+        height: 32
+        imageSource: IconSet.undo
+    }
+
+    FloatingButton {
+        id: redo
+        x: root.width - width - 42
+        y: root.height - height - 42
+        width: 32
+        height: 32
+        imageSource: IconSet.redo
     }
 }
