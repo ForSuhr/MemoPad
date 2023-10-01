@@ -49,9 +49,10 @@ Item {
             anchors.fill: parent
             drag.target: parent
             drag.axis: Drag.YAxis
-            onPressed: cursorShape = Qt.ClosedHandCursor
+            hoverEnabled: true
+            onEntered: cursorShape = Qt.SizeVerCursor
+            onExited: cursorShape = Qt.ArrowCursor
             onReleased: {
-                cursorShape = Qt.ArrowCursor
                 Snap.snap(root)
                 IO.saveTransform(id, root)
             }
@@ -85,9 +86,10 @@ Item {
             anchors.fill: parent
             drag.target: parent
             drag.axis: Drag.YAxis
-            onPressed: cursorShape = Qt.ClosedHandCursor
+            hoverEnabled: true
+            onEntered: cursorShape = Qt.SizeVerCursor
+            onExited: cursorShape = Qt.ArrowCursor
             onReleased: {
-                cursorShape = Qt.ArrowCursor
                 Snap.snap(root)
                 IO.saveTransform(id, root)
             }
@@ -118,9 +120,10 @@ Item {
             anchors.fill: parent
             drag.target: parent
             drag.axis: Drag.XAxis
-            onPressed: cursorShape = Qt.ClosedHandCursor
+            hoverEnabled: true
+            onEntered: cursorShape = Qt.SizeHorCursor
+            onExited: cursorShape = Qt.ArrowCursor
             onReleased: {
-                cursorShape = Qt.ArrowCursor
                 Snap.snap(root)
                 IO.saveTransform(id, root)
             }
@@ -154,9 +157,10 @@ Item {
             anchors.fill: parent
             drag.target: parent
             drag.axis: Drag.XAxis
-            onPressed: cursorShape = Qt.ClosedHandCursor
+            hoverEnabled: true
+            onEntered: cursorShape = Qt.SizeHorCursor
+            onExited: cursorShape = Qt.ArrowCursor
             onReleased: {
-                cursorShape = Qt.ArrowCursor
                 Snap.snap(root)
                 IO.saveTransform(id, root)
             }
@@ -187,9 +191,10 @@ Item {
         MouseArea {
             anchors.fill: parent
             drag.target: parent
-            onPressed: cursorShape = Qt.ClosedHandCursor
+            hoverEnabled: true
+            onEntered: cursorShape = Qt.SizeFDiagCursor
+            onExited: cursorShape = Qt.ArrowCursor
             onReleased: {
-                cursorShape = Qt.ArrowCursor
                 Snap.snap(root)
                 IO.saveTransform(id, root)
             }
@@ -235,9 +240,10 @@ Item {
         MouseArea {
             anchors.fill: parent
             drag.target: parent
-            onPressed: cursorShape = Qt.ClosedHandCursor
+            hoverEnabled: true
+            onEntered: cursorShape = Qt.SizeBDiagCursor
+            onExited: cursorShape = Qt.ArrowCursor
             onReleased: {
-                cursorShape = Qt.ArrowCursor
                 Snap.snap(root)
                 IO.saveTransform(id, root)
             }
@@ -280,9 +286,10 @@ Item {
         MouseArea {
             anchors.fill: parent
             drag.target: parent
-            onPressed: cursorShape = Qt.ClosedHandCursor
+            hoverEnabled: true
+            onEntered: cursorShape = Qt.SizeBDiagCursor
+            onExited: cursorShape = Qt.ArrowCursor
             onReleased: {
-                cursorShape = Qt.ArrowCursor
                 Snap.snap(root)
                 IO.saveTransform(id, root)
             }
@@ -325,9 +332,10 @@ Item {
         MouseArea {
             anchors.fill: parent
             drag.target: parent
-            onPressed: cursorShape = Qt.ClosedHandCursor
+            hoverEnabled: true
+            onEntered: cursorShape = Qt.SizeFDiagCursor
+            onExited: cursorShape = Qt.ArrowCursor
             onReleased: {
-                cursorShape = Qt.ArrowCursor
                 Snap.snap(root)
                 IO.saveTransform(id, root)
             }

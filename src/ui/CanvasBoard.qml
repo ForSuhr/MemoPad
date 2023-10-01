@@ -89,11 +89,12 @@ Item {
     /*pan*/
     MouseArea {
         id: panArea
-        z: 1
+        z: 2
         anchors.fill: canvas
         drag.target: root // drag the whole item instead of canvas
         acceptedButtons: Qt.RightButton
-        hoverEnabled: true
+        onPressed: cursorShape = Qt.ClosedHandCursor
+        onReleased: cursorShape = Qt.ArrowCursor
     }
 
     /*lose focus*/
@@ -102,7 +103,7 @@ Item {
     MouseArea {
         id: loseFocus
         z: 1
-        anchors.fill: parent
+        anchors.fill: canvas
         onPressed: {
             for (var i = 0; i < cardLayer.children.length; i++) {
                 cardLayer.children[i].selected = false
@@ -112,9 +113,10 @@ Item {
 
     CardLayer {
         id: cardLayer
-        z: 2
+        z: 3
     }
 
+    /*command undo&redo*/
     Connections {
         target: CommandManager
         function onMoveCardSignal(id, x, y) {
