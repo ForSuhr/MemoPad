@@ -16,11 +16,11 @@ ResizableItem {
     property string borderColor: "gainsboro"
     property int borderWidth: 4
     property int cornerRadius: 10
-    property alias text: textArea.text
+    property alias text: rawTextArea.text
 
     property bool created: false
     property bool loaded: false
-    property alias selected: textArea.focus
+    property alias selected: rawTextArea.focus
 
     onCreatedChanged: {
         id = CardManager.createCard("note")
@@ -29,7 +29,7 @@ ResizableItem {
         IO.saveBackgroundColor(id, root, false)
     }
     onLoadedChanged: {
-        textArea.text = CardManager.text(id)
+        rawTextArea.text = CardManager.text(id)
         root.width = CardManager.width(id)
         root.height = CardManager.height(id)
         root.backgroundColor = CardManager.backgroundColor(id)
@@ -66,7 +66,7 @@ ResizableItem {
         }
         onClicked: {
             selected = true
-            textArea.forceActiveFocus()
+            rawTextArea.forceActiveFocus()
             enabled = false
             cursorShape = Qt.IBeamCursor
         }
@@ -79,8 +79,8 @@ ResizableItem {
         height: parent.height
         anchors.fill: parent
         TextArea {
-            id: textArea
-            leftPadding: 20
+            id: rawTextArea
+            leftPadding: 10
             rightPadding: 10
             background: Rectangle {
                 color: backgroundColor
@@ -89,9 +89,10 @@ ResizableItem {
                 radius: cornerRadius
             }
             wrapMode: TextArea.Wrap
-            textFormat: TextArea.MarkdownText
+            textFormat: Text.PlainText
             font.pixelSize: 24
             color: "black"
+            visible: false
             selectByMouse: true
             selectionColor: "darkseagreen"
             selectedTextColor: "black"
@@ -107,10 +108,33 @@ ResizableItem {
                 }
             }
 
+            onFocusChanged: {
+                if (focus) {
+                    rawTextArea.visible = true
+                    markdownTextArea.visible = false
+                } else {
+                    rawTextArea.visible = false
+                    markdownTextArea.visible = true
+                }
+            }
             onEditingFinished: {
                 IO.saveText(id, root)
-                textArea.focus = false
+                rawTextArea.focus = false
             }
+        }
+        TextArea {
+            id: markdownTextArea
+            anchors.fill: rawTextArea
+            wrapMode: TextArea.Wrap
+            leftPadding: 10
+            rightPadding: 10
+            text: rawTextArea.text
+            textFormat: Text.MarkdownText
+            font.pixelSize: 24
+            readOnly: true
+            color: "black"
+            activeFocusOnPress: false
+            activeFocusOnTab: false
         }
     }
 
