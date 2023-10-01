@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Controls
+import QtQuick.Controls.Basic
 import MemoPad.CardManager
 import MemoPad.CommandManager
 import "Snap.js" as Snap
@@ -19,7 +20,7 @@ ResizableItem {
 
     property bool created: false
     property bool loaded: false
-    property bool selected: false
+    property alias selected: textArea.focus
 
     onCreatedChanged: {
         id = CardManager.createCard("note")
@@ -36,7 +37,6 @@ ResizableItem {
     }
     onSelectedChanged: {
         isVisble = selected
-        textArea.focus = selected
         mouseArea.enabled = !selected
         editBar.visible = selected
         palette.visible = selected
@@ -66,48 +66,52 @@ ResizableItem {
         }
         onClicked: {
             selected = true
-            textArea.focus = true
+            textArea.forceActiveFocus()
             enabled = false
             cursorShape = Qt.IBeamCursor
         }
     }
 
-    TextArea {
-        id: textArea
+    ScrollView {
+        id: scrollView
         z: 0
-        width: root.width
-        height: root.height
-        anchors.centerIn: parent
-        topPadding: 15
-        bottomPadding: 15
-        leftPadding: 20
-        rightPadding: 20
-        background: Rectangle {
-            color: backgroundColor
-            border.width: borderWidth
-            border.color: borderColor
-            radius: cornerRadius
-        }
-        wrapMode: TextArea.Wrap
-        textFormat: TextArea.MarkdownText
-        font.pixelSize: 24
-        color: "black"
-        selectByMouse: true
-        selectionColor: "darkseagreen"
-        selectedTextColor: "black"
-        activeFocusOnPress: false
-        activeFocusOnTab: false
+        width: parent.width
+        height: parent.height
+        anchors.fill: parent
+        TextArea {
+            id: textArea
+            leftPadding: 20
+            rightPadding: 10
+            background: Rectangle {
+                color: backgroundColor
+                border.width: borderWidth
+                border.color: borderColor
+                radius: cornerRadius
+            }
+            wrapMode: TextArea.Wrap
+            textFormat: TextArea.MarkdownText
+            font.pixelSize: 24
+            color: "black"
+            selectByMouse: true
+            selectionColor: "darkseagreen"
+            selectedTextColor: "black"
+            activeFocusOnPress: false
+            activeFocusOnTab: false
 
-        // adjust text area according to contents automatically
-        onContentHeightChanged: {
-            if (Globals.cardSizeAutoAdjust) {
-                root.height = (Math.floor(
-                                   (contentHeight + topPadding + bottomPadding)
-                                   / Globals.dotInterval) + 1) * Globals.dotInterval
+            // adjust text area according to contents automatically
+            onContentHeightChanged: {
+                if (Globals.cardSizeAutoAdjust) {
+                    root.height = (Math.floor(
+                                       (contentHeight + topPadding + bottomPadding)
+                                       / Globals.dotInterval) + 1) * Globals.dotInterval
+                }
+            }
+
+            onEditingFinished: {
+                IO.saveText(id, root)
+                textArea.focus = false
             }
         }
-
-        onEditingFinished: IO.saveText(id, root)
     }
 
     CardEditBar {

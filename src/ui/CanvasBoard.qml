@@ -104,11 +104,7 @@ Item {
         id: loseFocus
         z: 1
         anchors.fill: canvas
-        onPressed: {
-            for (var i = 0; i < cardLayer.children.length; i++) {
-                cardLayer.children[i].selected = false
-            }
-        }
+        onClicked: cardLayer.forceActiveFocus()
     }
 
     CardLayer {
