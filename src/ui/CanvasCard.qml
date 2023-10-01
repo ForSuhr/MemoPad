@@ -76,8 +76,7 @@ ResizableItem {
         MouseArea {
             anchors.fill: parent
             onDoubleClicked: {
-                IO.unload(root.parent) // the parent of this card is the cardLayer where it was placed
-                IO.load(canvasID)
+                IO.loadCanvas(canvasID)
             }
         }
     }

@@ -4,6 +4,12 @@ var noteCardComponent = null
 var canvasCardComponentFile = "CanvasCard.qml"
 var noteCardComponentFile = "NoteCard.qml"
 
+function loadCanvas(canvasID) {
+    unload(bgCanvas.cardLayer)
+    load(canvasID)
+}
+
+// unload all cards inside the cardLayer, because cardLayer is the container of all cards
 function unload(cardLayer) {
     for (var i = 0; i < cardLayer.children.length; i++)
         cardLayer.children[i].destroy()
