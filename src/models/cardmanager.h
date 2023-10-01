@@ -42,6 +42,7 @@ public:
     Q_INVOKABLE void setCanvasID(QString id, QString canvasID);
     Q_INVOKABLE QString canvasName(QString id);
     Q_INVOKABLE void setCanvasName(QString id, QString canvasName);
+    Q_INVOKABLE QString upperCanvasID();
 
     QMap<QString, Card*> m_cardMap = {};
     QMap<QString, Canvas*> m_canvasMap = {};
@@ -58,6 +59,7 @@ private:
     QString uuid();
 
     QString m_currentCanvasID = "canvas 0";
+    QString m_upperCanvasID;
     QSettings* m_IO = nullptr;
 };
 

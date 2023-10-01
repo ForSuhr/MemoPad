@@ -15,6 +15,7 @@ ResizableItem {
     // canvas id, this is referring to the target canvas
     property string canvasID
     property string canvasName: "new canvas"
+    property string upperCanvasID
 
     property bool created: false
     property bool loaded: false
