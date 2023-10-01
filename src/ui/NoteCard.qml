@@ -41,7 +41,6 @@ ResizableItem {
         editBar.visible = selected
         palette.visible = selected
         if (!selected) {
-            IO.saveText(id, root)
             mouseArea.cursorShape = Qt.OpenHandCursor
         }
     }
@@ -107,6 +106,8 @@ ResizableItem {
                                    / Globals.dotInterval) + 1) * Globals.dotInterval
             }
         }
+
+        onEditingFinished: IO.saveText(id, root)
     }
 
     CardEditBar {
