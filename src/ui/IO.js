@@ -4,6 +4,11 @@ var noteCardComponent = null
 var canvasCardComponentFile = "CanvasCard.qml"
 var noteCardComponentFile = "NoteCard.qml"
 
+function unload(cardLayer) {
+    for (var i = 0; i < cardLayer.children.length; i++)
+        cardLayer.children[i].destroy()
+}
+
 function load() {
     CardManager.loadCards()
     var cardNum = CardManager.cardNum()
