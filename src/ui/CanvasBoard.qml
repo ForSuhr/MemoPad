@@ -9,7 +9,7 @@ Item {
     x: -parent.width / 2
     y: -parent.height / 2
 
-    property var cardLayer: cardLayer
+    property alias cardLayer: cardLayer
     property real dotSize: Globals.dotSize
     property int dotInterval: Globals.dotInterval
     property string dotColor: "gainsboro"

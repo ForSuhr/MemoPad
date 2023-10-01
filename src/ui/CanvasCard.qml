@@ -11,10 +11,11 @@ ResizableItem {
     height: Globals.dotInterval * 3
 
     property string id
+    property string canvasName: "canvas 0"
 
     property bool created: false
     property bool loaded: false
-    property bool selected: false
+    property alias selected: teleport.focus
 
     onCreatedChanged: {
         id = CardManager.createCard("canvas")
@@ -54,10 +55,41 @@ ResizableItem {
         }
     }
 
-    Image {
+    Pane {
+        id: teleport
         anchors.fill: parent
-        source: "assets/themes/lumos/canvas.svg"
-        mipmap: true
+        background: Rectangle {
+            color: "snow"
+            border.width: 4
+            border.color: "gainsboro"
+            radius: 10
+        }
+        MouseArea {
+            anchors.fill: parent
+            onDoubleClicked: console.log("create new canvas")
+        }
+    }
+
+    TextField {
+        id: nameTextField
+        height: 30
+        width: contentWidth + 20
+        anchors.top: teleport.bottom
+        anchors.topMargin: 10
+        anchors.horizontalCenter: parent.horizontalCenter
+        background: Rectangle {
+            color: "snow"
+            border.width: 4
+            border.color: "gainsboro"
+            radius: 10
+        }
+        text: canvasName
+        font.pixelSize: 16
+        horizontalAlignment: TextInput.AlignHCenter
+        color: "black"
+        selectByMouse: true
+        selectionColor: "darkseagreen"
+        selectedTextColor: "black"
     }
 
     CardEditBar {
