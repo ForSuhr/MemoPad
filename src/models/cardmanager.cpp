@@ -144,6 +144,11 @@ void CardManager::setCanvasName(QString id, QString canvasName)
     m_IO->setValue(m_currentCanvasID + "/" + id + "/canvasName", canvasName);
 }
 
+QString CardManager::currentCanvasID()
+{
+    return m_currentCanvasID;
+}
+
 QString CardManager::upperCanvasID()
 {
     return m_upperCanvasID;
@@ -195,8 +200,13 @@ QString CardManager::createCanvas(QString id, QString canvasName)
     return canvasID;
 }
 
-void CardManager::loadCanvas(QString currentCanvasID)
+void CardManager::loadCanvas(QString newCanvasID)
 {
+    // check if newCanvasID exists
+    QStringList canvasList = m_IO->childGroups();
+    if (!canvasList.contains(newCanvasID))
+        return;
+
     // initialize canvas map
     m_IO->beginGroup(m_currentCanvasID);
     QStringList keys = m_IO->childGroups();
@@ -218,8 +228,9 @@ void CardManager::loadCanvas(QString currentCanvasID)
     m_cardMap.clear();
 
     // load new cards into card map
-    m_upperCanvasID = m_currentCanvasID;
-    m_currentCanvasID = currentCanvasID;
+    m_upperCanvasID = m_IO->value(newCanvasID + "/upperCanvasID").toString();
+    m_currentCanvasID = newCanvasID;
+    emit currentCanvasIDChanged(newCanvasID);
     loadCards();
 }
 

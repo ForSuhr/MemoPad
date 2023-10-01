@@ -5,6 +5,8 @@ import MemoPad.PreferencesManager
 
 QtObject {
     /*canvas*/
+    property string initialCanvasID: "canvas 0"
+    property string currentCanvasID: initialCanvasID
     property real dotSize: 1.0
     property int dotInterval: 20
 

@@ -42,6 +42,7 @@ public:
     Q_INVOKABLE void setCanvasID(QString id, QString canvasID);
     Q_INVOKABLE QString canvasName(QString id);
     Q_INVOKABLE void setCanvasName(QString id, QString canvasName);
+    Q_INVOKABLE QString currentCanvasID();
     Q_INVOKABLE QString upperCanvasID();
 
     QMap<QString, Card*> m_cardMap = {};
@@ -54,6 +55,9 @@ public slots:
 
     QString createCanvas(QString id, QString canvasName);
     void loadCanvas(QString canvasID);
+
+signals:
+    void currentCanvasIDChanged(QString canvasID);
 
 private:
     QString uuid();

@@ -1,5 +1,7 @@
 import QtQuick
 import MemoPad.CommandManager
+import "IO.js" as IO
+import MemoPad.CardManager
 
 Item {
     id: root
@@ -8,6 +10,7 @@ Item {
 
     property string imageSource: IconSet.blank
     property string buttonAction
+    property alias actionEnabled: mouseArea.visible
 
     Image {
         id: img
@@ -21,6 +24,7 @@ Item {
     }
 
     MouseArea {
+        id: mouseArea
         anchors.fill: parent
         hoverEnabled: true
         onEntered: {
@@ -38,6 +42,8 @@ Item {
                 CommandManager.undo()
             else if (buttonAction === "redo")
                 CommandManager.redo()
+            else if (buttonAction === "back")
+                IO.loadCanvas(CardManager.upperCanvasID())
         }
     }
 }

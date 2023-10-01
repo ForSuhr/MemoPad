@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+import MemoPad.CardManager
 
 Item {
     id: root
@@ -192,6 +193,7 @@ Item {
         height: 32
         imageSource: IconSet.undo
         buttonAction: "undo"
+        actionEnabled: false
     }
 
     FloatingButton {
@@ -202,5 +204,24 @@ Item {
         height: 32
         imageSource: IconSet.redo
         buttonAction: "redo"
+        actionEnabled: false
+    }
+
+    /*back to upper canvas button*/
+    FloatingButton {
+        id: back
+        x: 42
+        y: 42
+        width: 32
+        height: 32
+        imageSource: IconSet.back
+        buttonAction: "back"
+        actionEnabled: Globals.currentCanvasID === Globals.initialCanvasID ? false : true
+        Connections {
+            target: CardManager
+            function onCurrentCanvasIDChanged(newCanvasID) {
+                Globals.currentCanvasID = newCanvasID
+            }
+        }
     }
 }

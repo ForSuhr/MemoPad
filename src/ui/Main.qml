@@ -17,7 +17,7 @@ Window {
     color: "floralwhite"
 
     // load initial canvas, "canvas 0" is the ID of the initial canvas
-    Component.onCompleted: IO.load("canvas 0")
+    Component.onCompleted: IO.load(Globals.initialCanvasID)
 
     CanvasBoard {
         id: bgCanvas

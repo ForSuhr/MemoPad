@@ -25,6 +25,7 @@ qt_add_qml_module(MemoPad
         ui/assets/themes/lumos/gear.svg
         ui/assets/themes/lumos/undo.svg
         ui/assets/themes/lumos/redo.svg
+        ui/assets/themes/lumos/back.svg
     SOURCES
         models/card.h
         models/card.cpp
