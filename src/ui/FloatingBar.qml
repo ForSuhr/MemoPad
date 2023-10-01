@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import MemoPad.CardManager
+import MemoPad.CommandManager
 
 Item {
     id: root
@@ -194,6 +195,12 @@ Item {
         imageSource: IconSet.undo
         buttonAction: "undo"
         actionEnabled: false
+        Connections {
+            target: CommandManager
+            function onUndoStackEmptySignal(isEmpty) {
+                undo.actionEnabled = !isEmpty
+            }
+        }
     }
 
     FloatingButton {
@@ -205,6 +212,12 @@ Item {
         imageSource: IconSet.redo
         buttonAction: "redo"
         actionEnabled: false
+        Connections {
+            target: CommandManager
+            function onRedoStackEmptySignal(isEmpty) {
+                redo.actionEnabled = !isEmpty
+            }
+        }
     }
 
     /*back to upper canvas button*/

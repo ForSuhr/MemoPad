@@ -31,6 +31,9 @@ signals:
     void changeTextSignal(QString id, QString text);
     void changeBackgroundColorSignal(QString id, QString color);
 
+    void undoStackEmptySignal(bool isEmpty);
+    void redoStackEmptySignal(bool isEmpty);
+
 private:
     std::stack<Command*> m_undoStack;
     std::stack<Command*> m_redoStack;

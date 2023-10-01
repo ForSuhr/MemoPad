@@ -9,6 +9,9 @@ void CommandManager::execute(Command* command)
 {
     m_undoStack.push(command);
     m_redoStack = std::stack<Command*>(); // clear the redo stack
+
+    emit undoStackEmptySignal(false);
+    emit redoStackEmptySignal(true);
 }
 
 void CommandManager::undo()
@@ -19,6 +22,9 @@ void CommandManager::undo()
         m_undoStack.pop();
         m_redoStack.push(lastCommand);
     }
+
+    emit undoStackEmptySignal(m_undoStack.empty());
+    emit redoStackEmptySignal(m_redoStack.empty());
 }
 
 void CommandManager::redo()
@@ -29,6 +35,9 @@ void CommandManager::redo()
         m_redoStack.pop();
         m_undoStack.push(lastCommand);
     }
+
+    emit undoStackEmptySignal(m_undoStack.empty());
+    emit redoStackEmptySignal(m_redoStack.empty());
 }
 
 void CommandManager::moveCard(QString id, qreal lastX, qreal lastY, qreal currentX, qreal currentY)
