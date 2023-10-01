@@ -3,12 +3,20 @@
 CardManager::CardManager(QObject* parent)
     : QObject { parent }
 {
+    // setup IO
     QString path = QCoreApplication::applicationDirPath() + "/save/canvas.json";
-    m_cardIO = new QSettings(path, JsonFormat);
+    m_IO = new QSettings(path, JsonFormat);
 }
 
 CardManager::~CardManager()
 {
+    for (auto i = m_cardMap.begin(); i != m_cardMap.end(); i++) {
+        delete i.value();
+    }
+
+    for (auto i = m_canvasMap.begin(); i != m_canvasMap.end(); i++) {
+        delete i.value();
+    }
 }
 
 int CardManager::cardNum()
@@ -34,7 +42,7 @@ qreal CardManager::x(QString id)
 void CardManager::setX(QString id, qreal x)
 {
     m_cardMap[id]->m_x = x;
-    m_cardIO->setValue(m_currentCanvas + "/" + id + "/x", x);
+    m_IO->setValue(m_currentCanvasID + "/" + id + "/x", x);
 }
 
 qreal CardManager::y(QString id)
@@ -45,7 +53,7 @@ qreal CardManager::y(QString id)
 void CardManager::setY(QString id, qreal y)
 {
     m_cardMap[id]->m_y = y;
-    m_cardIO->setValue(m_currentCanvas + "/" + id + "/y", y);
+    m_IO->setValue(m_currentCanvasID + "/" + id + "/y", y);
 }
 
 QSizeF CardManager::pos(QString id)
@@ -67,7 +75,7 @@ qreal CardManager::width(QString id)
 void CardManager::setWidth(QString id, qreal width)
 {
     m_cardMap[id]->m_width = width;
-    m_cardIO->setValue(m_currentCanvas + "/" + id + "/width", width);
+    m_IO->setValue(m_currentCanvasID + "/" + id + "/width", width);
 }
 
 qreal CardManager::height(QString id)
@@ -78,7 +86,7 @@ qreal CardManager::height(QString id)
 void CardManager::setHeight(QString id, qreal height)
 {
     m_cardMap[id]->m_height = height;
-    m_cardIO->setValue(m_currentCanvas + "/" + id + "/height", height);
+    m_IO->setValue(m_currentCanvasID + "/" + id + "/height", height);
 }
 
 QSizeF CardManager::size(QString id)
@@ -100,7 +108,7 @@ QString CardManager::backgroundColor(QString id)
 void CardManager::setBackgroundColor(QString id, QString backgroundColor)
 {
     m_cardMap[id]->m_backgroundColor = backgroundColor;
-    m_cardIO->setValue(m_currentCanvas + "/" + id + "/backgroundColor", backgroundColor);
+    m_IO->setValue(m_currentCanvasID + "/" + id + "/backgroundColor", backgroundColor);
 }
 
 QString CardManager::text(QString id)
@@ -111,7 +119,29 @@ QString CardManager::text(QString id)
 void CardManager::setText(QString id, QString text)
 {
     m_cardMap[id]->m_text = text;
-    m_cardIO->setValue(m_currentCanvas + "/" + id + "/text", text);
+    m_IO->setValue(m_currentCanvasID + "/" + id + "/text", text);
+}
+
+QString CardManager::canvasID(QString id)
+{
+    return m_canvasMap[id]->m_canvasID;
+}
+
+void CardManager::setCanvasID(QString id, QString canvasID)
+{
+    m_canvasMap[id]->m_canvasID = canvasID;
+    m_IO->setValue(m_currentCanvasID + "/" + id + "/canvasID", canvasID);
+}
+
+QString CardManager::canvasName(QString id)
+{
+    return m_canvasMap[id]->m_canvasName;
+}
+
+void CardManager::setCanvasName(QString id, QString canvasName)
+{
+    m_canvasMap[id]->m_canvasName = canvasName;
+    m_IO->setValue(m_currentCanvasID + "/" + id + "/canvasName", canvasName);
 }
 
 QString CardManager::createCard(QString cardType)
@@ -119,35 +149,70 @@ QString CardManager::createCard(QString cardType)
     QString id = uuid();
     Card* card = new Card(id, cardType);
     m_cardMap[id] = card;
-    m_cardIO->setValue(m_currentCanvas + "/" + id + "/cardType", cardType);
+    m_IO->setValue(m_currentCanvasID + "/" + id + "/cardType", cardType);
     return id;
 }
 
 void CardManager::deleteCard(QString id)
 {
     m_cardMap.remove(id);
-    m_cardIO->beginGroup(m_currentCanvas);
-    m_cardIO->remove(id);
-    m_cardIO->endGroup();
+    m_IO->beginGroup(m_currentCanvasID);
+    m_IO->remove(id);
+    m_IO->endGroup();
 }
 
 /// @brief load cards from canvas file to m_cardMap
 void CardManager::loadCards()
 {
-    m_cardIO->beginGroup(m_currentCanvas);
-    QStringList keys = m_cardIO->childGroups();
+    m_IO->beginGroup(m_currentCanvasID);
+    QStringList keys = m_IO->childGroups(); // stringlist of all cards' uuid
     for (int i = 0; i < keys.count(); i++) {
-        QString cardType = m_cardIO->value(keys[i] + "/cardType").toString();
+        QString cardType = m_IO->value(keys[i] + "/cardType").toString();
         Card* card = new Card(keys[i], cardType);
-        card->m_x = m_cardIO->value(keys[i] + "/x").toReal();
-        card->m_y = m_cardIO->value(keys[i] + "/y").toReal();
-        card->m_width = m_cardIO->value(keys[i] + "/width").toReal();
-        card->m_height = m_cardIO->value(keys[i] + "/height").toReal();
-        card->m_text = m_cardIO->value(keys[i] + "/text").toString();
-        card->m_backgroundColor = m_cardIO->value(keys[i] + "/backgroundColor").toString();
+        card->m_x = m_IO->value(keys[i] + "/x").toReal();
+        card->m_y = m_IO->value(keys[i] + "/y").toReal();
+        card->m_width = m_IO->value(keys[i] + "/width").toReal();
+        card->m_height = m_IO->value(keys[i] + "/height").toReal();
+        card->m_text = m_IO->value(keys[i] + "/text").toString();
+        card->m_backgroundColor = m_IO->value(keys[i] + "/backgroundColor").toString();
         m_cardMap[keys[i]] = card;
     }
-    m_cardIO->endGroup();
+    m_IO->endGroup();
+}
+
+QString CardManager::createCanvas(QString id, QString canvasName)
+{
+    QString canvasID = uuid();
+    Canvas* canvas = new Canvas(canvasID, canvasName);
+    m_canvasMap[id] = canvas;
+    return id;
+}
+
+void CardManager::loadCanvas(QString currentCanvasID)
+{
+    // initialize canvas map
+    m_IO->beginGroup(m_currentCanvasID);
+    QStringList keys = m_IO->childGroups();
+    for (int i = 0; i < keys.count(); i++) {
+        QString cardType = m_IO->value(keys[i] + "/cardType").toString();
+        if (cardType == "canvas") {
+            QString canvasID = m_IO->value(keys[i] + "/canvasID").toString();
+            QString canvasName = m_IO->value(keys[i] + "/canvasName").toString();
+            Canvas* canvas = new Canvas(canvasID, canvasName);
+            m_canvasMap[keys[i]] = canvas;
+        }
+    }
+    m_IO->endGroup();
+
+    // clear current card map
+    for (auto i = m_cardMap.begin(); i != m_cardMap.end(); i++) {
+        delete i.value();
+    }
+    m_cardMap.clear();
+
+    // load new cards into card map
+    m_currentCanvasID = currentCanvasID;
+    loadCards();
 }
 
 QString CardManager::uuid()

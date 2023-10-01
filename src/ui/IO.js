@@ -9,8 +9,8 @@ function unload(cardLayer) {
         cardLayer.children[i].destroy()
 }
 
-function load() {
-    CardManager.loadCards()
+function load(canvasID) {
+    CardManager.loadCanvas(canvasID)
     var cardNum = CardManager.cardNum()
     var cardIDs = CardManager.cardIDs()
     for (var i = 0; i < cardNum; i++) {
@@ -122,6 +122,14 @@ function saveBackgroundColor(id, card, stackCommand = true) {
             CommandManager.changeBackgroundColor(id, lastColor, currentColor)
         CardManager.setBackgroundColor(id, currentColor)
     }
+}
+
+function saveCanvasID(id, card, stackCommand = true) {
+    CardManager.setCanvasID(id, card.canvasID)
+}
+
+function saveCanvasName(id, card, stackCommand = true) {
+    CardManager.setCanvasName(id, card.canvasName)
 }
 
 /*---------------------------delete--------------------------------------*/

@@ -16,7 +16,8 @@ Window {
     title: qsTr("MemoPad")
     color: "floralwhite"
 
-    Component.onCompleted: IO.load()
+    // load initial canvas, "canvas 0" is the ID of the initial canvas
+    Component.onCompleted: IO.load("canvas 0")
 
     CanvasBoard {
         id: bgCanvas

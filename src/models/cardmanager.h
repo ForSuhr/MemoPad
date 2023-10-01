@@ -9,6 +9,7 @@
 #include <QUuid>
 
 #include "../utils/qsettingsjson.h"
+#include "canvas.h"
 #include "card.h"
 
 class CardManager : public QObject {
@@ -37,18 +38,27 @@ public:
     Q_INVOKABLE QString text(QString id);
     Q_INVOKABLE void setText(QString id, QString text);
 
+    Q_INVOKABLE QString canvasID(QString id);
+    Q_INVOKABLE void setCanvasID(QString id, QString canvasID);
+    Q_INVOKABLE QString canvasName(QString id);
+    Q_INVOKABLE void setCanvasName(QString id, QString canvasName);
+
     QMap<QString, Card*> m_cardMap = {};
+    QMap<QString, Canvas*> m_canvasMap = {};
 
 public slots:
     QString createCard(QString cardType);
     void deleteCard(QString id);
     void loadCards();
 
+    QString createCanvas(QString id, QString canvasName);
+    void loadCanvas(QString canvasID);
+
 private:
     QString uuid();
 
-    QString m_currentCanvas = "canvas 0";
-    QSettings* m_cardIO = nullptr;
+    QString m_currentCanvasID = "canvas 0";
+    QSettings* m_IO = nullptr;
 };
 
 #endif // CARDMANAGER_H

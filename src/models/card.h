@@ -1,8 +1,7 @@
 #ifndef CARD_H
 #define CARD_H
 
-#include <QDebug>
-#include <QObject>
+#include <QString>
 
 class Card {
 
@@ -17,6 +16,8 @@ public:
     qreal m_height;
     QString m_text;
     QString m_backgroundColor;
+    QString m_canvasID;
+    QString m_canvasName;
 };
 
 #endif // CARD_H

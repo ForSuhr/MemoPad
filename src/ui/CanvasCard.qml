@@ -10,8 +10,11 @@ ResizableItem {
     width: Globals.dotInterval * 3
     height: Globals.dotInterval * 3
 
+    // card id, this is referring to the card itself
     property string id
-    property string canvasName: "canvas 0"
+    // canvas id, this is referring to the target canvas
+    property string canvasID
+    property string canvasName: "new canvas"
 
     property bool created: false
     property bool loaded: false
@@ -19,12 +22,17 @@ ResizableItem {
 
     onCreatedChanged: {
         id = CardManager.createCard("canvas")
+        canvasID = CardManager.createCanvas(id, canvasName)
         Snap.snap(root)
         IO.saveTransform(id, root, false)
+        IO.saveCanvasID(id, root)
+        IO.saveCanvasName(id, root)
     }
     onLoadedChanged: {
         root.width = CardManager.width(id)
         root.height = CardManager.height(id)
+        canvasID = CardManager.canvasID(id)
+        canvasName = CardManager.canvasName(id)
         Snap.snap(root)
     }
     onSelectedChanged: {
@@ -66,7 +74,10 @@ ResizableItem {
         }
         MouseArea {
             anchors.fill: parent
-            onDoubleClicked: console.log("create new canvas")
+            onDoubleClicked: {
+                IO.unload(root.parent) // the parent of this card is the cardLayer where it was placed
+                IO.load(canvasID)
+            }
         }
     }
 
