@@ -110,6 +110,9 @@ Item {
     CardLayer {
         id: cardLayer
         z: 3
+        onLoadCanvasSignal: canvasID => {
+                                IO.loadCanvas(canvasID)
+                            }
     }
 
     /*command undo&redo*/

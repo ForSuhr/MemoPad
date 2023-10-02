@@ -5,4 +5,6 @@ Item {
     width: parent.width
     height: parent.height
     anchors.fill: parent
+
+    signal loadCanvasSignal(string canvasID)
 }

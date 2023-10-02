@@ -218,6 +218,20 @@ void CardManager::loadCanvas(QString newCanvasID)
     if (!canvasList.contains(newCanvasID))
         return;
 
+    // initialize canvas map
+    m_IO->beginGroup(newCanvasID);
+    QStringList keys = m_IO->childGroups();
+    for (int i = 0; i < keys.count(); i++) {
+        QString cardType = m_IO->value(keys[i] + "/cardType").toString();
+        if (cardType == "canvas") {
+            QString canvasID = m_IO->value(keys[i] + "/canvasID").toString();
+            QString canvasName = m_IO->value(keys[i] + "/canvasName").toString();
+            Canvas* canvas = new Canvas(canvasID, canvasName, newCanvasID);
+            m_canvasMap[keys[i]] = canvas;
+        }
+    }
+    m_IO->endGroup();
+
     // clear current card map
     for (auto i = m_cardMap.begin(); i != m_cardMap.end(); i++) {
         delete i.value();
@@ -229,20 +243,6 @@ void CardManager::loadCanvas(QString newCanvasID)
     m_currentCanvasID = newCanvasID;
     emit currentCanvasIDChanged(newCanvasID);
     loadCards();
-
-    // initialize canvas map
-    m_IO->beginGroup(m_currentCanvasID);
-    QStringList keys = m_IO->childGroups();
-    for (int i = 0; i < keys.count(); i++) {
-        QString cardType = m_IO->value(keys[i] + "/cardType").toString();
-        if (cardType == "canvas") {
-            QString canvasID = m_IO->value(keys[i] + "/canvasID").toString();
-            QString canvasName = m_IO->value(keys[i] + "/canvasName").toString();
-            Canvas* canvas = new Canvas(canvasID, canvasName, m_currentCanvasID);
-            m_canvasMap[keys[i]] = canvas;
-        }
-    }
-    m_IO->endGroup();
 }
 
 QString CardManager::uuid()

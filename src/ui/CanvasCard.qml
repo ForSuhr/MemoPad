@@ -52,9 +52,12 @@ ResizableItem {
         drag.maximumX: root.parent.width - root.width
         drag.maximumY: root.parent.height - root.height
         acceptedButtons: Qt.LeftButton
+        hoverEnabled: true
+        onEntered: cursorShape = Qt.OpenHandCursor
+        onExited: cursorShape = Qt.ArrowCursor
         onPressed: cursorShape = Qt.ClosedHandCursor
         onReleased: {
-            cursorShape = Qt.ArrowCursor
+            cursorShape = Qt.OpenHandCursor
             Snap.snap(root)
             IO.savePos(id, root)
         }
@@ -76,7 +79,7 @@ ResizableItem {
         MouseArea {
             anchors.fill: parent
             onDoubleClicked: {
-                IO.loadCanvas(canvasID)
+                root.parent.loadCanvasSignal(canvasID)
             }
         }
     }
