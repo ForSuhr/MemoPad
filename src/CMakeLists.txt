@@ -9,6 +9,7 @@ find_package(Qt6 6.2 REQUIRED COMPONENTS Quick)
 
 qt_add_executable(MemoPad
     main.cpp
+    "ui/assets/icon/MemoPad.rc"
 )
 
 set_source_files_properties(ui/Globals.qml PROPERTIES QT_QML_SINGLETON_TYPE TRUE)
@@ -18,6 +19,7 @@ qt_add_qml_module(MemoPad
     URI MemoPad
     VERSION 1.0
     RESOURCES
+        #[[app icon]]
         ui/assets/themes/lumos/blank.svg
         ui/assets/themes/lumos/canvas.svg
         ui/assets/themes/lumos/note.svg
@@ -28,6 +30,8 @@ qt_add_qml_module(MemoPad
         ui/assets/themes/lumos/back.svg
         ui/assets/themes/lumos/doorClosed.svg
         ui/assets/themes/lumos/doorOpen.svg
+        #[[window icon]]
+        ui/assets/icon/MemoPad.png
     SOURCES
         models/card.h
         models/card.cpp

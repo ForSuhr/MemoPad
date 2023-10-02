@@ -1,4 +1,5 @@
 #include <QGuiApplication>
+#include <QIcon>
 #include <QQmlApplicationEngine>
 
 #include "models/cardmanager.h"
@@ -27,6 +28,9 @@ int main(int argc, char* argv[])
         },
         Qt::QueuedConnection);
     engine.load(url);
+
+    /*window icon*/
+    app.setWindowIcon(QIcon(":/MemoPad/ui/assets/icon/MemoPad.png"));
 
     return app.exec();
 }
