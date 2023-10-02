@@ -7,8 +7,8 @@ import "IO.js" as IO
 
 ResizableItem {
     id: root
-    width: Globals.dotInterval * 3
-    height: Globals.dotInterval * 3
+    width: Globals.dotInterval * 5
+    height: Globals.dotInterval * 5
 
     // card id, this is referring to the card itself
     property string id
