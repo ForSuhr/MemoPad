@@ -4,14 +4,12 @@
 #include "models/cardmanager.h"
 #include "models/commandmanager.h"
 #include "models/preferencesmanager.h"
-#include "models/texteditor.h"
 
 int main(int argc, char* argv[])
 {
     QGuiApplication app(argc, argv);
 
     /*qml register*/
-    qmlRegisterType<TextEditor>("MemoPad.TextEditorModel", 1, 0, "TextEditorModel");
     QScopedPointer<CardManager> scopedPointer1(new CardManager);
     qmlRegisterSingletonInstance("MemoPad.CardManager", 1, 0, "CardManager", scopedPointer1.get());
     QScopedPointer<PreferencesManager> scopedPointer2(new PreferencesManager);

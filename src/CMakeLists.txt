@@ -29,8 +29,6 @@ qt_add_qml_module(MemoPad
     SOURCES
         models/card.h
         models/card.cpp
-        models/texteditor.h
-        models/texteditor.cpp
         models/canvas.h
         models/canvas.cpp
         models/cardmanager.h
@@ -54,7 +52,6 @@ qt_add_qml_module(MemoPad
         ui/Snap.js
         ui/IO.js
         #[[qml]]
-        ui/TextEditor.qml
         ui/CanvasBoard.qml
         ui/FloatingBar.qml
         ui/FloatingBarArea.qml

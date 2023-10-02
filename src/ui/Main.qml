@@ -1,7 +1,6 @@
 import QtQuick
 import QtQuick.Controls
 import MemoPad
-import MemoPad.TextEditorModel
 import MemoPad.PreferencesManager
 import MemoPad.CardManager
 import MemoPad.CommandManager
