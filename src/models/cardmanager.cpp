@@ -186,6 +186,13 @@ void CardManager::deleteCanvasByCanvasCard(QString id, QString currentCanvasID)
     for (int i = 0; i < keys.count(); i++) {
         QString cardID = keys[i];
         QString cardType = m_IO->value(currentCanvasID + "/" + cardID + "/cardType").toString();
+
+        // if currentCanvasID == m_currentCanvasID,
+        // meaning that this is the first time this recursive function being called
+        // in this case, if this card doesn't match the card id we passed in,  jump over this iteration
+        if (currentCanvasID == m_currentCanvasID & cardID != id)
+            continue;
+
         if (cardType == "canvas") {
             QString canvasID = m_IO->value(currentCanvasID + "/" + cardID + "/canvasID").toString();
             deleteCanvasByCanvasCard(cardID, canvasID);
