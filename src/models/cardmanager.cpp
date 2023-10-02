@@ -218,6 +218,18 @@ void CardManager::loadCanvas(QString newCanvasID)
     if (!canvasList.contains(newCanvasID))
         return;
 
+    // clear current card map
+    for (auto i = m_cardMap.begin(); i != m_cardMap.end(); i++) {
+        delete i.value();
+    }
+    m_cardMap.clear();
+
+    // load new cards into card map
+    m_upperCanvasID = m_IO->value(newCanvasID + "/upperCanvasID").toString();
+    m_currentCanvasID = newCanvasID;
+    emit currentCanvasIDChanged(newCanvasID);
+    loadCards();
+
     // initialize canvas map
     m_IO->beginGroup(m_currentCanvasID);
     QStringList keys = m_IO->childGroups();
@@ -231,18 +243,6 @@ void CardManager::loadCanvas(QString newCanvasID)
         }
     }
     m_IO->endGroup();
-
-    // clear current card map
-    for (auto i = m_cardMap.begin(); i != m_cardMap.end(); i++) {
-        delete i.value();
-    }
-    m_cardMap.clear();
-
-    // load new cards into card map
-    m_upperCanvasID = m_IO->value(newCanvasID + "/upperCanvasID").toString();
-    m_currentCanvasID = newCanvasID;
-    emit currentCanvasIDChanged(newCanvasID);
-    loadCards();
 }
 
 QString CardManager::uuid()
