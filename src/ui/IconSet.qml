@@ -11,4 +11,6 @@ QtObject {
     property string undo: "assets/themes/lumos/undo.svg"
     property string redo: "assets/themes/lumos/redo.svg"
     property string back: "assets/themes/lumos/back.svg"
+    property string doorClosed: "assets/themes/lumos/doorClosed.svg"
+    property string doorOpen: "assets/themes/lumos/doorOpen.svg"
 }

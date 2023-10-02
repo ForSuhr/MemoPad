@@ -8,10 +8,10 @@ Item {
     id: root
 
     property bool isVisble: false
-    property real minHeight: 64
-    property real minWidth: 64
-    property real maxHeight: 1000
-    property real maxWidth: 1000
+    property real minHeight: Globals.dotInterval * 3
+    property real minWidth: Globals.dotInterval * 3
+    property real maxHeight: Globals.dotInterval * 50
+    property real maxWidth: Globals.dotInterval * 50
     property int areaBorderWidth: 6
     property string areaBorderColor: "lightgray"
     property string areaColor: "transparent"

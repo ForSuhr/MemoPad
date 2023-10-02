@@ -8,8 +8,8 @@ import "IO.js" as IO
 
 ResizableItem {
     id: root
-    width: Globals.dotInterval * 6
-    height: Globals.dotInterval * 3
+    width: Globals.dotInterval * 8
+    height: Globals.dotInterval * 4
 
     property string id
     property string backgroundColor: "snow"

@@ -7,8 +7,8 @@ import "IO.js" as IO
 
 ResizableItem {
     id: root
-    width: Globals.dotInterval * 5
-    height: Globals.dotInterval * 5
+    width: Globals.dotInterval * 4
+    height: Globals.dotInterval * 4
 
     // card id, this is referring to the card itself
     property string id
@@ -73,6 +73,32 @@ ResizableItem {
         }
     }
 
+    Image {
+        id: door
+        z: 2
+        width: root.width - Globals.dotInterval * 1
+        height: root.height - Globals.dotInterval * 1
+        fillMode: Qt.KeepAspectRatio
+        mipmap: true
+        anchors.centerIn: teleport
+        source: IconSet.doorClosed
+        MouseArea {
+            anchors.fill: parent
+            hoverEnabled: true
+            onEntered: {
+                door.source = IconSet.doorOpen
+                cursorShape = Qt.PointingHandCursor
+            }
+            onExited: {
+                door.source = IconSet.doorClosed
+                cursorShape = Qt.OpenHandCursor
+            }
+            onClicked: {
+                root.parent.loadCanvasSignal(canvasID)
+            }
+        }
+    }
+
     Pane {
         id: teleport
         anchors.fill: parent
@@ -81,12 +107,6 @@ ResizableItem {
             border.width: 2
             border.color: "gainsboro"
             radius: 10
-        }
-        MouseArea {
-            anchors.fill: parent
-            onDoubleClicked: {
-                root.parent.loadCanvasSignal(canvasID)
-            }
         }
     }
 
