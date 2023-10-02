@@ -9,7 +9,7 @@ Page {
     property string creatorText: "<b>Creator</b>" + "<br><br>"
                                  + "ForSuhr - <a href=https://github.com/ForSuhr/MemoPad>GitHub</a>"
     property string qtText: "<b>Third Party Licenses</b>" + "<br><br>"
-                            + "Qt6.3.2 - LGPL v3  - <a href=https://www.qt.io>https://www.qt.io</a>"
+                            + "Qt6.5.3 - LGPL v3  - <a href=https://www.qt.io>https://www.qt.io</a>"
 
     width: 400
     height: 400
