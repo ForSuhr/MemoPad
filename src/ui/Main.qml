@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Controls
-import MemoPad
+import MemoPad.Globals
+import MemoPad.IconSet
 import MemoPad.PreferencesManager
 import MemoPad.CardManager
 import MemoPad.CommandManager
