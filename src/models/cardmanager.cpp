@@ -165,10 +165,19 @@ QString CardManager::createCard(QString cardType)
 
 void CardManager::deleteCard(QString id)
 {
-    m_cardMap.remove(id);
+    /*remove this card from disk*/
     m_IO->beginGroup(m_currentCanvasID);
     m_IO->remove(id);
     m_IO->endGroup();
+
+    /*if this card of type "canvas", remove the canvas it refers to as well*/
+    if (m_cardMap[id]->m_cardType == "canvas") {
+        QString canvasID = m_cardMap[id]->m_canvasID;
+        m_IO->remove(canvasID);
+    }
+
+    /*remove it from memory*/
+    m_cardMap.remove(id);
 }
 
 /// @brief load cards from canvas file to m_cardMap
@@ -185,6 +194,8 @@ void CardManager::loadCards()
         card->m_height = m_IO->value(keys[i] + "/height").toReal();
         card->m_text = m_IO->value(keys[i] + "/text").toString();
         card->m_backgroundColor = m_IO->value(keys[i] + "/backgroundColor").toString();
+        card->m_canvasID = m_IO->value(keys[i] + "/canvasID").toString();
+        card->m_canvasName = m_IO->value(keys[i] + "/canvasName").toString();
         m_cardMap[keys[i]] = card;
     }
     m_IO->endGroup();
