@@ -165,19 +165,33 @@ QString CardManager::createCard(QString cardType)
 
 void CardManager::deleteCard(QString id)
 {
+    /*if this card of type "canvas", remove the canvas it refers to as well*/
+    deleteCanvasByCanvasCard(id, m_currentCanvasID);
+
+    /*remove it from memory*/
+    m_cardMap.remove(id);
+
     /*remove this card from disk*/
     m_IO->beginGroup(m_currentCanvasID);
     m_IO->remove(id);
     m_IO->endGroup();
+}
 
-    /*if this card of type "canvas", remove the canvas it refers to as well*/
-    if (m_cardMap[id]->m_cardType == "canvas") {
-        QString canvasID = m_cardMap[id]->m_canvasID;
-        m_IO->remove(canvasID);
+/// @brief a recursive function for deleting all sub-canvases by a canvas card id
+void CardManager::deleteCanvasByCanvasCard(QString id, QString currentCanvasID)
+{
+    m_IO->beginGroup(currentCanvasID);
+    QStringList keys = m_IO->childGroups();
+    m_IO->endGroup();
+    for (int i = 0; i < keys.count(); i++) {
+        QString cardID = keys[i];
+        QString cardType = m_IO->value(currentCanvasID + "/" + cardID + "/cardType").toString();
+        if (cardType == "canvas") {
+            QString canvasID = m_IO->value(currentCanvasID + "/" + cardID + "/canvasID").toString();
+            deleteCanvasByCanvasCard(cardID, canvasID);
+            m_IO->remove(canvasID);
+        }
     }
-
-    /*remove it from memory*/
-    m_cardMap.remove(id);
 }
 
 /// @brief load cards from canvas file to m_cardMap
@@ -186,17 +200,18 @@ void CardManager::loadCards()
     m_IO->beginGroup(m_currentCanvasID);
     QStringList keys = m_IO->childGroups(); // stringlist of all cards' uuid
     for (int i = 0; i < keys.count(); i++) {
-        QString cardType = m_IO->value(keys[i] + "/cardType").toString();
-        Card* card = new Card(keys[i], cardType);
-        card->m_x = m_IO->value(keys[i] + "/x").toReal();
-        card->m_y = m_IO->value(keys[i] + "/y").toReal();
-        card->m_width = m_IO->value(keys[i] + "/width").toReal();
-        card->m_height = m_IO->value(keys[i] + "/height").toReal();
-        card->m_text = m_IO->value(keys[i] + "/text").toString();
-        card->m_backgroundColor = m_IO->value(keys[i] + "/backgroundColor").toString();
-        card->m_canvasID = m_IO->value(keys[i] + "/canvasID").toString();
-        card->m_canvasName = m_IO->value(keys[i] + "/canvasName").toString();
-        m_cardMap[keys[i]] = card;
+        QString cardID = keys[i];
+        QString cardType = m_IO->value(cardID + "/cardType").toString();
+        Card* card = new Card(cardID, cardType);
+        card->m_x = m_IO->value(cardID + "/x").toReal();
+        card->m_y = m_IO->value(cardID + "/y").toReal();
+        card->m_width = m_IO->value(cardID + "/width").toReal();
+        card->m_height = m_IO->value(cardID + "/height").toReal();
+        card->m_text = m_IO->value(cardID + "/text").toString();
+        card->m_backgroundColor = m_IO->value(cardID + "/backgroundColor").toString();
+        card->m_canvasID = m_IO->value(cardID + "/canvasID").toString();
+        card->m_canvasName = m_IO->value(cardID + "/canvasName").toString();
+        m_cardMap[cardID] = card;
     }
     m_IO->endGroup();
 }

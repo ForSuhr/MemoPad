@@ -51,6 +51,7 @@ public:
 public slots:
     QString createCard(QString cardType);
     void deleteCard(QString id);
+    void deleteCanvasByCanvasCard(QString id, QString currentCanvasID);
     void loadCards();
 
     QString createCanvas(QString id, QString canvasName);
