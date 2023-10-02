@@ -17,6 +17,11 @@ ResizableItem {
     property string canvasName: "new canvas"
     property string upperCanvasID
 
+    property string backgroundColor: "snow"
+    property string borderColor: "gainsboro"
+    property int borderWidth: 2
+    property int cornerRadius: 10
+
     property bool created: false
     property bool loaded: false
     property alias selected: teleport.focus
@@ -38,6 +43,7 @@ ResizableItem {
     }
     onSelectedChanged: {
         isVisble = selected
+        palette.visible = selected
         mouseArea.enabled = !selected
         editBar.visible = selected
     }
@@ -71,7 +77,7 @@ ResizableItem {
         id: teleport
         anchors.fill: parent
         background: Rectangle {
-            color: "snow"
+            color: backgroundColor
             border.width: 2
             border.color: "gainsboro"
             radius: 10
@@ -92,10 +98,10 @@ ResizableItem {
         anchors.topMargin: 10
         anchors.horizontalCenter: parent.horizontalCenter
         background: Rectangle {
-            color: "snow"
-            border.width: 2
-            border.color: "gainsboro"
-            radius: 10
+            color: backgroundColor
+            border.width: borderWidth
+            border.color: borderColor
+            radius: cornerRadius
         }
         text: canvasName
         font.pixelSize: 16
@@ -117,6 +123,12 @@ ResizableItem {
 
     CardEditBar {
         id: editBar
-        borderColor: "gainsboro"
+        borderColor: borderColor
+    }
+
+    CardPalette {
+        id: palette
+        borderColor: borderColor
+        anchors.top: nameTextField.bottom
     }
 }
