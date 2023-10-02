@@ -31,8 +31,9 @@ ResizableItem {
         canvasID = CardManager.createCanvas(id, canvasName)
         Snap.snap(root)
         IO.saveTransform(id, root, false)
-        IO.saveCanvasID(id, root)
-        IO.saveCanvasName(id, root)
+        IO.saveCanvasID(id, root, false)
+        IO.saveCanvasName(id, root, false)
+        IO.saveBackgroundColor(id, root, false)
     }
     onLoadedChanged: {
         root.width = CardManager.width(id)
@@ -77,8 +78,8 @@ ResizableItem {
     Image {
         id: door
         z: 2
-        width: root.width - Globals.dotInterval * 1
-        height: root.height - Globals.dotInterval * 1
+        width: root.width - Globals.dotInterval * 2
+        height: root.height - Globals.dotInterval * 2
         fillMode: Qt.KeepAspectRatio
         mipmap: true
         anchors.centerIn: teleport
