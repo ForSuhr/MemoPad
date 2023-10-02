@@ -38,6 +38,7 @@ Page {
                     Label {
                         Layout.alignment: Qt.AlignVCenter
                         text: qsTr("Adjust card size to fit text")
+                        color: "black"
                         font.pixelSize: fontPixelSize
                     }
                     Item {
@@ -67,6 +68,7 @@ Page {
                     Label {
                         Layout.alignment: Qt.AlignVCenter
                         text: qsTr("FullScreen Mode")
+                        color: "black"
                         font.pixelSize: fontPixelSize
                     }
                     Item {

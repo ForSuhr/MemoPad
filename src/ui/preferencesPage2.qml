@@ -28,6 +28,7 @@ Page {
         TextArea {
             id: textArea
             readOnly: true
+            color: "black"
             font.pixelSize: fontPixelSize
             wrapMode: TextArea.Wrap
             textFormat: TextArea.RichText
