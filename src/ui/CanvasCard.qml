@@ -37,6 +37,7 @@ ResizableItem {
     onLoadedChanged: {
         root.width = CardManager.width(id)
         root.height = CardManager.height(id)
+        root.backgroundColor = CardManager.backgroundColor(id)
         canvasID = CardManager.canvasID(id)
         canvasName = CardManager.canvasName(id)
         Snap.snap(root)
