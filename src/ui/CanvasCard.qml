@@ -69,7 +69,7 @@ ResizableItem {
         anchors.fill: parent
         background: Rectangle {
             color: "snow"
-            border.width: 4
+            border.width: 2
             border.color: "gainsboro"
             radius: 10
         }
@@ -90,7 +90,7 @@ ResizableItem {
         anchors.horizontalCenter: parent.horizontalCenter
         background: Rectangle {
             color: "snow"
-            border.width: 4
+            border.width: 2
             border.color: "gainsboro"
             radius: 10
         }
@@ -101,6 +101,15 @@ ResizableItem {
         selectByMouse: true
         selectionColor: "darkseagreen"
         selectedTextColor: "black"
+        activeFocusOnPress: true
+        activeFocusOnTab: false
+        onEditingFinished: {
+            canvasName = text
+            IO.saveCanvasName(id, root)
+            nameTextField.focus = false
+        }
+        onActiveFocusChanged: if (focus)
+                                  nameTextField.selectAll()
     }
 
     CardEditBar {

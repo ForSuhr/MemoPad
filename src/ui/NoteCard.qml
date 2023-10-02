@@ -14,7 +14,7 @@ ResizableItem {
     property string id
     property string backgroundColor: "snow"
     property string borderColor: "gainsboro"
-    property int borderWidth: 4
+    property int borderWidth: 2
     property int cornerRadius: 10
     property alias text: rawTextArea.text
 
