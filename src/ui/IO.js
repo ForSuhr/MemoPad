@@ -54,6 +54,7 @@ function createCard(cardComponent, id) {
         var card = cardComponent.createObject(bgCanvas.cardLayer, {
                                                   "x": CardManager.x(id),
                                                   "y": CardManager.y(id),
+                                                  "z": CardManager.z(id),
                                                   "id": id
                                               })
 
@@ -65,14 +66,17 @@ function createCard(cardComponent, id) {
 function savePos(id, card, stackCommand = true) {
     var lastX = CardManager.x(id)
     var lastY = CardManager.y(id)
+    var lastZ = CardManager.z(id)
     var currentX = card.x
     var currentY = card.y
-    if (lastX !== currentX | lastY !== currentY) {
+    var currentZ = card.z
+    if (lastX !== currentX | lastY !== currentY | lastZ !== currentZ) {
         // stack command
         if (stackCommand)
-            CommandManager.moveCard(id, lastX, lastY, currentX, currentY)
+            CommandManager.moveCard(id, lastX, lastY, lastZ, currentX,
+                                    currentY, currentZ)
         // save to settings file
-        CardManager.setPos(id, currentX, currentY)
+        CardManager.setPos(id, currentX, currentY, currentZ)
     }
 }
 
@@ -93,19 +97,22 @@ function saveSize(id, card, stackCommand = true) {
 function saveTransform(id, card, stackCommand = true) {
     var lastX = CardManager.x(id)
     var lastY = CardManager.y(id)
+    var lastZ = CardManager.z(id)
     var currentX = card.x
     var currentY = card.y
+    var currentZ = card.z
     var lastWidth = CardManager.width(id)
     var lastHeight = CardManager.height(id)
     var currentWidth = card.width
     var currentHeight = card.height
-    if (lastX !== currentX | lastY !== currentY | lastWidth !== currentWidth
-            | lastHeight !== currentHeight) {
+    if (lastX !== currentX | lastY !== currentY | lastZ !== currentZ | lastWidth
+            !== currentWidth | lastHeight !== currentHeight) {
         if (stackCommand)
-            CommandManager.transformCard(id, lastX, lastY, currentX, currentY,
-                                         lastWidth, lastHeight, currentWidth,
+            CommandManager.transformCard(id, lastX, lastY, lastZ, currentX,
+                                         currentY, currentZ, lastWidth,
+                                         lastHeight, currentWidth,
                                          currentHeight)
-        CardManager.setPos(id, currentX, currentY)
+        CardManager.setPos(id, currentX, currentY, currentZ)
         CardManager.setSize(id, currentWidth, currentHeight)
     }
 }

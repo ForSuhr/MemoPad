@@ -40,9 +40,9 @@ void CommandManager::redo()
     emit redoStackEmptySignal(m_redoStack.empty());
 }
 
-void CommandManager::moveCard(QString id, qreal lastX, qreal lastY, qreal currentX, qreal currentY)
+void CommandManager::moveCard(QString id, qreal lastX, qreal lastY, qreal lastZ, qreal currentX, qreal currentY, qreal currentZ)
 {
-    CommandMoveCard* command = new CommandMoveCard(id, lastX, lastY, currentX, currentY, this);
+    CommandMoveCard* command = new CommandMoveCard(id, lastX, lastY, lastZ, currentX, currentY, currentZ, this);
     execute(command);
     connect(command, &CommandMoveCard::moveCardSignal, this, &CommandManager::moveCardSignal);
 }
@@ -54,9 +54,9 @@ void CommandManager::resizeCard(QString id, qreal lastWidth, qreal lastHeight, q
     connect(command, &CommandResizeCard::resizeCardSignal, this, &CommandManager::resizeCardSignal);
 }
 
-void CommandManager::transformCard(QString id, qreal lastX, qreal lastY, qreal currentX, qreal currentY, qreal lastWidth, qreal lastHeight, qreal currentWidth, qreal currentHeight)
+void CommandManager::transformCard(QString id, qreal lastX, qreal lastY, qreal lastZ, qreal currentX, qreal currentY, qreal currentZ, qreal lastWidth, qreal lastHeight, qreal currentWidth, qreal currentHeight)
 {
-    CommandTransformCard* command = new CommandTransformCard(id, lastX, lastY, currentX, currentY, lastWidth, lastHeight, currentWidth, currentHeight, this);
+    CommandTransformCard* command = new CommandTransformCard(id, lastX, lastY, lastZ, currentX, currentY, currentZ, lastWidth, lastHeight, currentWidth, currentHeight, this);
     execute(command);
     connect(command, &CommandTransformCard::transformCardSignal, this, &CommandManager::transformCardSignal);
 }

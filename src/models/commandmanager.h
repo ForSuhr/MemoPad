@@ -18,16 +18,16 @@ public:
     Q_INVOKABLE void redo();
 
     /*commands*/
-    Q_INVOKABLE void moveCard(QString id, qreal lastX, qreal lastY, qreal currentX, qreal currentY);
+    Q_INVOKABLE void moveCard(QString id, qreal lastX, qreal lastY, qreal lastZ, qreal currentX, qreal currentY, qreal currentZ);
     Q_INVOKABLE void resizeCard(QString id, qreal lastWidth, qreal lastHeight, qreal currentWidth, qreal currentHeight);
-    Q_INVOKABLE void transformCard(QString id, qreal lastX, qreal lastY, qreal currentX, qreal currentY, qreal lastWidth, qreal lastHeight, qreal currentWidth, qreal currentHeight);
+    Q_INVOKABLE void transformCard(QString id, qreal lastX, qreal lastY, qreal lastZ, qreal currentX, qreal currentY, qreal currentZ, qreal lastWidth, qreal lastHeight, qreal currentWidth, qreal currentHeight);
     Q_INVOKABLE void changeText(QString id, QString lastText, QString currentText);
     Q_INVOKABLE void changeBackgroundColor(QString id, QString lastColor, QString currentColor);
 
 signals:
-    void moveCardSignal(QString id, qreal x, qreal y);
+    void moveCardSignal(QString id, qreal x, qreal y, qreal z);
     void resizeCardSignal(QString id, qreal width, qreal height);
-    void transformCardSignal(QString id, qreal x, qreal y, qreal width, qreal height);
+    void transformCardSignal(QString id, qreal x, qreal y, qreal z, qreal width, qreal height);
     void changeTextSignal(QString id, QString text);
     void changeBackgroundColorSignal(QString id, QString color);
 

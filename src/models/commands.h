@@ -8,34 +8,38 @@
 class CommandMoveCard : public Command {
     Q_OBJECT
 public:
-    CommandMoveCard(QString id, qreal lastX, qreal lastY, qreal currentX, qreal currentY, QObject* parent = nullptr)
+    CommandMoveCard(QString id, qreal lastX, qreal lastY, qreal lastZ, qreal currentX, qreal currentY, qreal currentZ, QObject* parent = nullptr)
         : Command { id, parent }
     {
         m_id = id;
         m_lastX = lastX;
         m_lastY = lastY;
+        m_lastZ = lastZ;
         m_currentX = currentX;
         m_currentY = currentY;
+        m_currentZ = currentZ;
     };
 
     void undo() override
     {
-        emit moveCardSignal(m_id, m_lastX, m_lastY);
+        emit moveCardSignal(m_id, m_lastX, m_lastY, m_lastZ);
     };
     void redo() override
     {
-        emit moveCardSignal(m_id, m_currentX, m_currentY);
+        emit moveCardSignal(m_id, m_currentX, m_currentY, m_currentZ);
     };
 
 signals:
-    void moveCardSignal(QString id, qreal x, qreal y);
+    void moveCardSignal(QString id, qreal x, qreal y, qreal z);
 
 private:
     QString m_id;
     qreal m_lastX;
     qreal m_lastY;
+    qreal m_lastZ;
     qreal m_currentX;
     qreal m_currentY;
+    qreal m_currentZ;
 };
 
 class CommandResizeCard : public Command {
@@ -78,14 +82,16 @@ private:
 class CommandTransformCard : public Command {
     Q_OBJECT
 public:
-    CommandTransformCard(QString id, qreal lastX, qreal lastY, qreal currentX, qreal currentY, qreal lastWidth, qreal lastHeight, qreal currentWidth, qreal currentHeight, QObject* parent = nullptr)
+    CommandTransformCard(QString id, qreal lastX, qreal lastY, qreal lastZ, qreal currentX, qreal currentY, qreal currentZ, qreal lastWidth, qreal lastHeight, qreal currentWidth, qreal currentHeight, QObject* parent = nullptr)
         : Command { id, parent }
     {
         m_id = id;
         m_lastX = lastX;
         m_lastY = lastY;
+        m_lastZ = lastZ;
         m_currentX = currentX;
         m_currentY = currentY;
+        m_currentZ = currentZ;
         m_lastWidth = lastWidth;
         m_lastHeight = lastHeight;
         m_currentWidth = currentWidth;
@@ -94,22 +100,24 @@ public:
 
     void undo() override
     {
-        emit transformCardSignal(m_id, m_lastX, m_lastY, m_lastWidth, m_lastHeight);
+        emit transformCardSignal(m_id, m_lastX, m_lastY, m_lastZ, m_lastWidth, m_lastHeight);
     };
     void redo() override
     {
-        emit transformCardSignal(m_id, m_currentX, m_currentY, m_currentWidth, m_currentHeight);
+        emit transformCardSignal(m_id, m_currentX, m_currentY, m_currentZ, m_currentWidth, m_currentHeight);
     };
 
 signals:
-    void transformCardSignal(QString id, qreal x, qreal y, qreal width, qreal height);
+    void transformCardSignal(QString id, qreal x, qreal y, qreal z, qreal width, qreal height);
 
 private:
     QString m_id;
     qreal m_lastX;
     qreal m_lastY;
+    qreal m_lastZ;
     qreal m_currentX;
     qreal m_currentY;
+    qreal m_currentZ;
     qreal m_lastWidth;
     qreal m_lastHeight;
     qreal m_currentWidth;

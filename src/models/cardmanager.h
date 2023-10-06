@@ -25,8 +25,10 @@ public:
     Q_INVOKABLE void setX(QString id, qreal x);
     Q_INVOKABLE qreal y(QString id);
     Q_INVOKABLE void setY(QString id, qreal y);
+    Q_INVOKABLE qreal z(QString id);
+    Q_INVOKABLE void setZ(QString id, qreal z);
     Q_INVOKABLE QSizeF pos(QString id);
-    Q_INVOKABLE void setPos(QString id, qreal x, qreal y);
+    Q_INVOKABLE void setPos(QString id, qreal x, qreal y, qreal z);
     Q_INVOKABLE qreal width(QString id);
     Q_INVOKABLE void setWidth(QString id, qreal width);
     Q_INVOKABLE qreal height(QString id);

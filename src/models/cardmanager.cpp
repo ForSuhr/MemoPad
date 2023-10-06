@@ -56,15 +56,27 @@ void CardManager::setY(QString id, qreal y)
     m_IO->setValue(m_currentCanvasID + "/" + id + "/y", y);
 }
 
+qreal CardManager::z(QString id)
+{
+    return m_cardMap[id]->m_z;
+}
+
+void CardManager::setZ(QString id, qreal z)
+{
+    m_cardMap[id]->m_z = z;
+    m_IO->setValue(m_currentCanvasID + "/" + id + "/z", z);
+}
+
 QSizeF CardManager::pos(QString id)
 {
     return QSizeF(x(id), y(id));
 }
 
-void CardManager::setPos(QString id, qreal x, qreal y)
+void CardManager::setPos(QString id, qreal x, qreal y, qreal z)
 {
     setX(id, x);
     setY(id, y);
+    setZ(id, z);
 }
 
 qreal CardManager::width(QString id)
@@ -212,6 +224,7 @@ void CardManager::loadCards()
         Card* card = new Card(cardID, cardType);
         card->m_x = m_IO->value(cardID + "/x").toReal();
         card->m_y = m_IO->value(cardID + "/y").toReal();
+        card->m_z = m_IO->value(cardID + "/z").toReal();
         card->m_width = m_IO->value(cardID + "/width").toReal();
         card->m_height = m_IO->value(cardID + "/height").toReal();
         card->m_text = m_IO->value(cardID + "/text").toString();
