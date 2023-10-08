@@ -107,6 +107,7 @@ Item {
         onClicked: cardLayer.forceActiveFocus()
     }
 
+    /*CardLayer is a container item where all cards are placed in it*/
     CardLayer {
         id: cardLayer
         z: 3

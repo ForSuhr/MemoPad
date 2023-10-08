@@ -49,6 +49,7 @@ ResizableItem {
         palette.visible = selected
         mouseArea.enabled = !selected
         editBar.visible = selected
+        root.parent.setCardToTop(id)
     }
 
     MouseArea {

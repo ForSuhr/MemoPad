@@ -43,6 +43,7 @@ ResizableItem {
         if (!selected) {
             mouseArea.cursorShape = Qt.OpenHandCursor
         }
+        root.parent.setCardToTop(id)
     }
 
     MouseArea {
