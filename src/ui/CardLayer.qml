@@ -35,7 +35,6 @@ Item {
                 if (currentID === cardArray[k].id)
                     cardLayer.children[j].z = k + 1 // the card order z is 1-based
             IO.savePos(currentID, cardLayer.children[j])
-            console.log(cardLayer.children[j], ": ", cardLayer.children[j].z)
         }
     }
 }
