@@ -34,4 +34,8 @@ Window {
                                         PreferencesManager.floatingBarArea = area
                                     }
     }
+
+    MShortCut {
+        id: shortCut
+    }
 }

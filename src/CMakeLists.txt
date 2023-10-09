@@ -73,6 +73,7 @@ qt_add_qml_module(MemoPad
         ui/PreferencesPopup.qml
         ui/preferencesPage1.qml
         ui/preferencesPage2.qml
+        ui/MShortCut.qml
 )
 
 set_target_properties(MemoPad PROPERTIES
