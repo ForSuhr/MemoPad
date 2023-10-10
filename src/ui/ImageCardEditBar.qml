@@ -43,14 +43,12 @@ Pane {
 
     FileDialog {
         id: fileDialog
-        title: "Please choose a file"
+        title: qsTr("Choose an image")
+        nameFilters: ["PNG files (*.png)", "JPEG files (*.jpg *.jpeg)", "SVG files (*.svg)"]
         folder: StandardPaths.writableLocation(StandardPaths.PicturesLocation)
         onAccepted: {
             console.log("Open: " + fileDialog.currentFile)
             cardEditBar.parent.imageSource = fileDialog.currentFile
-        }
-        onRejected: {
-            console.log("Canceled")
         }
     }
 
