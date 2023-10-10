@@ -26,6 +26,19 @@ Pane {
         border.color: borderColor
     }
 
+    ScaleAnimator {
+        id: scaleUp
+        from: 1
+        to: 1.1
+        duration: 100
+    }
+    ScaleAnimator {
+        id: scaleDown
+        from: 1.1
+        to: 1
+        duration: 100
+    }
+
     RowLayout {
         width: 32 * itemNum - 16
         height: 24
@@ -44,8 +57,16 @@ Pane {
                 hoverEnabled: true
                 onClicked: IO.deleteCard(cardEditBar.parent.id,
                                          cardEditBar.parent)
-                onEntered: cursorShape = Qt.PointingHandCursor
-                onExited: cursorShape = Qt.ArrowCursor
+                onEntered: {
+                    scaleUp.target = parent
+                    scaleUp.start()
+                    cursorShape = Qt.PointingHandCursor
+                }
+                onExited: {
+                    scaleDown.target = parent
+                    scaleDown.start()
+                    cursorShape = Qt.ArrowCursor
+                }
             }
         }
         Item {

@@ -28,6 +28,19 @@ Pane {
         border.color: borderColor
     }
 
+    ScaleAnimator {
+        id: scaleUp
+        from: 1
+        to: 1.1
+        duration: 100
+    }
+    ScaleAnimator {
+        id: scaleDown
+        from: 1.1
+        to: 1
+        duration: 100
+    }
+
     FileDialog {
         id: fileDialog
         title: "Please choose a file"
@@ -58,8 +71,16 @@ Pane {
                 anchors.fill: parent
                 hoverEnabled: true
                 onClicked: fileDialog.open()
-                onEntered: cursorShape = Qt.PointingHandCursor
-                onExited: cursorShape = Qt.ArrowCursor
+                onEntered: {
+                    scaleUp.target = parent
+                    scaleUp.start()
+                    cursorShape = Qt.PointingHandCursor
+                }
+                onExited: {
+                    scaleDown.target = parent
+                    scaleDown.start()
+                    cursorShape = Qt.ArrowCursor
+                }
             }
         }
         CardEditBarItem {
@@ -71,8 +92,16 @@ Pane {
                 hoverEnabled: true
                 onClicked: IO.deleteCard(cardEditBar.parent.id,
                                          cardEditBar.parent)
-                onEntered: cursorShape = Qt.PointingHandCursor
-                onExited: cursorShape = Qt.ArrowCursor
+                onEntered: {
+                    scaleUp.target = parent
+                    scaleUp.start()
+                    cursorShape = Qt.PointingHandCursor
+                }
+                onExited: {
+                    scaleDown.target = parent
+                    scaleDown.start()
+                    cursorShape = Qt.ArrowCursor
+                }
             }
         }
         Item {

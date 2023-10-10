@@ -86,6 +86,7 @@ ResizableItem {
             anchors.centerIn: parent
             source: IconSet.image
             fillMode: Image.PreserveAspectCrop
+            mipmap: true
         }
         Canvas {
             id: roundedCorner
