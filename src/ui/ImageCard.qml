@@ -117,7 +117,7 @@ ResizableItem {
         }
     }
 
-    CardEditBar {
+    ImageCardEditBar {
         id: editBar
         borderColor: borderColor
     }
