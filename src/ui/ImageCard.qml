@@ -85,6 +85,35 @@ ResizableItem {
             height: parent.height - 10
             anchors.centerIn: parent
             source: IconSet.image
+            fillMode: Image.PreserveAspectCrop
+        }
+        Canvas {
+            id: roundedCorner
+            anchors.fill: img
+            layer.mipmap: true
+            onPaint: {
+                var ctx = getContext("2d")
+                ctx.reset()
+                ctx.fillStyle = backgroundColor
+                ctx.beginPath()
+                ctx.rect(0, 0, width,
+                         height) // draw a rect as "destination image"
+                ctx.fill()
+
+                ctx.beginPath()
+                ctx.fillStyle = "transparent"
+                ctx.roundedRect(
+                            0, 0, width, height, cornerRadius,
+                            cornerRadius) // draw a rounded rect as "source image"
+                ctx.globalCompositeOperation = 'source-out' // display the "source image" wherever the source image is opaque and the destination image is transparent
+                ctx.fill()
+            }
+        }
+        Connections {
+            target: root
+            function onBackgroundColorChanged() {
+                roundedCorner.requestPaint()
+            }
         }
     }
 

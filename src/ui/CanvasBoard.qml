@@ -39,7 +39,7 @@ Item {
         anchors.fill: parent
         onPaint: {
             var ctx = getContext("2d")
-            ctx.clearRect(0, 0, canvas.width, canvas.height)
+            ctx.reset()
             ctx.fillStyle = dotColor
             for (var x = dotInterval; x < canvas.width; x += dotInterval) {
                 for (var y = dotInterval; y < canvas.height; y += dotInterval) {
