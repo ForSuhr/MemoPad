@@ -108,9 +108,9 @@ ResizableItem {
         anchors.fill: parent
         background: Rectangle {
             color: backgroundColor
-            border.width: 2
-            border.color: "gainsboro"
-            radius: 10
+            border.width: borderWidth
+            border.color: borderColor
+            radius: cornerRadius
         }
     }
 

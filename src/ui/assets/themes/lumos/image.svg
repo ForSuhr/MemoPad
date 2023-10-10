@@ -21,9 +21,9 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      showgrid="false"
-     inkscape:zoom="1.1559539"
-     inkscape:cx="153.55284"
-     inkscape:cy="243.95437"
+     inkscape:zoom="0.57797695"
+     inkscape:cx="158.31081"
+     inkscape:cy="224.92246"
      inkscape:window-width="1920"
      inkscape:window-height="1017"
      inkscape:window-x="-8"
@@ -32,16 +32,56 @@
      inkscape:current-layer="svg131" />
   <!--! Font Awesome Pro 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
   <rect
-     style="display:inline;fill:#f5f4ea;fill-opacity:1;stroke:#666666;stroke-width:40;stroke-linecap:round;stroke-miterlimit:0;stroke-dasharray:none"
+     style="display:inline;fill:#f5f4ea;fill-opacity:1;stroke:#666666;stroke-width:37.6224;stroke-linecap:round;stroke-miterlimit:0;stroke-dasharray:none"
      id="rect1242"
-     width="448"
-     height="448"
-     x="36.391014"
-     y="32.065582"
-     rx="70.779175"
-     ry="70.779175" />
-  <path
-     id="rect543"
-     style="display:inline;fill:#666666;stroke:#666666;stroke-width:40;stroke-linecap:round;stroke-miterlimit:0"
-     d="m 150.38402,150.24541 a 48.974761,50.039134 0 1 0 0,100.07813 48.974761,50.039134 0 1 0 0,-100.07813 z m 163.25,100.07813 c -7.55027,0 -14.6933,3.54467 -19.38671,9.69531 l -84.68555,111.96289 -31.11914,-44.51562 c -4.59139,-6.56762 -11.93809,-10.42383 -19.89649,-10.42383 -7.95839,0 -15.30314,3.85742 -19.89453,10.5293 l -81.624996,116.75781 -2.525391,3.55469 v 0.23047 H 457.63012 V 424.78448 L 333.01879,260.01885 c -4.59138,-6.15064 -11.83451,-9.69531 -19.38477,-9.69531 z" />
+     width="416.63928"
+     height="426.15521"
+     x="49.908661"
+     y="44.71814"
+     rx="65.824524"
+     ry="67.327942" />
+  <g
+     id="g1149"
+     transform="matrix(0.97048957,0,0,1.0015806,6.7341046,-0.40424785)">
+    <path
+       id="rect543"
+       style="display:inline;fill:#666666;stroke:#666666;stroke-width:30.805;stroke-linecap:round;stroke-miterlimit:0"
+       d="m 172.64934,143.74005 a 38.638501,37.617033 0 1 0 0,75.23397 38.638501,37.617033 0 1 0 0,-75.23397 z m 128.79563,75.23397 c -5.95677,0 -11.59224,2.66471 -15.2951,7.28847 l -66.81243,84.16833 -24.55135,-33.4647 c -3.62237,-4.93723 -9.41852,-7.83614 -15.69728,-7.83614 -6.27877,0 -12.07337,2.89984 -15.69575,7.91542 l -64.397807,87.77296 -1.99239,2.67224 v 0.17325 H 415.05029 V 350.12543 L 316.73852,226.26249 c -3.62234,-4.62376 -9.33679,-7.28847 -15.29355,-7.28847 z" />
+    <path
+       sodipodi:type="star"
+       style="fill:#666666;stroke:#666666;stroke-width:40;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0"
+       id="path568"
+       inkscape:flatsided="true"
+       sodipodi:sides="3"
+       sodipodi:cx="89.536446"
+       sodipodi:cy="261.68863"
+       sodipodi:r1="12.543753"
+       sodipodi:r2="6.2718763"
+       sodipodi:arg1="-0.76101275"
+       sodipodi:arg2="0.2861848"
+       inkscape:rounded="0"
+       inkscape:randomized="0"
+       d="M 98.619853,253.03777 92.48661,273.88052 77.502874,258.1476 Z"
+       inkscape:transform-center-x="0.020413763"
+       inkscape:transform-center-y="-1.4643609"
+       transform="matrix(0.35751193,-0.33983248,0.37066744,0.32777134,-36.771654,315.33842)" />
+    <path
+       sodipodi:type="star"
+       style="fill:#666666;stroke:#666666;stroke-width:40;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0"
+       id="path568-2"
+       inkscape:flatsided="true"
+       sodipodi:sides="3"
+       sodipodi:cx="89.536446"
+       sodipodi:cy="261.68863"
+       sodipodi:r1="12.543753"
+       sodipodi:r2="6.2718763"
+       sodipodi:arg1="-0.76101275"
+       sodipodi:arg2="0.2861848"
+       inkscape:rounded="0"
+       inkscape:randomized="0"
+       d="M 98.619853,253.03777 92.48661,273.88052 77.502874,258.1476 Z"
+       inkscape:transform-center-x="0.032221546"
+       inkscape:transform-center-y="-2.3794997"
+       transform="matrix(0.56416269,-0.55220953,0.58492241,0.53261082,213.6209,273.04469)" />
+  </g>
 </svg>

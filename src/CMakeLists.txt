@@ -66,8 +66,9 @@ qt_add_qml_module(MemoPad
         ui/FloatingButton.qml
         ui/CardLayer.qml
         ui/ResizableItem.qml
-        ui/NoteCard.qml
         ui/CanvasCard.qml
+        ui/NoteCard.qml
+         ui/ImageCard.qml
         ui/CardPalette.qml
         ui/CardEditBar.qml
         ui/CardEditBarItem.qml

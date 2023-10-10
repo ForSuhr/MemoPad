@@ -85,10 +85,13 @@ Item {
                 componentFile: "NoteCard.qml"
                 imageSource: IconSet.note
             }
-            Item {
-                id: spacerItem
-                Layout.fillWidth: true
-                Layout.fillHeight: true
+            FloatingBarItem {
+                id: imageItem
+                implicitWidth: parent.height
+                implicitHeight: parent.height
+                floatingBarArea: root.floatingBarArea
+                componentFile: "ImageCard.qml"
+                imageSource: IconSet.image
             }
             FloatingBarItem {
                 id: gearItem
