@@ -23,6 +23,7 @@ qt_add_qml_module(MemoPad
         ui/assets/themes/lumos/blank.svg
         ui/assets/themes/lumos/canvas.svg
         ui/assets/themes/lumos/note.svg
+        ui/assets/themes/lumos/image.svg
         ui/assets/themes/lumos/trash.svg
         ui/assets/themes/lumos/gear.svg
         ui/assets/themes/lumos/undo.svg
