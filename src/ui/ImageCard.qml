@@ -16,6 +16,7 @@ ResizableItem {
     property string borderColor: "gainsboro"
     property int borderWidth: 2
     property int cornerRadius: 10
+    property alias imageSource: img.source
 
     property bool created: false
     property bool loaded: false
@@ -28,10 +29,10 @@ ResizableItem {
         IO.saveBackgroundColor(id, root, false)
     }
     onLoadedChanged: {
-        // TODO: load image source
         root.width = CardManager.width(id)
         root.height = CardManager.height(id)
         root.backgroundColor = CardManager.backgroundColor(id)
+        root.imageSource = IconSet.image
         Snap.snap(root)
     }
     onSelectedChanged: {
@@ -77,6 +78,13 @@ ResizableItem {
             border.width: borderWidth
             border.color: borderColor
             radius: cornerRadius
+        }
+        Image {
+            id: img
+            width: parent.width - 10
+            height: parent.height - 10
+            anchors.centerIn: parent
+            source: IconSet.image
         }
     }
 

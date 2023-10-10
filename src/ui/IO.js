@@ -1,8 +1,10 @@
 /*--------------------------load system----------------------------------*/
 var canvasCardComponent = null
 var noteCardComponent = null
+var imageCardComponent = null
 var canvasCardComponentFile = "CanvasCard.qml"
 var noteCardComponentFile = "NoteCard.qml"
+var imageCardComponentFile = "ImageCard.qml"
 
 function loadCanvas(canvasID) {
     unload(bgCanvas.cardLayer)
@@ -28,6 +30,9 @@ function load(canvasID) {
             break
         case "note":
             loadComponent(noteCardComponent, noteCardComponentFile, id)
+            break
+        case "image":
+            loadComponent(imageCardComponent, imageCardComponentFile, id)
             break
         }
     }
