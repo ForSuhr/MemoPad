@@ -38,11 +38,11 @@ ResizableItem {
     onSelectedChanged: {
         isVisble = selected
         mouseArea.enabled = !selected
+        scrollView.z = selected ? 1 : 0
         editBar.visible = selected
         palette.visible = selected
-        if (!selected) {
+        if (!selected)
             mouseArea.cursorShape = Qt.OpenHandCursor
-        }
         root.parent.setCardToTop(id)
     }
 
@@ -69,7 +69,6 @@ ResizableItem {
             selected = true
             rawTextArea.forceActiveFocus()
             enabled = false
-            cursorShape = Qt.IBeamCursor
         }
     }
 
