@@ -167,8 +167,6 @@ void CardManager::setImage(QString id, QUrl imageUrl)
         fileName = fileInfo.baseName() + "_" + timestamp + "." + fileInfo.suffix();
         imageTarget = dirPath + fileName;
     }
-    qInfo() << "imageSource: " + imageSource;
-    qInfo() << "imageTarget: " + imageTarget;
     QFile::copy(imageSource, imageTarget);
     m_cardMap[id]->m_image = "file:///" + imageTarget; // qml need URI to work
     m_IO->setValue(m_currentCanvasID + "/" + id + "/image", fileName);
