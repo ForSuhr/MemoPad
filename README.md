@@ -16,7 +16,7 @@ Unzip and run!
 
 Run and read!
 
-<img src="https://github.com/ForSuhr/MemoPad/assets/105584788/f6afdc33-c006-4415-8669-1c5386ba9a13" width="600"/>
+<img src="https://github.com/ForSuhr/MemoPad/assets/105584788/1d84f4b9-5577-46d3-9017-528ca3e6aab1" width="600"/>
 
 As you can see, the user guide is already written inside.
 
