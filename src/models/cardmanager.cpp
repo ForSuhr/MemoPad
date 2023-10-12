@@ -158,12 +158,17 @@ void CardManager::setImage(QString id, QUrl imageUrl)
     // set new image
     QFileInfo fileInfo(imageSource);
     QString fileName = fileInfo.fileName();
-    QString imageTarget = QCoreApplication::applicationDirPath() + "/save/images/" + fileName;
+    QString dirPath = QCoreApplication::applicationDirPath() + "/save/images/";
+    if (!QDir(dirPath).exists())
+        QDir().mkpath(dirPath);
+    QString imageTarget = dirPath + fileName;
     if (QFile::exists(imageTarget)) {
         QString timestamp = QDateTime::currentDateTime().toString("yyyyMMddHHmmss");
         fileName = fileInfo.baseName() + "_" + timestamp + "." + fileInfo.suffix();
-        imageTarget = QCoreApplication::applicationDirPath() + "/save/images/" + fileName;
+        imageTarget = dirPath + fileName;
     }
+    qInfo() << "imageSource: " + imageSource;
+    qInfo() << "imageTarget: " + imageTarget;
     QFile::copy(imageSource, imageTarget);
     m_cardMap[id]->m_image = "file:///" + imageTarget; // qml need URI to work
     m_IO->setValue(m_currentCanvasID + "/" + id + "/image", fileName);

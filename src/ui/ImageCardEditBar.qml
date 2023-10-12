@@ -47,7 +47,6 @@ Pane {
         nameFilters: ["PNG files (*.png)", "JPEG files (*.jpg *.jpeg)", "SVG files (*.svg)"]
         folder: StandardPaths.writableLocation(StandardPaths.PicturesLocation)
         onAccepted: {
-            console.log("Open: " + fileDialog.currentFile)
             IO.saveImage(id, fileDialog.currentFile)
             cardEditBar.parent.imageSource = CardManager.image(id)
         }
