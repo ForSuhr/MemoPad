@@ -10,6 +10,9 @@ QtObject {
     property real dotSize: 1.0
     property int dotInterval: 20
 
+    /*floating bar*/
+    property string floatingBarArea: "top area"
+
     /*font*/
     property int fontPixelSize16: 16
     property int fontPixelSize24: 24
@@ -21,6 +24,7 @@ QtObject {
     property bool fullScreenMode: false
 
     Component.onCompleted: {
+        floatingBarArea = PreferencesManager.floatingBarArea
         cardSizeAutoAdjust = PreferencesManager.cardSizeAutoAdjust
         fullScreenMode = PreferencesManager.fullScreenMode
     }

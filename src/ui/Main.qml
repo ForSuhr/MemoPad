@@ -29,10 +29,6 @@ Window {
         id: floatingBar
         width: window.width
         height: window.height
-        floatingBarArea: PreferencesManager.floatingBarArea
-        onFloatingBarAreaChangedUI: area => {
-                                        PreferencesManager.floatingBarArea = area
-                                    }
     }
 
     MShortCut {

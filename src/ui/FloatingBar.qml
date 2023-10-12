@@ -3,18 +3,17 @@ import QtQuick.Controls
 import QtQuick.Layouts
 import MemoPad.CardManager
 import MemoPad.CommandManager
+import MemoPad.PreferencesManager
 
 Item {
     id: root
-
-    signal floatingBarAreaChangedUI(string area)
 
     property string floatingBarColor: "white"
     property string floatingBarPressedColor: "ghostwhite"
     property string floatingBarBorderColor: "gainsboro"
     property string topAreaKey: "top area"
     property string bottomAreaKey: "bottom area"
-    property string floatingBarArea: "top area" // area read from settings
+    property string floatingBarArea: Globals.floatingBarArea
     property var defaultArea: topArea
 
     FloatingBarArea {
@@ -28,7 +27,7 @@ Item {
         onFloatingBarDropped: {
             floatingBar.x = topArea.x + (topArea.width - floatingBar.width) / 2
             floatingBar.y = topArea.y + (topArea.height - floatingBar.height) / 2
-            floatingBarAreaChangedUI(topAreaKey)
+            PreferencesManager.floatingBarArea = topAreaKey
         }
     }
 
@@ -43,7 +42,7 @@ Item {
         onFloatingBarDropped: {
             floatingBar.x = bottomArea.x + (bottomArea.width - floatingBar.width) / 2
             floatingBar.y = bottomArea.y + (bottomArea.height - floatingBar.height) / 2
-            floatingBarAreaChangedUI(bottomAreaKey)
+            PreferencesManager.floatingBarArea = bottomAreaKey
         }
     }
 
