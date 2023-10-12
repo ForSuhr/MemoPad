@@ -2,10 +2,14 @@
 #define CARDMANAGER_H
 
 #include <QCoreApplication>
+#include <QDateTime>
 #include <QDebug>
+#include <QFile>
+#include <QFileInfo>
 #include <QMap>
 #include <QObject>
 #include <QSizeF>
+#include <QUrl>
 #include <QUuid>
 
 #include "../utils/qsettingsjson.h"
@@ -39,6 +43,8 @@ public:
     Q_INVOKABLE void setBackgroundColor(QString id, QString backgroundColor);
     Q_INVOKABLE QString text(QString id);
     Q_INVOKABLE void setText(QString id, QString text);
+    Q_INVOKABLE QString image(QString id);
+    Q_INVOKABLE void setImage(QString id, QUrl imageUrl);
 
     Q_INVOKABLE QString canvasID(QString id);
     Q_INVOKABLE void setCanvasID(QString id, QString canvasID);

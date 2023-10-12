@@ -16,6 +16,7 @@ public:
     qreal m_width;
     qreal m_height;
     QString m_text;
+    QString m_image;
     QString m_backgroundColor;
     QString m_canvasID;
     QString m_canvasName;

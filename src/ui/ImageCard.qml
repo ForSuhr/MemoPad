@@ -32,7 +32,7 @@ ResizableItem {
         root.width = CardManager.width(id)
         root.height = CardManager.height(id)
         root.backgroundColor = CardManager.backgroundColor(id)
-        root.imageSource = IconSet.image
+        root.imageSource = CardManager.image(id)
         Snap.snap(root)
     }
     onSelectedChanged: {

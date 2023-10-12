@@ -134,6 +134,36 @@ void CardManager::setText(QString id, QString text)
     m_IO->setValue(m_currentCanvasID + "/" + id + "/text", text);
 }
 
+QString CardManager::image(QString id)
+{
+    return m_cardMap[id]->m_image;
+}
+
+void CardManager::setImage(QString id, QUrl imageUrl)
+{
+    // get string path from url
+    QString imageSource = imageUrl.toLocalFile();
+
+    // clear the previous image
+    QString previousImage = QCoreApplication::applicationDirPath() + "/save/images/" + m_IO->value(m_currentCanvasID + "/" + id + "/image").toString();
+    QFile file(previousImage);
+    if (file.exists())
+        file.remove();
+
+    // set new image
+    QFileInfo fileInfo(imageSource);
+    QString fileName = fileInfo.fileName();
+    QString imageTarget = QCoreApplication::applicationDirPath() + "/save/images/" + fileName;
+    if (QFile::exists(imageTarget)) {
+        QString timestamp = QDateTime::currentDateTime().toString("yyyyMMddHHmmss");
+        fileName = fileInfo.baseName() + "_" + timestamp + "." + fileInfo.suffix();
+        imageTarget = QCoreApplication::applicationDirPath() + "/save/images/" + fileName;
+    }
+    QFile::copy(imageSource, imageTarget);
+    m_cardMap[id]->m_image = "file:///" + imageTarget; // qml need URI to work
+    m_IO->setValue(m_currentCanvasID + "/" + id + "/image", fileName);
+}
+
 QString CardManager::canvasID(QString id)
 {
     return m_canvasMap[id]->m_canvasID;
@@ -228,6 +258,7 @@ void CardManager::loadCards()
         card->m_width = m_IO->value(cardID + "/width").toReal();
         card->m_height = m_IO->value(cardID + "/height").toReal();
         card->m_text = m_IO->value(cardID + "/text").toString();
+        card->m_image = "file:///" + QCoreApplication::applicationDirPath() + "/save/images/" + m_IO->value(cardID + "/image").toString();
         card->m_backgroundColor = m_IO->value(cardID + "/backgroundColor").toString();
         card->m_canvasID = m_IO->value(cardID + "/canvasID").toString();
         card->m_canvasName = m_IO->value(cardID + "/canvasName").toString();

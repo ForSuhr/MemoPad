@@ -48,7 +48,8 @@ Pane {
         folder: StandardPaths.writableLocation(StandardPaths.PicturesLocation)
         onAccepted: {
             console.log("Open: " + fileDialog.currentFile)
-            cardEditBar.parent.imageSource = fileDialog.currentFile
+            IO.saveImage(id, fileDialog.currentFile)
+            cardEditBar.parent.imageSource = CardManager.image(id)
         }
     }
 

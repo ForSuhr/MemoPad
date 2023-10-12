@@ -132,6 +132,10 @@ function saveText(id, card, stackCommand = true) {
     }
 }
 
+function saveImage(id, imageSource) {
+    CardManager.setImage(id, imageSource)
+}
+
 function saveBackgroundColor(id, card, stackCommand = true) {
     var lastColor = CardManager.backgroundColor(id)
     var currentColor = card.backgroundColor
