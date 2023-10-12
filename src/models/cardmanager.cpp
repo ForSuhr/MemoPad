@@ -137,12 +137,11 @@ void CardManager::setText(QString id, QString text)
 QString CardManager::image(QString id)
 {
     QUrl url = m_cardMap[id]->m_image;
-    QString urlString = url.toString();
-    QString source = url.toLocalFile();
-    QFileInfo fileInfo(source);
+    QString source = url.toString();
+    QFileInfo fileInfo(url.toLocalFile());
     if (fileInfo.isDir() | !fileInfo.exists())
-        urlString = "qrc:/MemoPad/ui/assets/themes/lumos/image.svg";
-    return urlString;
+        source = "qrc:/MemoPad/ui/assets/themes/lumos/image.svg";
+    return source;
 }
 
 void CardManager::setImage(QString id, QUrl imageUrl)
