@@ -6,6 +6,8 @@
 
 A minimalist note-taking app.
 
+The idea is simple: draggable cards can be freely placed and snap to the canvas, and canvases can be nested.
+
 ## Get Started
 
 ### How to install
