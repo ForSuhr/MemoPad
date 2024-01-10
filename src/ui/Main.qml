@@ -6,7 +6,7 @@ import MemoPad.PreferencesManager
 import MemoPad.CardManager
 import MemoPad.CommandManager
 import "js/IO.js" as IO
-import "sidebar"
+import "overlay"
 
 Window {
     id: window
@@ -26,7 +26,7 @@ Window {
         height: window.height * 2
     }
 
-    FloatingBar {
+    Overlay {
         id: floatingBar
         width: window.width
         height: window.height

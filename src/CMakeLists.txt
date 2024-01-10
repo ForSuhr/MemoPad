@@ -69,11 +69,11 @@ qt_add_qml_module(MemoPad
         ui/cards/decos/CardEditBar.qml
         ui/cards/decos/CardEditBarItem.qml
         ui/cards/decos/ImageCardEditBar.qml
-        #[[sidebar]]
-        ui/sidebar/FloatingBar.qml
-        ui/sidebar/FloatingBarArea.qml
-        ui/sidebar/FloatingBarItem.qml
-        ui/sidebar/FloatingButton.qml
+        #[[overlay]]
+        ui/overlay/Overlay.qml
+        ui/overlay/FloatingBarArea.qml
+        ui/overlay/FloatingBarItem.qml
+        ui/overlay/FloatingButton.qml
         #[[preferences-popup]]
         ui/preferences-popup/PreferencesPopup.qml
         ui/preferences-popup/preferencesPage1.qml
