@@ -27,7 +27,7 @@ Window {
     }
 
     Overlay {
-        id: floatingBar
+        id: overlay
         width: window.width
         height: window.height
     }
