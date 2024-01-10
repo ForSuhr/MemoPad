@@ -2,7 +2,7 @@ import QtQuick
 import QtQuick.Controls
 import MemoPad.CardManager
 import MemoPad.CommandManager
-import "IO.js" as IO
+import "js/IO.js" as IO
 
 Item {
     id: root

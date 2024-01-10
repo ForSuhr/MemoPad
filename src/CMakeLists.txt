@@ -56,27 +56,31 @@ qt_add_qml_module(MemoPad
         ui/Globals.qml
         ui/IconSet.qml
         #[[javascript]]
-        ui/CardCreator.js
-        ui/Snap.js
-        ui/IO.js
-        #[[qml]]
+        ui/js/CardCreator.js
+        ui/js/Snap.js
+        ui/js/IO.js
+        #[[cards]]
+        ui/cards/ResizableItem.qml
+        ui/cards/CanvasCard.qml
+        ui/cards/NoteCard.qml
+        ui/cards/ImageCard.qml
+        #[[cards/decos]]
+        ui/cards/decos/CardPalette.qml
+        ui/cards/decos/CardEditBar.qml
+        ui/cards/decos/CardEditBarItem.qml
+        ui/cards/decos/ImageCardEditBar.qml
+        #[[sidebar]]
+        ui/sidebar/FloatingBar.qml
+        ui/sidebar/FloatingBarArea.qml
+        ui/sidebar/FloatingBarItem.qml
+        ui/sidebar/FloatingButton.qml
+        #[[preferences-popup]]
+        ui/preferences-popup/PreferencesPopup.qml
+        ui/preferences-popup/preferencesPage1.qml
+        ui/preferences-popup/preferencesPage2.qml
+        #[[miscellaneous]]
         ui/CanvasBoard.qml
-        ui/FloatingBar.qml
-        ui/FloatingBarArea.qml
-        ui/FloatingBarItem.qml
-        ui/FloatingButton.qml
         ui/CardLayer.qml
-        ui/ResizableItem.qml
-        ui/CanvasCard.qml
-        ui/NoteCard.qml
-         ui/ImageCard.qml
-        ui/CardPalette.qml
-        ui/CardEditBar.qml
-        ui/CardEditBarItem.qml
-        ui/ImageCardEditBar.qml
-        ui/PreferencesPopup.qml
-        ui/preferencesPage1.qml
-        ui/preferencesPage2.qml
         ui/MShortCut.qml
 )
 

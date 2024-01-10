@@ -1,8 +1,9 @@
 import QtQuick
-import "Snap.js" as Snap
-import "IO.js" as IO
+import "../js/Snap.js" as Snap
+import "../js/IO.js" as IO
 import MemoPad.CardManager
 import MemoPad.CommandManager
+import MemoPad.Globals
 
 Item {
     id: root

@@ -2,9 +2,9 @@
 var canvasCardComponent = null
 var noteCardComponent = null
 var imageCardComponent = null
-var canvasCardComponentFile = "CanvasCard.qml"
-var noteCardComponentFile = "NoteCard.qml"
-var imageCardComponentFile = "ImageCard.qml"
+var canvasCardComponentFile = "../cards/CanvasCard.qml"
+var noteCardComponentFile = "../cards/NoteCard.qml"
+var imageCardComponentFile = "../cards/ImageCard.qml"
 
 function loadCanvas(canvasID) {
     unload(bgCanvas.cardLayer)
@@ -64,6 +64,8 @@ function createCard(cardComponent, id) {
                                               })
 
         card.loaded = true
+    } else {
+        console.error("Error loading component:", cardComponent.errorString())
     }
 }
 

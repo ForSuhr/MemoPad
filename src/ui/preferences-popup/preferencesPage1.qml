@@ -3,6 +3,7 @@ import QtQuick.Controls
 import QtQuick.Controls.Basic
 import QtQuick.Layouts
 import MemoPad.PreferencesManager
+import MemoPad.Globals
 
 Page {
     id: commonPage

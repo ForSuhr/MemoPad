@@ -4,8 +4,11 @@ import QtQuick.Controls.Basic
 import Qt5Compat.GraphicalEffects
 import MemoPad.CardManager
 import MemoPad.CommandManager
-import "Snap.js" as Snap
-import "IO.js" as IO
+import "../js/Snap.js" as Snap
+import "../js/IO.js" as IO
+import "decos"
+import MemoPad.Globals
+import MemoPad.IconSet
 
 ResizableItem {
     id: root

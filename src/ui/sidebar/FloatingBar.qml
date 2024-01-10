@@ -4,6 +4,9 @@ import QtQuick.Layouts
 import MemoPad.CardManager
 import MemoPad.CommandManager
 import MemoPad.PreferencesManager
+import "../preferences-popup"
+import MemoPad.Globals
+import MemoPad.IconSet
 
 Item {
     id: root
@@ -73,7 +76,7 @@ Item {
                 implicitWidth: parent.height
                 implicitHeight: parent.height
                 floatingBarArea: root.floatingBarArea
-                componentFile: "CanvasCard.qml"
+                componentFile: "../cards/CanvasCard.qml"
                 imageSource: IconSet.canvas
             }
             FloatingBarItem {
@@ -81,7 +84,7 @@ Item {
                 implicitWidth: parent.height
                 implicitHeight: parent.height
                 floatingBarArea: root.floatingBarArea
-                componentFile: "NoteCard.qml"
+                componentFile: "../cards/NoteCard.qml"
                 imageSource: IconSet.note
             }
             FloatingBarItem {
@@ -89,7 +92,7 @@ Item {
                 implicitWidth: parent.height
                 implicitHeight: parent.height
                 floatingBarArea: root.floatingBarArea
-                componentFile: "ImageCard.qml"
+                componentFile: "../cards/ImageCard.qml"
                 imageSource: IconSet.image
             }
             FloatingBarItem {

@@ -1,7 +1,7 @@
 import QtQuick
 import MemoPad.CommandManager
-import "IO.js" as IO
 import MemoPad.CardManager
+import "../js/IO.js" as IO
 
 Item {
     id: root

@@ -1,11 +1,12 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
-import "IO.js" as IO
+import "../../js/IO.js" as IO
 import MemoPad.CardManager
 import MemoPad.CommandManager
 import QtQuick.Dialogs
 import Qt.labs.platform
+import MemoPad.IconSet
 
 Pane {
     id: cardEditBar

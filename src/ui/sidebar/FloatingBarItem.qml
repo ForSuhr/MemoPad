@@ -1,5 +1,5 @@
 import QtQuick
-import "CardCreator.js" as CardCreator
+import "../js/CardCreator.js" as CardCreator
 
 Item {
     id: root
