@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Controls.Basic
+import Qt5Compat.GraphicalEffects
 import MemoPad.CardManager
 import MemoPad.CommandManager
 import "Snap.js" as Snap
@@ -146,5 +147,13 @@ ResizableItem {
     CardPalette {
         id: palette
         borderColor: borderColor
+    }
+
+    DropShadow {
+        anchors.fill: scrollView
+        source: scrollView
+        radius: 8
+        color: "gainsboro"
+        smooth: true
     }
 }
