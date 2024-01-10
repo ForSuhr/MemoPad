@@ -27,6 +27,7 @@ qt_add_qml_module(MemoPad
         ui/assets/themes/lumos/trash.svg
         ui/assets/themes/lumos/uploadImage.svg
         ui/assets/themes/lumos/gear.svg
+        ui/assets/themes/lumos/palette.svg
         ui/assets/themes/lumos/undo.svg
         ui/assets/themes/lumos/redo.svg
         ui/assets/themes/lumos/back.svg
@@ -71,6 +72,7 @@ qt_add_qml_module(MemoPad
         ui/cards/decos/ImageCardEditBar.qml
         #[[overlay]]
         ui/overlay/Overlay.qml
+        ui/overlay/FloatingBar.qml
         ui/overlay/FloatingBarArea.qml
         ui/overlay/FloatingBarItem.qml
         ui/overlay/FloatingButton.qml

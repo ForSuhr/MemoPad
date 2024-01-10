@@ -9,6 +9,7 @@ QtObject {
     property string image: "qrc:/MemoPad/ui/assets/themes/lumos/image.svg"
     property string trash: "qrc:/MemoPad/ui/assets/themes/lumos/trash.svg"
     property string uploadImage: "qrc:/MemoPad/ui/assets/themes/lumos/uploadImage.svg"
+    property string palette: "qrc:/MemoPad/ui/assets/themes/lumos/palette.svg"
     property string gear: "qrc:/MemoPad/ui/assets/themes/lumos/gear.svg"
     property string undo: "qrc:/MemoPad/ui/assets/themes/lumos/undo.svg"
     property string redo: "qrc:/MemoPad/ui/assets/themes/lumos/redo.svg"
