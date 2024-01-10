@@ -16,6 +16,8 @@ public:
     Q_INVOKABLE void execute(Command* command);
     Q_INVOKABLE void undo();
     Q_INVOKABLE void redo();
+    Q_INVOKABLE void clearUndoStack();
+    Q_INVOKABLE void clearRedoStack();
 
     /*commands*/
     Q_INVOKABLE void moveCard(QString id, qreal lastX, qreal lastY, qreal lastZ, qreal currentX, qreal currentY, qreal currentZ);

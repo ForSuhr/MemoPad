@@ -40,6 +40,18 @@ void CommandManager::redo()
     emit redoStackEmptySignal(m_redoStack.empty());
 }
 
+void CommandManager::clearUndoStack()
+{
+    m_undoStack = std::stack<Command*>();
+    emit undoStackEmptySignal(m_undoStack.empty());
+}
+
+void CommandManager::clearRedoStack()
+{
+    m_redoStack = std::stack<Command*>();
+    emit redoStackEmptySignal(m_redoStack.empty());
+}
+
 void CommandManager::moveCard(QString id, qreal lastX, qreal lastY, qreal lastZ, qreal currentX, qreal currentY, qreal currentZ)
 {
     CommandMoveCard* command = new CommandMoveCard(id, lastX, lastY, lastZ, currentX, currentY, currentZ, this);

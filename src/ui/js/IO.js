@@ -7,6 +7,11 @@ var noteCardComponentFile = "../cards/NoteCard.qml"
 var imageCardComponentFile = "../cards/ImageCard.qml"
 
 function loadCanvas(canvasID) {
+    // clear undo and redo stack of the previous canvas
+    CommandManager.clearUndoStack()
+    CommandManager.clearRedoStack()
+
+    // unload previous canvas, load next canvas
     unload(bgCanvas.cardLayer)
     load(canvasID)
 }

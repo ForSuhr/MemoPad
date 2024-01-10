@@ -8,6 +8,7 @@ import "../js/Snap.js" as Snap
 import "../js/IO.js" as IO
 import "decos"
 import MemoPad.Globals
+import MemoPad.IconSet
 
 ResizableItem {
     id: root
