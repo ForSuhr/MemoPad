@@ -19,14 +19,12 @@ Item {
     property real zoomFactor: 1.0
     property real zoomMin: 0.5 // zoom out
     property real zoomMax: 2.0 // zoom in
-    property real mouseX: 0.0
-    property real mouseY: 0.0
 
     transform: [
         Scale {
             id: itemScale
-            origin.x: root.mouseX
-            origin.y: root.mouseY
+            origin.x: root.width / 2
+            origin.y: root.height / 2
             xScale: zoomFactor
             yScale: zoomFactor
         }
@@ -83,15 +81,16 @@ Item {
                        root.y = -root.parent.height / 2
                    }
         onWheel: wheel => {
-                     // get mouse position when wheel is scrolled
-                     root.mouseX = wheel.x
-                     root.mouseY = wheel.y
                      // zoom in & out
                      var scrollAngleDelta = wheel.angleDelta.y / 120 // 120 units equals 15 degrees
-                     root.zoomFactor = Math.min(
+
+                     var newZoomFactor = Math.min(
                          zoomMax,
                          Math.max(zoomMin,
                                   root.zoomFactor + 0.1 * scrollAngleDelta))
+                     if (newZoomFactor !== root.zoomFactor) {
+                         root.zoomFactor = newZoomFactor
+                     }
                  }
     }
 
