@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Controls
+import Qt5Compat.GraphicalEffects
 import MemoPad.CardManager
 import MemoPad.CommandManager
 import "js/IO.js" as IO
@@ -59,6 +60,14 @@ Item {
                 ctx.stroke()
             }
         }
+    }
+
+    DropShadow {
+        anchors.fill: canvas
+        source: canvas
+        radius: 6
+        color: "gainsboro"
+        smooth: true
     }
 
     /*scale*/
