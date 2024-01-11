@@ -154,7 +154,7 @@ ResizableItem {
     DropShadow {
         anchors.fill: scrollView
         source: scrollView
-        radius: 8
+        radius: 6
         color: "gainsboro"
         smooth: true
     }

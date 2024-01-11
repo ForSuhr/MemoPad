@@ -135,7 +135,7 @@ ResizableItem {
     DropShadow {
         anchors.fill: imageFrame
         source: imageFrame
-        radius: 8
+        radius: 6
         color: "gainsboro"
         smooth: true
     }

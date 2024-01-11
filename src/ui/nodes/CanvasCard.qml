@@ -163,8 +163,7 @@ ResizableItem {
     DropShadow {
         anchors.fill: teleport
         source: teleport
-        radius: 4
-        scale: 1.1
+        radius: 6
         color: "gainsboro"
         smooth: true
     }
@@ -172,7 +171,7 @@ ResizableItem {
     DropShadow {
         anchors.fill: nameTextField
         source: nameTextField
-        radius: 8
+        radius: 4
         color: "gainsboro"
         smooth: true
     }
