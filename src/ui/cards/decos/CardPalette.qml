@@ -8,11 +8,14 @@ import MemoPad.CommandManager
 Pane {
     id: palette
 
-    property int colorNum: 6
+    property int squareWidth: 32
+    property int squareHeight: 32
+    property int colorBallRadius: 24
+    property int colorNum: 7
     property string borderColor: "gainsboro"
 
-    width: 32 * colorNum
-    height: 32
+    width: squareWidth * colorNum
+    height: squareHeight
     anchors.horizontalCenter: palette.parent.horizontalCenter
     anchors.top: palette.parent.bottom
     anchors.topMargin: 10
@@ -41,8 +44,8 @@ Pane {
 
     RowLayout {
         id: rowLayout
-        width: 32 * colorNum - 16
-        height: 24
+        width: squareWidth * colorNum - 16
+        height: colorBallRadius
         anchors.verticalCenter: parent.verticalCenter
         anchors.horizontalCenter: parent.horizontalCenter
         Item {
@@ -192,6 +195,33 @@ Pane {
             border.width: 2
             border.color: "lightgray"
             color: "whitesmoke"
+            MouseArea {
+                anchors.fill: parent
+                hoverEnabled: true
+                onClicked: {
+                    palette.parent.backgroundColor = parent.color
+                    IO.saveCardBackgroundColor(id, palette.parent)
+                }
+                onEntered: {
+                    scaleUp.target = parent
+                    scaleUp.start()
+                    cursorShape = Qt.PointingHandCursor
+                }
+                onExited: {
+                    scaleDown.target = parent
+                    scaleDown.start()
+                    cursorShape = Qt.ArrowCursor
+                }
+            }
+        }
+        Rectangle {
+            id: darkgray
+            width: parent.height
+            height: parent.height
+            radius: width / 2
+            border.width: 2
+            border.color: "lightgray"
+            color: "darkgray"
             MouseArea {
                 anchors.fill: parent
                 hoverEnabled: true
