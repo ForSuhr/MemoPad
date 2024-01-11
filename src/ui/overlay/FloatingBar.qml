@@ -52,7 +52,7 @@ Item {
                 implicitWidth: parent.height
                 implicitHeight: parent.height
                 floatingBarArea: root.floatingBarArea
-                componentFile: "../cards/CanvasCard.qml"
+                componentFile: "../nodes/CanvasCard.qml"
                 imageSource: IconSet.canvas
             }
             FloatingBarItem {
@@ -60,7 +60,7 @@ Item {
                 implicitWidth: parent.height
                 implicitHeight: parent.height
                 floatingBarArea: root.floatingBarArea
-                componentFile: "../cards/NoteCard.qml"
+                componentFile: "../nodes/NoteCard.qml"
                 imageSource: IconSet.note
             }
             FloatingBarItem {
@@ -68,7 +68,7 @@ Item {
                 implicitWidth: parent.height
                 implicitHeight: parent.height
                 floatingBarArea: root.floatingBarArea
-                componentFile: "../cards/ImageCard.qml"
+                componentFile: "../nodes/ImageCard.qml"
                 imageSource: IconSet.image
             }
             FloatingBarItem {

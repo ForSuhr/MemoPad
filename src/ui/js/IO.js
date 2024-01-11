@@ -2,9 +2,9 @@
 var canvasCardComponent = null
 var noteCardComponent = null
 var imageCardComponent = null
-var canvasCardComponentFile = "../cards/CanvasCard.qml"
-var noteCardComponentFile = "../cards/NoteCard.qml"
-var imageCardComponentFile = "../cards/ImageCard.qml"
+var canvasCardComponentFile = "../nodes/CanvasCard.qml"
+var noteCardComponentFile = "../nodes/NoteCard.qml"
+var imageCardComponentFile = "../nodes/ImageCard.qml"
 
 function loadCanvas(canvasID) {
     // clear undo and redo stack of the previous canvas
@@ -162,7 +162,6 @@ function saveCanvasName(id, card, stackCommand = true) {
 }
 
 /*--------------------------canvas------------------------------*/
-
 function saveCurrentCanvasColor(color, stackCommand = true) {
     CardManager.setCurrentCanvasColor(color)
 }

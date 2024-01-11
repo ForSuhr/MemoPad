@@ -60,16 +60,18 @@ qt_add_qml_module(MemoPad
         ui/js/CardCreator.js
         ui/js/Snap.js
         ui/js/IO.js
-        #[[cards]]
-        ui/cards/ResizableItem.qml
-        ui/cards/CanvasCard.qml
-        ui/cards/NoteCard.qml
-        ui/cards/ImageCard.qml
-        #[[cards/decos]]
-        ui/cards/decos/CardPalette.qml
-        ui/cards/decos/CardEditBar.qml
-        ui/cards/decos/CardEditBarItem.qml
-        ui/cards/decos/ImageCardEditBar.qml
+        #[[nodes]]
+        ui/nodes/ResizableItem.qml
+        ui/nodes/CanvasCard.qml
+        ui/nodes/NoteCard.qml
+        ui/nodes/ImageCard.qml
+        #[[edges]]
+        ui/edges/Arrow.qml
+        #[[nodes/decos]]
+        ui/nodes/decos/CardPalette.qml
+        ui/nodes/decos/CardEditBar.qml
+        ui/nodes/decos/CardEditBarItem.qml
+        ui/nodes/decos/ImageCardEditBar.qml
         #[[overlay]]
         ui/overlay/Overlay.qml
         ui/overlay/FloatingBar.qml
