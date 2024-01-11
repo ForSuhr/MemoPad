@@ -10,13 +10,10 @@ CardManager::CardManager(QObject* parent)
 
 CardManager::~CardManager()
 {
-    for (auto i = m_cardMap.begin(); i != m_cardMap.end(); i++) {
-        delete i.value();
-    }
-
-    for (auto i = m_canvasMap.begin(); i != m_canvasMap.end(); i++) {
-        delete i.value();
-    }
+    qDeleteAll(m_cardMap.begin(), m_cardMap.end());
+    m_cardMap.clear();
+    qDeleteAll(m_canvasMap.begin(), m_canvasMap.end());
+    m_canvasMap.clear();
 }
 
 int CardManager::cardNum()
@@ -202,6 +199,16 @@ QString CardManager::currentCanvasID()
 QString CardManager::upperCanvasID()
 {
     return m_upperCanvasID;
+}
+
+void CardManager::setCurrentCanvasColor(QString canvasColor)
+{
+    m_IO->setValue(m_currentCanvasID + "/" + "/canvasColor", canvasColor);
+}
+
+QString CardManager::currentCanvasColor()
+{
+    return m_IO->value(m_currentCanvasID + "/" + "/canvasColor").toString();
 }
 
 QString CardManager::createCard(QString cardType)

@@ -81,7 +81,7 @@ Item {
                 MouseArea {
                     anchors.fill: parent
                     hoverEnabled: true
-                    onClicked: ;
+                    onClicked: canvasPalette.forceActiveFocus()
                     onEntered: {
                         cursorShape = Qt.PointingHandCursor
                         paletteItem.scale = 1.1
@@ -143,6 +143,7 @@ Item {
                     property real currentY: 0
                     onPressed: {
                         cursorShape = Qt.ClosedHandCursor
+                        dragAreaRect.forceActiveFocus()
                         topArea.visible = true
                         bottomArea.visible = true
                         floatingBar.background.color = floatingBarPressedColor

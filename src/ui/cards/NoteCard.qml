@@ -29,7 +29,7 @@ ResizableItem {
         id = CardManager.createCard("note")
         Snap.snap(root)
         IO.saveTransform(id, root, false)
-        IO.saveBackgroundColor(id, root, false)
+        IO.saveCardBackgroundColor(id, root, false)
     }
     onLoadedChanged: {
         rawTextArea.text = CardManager.text(id)

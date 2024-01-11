@@ -143,7 +143,7 @@ function saveImage(id, imageSource) {
     CardManager.setImage(id, imageSource)
 }
 
-function saveBackgroundColor(id, card, stackCommand = true) {
+function saveCardBackgroundColor(id, card, stackCommand = true) {
     var lastColor = CardManager.backgroundColor(id)
     var currentColor = card.backgroundColor
     if (lastColor !== currentColor) {
@@ -159,6 +159,12 @@ function saveCanvasID(id, card, stackCommand = true) {
 
 function saveCanvasName(id, card, stackCommand = true) {
     CardManager.setCanvasName(id, card.canvasName)
+}
+
+/*--------------------------canvas------------------------------*/
+
+function saveCurrentCanvasColor(color, stackCommand = true) {
+    CardManager.setCurrentCanvasColor(color)
 }
 
 /*---------------------------delete--------------------------------------*/

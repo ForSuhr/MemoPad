@@ -15,7 +15,7 @@ Window {
     visible: true
     visibility: Globals.fullScreenMode ? Window.FullScreen : Window.Windowed
     title: qsTr("MemoPad")
-    color: "floralwhite"
+    color: Globals.canvasColor
 
     // load initial canvas, "canvas 0" is the ID of the initial canvas
     Component.onCompleted: IO.load(Globals.initialCanvasID)

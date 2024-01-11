@@ -38,7 +38,7 @@ ResizableItem {
         IO.saveTransform(id, root, false)
         IO.saveCanvasID(id, root, false)
         IO.saveCanvasName(id, root, false)
-        IO.saveBackgroundColor(id, root, false)
+        IO.saveCardBackgroundColor(id, root, false)
     }
     onLoadedChanged: {
         root.width = CardManager.width(id)

@@ -30,7 +30,7 @@ ResizableItem {
         id = CardManager.createCard("image")
         Snap.snap(root)
         IO.saveTransform(id, root, false)
-        IO.saveBackgroundColor(id, root, false)
+        IO.saveCardBackgroundColor(id, root, false)
     }
     onLoadedChanged: {
         root.width = CardManager.width(id)

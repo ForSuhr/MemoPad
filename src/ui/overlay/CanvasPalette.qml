@@ -1,21 +1,37 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
-import "../../js/IO.js" as IO
+import "../js/IO.js" as IO
 import MemoPad.CardManager
 import MemoPad.CommandManager
+import MemoPad.Globals
 
 Pane {
     id: palette
 
     property int colorNum: 6
     property string borderColor: "gainsboro"
+    property string floatingBarArea: Globals.floatingBarArea
+
+    onFocusChanged: {
+        visible = focus ? true : false
+    }
+
+    onFloatingBarAreaChanged: {
+        if (floatingBarArea === "top area") {
+            anchors.bottom = undefined
+            anchors.top = floatingBar.bottom
+        } else {
+            anchors.top = undefined
+            anchors.bottom = floatingBar.top
+        }
+    }
 
     width: 32 * colorNum
     height: 32
     anchors.horizontalCenter: palette.parent.horizontalCenter
-    anchors.top: palette.parent.bottom
-    anchors.topMargin: 10
+    anchors.topMargin: 20
+    anchors.bottomMargin: 20
     opacity: enabled
     visible: false
     background: Rectangle {
@@ -61,8 +77,8 @@ Pane {
                 anchors.fill: parent
                 hoverEnabled: true
                 onClicked: {
-                    palette.parent.backgroundColor = parent.color
-                    IO.saveCardBackgroundColor(id, palette.parent)
+                    Globals.canvasColor = parent.color
+                    IO.saveCurrentCanvasColor(parent.color)
                 }
                 onEntered: {
                     scaleUp.target = parent
@@ -88,8 +104,8 @@ Pane {
                 anchors.fill: parent
                 hoverEnabled: true
                 onClicked: {
-                    palette.parent.backgroundColor = parent.color
-                    IO.saveCardBackgroundColor(id, palette.parent)
+                    Globals.canvasColor = parent.color
+                    IO.saveCurrentCanvasColor(parent.color)
                 }
                 onEntered: {
                     scaleUp.target = parent
@@ -115,8 +131,8 @@ Pane {
                 anchors.fill: parent
                 hoverEnabled: true
                 onClicked: {
-                    palette.parent.backgroundColor = parent.color
-                    IO.saveCardBackgroundColor(id, palette.parent)
+                    Globals.canvasColor = parent.color
+                    IO.saveCurrentCanvasColor(parent.color)
                 }
                 onEntered: {
                     scaleUp.target = parent
@@ -142,8 +158,8 @@ Pane {
                 anchors.fill: parent
                 hoverEnabled: true
                 onClicked: {
-                    palette.parent.backgroundColor = parent.color
-                    IO.saveCardBackgroundColor(id, palette.parent)
+                    Globals.canvasColor = parent.color
+                    IO.saveCurrentCanvasColor(parent.color)
                 }
                 onEntered: {
                     scaleUp.target = parent
@@ -169,8 +185,8 @@ Pane {
                 anchors.fill: parent
                 hoverEnabled: true
                 onClicked: {
-                    palette.parent.backgroundColor = parent.color
-                    IO.saveCardBackgroundColor(id, palette.parent)
+                    Globals.canvasColor = parent.color
+                    IO.saveCurrentCanvasColor(parent.color)
                 }
                 onEntered: {
                     scaleUp.target = parent
@@ -196,8 +212,8 @@ Pane {
                 anchors.fill: parent
                 hoverEnabled: true
                 onClicked: {
-                    palette.parent.backgroundColor = parent.color
-                    IO.saveCardBackgroundColor(id, palette.parent)
+                    Globals.canvasColor = parent.color
+                    IO.saveCurrentCanvasColor(parent.color)
                 }
                 onEntered: {
                     scaleUp.target = parent

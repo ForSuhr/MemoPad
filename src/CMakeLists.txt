@@ -76,6 +76,7 @@ qt_add_qml_module(MemoPad
         ui/overlay/FloatingBarArea.qml
         ui/overlay/FloatingBarItem.qml
         ui/overlay/FloatingButton.qml
+        ui/overlay/CanvasPalette.qml
         #[[preferences-popup]]
         ui/preferences-popup/PreferencesPopup.qml
         ui/preferences-popup/preferencesPage1.qml

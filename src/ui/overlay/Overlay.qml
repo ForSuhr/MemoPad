@@ -26,6 +26,7 @@ Item {
             floatingBar.x = topArea.x + (topArea.width - floatingBar.width) / 2
             floatingBar.y = topArea.y + (topArea.height - floatingBar.height) / 2
             PreferencesManager.floatingBarArea = topAreaKey
+            Globals.floatingBarArea = topAreaKey
         }
     }
 
@@ -41,11 +42,16 @@ Item {
             floatingBar.x = bottomArea.x + (bottomArea.width - floatingBar.width) / 2
             floatingBar.y = bottomArea.y + (bottomArea.height - floatingBar.height) / 2
             PreferencesManager.floatingBarArea = bottomAreaKey
+            Globals.floatingBarArea = bottomAreaKey
         }
     }
 
     FloatingBar {
         id: floatingBar
+    }
+
+    CanvasPalette {
+        id: canvasPalette
     }
 
     /*settings window*/
@@ -98,10 +104,12 @@ Item {
         imageSource: IconSet.back
         buttonAction: "back"
         actionEnabled: Globals.currentCanvasID === Globals.initialCanvasID ? false : true
+        // event handler on canvas changed
         Connections {
             target: CardManager
             function onCurrentCanvasIDChanged(newCanvasID) {
                 Globals.currentCanvasID = newCanvasID
+                Globals.canvasColor = CardManager.currentCanvasColor()
             }
         }
     }

@@ -9,6 +9,7 @@ QtObject {
     property string currentCanvasID: initialCanvasID
     property real dotSize: 1.0
     property int dotInterval: 20
+    property string canvasColor: "floralwhite"
 
     /*floating bar*/
     property string floatingBarArea: "top area"

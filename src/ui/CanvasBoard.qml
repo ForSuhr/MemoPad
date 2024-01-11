@@ -160,7 +160,7 @@ Item {
             for (var i = 0; i < cardLayer.children.length; i++) {
                 if (cardLayer.children[i].id === id) {
                     cardLayer.children[i].backgroundColor = color
-                    IO.saveBackgroundColor(id, cardLayer.children[i], false)
+                    IO.saveCardBackgroundColor(id, cardLayer.children[i], false)
                 }
             }
         }

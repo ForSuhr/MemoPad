@@ -53,6 +53,8 @@ public:
     Q_INVOKABLE void setCanvasName(QString id, QString canvasName);
     Q_INVOKABLE QString currentCanvasID();
     Q_INVOKABLE QString upperCanvasID();
+    Q_INVOKABLE void setCurrentCanvasColor(QString canvasColor);
+    Q_INVOKABLE QString currentCanvasColor();
 
     QMap<QString, Card*> m_cardMap = {};
     QMap<QString, Canvas*> m_canvasMap = {};
