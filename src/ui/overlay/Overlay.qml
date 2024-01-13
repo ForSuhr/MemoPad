@@ -13,6 +13,19 @@ Item {
 
     property string topAreaKey: "top area"
     property string bottomAreaKey: "bottom area"
+    property int visibility: window.visibility
+
+    function moveFloatingBar(areaKey) {
+        if (areaKey === topAreaKey) {
+            floatingBar.x = topArea.x + (topArea.width - floatingBar.width) / 2
+            floatingBar.y = topArea.y + (topArea.height - floatingBar.height) / 2
+        } else {
+            floatingBar.x = bottomArea.x + (bottomArea.width - floatingBar.width) / 2
+            floatingBar.y = bottomArea.y + (bottomArea.height - floatingBar.height) / 2
+        }
+    }
+
+    onVisibilityChanged: moveFloatingBar(Globals.floatingBarArea)
 
     FloatingBarArea {
         id: topArea
@@ -23,10 +36,9 @@ Item {
         visible: false
         key: topAreaKey
         onFloatingBarDropped: {
-            floatingBar.x = topArea.x + (topArea.width - floatingBar.width) / 2
-            floatingBar.y = topArea.y + (topArea.height - floatingBar.height) / 2
             PreferencesManager.floatingBarArea = topAreaKey
             Globals.floatingBarArea = topAreaKey
+            moveFloatingBar(topAreaKey)
         }
     }
 
@@ -39,10 +51,9 @@ Item {
         visible: false
         key: bottomAreaKey
         onFloatingBarDropped: {
-            floatingBar.x = bottomArea.x + (bottomArea.width - floatingBar.width) / 2
-            floatingBar.y = bottomArea.y + (bottomArea.height - floatingBar.height) / 2
             PreferencesManager.floatingBarArea = bottomAreaKey
             Globals.floatingBarArea = bottomAreaKey
+            moveFloatingBar(bottomAreaKey)
         }
     }
 

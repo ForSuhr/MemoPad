@@ -1,7 +1,7 @@
 import QtQuick
 
 Item {
-    id: root
+    id: floatingBarArea
     opacity: 0.5
 
     property string key: "unknown area"
@@ -9,8 +9,8 @@ Item {
 
     DropArea {
         id: dropArea
-        width: root.width
-        height: root.height
+        width: floatingBarArea.width
+        height: floatingBarArea.height
         Rectangle {
             id: rect
             width: dropArea.width
