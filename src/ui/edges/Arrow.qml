@@ -1,13 +1,26 @@
 import QtQuick
 import QtQuick.Shapes
 
-Item {
+Shape {
+    id: arrow
+    width: Math.abs(arcToX - arcFromX)
+    height: Math.abs(arcToY - arcFromY)
+    antialiasing: true
+    smooth: true
+
+    property string arrowID
+
+    property bool created: false
+
     property string fromCardID: ""
     property string toCardID: ""
     property string fromDirection: ""
     property string toDirection: ""
-    property alias toCardX: card.x
-    property alias toCardY: card.y
+    // get pos by card id
+    property real fromCardX: 0
+    property real fromCardY: 0
+    property real toCardX: 0
+    property real toCardY: 0
 
     onToCardXChanged: {
         if (toCardID !== "") {
@@ -28,10 +41,10 @@ Item {
     property alias arrowToX: arrowhead.x
     property alias arrowToY: arrowhead.y
 
-    property real arcFromX: 100
-    property real arcFromY: 100
-    property real arcToX: 500
-    property real arcToY: 100
+    property real arcFromX: 0
+    property real arcFromY: 0
+    property real arcToX: 100
+    property real arcToY: 0
     property real midwayX: arcFromX + (arcToX - arcFromX) / 2
     property real midwayY: arcFromY + (arcToY - arcFromY) / 2
     property real dynamicMidwayX: startCircle.x + (arrowhead.x - startCircle.x) / 2
@@ -58,182 +71,177 @@ Item {
 
     Component.onCompleted: arrowHeadDirection = east
 
+    Item {
+        id: startCircle
+        x: arcFromX
+        y: arcFromY
+        width: triangleHigh
+        height: triangleHigh
+        Rectangle {
+            x: -parent.width / 2
+            y: -parent.height / 2
+            width: parent.width
+            height: parent.height
+            color: circleColor
+            radius: width / 2
+            MouseArea {
+                scale: 2
+                anchors.fill: parent
+                drag.target: startCircle
+                hoverEnabled: true
+                onEntered: cursorShape = Qt.OpenHandCursor
+            }
+        }
+    }
+
+    Item {
+        id: controlCircle
+        x: midwayX
+        y: midwayY
+        width: triangleHigh
+        height: triangleHigh
+        Rectangle {
+            x: -parent.width / 2
+            y: -parent.height / 2
+            width: parent.width
+            height: parent.height
+            color: circleColor
+            radius: width / 2
+            MouseArea {
+                anchors.fill: parent
+                drag.target: controlCircle
+                hoverEnabled: true
+                onEntered: cursorShape = Qt.OpenHandCursor
+            }
+        }
+        onXChanged: {
+            if (Math.abs(dynamicMidwayX - controlCircle.x) <= tolerance & Math.abs(
+                        dynamicMidwayY - controlCircle.y) <= tolerance) {
+                x = dynamicMidwayX
+                y = dynamicMidwayY
+            }
+            updateArrowHeadDirection()
+        }
+        onYChanged: {
+            if (Math.abs(dynamicMidwayX - controlCircle.x) <= tolerance & Math.abs(
+                        dynamicMidwayY - controlCircle.y) <= tolerance) {
+                x = dynamicMidwayX
+                y = dynamicMidwayY
+            }
+            updateArrowHeadDirection()
+        }
+    }
+
+    ShapePath {
+        id: arcShapePath
+        strokeColor: arrowColor
+        strokeWidth: arrowWidth
+        fillColor: "transparent"
+        capStyle: ShapePath.RoundCap
+
+        startX: startCircle.x
+        startY: startCircle.y
+        pathElements: [
+            PathQuad {
+                id: arc
+                x: arrowhead.x
+                y: arrowhead.y
+                controlX: controlCircle.x
+                controlY: controlCircle.y
+            }
+        ]
+    }
+
     Shape {
-        id: arrow
-        width: Math.abs(arcToX - arcFromX)
-        height: Math.abs(arcToY - arcFromY)
+        id: arrowhead
         antialiasing: true
         smooth: true
+        x: arcToX
+        y: arcToY
+        width: triangleHigh * 1.2
+        height: triangleHigh * 1.2
 
-        Item {
-            id: startCircle
-            x: arcFromX
-            y: arcFromY
-            width: triangleHigh
-            height: triangleHigh
-            Rectangle {
-                x: -parent.width / 2
-                y: -parent.height / 2
-                width: parent.width
-                height: parent.height
-                color: circleColor
-                radius: width / 2
-                MouseArea {
-                    scale: 2
-                    anchors.fill: parent
-                    drag.target: startCircle
-                    hoverEnabled: true
-                    onEntered: cursorShape = Qt.OpenHandCursor
-                }
-            }
-        }
-
-        Item {
-            id: controlCircle
-            x: midwayX
-            y: midwayY
-            width: triangleHigh
-            height: triangleHigh
-            Rectangle {
-                x: -parent.width / 2
-                y: -parent.height / 2
-                width: parent.width
-                height: parent.height
-                color: circleColor
-                radius: width / 2
-                MouseArea {
-                    anchors.fill: parent
-                    drag.target: controlCircle
-                    hoverEnabled: true
-                    onEntered: cursorShape = Qt.OpenHandCursor
-                }
-            }
-            onXChanged: {
-                if (Math.abs(dynamicMidwayX - controlCircle.x) <= tolerance & Math.abs(
-                            dynamicMidwayY - controlCircle.y) <= tolerance) {
-                    x = dynamicMidwayX
-                    y = dynamicMidwayY
-                }
-                updateArrowHeadDirection()
-            }
-            onYChanged: {
-                if (Math.abs(dynamicMidwayX - controlCircle.x) <= tolerance & Math.abs(
-                            dynamicMidwayY - controlCircle.y) <= tolerance) {
-                    x = dynamicMidwayX
-                    y = dynamicMidwayY
-                }
-                updateArrowHeadDirection()
-            }
-        }
+        Drag.keys: ["arrowhead"]
+        Drag.hotSpot.x: width / 2
+        Drag.hotSpot.y: height / 2
+        Drag.active: arrowheadMouseArea.drag.active
 
         ShapePath {
-            id: arcShapePath
-            strokeColor: arrowColor
-            strokeWidth: arrowWidth
-            fillColor: "transparent"
+            id: triangleShapePath
+            strokeColor: arrowHeadColor
+            strokeWidth: 1
+            fillColor: arrowHeadColor
             capStyle: ShapePath.RoundCap
 
-            startX: startCircle.x
-            startY: startCircle.y
+            startX: 0
+            startY: 0
             pathElements: [
-                PathQuad {
-                    id: arc
-                    x: arrowhead.x
-                    y: arrowhead.y
-                    controlX: controlCircle.x
-                    controlY: controlCircle.y
+                PathLine {
+                    x: triangleShapePath.startX
+                    y: triangleShapePath.startY + triangleHigh * Math.tan(
+                           Math.PI * triangleTheta / 180)
+                },
+                PathLine {
+                    id: endPoint
+                    x: triangleShapePath.startX + triangleHigh
+                    y: triangleShapePath.startY
+                },
+                PathLine {
+                    x: triangleShapePath.startX
+                    y: triangleShapePath.startY - triangleHigh * Math.tan(
+                           Math.PI * triangleTheta / 180)
+                },
+                PathLine {
+                    x: triangleShapePath.startX
+                    y: triangleShapePath.startY
                 }
             ]
         }
+        transform: Rotation {
+            id: rotation
+            origin.x: triangleShapePath.startX
+            origin.y: triangleShapePath.startY
+            angle: 0
+            axis.z: 1
+        }
 
-        Shape {
-            id: arrowhead
-            antialiasing: true
-            smooth: true
-            x: arcToX
-            y: arcToY
-            width: triangleHigh * 1.2
-            height: triangleHigh * 1.2
-
-            Drag.keys: ["arrowhead"]
-            Drag.hotSpot.x: width / 2
-            Drag.hotSpot.y: height / 2
-            Drag.active: arrowheadMouseArea.drag.active
-
-            ShapePath {
-                id: triangleShapePath
-                strokeColor: arrowHeadColor
-                strokeWidth: 1
-                fillColor: arrowHeadColor
-                capStyle: ShapePath.RoundCap
-
-                startX: 0
-                startY: 0
-                pathElements: [
-                    PathLine {
-                        x: triangleShapePath.startX
-                        y: triangleShapePath.startY + triangleHigh * Math.tan(
-                               Math.PI * triangleTheta / 180)
-                    },
-                    PathLine {
-                        id: endPoint
-                        x: triangleShapePath.startX + triangleHigh
-                        y: triangleShapePath.startY
-                    },
-                    PathLine {
-                        x: triangleShapePath.startX
-                        y: triangleShapePath.startY - triangleHigh * Math.tan(
-                               Math.PI * triangleTheta / 180)
-                    },
-                    PathLine {
-                        x: triangleShapePath.startX
-                        y: triangleShapePath.startY
-                    }
-                ]
-            }
-            transform: Rotation {
-                id: rotation
-                origin.x: triangleShapePath.startX
-                origin.y: triangleShapePath.startY
-                angle: 0
-                axis.z: 1
-            }
-
-            MouseArea {
-                id: arrowheadMouseArea
-                scale: 2
-                anchors.fill: arrowhead
-                drag.target: arrowhead
-                hoverEnabled: true
-                property real initialX
-                property real initialY
-                property bool isDragging: false
-                onEntered: cursorShape = Qt.OpenHandCursor
-                onPressed: mouse => {
-                               initialX = mouse.x
-                               initialY = mouse.y
-                               isDragging = true
-                           }
-                onPositionChanged: mouse => {
-                                       if (isDragging) {
-                                           var distance = Math.sqrt(
-                                               Math.pow(mouse.x - initialX,
-                                                        2) + Math.pow(
-                                                   mouse.y - initialY, 2))
-                                           if (distance > 5) {
-                                               toCardID = ""
-                                           }
+        MouseArea {
+            id: arrowheadMouseArea
+            scale: 2
+            anchors.fill: arrowhead
+            drag.target: arrowhead
+            hoverEnabled: true
+            property real initialX
+            property real initialY
+            property bool isDragging: false
+            onEntered: cursorShape = Qt.OpenHandCursor
+            onPressed: mouse => {
+                           initialX = mouse.x
+                           initialY = mouse.y
+                           isDragging = true
+                       }
+            onPositionChanged: mouse => {
+                                   if (isDragging) {
+                                       var distance = Math.sqrt(
+                                           Math.pow(mouse.x - initialX,
+                                                    2) + Math.pow(
+                                               mouse.y - initialY, 2))
+                                       if (distance > 5) {
+                                           toCardID = ""
                                        }
                                    }
-                onReleased: {
-                    isDragging = false
-                    arrowhead.Drag.drop()
-                }
+                               }
+            onReleased: {
+                isDragging = false
+                arrowhead.Drag.drop()
             }
-
-            onXChanged: updateArrowHeadDirection()
-            onYChanged: updateArrowHeadDirection()
         }
+
+        onXChanged: {
+            updateArrowHeadDirection()
+            console.log(x, y)
+        }
+        onYChanged: updateArrowHeadDirection()
     }
     function updateArrowHeadDirection() {
         arrowHeadDirection = Math.atan2(

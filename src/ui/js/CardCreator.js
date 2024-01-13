@@ -43,7 +43,8 @@ function createCard(mouse) {
                                                               mouse.x,
                                                               mouse.y).y - onPressedMouse.y
                                                  })
-    }
+    } else
+        console.log(cardComponent.errorString())
 }
 
 function continueDrag(mouse) {

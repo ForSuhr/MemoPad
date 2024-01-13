@@ -1,7 +1,7 @@
 import QtQuick
 
 Item {
-    id: root
+    id: arrowDropArea
 
     property int areaRadius: 40
 
@@ -19,8 +19,8 @@ Item {
             anchors.fill: parent
             keys: ["arrowhead"]
             onPositionChanged: drag => {
-                                   drag.source.x = card.x
-                                   drag.source.y = card.y
+                                   drag.source.x = arrowDropArea.parent.x - drag.source.parent.x
+                                   drag.source.y = arrowDropArea.parent.y - drag.source.parent.y
                                }
             onEntered: parent.color = "#66000000"
             onExited: parent.color = "transparent"

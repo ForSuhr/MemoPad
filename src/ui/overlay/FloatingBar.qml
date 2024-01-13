@@ -12,6 +12,9 @@ Item {
     width: floatingBar.width
     height: floatingBar.height
 
+    property int floatingBarItemWidth: 50
+    property int floatingBarItemHeight: floatingBarItemWidth
+    property int floatingBarItemNumber: 6 // depends on how many items inside the RowLayout
     property string floatingBarColor: "white"
     property string floatingBarPressedColor: "ghostwhite"
     property string floatingBarBorderColor: "gainsboro"
@@ -34,8 +37,8 @@ Item {
 
     Pane {
         id: floatingBar
-        width: 50 * 5 // depends on how many items inside the RowLayout
-        height: 50
+        width: floatingBarItemWidth * floatingBarItemNumber
+        height: floatingBarItemHeight
         opacity: enabled
         background: Rectangle {
             opacity: enabled ? 1 : 0.5
@@ -52,7 +55,6 @@ Item {
                 id: canvasItem
                 implicitWidth: parent.height
                 implicitHeight: parent.height
-                floatingBarArea: root.floatingBarArea
                 componentFile: "../nodes/CanvasCard.qml"
                 imageSource: IconSet.canvas
             }
@@ -60,7 +62,6 @@ Item {
                 id: noteItem
                 implicitWidth: parent.height
                 implicitHeight: parent.height
-                floatingBarArea: root.floatingBarArea
                 componentFile: "../nodes/NoteCard.qml"
                 imageSource: IconSet.note
             }
@@ -68,16 +69,21 @@ Item {
                 id: imageItem
                 implicitWidth: parent.height
                 implicitHeight: parent.height
-                floatingBarArea: root.floatingBarArea
                 componentFile: "../nodes/ImageCard.qml"
                 imageSource: IconSet.image
+            }
+            FloatingBarItem {
+                id: arrowItem
+                implicitWidth: parent.height
+                implicitHeight: parent.height
+                componentFile: "../edges/Arrow.qml"
+                imageSource: IconSet.arrow
             }
             FloatingBarItem {
                 id: paletteItem
                 implicitWidth: parent.height
                 implicitHeight: parent.height
                 imageSource: IconSet.palette
-                floatingBarArea: root.floatingBarArea
                 enableMouseArea: false
                 MouseArea {
                     anchors.fill: parent
@@ -98,7 +104,6 @@ Item {
                 implicitWidth: parent.height
                 implicitHeight: parent.height
                 imageSource: IconSet.gear
-                floatingBarArea: root.floatingBarArea
                 enableMouseArea: false
                 MouseArea {
                     anchors.fill: parent

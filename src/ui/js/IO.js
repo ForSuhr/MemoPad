@@ -5,6 +5,7 @@ var imageCardComponent = null
 var canvasCardComponentFile = "../nodes/CanvasCard.qml"
 var noteCardComponentFile = "../nodes/NoteCard.qml"
 var imageCardComponentFile = "../nodes/ImageCard.qml"
+var arrowComponentFile = "../edges/Arrow.qml"
 
 function loadCanvas(canvasID) {
     // clear undo and redo stack of the previous canvas
