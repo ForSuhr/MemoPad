@@ -175,4 +175,8 @@ ResizableItem {
         color: "gainsboro"
         smooth: true
     }
+
+    ArrowDropArea {
+        anchors.fill: root
+    }
 }

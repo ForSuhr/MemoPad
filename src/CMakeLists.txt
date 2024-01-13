@@ -68,6 +68,7 @@ qt_add_qml_module(MemoPad
         #[[edges]]
         ui/edges/Arrow.qml
         #[[nodes/decos]]
+        ui/nodes/decos/ArrowDropArea.qml
         ui/nodes/decos/CardPalette.qml
         ui/nodes/decos/CardEditBar.qml
         ui/nodes/decos/CardEditBarItem.qml

@@ -5,6 +5,7 @@ import MemoPad.CardManager
 import MemoPad.CommandManager
 import MemoPad.Globals
 
+/* ResizableItem works as an abstract base item for other cards */
 Item {
     id: root
 
