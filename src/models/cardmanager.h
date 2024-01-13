@@ -25,32 +25,32 @@ public:
 
     Q_INVOKABLE int cardNum();
     Q_INVOKABLE QStringList cardIDs();
-    Q_INVOKABLE QString cardType(QString id);
-    Q_INVOKABLE qreal x(QString id);
-    Q_INVOKABLE void setX(QString id, qreal x);
-    Q_INVOKABLE qreal y(QString id);
-    Q_INVOKABLE void setY(QString id, qreal y);
-    Q_INVOKABLE qreal z(QString id);
-    Q_INVOKABLE void setZ(QString id, qreal z);
-    Q_INVOKABLE QSizeF pos(QString id);
-    Q_INVOKABLE void setPos(QString id, qreal x, qreal y, qreal z);
-    Q_INVOKABLE qreal width(QString id);
-    Q_INVOKABLE void setWidth(QString id, qreal width);
-    Q_INVOKABLE qreal height(QString id);
-    Q_INVOKABLE void setHeight(QString id, qreal height);
-    Q_INVOKABLE QSizeF size(QString id);
-    Q_INVOKABLE void setSize(QString id, qreal width, qreal height);
-    Q_INVOKABLE QString backgroundColor(QString id);
-    Q_INVOKABLE void setBackgroundColor(QString id, QString backgroundColor);
-    Q_INVOKABLE QString text(QString id);
-    Q_INVOKABLE void setText(QString id, QString text);
-    Q_INVOKABLE QString image(QString id);
-    Q_INVOKABLE void setImage(QString id, QUrl imageUrl);
+    Q_INVOKABLE QString cardType(QString cardID);
+    Q_INVOKABLE qreal x(QString cardID);
+    Q_INVOKABLE void setX(QString cardID, qreal x);
+    Q_INVOKABLE qreal y(QString cardID);
+    Q_INVOKABLE void setY(QString cardID, qreal y);
+    Q_INVOKABLE qreal z(QString cardID);
+    Q_INVOKABLE void setZ(QString cardID, qreal z);
+    Q_INVOKABLE QSizeF pos(QString cardID);
+    Q_INVOKABLE void setPos(QString cardID, qreal x, qreal y, qreal z);
+    Q_INVOKABLE qreal width(QString cardID);
+    Q_INVOKABLE void setWidth(QString cardID, qreal width);
+    Q_INVOKABLE qreal height(QString cardID);
+    Q_INVOKABLE void setHeight(QString cardID, qreal height);
+    Q_INVOKABLE QSizeF size(QString cardID);
+    Q_INVOKABLE void setSize(QString cardID, qreal width, qreal height);
+    Q_INVOKABLE QString backgroundColor(QString cardID);
+    Q_INVOKABLE void setBackgroundColor(QString cardID, QString backgroundColor);
+    Q_INVOKABLE QString text(QString cardID);
+    Q_INVOKABLE void setText(QString cardID, QString text);
+    Q_INVOKABLE QString image(QString cardID);
+    Q_INVOKABLE void setImage(QString cardID, QUrl imageUrl);
 
-    Q_INVOKABLE QString canvasID(QString id);
-    Q_INVOKABLE void setCanvasID(QString id, QString canvasID);
-    Q_INVOKABLE QString canvasName(QString id);
-    Q_INVOKABLE void setCanvasName(QString id, QString canvasName);
+    Q_INVOKABLE QString canvasID(QString cardID);
+    Q_INVOKABLE void setCanvasID(QString cardID, QString canvasID);
+    Q_INVOKABLE QString canvasName(QString cardID);
+    Q_INVOKABLE void setCanvasName(QString cardID, QString canvasName);
     Q_INVOKABLE QString currentCanvasID();
     Q_INVOKABLE QString upperCanvasID();
     Q_INVOKABLE void setCurrentCanvasColor(QString canvasColor);
@@ -61,11 +61,11 @@ public:
 
 public slots:
     QString createCard(QString cardType);
-    void deleteCard(QString id);
-    void deleteCanvasByCanvasCard(QString id, QString currentCanvasID);
+    void deleteCard(QString cardID);
+    void deleteCanvasByCanvasCard(QString cardID, QString currentCanvasID);
     void loadCards();
 
-    QString createCanvas(QString id, QString canvasName);
+    QString createCanvas(QString cardID, QString canvasName);
     void loadCanvas(QString canvasID);
 
 signals:

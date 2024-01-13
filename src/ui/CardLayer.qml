@@ -16,11 +16,11 @@ Item {
         // add cards to an array
         var cardArray = []
         for (var i = 0; i < cardLayer.children.length; i++) {
-            var currentID = cardLayer.children[i].id
+            var currentID = cardLayer.children[i].cardID
             if (currentID === cardID)
                 cardLayer.children[i].z = cardLayer.children.length + 1
             cardArray.push({
-                               "id": cardLayer.children[i].id,
+                               "cardID": cardLayer.children[i].cardID,
                                "z": cardLayer.children[i].z
                            })
         }
@@ -30,9 +30,9 @@ Item {
         })
         // reassign z by ascending order
         for (var j = 0; j < cardLayer.children.length; j++) {
-            currentID = cardLayer.children[j].id
+            currentID = cardLayer.children[j].cardID
             for (var k = 0; k < cardArray.length; k++)
-                if (currentID === cardArray[k].id)
+                if (currentID === cardArray[k].cardID)
                     cardLayer.children[j].z = k + 1 // the card order z is 1-based
             IO.savePos(currentID, cardLayer.children[j], false)
         }

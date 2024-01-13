@@ -6,9 +6,9 @@
 class Card {
 
 public:
-    explicit Card(QString id, QString cardType);
+    explicit Card(QString cardID, QString cardType);
 
-    QString m_id;
+    QString m_cardID;
     QString m_cardType;
     qreal m_x;
     qreal m_y;

@@ -15,7 +15,7 @@ ResizableItem {
     width: Globals.dotInterval * 8
     height: Globals.dotInterval * 8
 
-    property string id
+    property string cardID
     property string backgroundColor: "snow"
     property string borderColor: "gainsboro"
     property int borderWidth: 2
@@ -29,14 +29,14 @@ ResizableItem {
     onCreatedChanged: {
         id = CardManager.createCard("image")
         Snap.snap(root)
-        IO.saveTransform(id, root, false)
-        IO.saveCardBackgroundColor(id, root, false)
+        IO.saveTransform(cardID, root, false)
+        IO.saveCardBackgroundColor(cardID, root, false)
     }
     onLoadedChanged: {
-        root.width = CardManager.width(id)
-        root.height = CardManager.height(id)
-        root.backgroundColor = CardManager.backgroundColor(id)
-        root.imageSource = CardManager.image(id)
+        root.width = CardManager.width(cardID)
+        root.height = CardManager.height(cardID)
+        root.backgroundColor = CardManager.backgroundColor(cardID)
+        root.imageSource = CardManager.image(cardID)
         Snap.snap(root)
     }
     onSelectedChanged: {
@@ -44,7 +44,7 @@ ResizableItem {
         mouseArea.enabled = !selected
         editBar.visible = selected
         palette.visible = selected
-        root.parent.setCardToTop(id)
+        root.parent.setCardToTop(cardID)
     }
 
     MouseArea {
@@ -64,7 +64,7 @@ ResizableItem {
         onReleased: {
             cursorShape = Qt.OpenHandCursor
             Snap.snap(root)
-            IO.savePos(id, root)
+            IO.savePos(cardID, root)
         }
         onClicked: {
             selected = true
@@ -140,7 +140,7 @@ ResizableItem {
         smooth: true
     }
 
-    ArrowDropArea{
+    ArrowDropArea {
         anchors.fill: root
     }
 }

@@ -28,26 +28,26 @@ function load(canvasID) {
     var cardNum = CardManager.cardNum()
     var cardIDs = CardManager.cardIDs()
     for (var i = 0; i < cardNum; i++) {
-        var id = cardIDs[i]
-        var cardType = CardManager.cardType(id)
+        var cardID = cardIDs[i]
+        var cardType = CardManager.cardType(cardID)
         switch (cardType) {
         case "canvas":
-            loadComponent(canvasCardComponent, canvasCardComponentFile, id)
+            loadComponent(canvasCardComponent, canvasCardComponentFile, cardID)
             break
         case "note":
-            loadComponent(noteCardComponent, noteCardComponentFile, id)
+            loadComponent(noteCardComponent, noteCardComponentFile, cardID)
             break
         case "image":
-            loadComponent(imageCardComponent, imageCardComponentFile, id)
+            loadComponent(imageCardComponent, imageCardComponentFile, cardID)
             break
         }
     }
 }
 
-function loadComponent(cardComponent, cardComponentFile, id) {
+function loadComponent(cardComponent, cardComponentFile, cardID) {
     // avoid duplicate loading
     if (cardComponent !== null) {
-        createCard(cardComponent, id)
+        createCard(cardComponent, cardID)
         return
     }
 
@@ -55,18 +55,18 @@ function loadComponent(cardComponent, cardComponentFile, id) {
     if (cardComponent.status === Component.Loading)
         cardComponent.statusChanged.connect(createCard)
     else
-        createCard(cardComponent, id)
+        createCard(cardComponent, cardID)
 }
 
-function createCard(cardComponent, id) {
+function createCard(cardComponent, cardID) {
     // create card from the loaded component
     if (cardComponent.status === Component.Ready) {
         // set card layer as its parent
         var card = cardComponent.createObject(bgCanvas.cardLayer, {
-                                                  "x": CardManager.x(id),
-                                                  "y": CardManager.y(id),
-                                                  "z": CardManager.z(id),
-                                                  "id": id
+                                                  "x": CardManager.x(cardID),
+                                                  "y": CardManager.y(cardID),
+                                                  "z": CardManager.z(cardID),
+                                                  "cardID": cardID
                                               })
 
         card.loaded = true
@@ -76,90 +76,91 @@ function createCard(cardComponent, id) {
 }
 
 /*--------------------------save system----------------------------------*/
-function savePos(id, card, stackCommand = true) {
-    var lastX = CardManager.x(id)
-    var lastY = CardManager.y(id)
-    var lastZ = CardManager.z(id)
+function savePos(cardID, card, stackCommand = true) {
+    var lastX = CardManager.x(cardID)
+    var lastY = CardManager.y(cardID)
+    var lastZ = CardManager.z(cardID)
     var currentX = card.x
     var currentY = card.y
     var currentZ = card.z
     if (lastX !== currentX | lastY !== currentY | lastZ !== currentZ) {
         // stack command
         if (stackCommand)
-            CommandManager.moveCard(id, lastX, lastY, lastZ, currentX,
+            CommandManager.moveCard(cardID, lastX, lastY, lastZ, currentX,
                                     currentY, currentZ)
         // save to settings file
-        CardManager.setPos(id, currentX, currentY, currentZ)
+        CardManager.setPos(cardID, currentX, currentY, currentZ)
     }
 }
 
-function saveSize(id, card, stackCommand = true) {
-    var lastWidth = CardManager.width(id)
-    var lastHeight = CardManager.height(id)
+function saveSize(cardID, card, stackCommand = true) {
+    var lastWidth = CardManager.width(cardID)
+    var lastHeight = CardManager.height(cardID)
     var currentWidth = card.width
     var currentHeight = card.height
     if (lastWidth !== currentWidth | lastHeight !== currentHeight) {
         if (stackCommand)
-            CommandManager.resizeCard(id, lastWidth, lastHeight, currentWidth,
-                                      currentHeight)
-        CardManager.setSize(id, currentWidth, currentHeight)
+            CommandManager.resizeCard(cardID, lastWidth, lastHeight,
+                                      currentWidth, currentHeight)
+        CardManager.setSize(cardID, currentWidth, currentHeight)
     }
 }
 
 // transform = move + resize
-function saveTransform(id, card, stackCommand = true) {
-    var lastX = CardManager.x(id)
-    var lastY = CardManager.y(id)
-    var lastZ = CardManager.z(id)
+function saveTransform(cardID, card, stackCommand = true) {
+    var lastX = CardManager.x(cardID)
+    var lastY = CardManager.y(cardID)
+    var lastZ = CardManager.z(cardID)
     var currentX = card.x
     var currentY = card.y
     var currentZ = card.z
-    var lastWidth = CardManager.width(id)
-    var lastHeight = CardManager.height(id)
+    var lastWidth = CardManager.width(cardID)
+    var lastHeight = CardManager.height(cardID)
     var currentWidth = card.width
     var currentHeight = card.height
     if (lastX !== currentX | lastY !== currentY | lastZ !== currentZ | lastWidth
             !== currentWidth | lastHeight !== currentHeight) {
         if (stackCommand)
-            CommandManager.transformCard(id, lastX, lastY, lastZ, currentX,
+            CommandManager.transformCard(cardID, lastX, lastY, lastZ, currentX,
                                          currentY, currentZ, lastWidth,
                                          lastHeight, currentWidth,
                                          currentHeight)
-        CardManager.setPos(id, currentX, currentY, currentZ)
-        CardManager.setSize(id, currentWidth, currentHeight)
+        CardManager.setPos(cardID, currentX, currentY, currentZ)
+        CardManager.setSize(cardID, currentWidth, currentHeight)
     }
 }
 
-function saveText(id, card, stackCommand = true) {
-    var lastText = CardManager.text(id)
+function saveText(cardID, card, stackCommand = true) {
+    var lastText = CardManager.text(cardID)
     var currentText = card.text
     if (lastText !== currentText) {
         if (stackCommand)
-            CommandManager.changeText(id, lastText, currentText)
-        CardManager.setText(id, currentText)
+            CommandManager.changeText(cardID, lastText, currentText)
+        CardManager.setText(cardID, currentText)
     }
 }
 
-function saveImage(id, imageSource) {
-    CardManager.setImage(id, imageSource)
+function saveImage(cardID, imageSource) {
+    CardManager.setImage(cardID, imageSource)
 }
 
-function saveCardBackgroundColor(id, card, stackCommand = true) {
-    var lastColor = CardManager.backgroundColor(id)
+function saveCardBackgroundColor(cardID, card, stackCommand = true) {
+    var lastColor = CardManager.backgroundColor(cardID)
     var currentColor = card.backgroundColor
     if (lastColor !== currentColor) {
         if (stackCommand)
-            CommandManager.changeBackgroundColor(id, lastColor, currentColor)
-        CardManager.setBackgroundColor(id, currentColor)
+            CommandManager.changeBackgroundColor(cardID, lastColor,
+                                                 currentColor)
+        CardManager.setBackgroundColor(cardID, currentColor)
     }
 }
 
-function saveCanvasID(id, card, stackCommand = true) {
-    CardManager.setCanvasID(id, card.canvasID)
+function saveCanvasID(cardID, card, stackCommand = true) {
+    CardManager.setCanvasID(cardID, card.canvasID)
 }
 
-function saveCanvasName(id, card, stackCommand = true) {
-    CardManager.setCanvasName(id, card.canvasName)
+function saveCanvasName(cardID, card, stackCommand = true) {
+    CardManager.setCanvasName(cardID, card.canvasName)
 }
 
 /*--------------------------canvas------------------------------*/
@@ -168,7 +169,7 @@ function saveCurrentCanvasColor(color, stackCommand = true) {
 }
 
 /*---------------------------delete--------------------------------------*/
-function deleteCard(id, card) {
-    CardManager.deleteCard(id)
+function deleteCard(cardID, card) {
+    CardManager.deleteCard(cardID)
     card.destroy()
 }

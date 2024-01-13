@@ -48,8 +48,8 @@ Pane {
         nameFilters: ["PNG files (*.png)", "JPEG files (*.jpg *.jpeg)", "SVG files (*.svg)"]
         folder: StandardPaths.writableLocation(StandardPaths.PicturesLocation)
         onAccepted: {
-            IO.saveImage(id, fileDialog.currentFile)
-            cardEditBar.parent.imageSource = CardManager.image(id)
+            IO.saveImage(cardID, fileDialog.currentFile)
+            cardEditBar.parent.imageSource = CardManager.image(cardID)
         }
     }
 
@@ -89,7 +89,7 @@ Pane {
             MouseArea {
                 anchors.fill: parent
                 hoverEnabled: true
-                onClicked: IO.deleteCard(cardEditBar.parent.id,
+                onClicked: IO.deleteCard(cardEditBar.parent.cardID,
                                          cardEditBar.parent)
                 onEntered: {
                     scaleUp.target = parent

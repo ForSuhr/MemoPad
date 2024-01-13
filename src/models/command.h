@@ -7,16 +7,16 @@
 class Command : public QObject {
     Q_OBJECT
 public:
-    Command(QString id, QObject* parent = nullptr)
+    Command(QString cardID, QObject* parent = nullptr)
     {
-        m_id = id;
+        m_cardID = cardID;
     };
 
     virtual void undo() = 0;
     virtual void redo() = 0;
 
 private:
-    QString m_id;
+    QString m_cardID;
 };
 
 #endif // COMMAND_H

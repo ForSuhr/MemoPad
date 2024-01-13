@@ -65,7 +65,7 @@ Pane {
                 hoverEnabled: true
                 onClicked: {
                     palette.parent.backgroundColor = parent.color
-                    IO.saveCardBackgroundColor(id, palette.parent)
+                    IO.saveCardBackgroundColor(cardID, palette.parent)
                 }
                 onEntered: {
                     scaleUp.target = parent
@@ -92,7 +92,7 @@ Pane {
                 hoverEnabled: true
                 onClicked: {
                     palette.parent.backgroundColor = parent.color
-                    IO.saveCardBackgroundColor(id, palette.parent)
+                    IO.saveCardBackgroundColor(cardID, palette.parent)
                 }
                 onEntered: {
                     scaleUp.target = parent
@@ -119,7 +119,7 @@ Pane {
                 hoverEnabled: true
                 onClicked: {
                     palette.parent.backgroundColor = parent.color
-                    IO.saveCardBackgroundColor(id, palette.parent)
+                    IO.saveCardBackgroundColor(cardID, palette.parent)
                 }
                 onEntered: {
                     scaleUp.target = parent
@@ -146,7 +146,7 @@ Pane {
                 hoverEnabled: true
                 onClicked: {
                     palette.parent.backgroundColor = parent.color
-                    IO.saveCardBackgroundColor(id, palette.parent)
+                    IO.saveCardBackgroundColor(cardID, palette.parent)
                 }
                 onEntered: {
                     scaleUp.target = parent
@@ -173,7 +173,7 @@ Pane {
                 hoverEnabled: true
                 onClicked: {
                     palette.parent.backgroundColor = parent.color
-                    IO.saveCardBackgroundColor(id, palette.parent)
+                    IO.saveCardBackgroundColor(cardID, palette.parent)
                 }
                 onEntered: {
                     scaleUp.target = parent
@@ -200,7 +200,7 @@ Pane {
                 hoverEnabled: true
                 onClicked: {
                     palette.parent.backgroundColor = parent.color
-                    IO.saveCardBackgroundColor(id, palette.parent)
+                    IO.saveCardBackgroundColor(cardID, palette.parent)
                 }
                 onEntered: {
                     scaleUp.target = parent
@@ -227,7 +227,7 @@ Pane {
                 hoverEnabled: true
                 onClicked: {
                     palette.parent.backgroundColor = parent.color
-                    IO.saveCardBackgroundColor(id, palette.parent)
+                    IO.saveCardBackgroundColor(cardID, palette.parent)
                 }
                 onEntered: {
                     scaleUp.target = parent

@@ -56,7 +56,7 @@ Pane {
             MouseArea {
                 anchors.fill: parent
                 hoverEnabled: true
-                onClicked: IO.deleteCard(cardEditBar.parent.id,
+                onClicked: IO.deleteCard(cardEditBar.parent.cardID,
                                          cardEditBar.parent)
                 onEntered: {
                     scaleUp.target = parent

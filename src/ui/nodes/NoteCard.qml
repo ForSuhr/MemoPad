@@ -14,7 +14,7 @@ ResizableItem {
     width: Globals.dotInterval * 8
     height: Globals.dotInterval * 4
 
-    property string id
+    property string cardID
     property string backgroundColor: "snow"
     property string borderColor: "gainsboro"
     property int borderWidth: 2
@@ -26,16 +26,16 @@ ResizableItem {
     property alias selected: rawTextArea.focus
 
     onCreatedChanged: {
-        id = CardManager.createCard("note")
+        cardID = CardManager.createCard("note")
         Snap.snap(root)
-        IO.saveTransform(id, root, false)
-        IO.saveCardBackgroundColor(id, root, false)
+        IO.saveTransform(cardID, root, false)
+        IO.saveCardBackgroundColor(cardID, root, false)
     }
     onLoadedChanged: {
-        rawTextArea.text = CardManager.text(id)
-        root.width = CardManager.width(id)
-        root.height = CardManager.height(id)
-        root.backgroundColor = CardManager.backgroundColor(id)
+        rawTextArea.text = CardManager.text(cardID)
+        root.width = CardManager.width(cardID)
+        root.height = CardManager.height(cardID)
+        root.backgroundColor = CardManager.backgroundColor(cardID)
         Snap.snap(root)
     }
     onSelectedChanged: {
@@ -46,7 +46,7 @@ ResizableItem {
         palette.visible = selected
         if (!selected)
             mouseArea.cursorShape = Qt.OpenHandCursor
-        root.parent.setCardToTop(id)
+        root.parent.setCardToTop(cardID)
     }
 
     MouseArea {
@@ -66,7 +66,7 @@ ResizableItem {
         onReleased: {
             cursorShape = Qt.OpenHandCursor
             Snap.snap(root)
-            IO.savePos(id, root)
+            IO.savePos(cardID, root)
         }
         onClicked: {
             selected = true
@@ -121,7 +121,7 @@ ResizableItem {
                 }
             }
             onEditingFinished: {
-                IO.saveText(id, root)
+                IO.saveText(cardID, root)
                 rawTextArea.focus = false
             }
         }
@@ -159,7 +159,7 @@ ResizableItem {
         smooth: true
     }
 
-    ArrowDropArea{
+    ArrowDropArea {
         anchors.fill: root
     }
 }

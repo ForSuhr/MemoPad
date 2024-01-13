@@ -8,10 +8,10 @@
 class CommandMoveCard : public Command {
     Q_OBJECT
 public:
-    CommandMoveCard(QString id, qreal lastX, qreal lastY, qreal lastZ, qreal currentX, qreal currentY, qreal currentZ, QObject* parent = nullptr)
-        : Command { id, parent }
+    CommandMoveCard(QString cardID, qreal lastX, qreal lastY, qreal lastZ, qreal currentX, qreal currentY, qreal currentZ, QObject* parent = nullptr)
+        : Command { cardID, parent }
     {
-        m_id = id;
+        m_cardID = cardID;
         m_lastX = lastX;
         m_lastY = lastY;
         m_lastZ = lastZ;
@@ -22,18 +22,18 @@ public:
 
     void undo() override
     {
-        emit moveCardSignal(m_id, m_lastX, m_lastY, m_lastZ);
+        emit moveCardSignal(m_cardID, m_lastX, m_lastY, m_lastZ);
     };
     void redo() override
     {
-        emit moveCardSignal(m_id, m_currentX, m_currentY, m_currentZ);
+        emit moveCardSignal(m_cardID, m_currentX, m_currentY, m_currentZ);
     };
 
 signals:
-    void moveCardSignal(QString id, qreal x, qreal y, qreal z);
+    void moveCardSignal(QString cardID, qreal x, qreal y, qreal z);
 
 private:
-    QString m_id;
+    QString m_cardID;
     qreal m_lastX;
     qreal m_lastY;
     qreal m_lastZ;
@@ -45,10 +45,10 @@ private:
 class CommandResizeCard : public Command {
     Q_OBJECT
 public:
-    CommandResizeCard(QString id, qreal lastWidth, qreal lastHeight, qreal currentWidth, qreal currentHeight, QObject* parent = nullptr)
-        : Command { id, parent }
+    CommandResizeCard(QString cardID, qreal lastWidth, qreal lastHeight, qreal currentWidth, qreal currentHeight, QObject* parent = nullptr)
+        : Command { cardID, parent }
     {
-        m_id = id;
+        m_cardID = cardID;
         m_lastWidth = lastWidth;
         m_lastHeight = lastHeight;
         m_currentWidth = currentWidth;
@@ -57,18 +57,18 @@ public:
 
     void undo() override
     {
-        emit resizeCardSignal(m_id, m_lastWidth, m_lastHeight);
+        emit resizeCardSignal(m_cardID, m_lastWidth, m_lastHeight);
     };
     void redo() override
     {
-        emit resizeCardSignal(m_id, m_currentWidth, m_currentHeight);
+        emit resizeCardSignal(m_cardID, m_currentWidth, m_currentHeight);
     };
 
 signals:
-    void resizeCardSignal(QString id, qreal width, qreal height);
+    void resizeCardSignal(QString cardID, qreal width, qreal height);
 
 private:
-    QString m_id;
+    QString m_cardID;
     qreal m_lastX;
     qreal m_lastY;
     qreal m_currentX;
@@ -82,10 +82,10 @@ private:
 class CommandTransformCard : public Command {
     Q_OBJECT
 public:
-    CommandTransformCard(QString id, qreal lastX, qreal lastY, qreal lastZ, qreal currentX, qreal currentY, qreal currentZ, qreal lastWidth, qreal lastHeight, qreal currentWidth, qreal currentHeight, QObject* parent = nullptr)
-        : Command { id, parent }
+    CommandTransformCard(QString cardID, qreal lastX, qreal lastY, qreal lastZ, qreal currentX, qreal currentY, qreal currentZ, qreal lastWidth, qreal lastHeight, qreal currentWidth, qreal currentHeight, QObject* parent = nullptr)
+        : Command { cardID, parent }
     {
-        m_id = id;
+        m_cardID = cardID;
         m_lastX = lastX;
         m_lastY = lastY;
         m_lastZ = lastZ;
@@ -100,18 +100,18 @@ public:
 
     void undo() override
     {
-        emit transformCardSignal(m_id, m_lastX, m_lastY, m_lastZ, m_lastWidth, m_lastHeight);
+        emit transformCardSignal(m_cardID, m_lastX, m_lastY, m_lastZ, m_lastWidth, m_lastHeight);
     };
     void redo() override
     {
-        emit transformCardSignal(m_id, m_currentX, m_currentY, m_currentZ, m_currentWidth, m_currentHeight);
+        emit transformCardSignal(m_cardID, m_currentX, m_currentY, m_currentZ, m_currentWidth, m_currentHeight);
     };
 
 signals:
-    void transformCardSignal(QString id, qreal x, qreal y, qreal z, qreal width, qreal height);
+    void transformCardSignal(QString cardID, qreal x, qreal y, qreal z, qreal width, qreal height);
 
 private:
-    QString m_id;
+    QString m_cardID;
     qreal m_lastX;
     qreal m_lastY;
     qreal m_lastZ;
@@ -127,28 +127,28 @@ private:
 class CommandChangeText : public Command {
     Q_OBJECT
 public:
-    CommandChangeText(QString id, QString lastText, QString currentText, QObject* parent = nullptr)
-        : Command { id, parent }
+    CommandChangeText(QString cardID, QString lastText, QString currentText, QObject* parent = nullptr)
+        : Command { cardID, parent }
     {
-        m_id = id;
+        m_cardID = cardID;
         m_lastText = lastText;
         m_currentText = currentText;
     };
 
     void undo() override
     {
-        emit changeTextSignal(m_id, m_lastText);
+        emit changeTextSignal(m_cardID, m_lastText);
     };
     void redo() override
     {
-        emit changeTextSignal(m_id, m_currentText);
+        emit changeTextSignal(m_cardID, m_currentText);
     };
 
 signals:
-    void changeTextSignal(QString id, QString text);
+    void changeTextSignal(QString cardID, QString text);
 
 private:
-    QString m_id;
+    QString m_cardID;
     QString m_lastText;
     QString m_currentText;
 };
@@ -156,28 +156,28 @@ private:
 class CommandChangeBackgroundColor : public Command {
     Q_OBJECT
 public:
-    CommandChangeBackgroundColor(QString id, QString lastColor, QString currentColor, QObject* parent = nullptr)
-        : Command { id, parent }
+    CommandChangeBackgroundColor(QString cardID, QString lastColor, QString currentColor, QObject* parent = nullptr)
+        : Command { cardID, parent }
     {
-        m_id = id;
+        m_cardID = cardID;
         m_lastColor = lastColor;
         m_currentColor = currentColor;
     };
 
     void undo() override
     {
-        emit changeBackgroundColorSignal(m_id, m_lastColor);
+        emit changeBackgroundColorSignal(m_cardID, m_lastColor);
     };
     void redo() override
     {
-        emit changeBackgroundColorSignal(m_id, m_currentColor);
+        emit changeBackgroundColorSignal(m_cardID, m_currentColor);
     };
 
 signals:
-    void changeBackgroundColorSignal(QString id, QString color);
+    void changeBackgroundColorSignal(QString cardID, QString color);
 
 private:
-    QString m_id;
+    QString m_cardID;
     QString m_lastColor;
     QString m_currentColor;
 };

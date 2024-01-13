@@ -26,114 +26,114 @@ QStringList CardManager::cardIDs()
     return m_cardMap.keys();
 }
 
-QString CardManager::cardType(QString id)
+QString CardManager::cardType(QString cardID)
 {
-    return m_cardMap[id]->m_cardType;
+    return m_cardMap[cardID]->m_cardType;
 }
 
-qreal CardManager::x(QString id)
+qreal CardManager::x(QString cardID)
 {
-    return m_cardMap[id]->m_x;
+    return m_cardMap[cardID]->m_x;
 }
 
-void CardManager::setX(QString id, qreal x)
+void CardManager::setX(QString cardID, qreal x)
 {
-    m_cardMap[id]->m_x = x;
-    m_IO->setValue(m_currentCanvasID + "/" + id + "/x", x);
+    m_cardMap[cardID]->m_x = x;
+    m_IO->setValue(m_currentCanvasID + "/" + cardID + "/x", x);
 }
 
-qreal CardManager::y(QString id)
+qreal CardManager::y(QString cardID)
 {
-    return m_cardMap[id]->m_y;
+    return m_cardMap[cardID]->m_y;
 }
 
-void CardManager::setY(QString id, qreal y)
+void CardManager::setY(QString cardID, qreal y)
 {
-    m_cardMap[id]->m_y = y;
-    m_IO->setValue(m_currentCanvasID + "/" + id + "/y", y);
+    m_cardMap[cardID]->m_y = y;
+    m_IO->setValue(m_currentCanvasID + "/" + cardID + "/y", y);
 }
 
-qreal CardManager::z(QString id)
+qreal CardManager::z(QString cardID)
 {
-    return m_cardMap[id]->m_z;
+    return m_cardMap[cardID]->m_z;
 }
 
-void CardManager::setZ(QString id, qreal z)
+void CardManager::setZ(QString cardID, qreal z)
 {
-    m_cardMap[id]->m_z = z;
-    m_IO->setValue(m_currentCanvasID + "/" + id + "/z", z);
+    m_cardMap[cardID]->m_z = z;
+    m_IO->setValue(m_currentCanvasID + "/" + cardID + "/z", z);
 }
 
-QSizeF CardManager::pos(QString id)
+QSizeF CardManager::pos(QString cardID)
 {
-    return QSizeF(x(id), y(id));
+    return QSizeF(x(cardID), y(cardID));
 }
 
-void CardManager::setPos(QString id, qreal x, qreal y, qreal z)
+void CardManager::setPos(QString cardID, qreal x, qreal y, qreal z)
 {
-    setX(id, x);
-    setY(id, y);
-    setZ(id, z);
+    setX(cardID, x);
+    setY(cardID, y);
+    setZ(cardID, z);
 }
 
-qreal CardManager::width(QString id)
+qreal CardManager::width(QString cardID)
 {
-    return m_cardMap[id]->m_width;
+    return m_cardMap[cardID]->m_width;
 }
 
-void CardManager::setWidth(QString id, qreal width)
+void CardManager::setWidth(QString cardID, qreal width)
 {
-    m_cardMap[id]->m_width = width;
-    m_IO->setValue(m_currentCanvasID + "/" + id + "/width", width);
+    m_cardMap[cardID]->m_width = width;
+    m_IO->setValue(m_currentCanvasID + "/" + cardID + "/width", width);
 }
 
-qreal CardManager::height(QString id)
+qreal CardManager::height(QString cardID)
 {
-    return m_cardMap[id]->m_height;
+    return m_cardMap[cardID]->m_height;
 }
 
-void CardManager::setHeight(QString id, qreal height)
+void CardManager::setHeight(QString cardID, qreal height)
 {
-    m_cardMap[id]->m_height = height;
-    m_IO->setValue(m_currentCanvasID + "/" + id + "/height", height);
+    m_cardMap[cardID]->m_height = height;
+    m_IO->setValue(m_currentCanvasID + "/" + cardID + "/height", height);
 }
 
-QSizeF CardManager::size(QString id)
+QSizeF CardManager::size(QString cardID)
 {
-    return QSizeF(width(id), height(id));
+    return QSizeF(width(cardID), height(cardID));
 }
 
-void CardManager::setSize(QString id, qreal width, qreal height)
+void CardManager::setSize(QString cardID, qreal width, qreal height)
 {
-    setWidth(id, width);
-    setHeight(id, height);
+    setWidth(cardID, width);
+    setHeight(cardID, height);
 }
 
-QString CardManager::backgroundColor(QString id)
+QString CardManager::backgroundColor(QString cardID)
 {
-    return m_cardMap[id]->m_backgroundColor;
+    return m_cardMap[cardID]->m_backgroundColor;
 }
 
-void CardManager::setBackgroundColor(QString id, QString backgroundColor)
+void CardManager::setBackgroundColor(QString cardID, QString backgroundColor)
 {
-    m_cardMap[id]->m_backgroundColor = backgroundColor;
-    m_IO->setValue(m_currentCanvasID + "/" + id + "/backgroundColor", backgroundColor);
+    m_cardMap[cardID]->m_backgroundColor = backgroundColor;
+    m_IO->setValue(m_currentCanvasID + "/" + cardID + "/backgroundColor", backgroundColor);
 }
 
-QString CardManager::text(QString id)
+QString CardManager::text(QString cardID)
 {
-    return m_cardMap[id]->m_text;
+    return m_cardMap[cardID]->m_text;
 }
 
-void CardManager::setText(QString id, QString text)
+void CardManager::setText(QString cardID, QString text)
 {
-    m_cardMap[id]->m_text = text;
-    m_IO->setValue(m_currentCanvasID + "/" + id + "/text", text);
+    m_cardMap[cardID]->m_text = text;
+    m_IO->setValue(m_currentCanvasID + "/" + cardID + "/text", text);
 }
 
-QString CardManager::image(QString id)
+QString CardManager::image(QString cardID)
 {
-    QUrl url = m_cardMap[id]->m_image;
+    QUrl url = m_cardMap[cardID]->m_image;
     QString source = url.toString();
     QFileInfo fileInfo(url.toLocalFile());
     if (fileInfo.isDir() | !fileInfo.exists())
@@ -141,13 +141,13 @@ QString CardManager::image(QString id)
     return source;
 }
 
-void CardManager::setImage(QString id, QUrl imageUrl)
+void CardManager::setImage(QString cardID, QUrl imageUrl)
 {
     // get string path from url
     QString imageSource = imageUrl.toLocalFile();
 
     // clear the previous image
-    QString previousImage = QCoreApplication::applicationDirPath() + "/save/images/" + m_IO->value(m_currentCanvasID + "/" + id + "/image").toString();
+    QString previousImage = QCoreApplication::applicationDirPath() + "/save/images/" + m_IO->value(m_currentCanvasID + "/" + cardID + "/image").toString();
     QFile file(previousImage);
     if (file.exists())
         file.remove();
@@ -165,30 +165,30 @@ void CardManager::setImage(QString id, QUrl imageUrl)
         imageTarget = dirPath + fileName;
     }
     QFile::copy(imageSource, imageTarget);
-    m_cardMap[id]->m_image = "file:///" + imageTarget; // qml need URI to work
-    m_IO->setValue(m_currentCanvasID + "/" + id + "/image", fileName);
+    m_cardMap[cardID]->m_image = "file:///" + imageTarget; // qml need URI to work
+    m_IO->setValue(m_currentCanvasID + "/" + cardID + "/image", fileName);
 }
 
-QString CardManager::canvasID(QString id)
+QString CardManager::canvasID(QString cardID)
 {
-    return m_canvasMap[id]->m_canvasID;
+    return m_canvasMap[cardID]->m_canvasID;
 }
 
-void CardManager::setCanvasID(QString id, QString canvasID)
+void CardManager::setCanvasID(QString cardID, QString canvasID)
 {
-    m_canvasMap[id]->m_canvasID = canvasID;
-    m_IO->setValue(m_currentCanvasID + "/" + id + "/canvasID", canvasID);
+    m_canvasMap[cardID]->m_canvasID = canvasID;
+    m_IO->setValue(m_currentCanvasID + "/" + cardID + "/canvasID", canvasID);
 }
 
-QString CardManager::canvasName(QString id)
+QString CardManager::canvasName(QString cardID)
 {
-    return m_canvasMap[id]->m_canvasName;
+    return m_canvasMap[cardID]->m_canvasName;
 }
 
-void CardManager::setCanvasName(QString id, QString canvasName)
+void CardManager::setCanvasName(QString cardID, QString canvasName)
 {
-    m_canvasMap[id]->m_canvasName = canvasName;
-    m_IO->setValue(m_currentCanvasID + "/" + id + "/canvasName", canvasName);
+    m_canvasMap[cardID]->m_canvasName = canvasName;
+    m_IO->setValue(m_currentCanvasID + "/" + cardID + "/canvasName", canvasName);
 }
 
 QString CardManager::currentCanvasID()
@@ -213,29 +213,29 @@ QString CardManager::currentCanvasColor()
 
 QString CardManager::createCard(QString cardType)
 {
-    QString id = uuid();
-    Card* card = new Card(id, cardType);
-    m_cardMap[id] = card;
-    m_IO->setValue(m_currentCanvasID + "/" + id + "/cardType", cardType);
-    return id;
+    QString cardID = uuid();
+    Card* card = new Card(cardID, cardType);
+    m_cardMap[cardID] = card;
+    m_IO->setValue(m_currentCanvasID + "/" + cardID + "/cardType", cardType);
+    return cardID;
 }
 
-void CardManager::deleteCard(QString id)
+void CardManager::deleteCard(QString cardID)
 {
-    /*remove all sub-canvases that the id refers to recursively (in case this id belongs to a card of type "canvas")*/
-    deleteCanvasByCanvasCard(id, m_currentCanvasID);
+    /*remove all sub-canvases that the cardID refers to recursively (in case this cardID belongs to a card of type "canvas")*/
+    deleteCanvasByCanvasCard(cardID, m_currentCanvasID);
 
     /*remove it from memory*/
-    m_cardMap.remove(id);
+    m_cardMap.remove(cardID);
 
     /*remove this card from disk*/
     m_IO->beginGroup(m_currentCanvasID);
-    m_IO->remove(id);
+    m_IO->remove(cardID);
     m_IO->endGroup();
 }
 
 /// @brief a recursive function for deleting all sub-canvases by a canvas card id
-void CardManager::deleteCanvasByCanvasCard(QString id, QString currentCanvasID)
+void CardManager::deleteCanvasByCanvasCard(QString cardID, QString currentCanvasID)
 {
     m_IO->beginGroup(currentCanvasID);
     QStringList keys = m_IO->childGroups();
@@ -247,7 +247,7 @@ void CardManager::deleteCanvasByCanvasCard(QString id, QString currentCanvasID)
         // if currentCanvasID == m_currentCanvasID,
         // meaning that this is the first time this recursive function being called
         // in this case, if this card doesn't match the card id we passed in,  jump over this iteration
-        if (currentCanvasID == m_currentCanvasID & cardID != id)
+        if (currentCanvasID == m_currentCanvasID & cardID != cardID)
             continue;
 
         if (cardType == "canvas") {
@@ -282,11 +282,11 @@ void CardManager::loadCards()
     m_IO->endGroup();
 }
 
-QString CardManager::createCanvas(QString id, QString canvasName)
+QString CardManager::createCanvas(QString cardID, QString canvasName)
 {
     QString canvasID = uuid();
     Canvas* canvas = new Canvas(canvasID, canvasName, m_currentCanvasID);
-    m_canvasMap[id] = canvas;
+    m_canvasMap[cardID] = canvas;
     m_IO->setValue(canvasID + "/canvasName", canvasName);
     m_IO->setValue(canvasID + "/upperCanvasID", m_currentCanvasID);
     return canvasID;

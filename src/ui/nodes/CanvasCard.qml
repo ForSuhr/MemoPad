@@ -16,7 +16,7 @@ ResizableItem {
     height: Globals.dotInterval * 4
 
     // card id, this is referring to the card itself
-    property string id
+    property string cardID
     // canvas id, this is referring to the target canvas
     property string canvasID
     property string canvasName: "new canvas"
@@ -32,20 +32,20 @@ ResizableItem {
     property alias selected: teleport.focus
 
     onCreatedChanged: {
-        id = CardManager.createCard("canvas")
-        canvasID = CardManager.createCanvas(id, canvasName)
+        cardID = CardManager.createCard("canvas")
+        canvasID = CardManager.createCanvas(cardID, canvasName)
         Snap.snap(root)
-        IO.saveTransform(id, root, false)
-        IO.saveCanvasID(id, root, false)
-        IO.saveCanvasName(id, root, false)
-        IO.saveCardBackgroundColor(id, root, false)
+        IO.saveTransform(cardID, root, false)
+        IO.saveCanvasID(cardID, root, false)
+        IO.saveCanvasName(cardID, root, false)
+        IO.saveCardBackgroundColor(cardID, root, false)
     }
     onLoadedChanged: {
-        root.width = CardManager.width(id)
-        root.height = CardManager.height(id)
-        root.backgroundColor = CardManager.backgroundColor(id)
-        canvasID = CardManager.canvasID(id)
-        canvasName = CardManager.canvasName(id)
+        root.width = CardManager.width(cardID)
+        root.height = CardManager.height(cardID)
+        root.backgroundColor = CardManager.backgroundColor(cardID)
+        canvasID = CardManager.canvasID(cardID)
+        canvasName = CardManager.canvasName(cardID)
         Snap.snap(root)
     }
     onSelectedChanged: {
@@ -53,7 +53,7 @@ ResizableItem {
         palette.visible = selected
         mouseArea.enabled = !selected
         editBar.visible = selected
-        root.parent.setCardToTop(id)
+        root.parent.setCardToTop(cardID)
     }
 
     MouseArea {
@@ -73,7 +73,7 @@ ResizableItem {
         onReleased: {
             cursorShape = Qt.OpenHandCursor
             Snap.snap(root)
-            IO.savePos(id, root)
+            IO.savePos(cardID, root)
         }
         onClicked: {
             selected = true
@@ -142,7 +142,7 @@ ResizableItem {
         activeFocusOnTab: false
         onEditingFinished: {
             canvasName = text
-            IO.saveCanvasName(id, root)
+            IO.saveCanvasName(cardID, root)
             nameTextField.focus = false
         }
         onActiveFocusChanged: if (focus)

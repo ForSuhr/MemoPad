@@ -1,7 +1,7 @@
 #include "card.h"
 
-Card::Card(QString id, QString cardType)
+Card::Card(QString cardID, QString cardType)
 {
-    m_id = id;
+    m_cardID = cardID;
     m_cardType = cardType;
 }

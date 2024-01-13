@@ -127,48 +127,49 @@ Item {
     /*command undo&redo*/
     Connections {
         target: CommandManager
-        function onMoveCardSignal(id, x, y) {
+        function onMoveCardSignal(cardID, x, y) {
             for (var i = 0; i < cardLayer.children.length; i++) {
-                if (cardLayer.children[i].id === id) {
+                if (cardLayer.children[i].cardID === cardID) {
                     cardLayer.children[i].x = x
                     cardLayer.children[i].y = y
-                    IO.savePos(id, cardLayer.children[i], false)
+                    IO.savePos(cardID, cardLayer.children[i], false)
                 }
             }
         }
-        function onResizeCardSignal(id, width, height) {
+        function onResizeCardSignal(cardID, width, height) {
             for (var i = 0; i < cardLayer.children.length; i++) {
-                if (cardLayer.children[i].id === id) {
+                if (cardLayer.children[i].cardID === cardID) {
                     cardLayer.children[i].width = width
                     cardLayer.children[i].height = height
-                    IO.saveSize(id, cardLayer.children[i], false)
+                    IO.saveSize(cardID, cardLayer.children[i], false)
                 }
             }
         }
-        function onTransformCardSignal(id, x, y, width, height) {
+        function onTransformCardSignal(cardID, x, y, width, height) {
             for (var i = 0; i < cardLayer.children.length; i++) {
-                if (cardLayer.children[i].id === id) {
+                if (cardLayer.children[i].cardID === cardID) {
                     cardLayer.children[i].x = x
                     cardLayer.children[i].y = y
                     cardLayer.children[i].width = width
                     cardLayer.children[i].height = height
-                    IO.saveTransform(id, cardLayer.children[i], false)
+                    IO.saveTransform(cardID, cardLayer.children[i], false)
                 }
             }
         }
-        function onChangeTextSignal(id, text) {
+        function onChangeTextSignal(cardID, text) {
             for (var i = 0; i < cardLayer.children.length; i++) {
-                if (cardLayer.children[i].id === id) {
+                if (cardLayer.children[i].cardID === cardID) {
                     cardLayer.children[i].text = text
-                    IO.saveText(id, cardLayer.children[i], false)
+                    IO.saveText(cardID, cardLayer.children[i], false)
                 }
             }
         }
-        function onChangeBackgroundColorSignal(id, color) {
+        function onChangeBackgroundColorSignal(cardID, color) {
             for (var i = 0; i < cardLayer.children.length; i++) {
-                if (cardLayer.children[i].id === id) {
+                if (cardLayer.children[i].cardID === cardID) {
                     cardLayer.children[i].backgroundColor = color
-                    IO.saveCardBackgroundColor(id, cardLayer.children[i], false)
+                    IO.saveCardBackgroundColor(cardID,
+                                               cardLayer.children[i], false)
                 }
             }
         }
