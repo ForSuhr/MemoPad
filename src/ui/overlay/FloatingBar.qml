@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+import Qt5Compat.GraphicalEffects
 import MemoPad.Globals
 import MemoPad.IconSet
 
@@ -178,5 +179,13 @@ Item {
                 velocity: 2000
             }
         }
+    }
+
+    DropShadow {
+        anchors.fill: floatingBar
+        source: floatingBar
+        radius: 6
+        color: "gainsboro"
+        smooth: true
     }
 }
