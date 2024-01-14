@@ -22,6 +22,7 @@ Item {
     property string bottomAreaKey: "bottom area"
     property string floatingBarArea: Globals.floatingBarArea
 
+    Drag.proposedAction: Qt.MoveAction
     Drag.active: dragArea.drag.active
     Drag.keys: [topAreaKey, bottomAreaKey]
 
