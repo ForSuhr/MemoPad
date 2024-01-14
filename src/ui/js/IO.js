@@ -75,6 +75,16 @@ function createCard(cardComponent, cardID) {
     }
 }
 
+/*--------------------------query system---------------------------*/
+function getCardById(cardID) {
+    var cardLayer = bgCanvas.cardLayer
+    for (var i = 0; i < cardLayer.children.length; i++) {
+        var currentID = cardLayer.children[i].cardID
+        if (currentID === cardID)
+            return cardLayer.children[i]
+    }
+}
+
 /*--------------------------save system----------------------------------*/
 function savePos(cardID, card, stackCommand = true) {
     var lastX = CardManager.x(cardID)

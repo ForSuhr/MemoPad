@@ -1,5 +1,7 @@
 import QtQuick
 import QtQuick.Shapes
+import MemoPad.CardManager
+import "../js/IO.js" as IO
 
 Shape {
     id: arrow
@@ -8,31 +10,38 @@ Shape {
     antialiasing: true
     smooth: true
 
-    property string arrowID
-
+    property string cardID
     property bool created: false
+
+    onCreatedChanged: {
+        cardID = CardManager.createCard("arrow")
+        IO.saveTransform(cardID, arrow, false)
+    }
 
     property string fromCardID: ""
     property string toCardID: ""
     property string fromDirection: ""
     property string toDirection: ""
-    // get pos by card id
+
+    property var fromCard: undefined
+    property var toCard: undefined
+
     property real fromCardX: 0
     property real fromCardY: 0
-    property real toCardX: 0
-    property real toCardY: 0
+    property real toCardX: toCard === undefined ? 0 : toCard.x
+    property real toCardY: toCard === undefined ? 0 : toCard.y
 
     onToCardXChanged: {
-        if (toCardID !== "") {
-            arrowhead.x = toCardX
-            arrowhead.y = toCardY
+        if (toCard !== undefined) {
+            arrowhead.x = toCardX - x
+            arrowhead.y = toCardY - y
         }
     }
 
     onToCardYChanged: {
-        if (toCardID !== "") {
-            arrowhead.x = toCardX
-            arrowhead.y = toCardY
+        if (toCard !== undefined) {
+            arrowhead.x = toCardX - x
+            arrowhead.y = toCardY - y
         }
     }
 
@@ -164,6 +173,7 @@ Shape {
         Drag.keys: ["arrowhead"]
         Drag.hotSpot.x: width / 2
         Drag.hotSpot.y: height / 2
+        Drag.proposedAction: Qt.MoveAction
         Drag.active: arrowheadMouseArea.drag.active
 
         ShapePath {
@@ -228,19 +238,18 @@ Shape {
                                                mouse.y - initialY, 2))
                                        if (distance > 5) {
                                            toCardID = ""
+                                           toCard = undefined
                                        }
                                    }
                                }
             onReleased: {
                 isDragging = false
-                arrowhead.Drag.drop()
+                if (arrowhead.Drag.drop() === Qt.MoveAction)
+                    toCard = IO.getCardById(toCardID)
             }
         }
 
-        onXChanged: {
-            updateArrowHeadDirection()
-            console.log(x, y)
-        }
+        onXChanged: updateArrowHeadDirection()
         onYChanged: updateArrowHeadDirection()
     }
     function updateArrowHeadDirection() {

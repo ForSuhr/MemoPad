@@ -24,9 +24,10 @@ Item {
                                }
             onEntered: parent.color = "#66000000"
             onExited: parent.color = "transparent"
-            onDropped: drag => {
-                           console.log("dropped")
-                           //toCardID = cardID
+            onDropped: drop => {
+                           parent.color = "transparent"
+                           drop.acceptProposedAction()
+                           drop.source.parent.toCardID = cardID
                        }
         }
     }
