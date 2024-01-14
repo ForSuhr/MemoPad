@@ -2,6 +2,7 @@
 var canvasCardComponent = null
 var noteCardComponent = null
 var imageCardComponent = null
+var arrowComponent = null
 var canvasCardComponentFile = "../nodes/CanvasCard.qml"
 var noteCardComponentFile = "../nodes/NoteCard.qml"
 var imageCardComponentFile = "../nodes/ImageCard.qml"
@@ -39,6 +40,9 @@ function load(canvasID) {
             break
         case "image":
             loadComponent(imageCardComponent, imageCardComponentFile, cardID)
+            break
+        case "arrow":
+            loadComponent(arrowComponent, arrowComponentFile, cardID)
             break
         }
     }

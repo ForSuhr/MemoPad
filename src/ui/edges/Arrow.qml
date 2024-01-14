@@ -12,10 +12,18 @@ Shape {
 
     property string cardID
     property bool created: false
+    property bool loaded: false
+    property bool selected: false
 
     onCreatedChanged: {
         cardID = CardManager.createCard("arrow")
         IO.saveTransform(cardID, arrow, false)
+    }
+    onLoadedChanged: {
+
+    }
+    onSelectedChanged: {
+
     }
 
     property string fromCardID: ""
