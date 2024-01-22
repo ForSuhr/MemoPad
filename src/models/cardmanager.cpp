@@ -211,6 +211,116 @@ QString CardManager::currentCanvasColor()
     return m_IO->value(m_currentCanvasID + "/" + "/canvasColor").toString();
 }
 
+QString CardManager::fromCardID(QString cardID)
+{
+    return m_cardMap[cardID]->m_fromCardID;
+}
+
+void CardManager::setFromCardID(QString cardID, QString fromCardID)
+{
+    m_cardMap[cardID]->m_fromCardID = fromCardID;
+    m_IO->setValue(m_currentCanvasID + "/" + cardID + "/fromCardID", fromCardID);
+}
+
+QString CardManager::fromCardDirection(QString cardID)
+{
+    return m_cardMap[cardID]->m_fromCardDirection;
+}
+
+void CardManager::setFromCardDirection(QString cardID, QString fromCardDirection)
+{
+    m_cardMap[cardID]->m_fromCardDirection = fromCardDirection;
+    m_IO->setValue(m_currentCanvasID + "/" + cardID + "/fromCardDirection", fromCardDirection);
+}
+
+QString CardManager::toCardID(QString cardID)
+{
+    return m_cardMap[cardID]->m_toCardID;
+}
+
+void CardManager::setToCardID(QString cardID, QString toCardID)
+{
+    m_cardMap[cardID]->m_toCardID = toCardID;
+    m_IO->setValue(m_currentCanvasID + "/" + cardID + "/toCardID", toCardID);
+}
+
+QString CardManager::toCardDirection(QString cardID)
+{
+    return m_cardMap[cardID]->m_toCardDirection;
+}
+
+void CardManager::setToCardDirection(QString cardID, QString toCardDirection)
+{
+    m_cardMap[cardID]->m_toCardDirection = toCardDirection;
+    m_IO->setValue(m_currentCanvasID + "/" + cardID + "/toCardDirection", toCardDirection);
+}
+
+qreal CardManager::fromX(QString cardID)
+{
+    return m_cardMap[cardID]->m_fromX;
+}
+
+void CardManager::setFromX(QString cardID, qreal fromX)
+{
+    m_cardMap[cardID]->m_fromX = fromX;
+    m_IO->setValue(m_currentCanvasID + "/" + cardID + "/fromX", fromX);
+}
+
+qreal CardManager::fromY(QString cardID)
+{
+    return m_cardMap[cardID]->m_fromY;
+}
+
+void CardManager::setFromY(QString cardID, qreal fromY)
+{
+    m_cardMap[cardID]->m_fromY = fromY;
+    m_IO->setValue(m_currentCanvasID + "/" + cardID + "/fromY", fromY);
+}
+
+qreal CardManager::toX(QString cardID)
+{
+    return m_cardMap[cardID]->m_toX;
+}
+
+void CardManager::setToX(QString cardID, qreal toX)
+{
+    m_cardMap[cardID]->m_toX = toX;
+    m_IO->setValue(m_currentCanvasID + "/" + cardID + "/toX", toX);
+}
+
+qreal CardManager::toY(QString cardID)
+{
+    return m_cardMap[cardID]->m_toY;
+}
+
+void CardManager::setToY(QString cardID, qreal toY)
+{
+    m_cardMap[cardID]->m_toY = toY;
+    m_IO->setValue(m_currentCanvasID + "/" + cardID + "/toY", toY);
+}
+
+qreal CardManager::controlX(QString cardID)
+{
+    return m_cardMap[cardID]->m_controlX;
+}
+
+void CardManager::setControlX(QString cardID, qreal controlX)
+{
+    m_cardMap[cardID]->m_controlX = controlX;
+    m_IO->setValue(m_currentCanvasID + "/" + cardID + "/controlX", controlX);
+}
+
+qreal CardManager::controlY(QString cardID)
+{
+    return m_cardMap[cardID]->m_controlY;
+}
+
+void CardManager::setControlY(QString cardID, qreal controlY)
+{
+    m_cardMap[cardID]->m_controlY = controlY;
+    m_IO->setValue(m_currentCanvasID + "/" + cardID + "/controlY", controlY);
+}
+
 QString CardManager::createCard(QString cardType)
 {
     QString cardID = uuid();
@@ -277,6 +387,16 @@ void CardManager::loadCards()
         card->m_backgroundColor = m_IO->value(cardID + "/backgroundColor").toString();
         card->m_canvasID = m_IO->value(cardID + "/canvasID").toString();
         card->m_canvasName = m_IO->value(cardID + "/canvasName").toString();
+        card->m_fromCardID = m_IO->value(cardID + "/fromCardID").toString();
+        card->m_fromCardDirection = m_IO->value(cardID + "/fromCardDirection").toString();
+        card->m_toCardID = m_IO->value(cardID + "/toCardID").toString();
+        card->m_toCardDirection = m_IO->value(cardID + "/toCardDirection").toString();
+        card->m_fromX = m_IO->value(cardID + "/fromX").toReal();
+        card->m_fromY = m_IO->value(cardID + "/fromY").toReal();
+        card->m_toX = m_IO->value(cardID + "/toX").toReal();
+        card->m_toY = m_IO->value(cardID + "/toY").toReal();
+        card->m_controlX = m_IO->value(cardID + "/controlX").toReal();
+        card->m_controlY = m_IO->value(cardID + "/controlY").toReal();
         m_cardMap[cardID] = card;
     }
     m_IO->endGroup();

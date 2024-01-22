@@ -56,6 +56,27 @@ public:
     Q_INVOKABLE void setCurrentCanvasColor(QString canvasColor);
     Q_INVOKABLE QString currentCanvasColor();
 
+    Q_INVOKABLE QString fromCardID(QString cardID);
+    Q_INVOKABLE void setFromCardID(QString cardID, QString fromCardID);
+    Q_INVOKABLE QString fromCardDirection(QString cardID);
+    Q_INVOKABLE void setFromCardDirection(QString cardID, QString fromCardDirection);
+    Q_INVOKABLE QString toCardID(QString cardID);
+    Q_INVOKABLE void setToCardID(QString cardID, QString toCardID);
+    Q_INVOKABLE QString toCardDirection(QString cardID);
+    Q_INVOKABLE void setToCardDirection(QString cardID, QString toCardDirection);
+    Q_INVOKABLE qreal fromX(QString cardID);
+    Q_INVOKABLE void setFromX(QString cardID, qreal fromX);
+    Q_INVOKABLE qreal fromY(QString cardID);
+    Q_INVOKABLE void setFromY(QString cardID, qreal fromY);
+    Q_INVOKABLE qreal toX(QString cardID);
+    Q_INVOKABLE void setToX(QString cardID, qreal toX);
+    Q_INVOKABLE qreal toY(QString cardID);
+    Q_INVOKABLE void setToY(QString cardID, qreal toY);
+    Q_INVOKABLE qreal controlX(QString cardID);
+    Q_INVOKABLE void setControlX(QString cardID, qreal controlX);
+    Q_INVOKABLE qreal controlY(QString cardID);
+    Q_INVOKABLE void setControlY(QString cardID, qreal controlY);
+
     QMap<QString, Card*> m_cardMap = {};
     QMap<QString, Canvas*> m_canvasMap = {};
 

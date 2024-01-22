@@ -18,8 +18,22 @@ public:
     QString m_text;
     QString m_image;
     QString m_backgroundColor;
+
+    // canvas card
     QString m_canvasID;
     QString m_canvasName;
+
+    // arrow card
+    QString m_fromCardID;
+    QString m_fromCardDirection;
+    QString m_toCardID;
+    QString m_toCardDirection;
+    qreal m_fromX;
+    qreal m_fromY;
+    qreal m_toX;
+    qreal m_toY;
+    qreal m_controlX;
+    qreal m_controlY;
 };
 
 #endif // CARD_H
