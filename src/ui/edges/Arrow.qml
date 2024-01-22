@@ -53,31 +53,116 @@ Item {
         target: arrow
     }
 
-    property string fromCardID: ""
-    property string toCardID: ""
-    property string fromDirection: ""
-    property string toDirection: ""
+    property alias fromCardID: startCircle.cardID
+    property alias toCardID: arrowhead.cardID
+    property alias fromDirection: startCircle.direction
+    property alias toDirection: arrowhead.direction
 
     property var fromCard: undefined
     property var toCard: undefined
 
-    property real fromCardX: 0
-    property real fromCardY: 0
+    property real fromCardX: fromCard === undefined ? 0 : fromCard.x
+    property real fromCardY: fromCard === undefined ? 0 : fromCard.y
     property real toCardX: toCard === undefined ? 0 : toCard.x
     property real toCardY: toCard === undefined ? 0 : toCard.y
 
-    onToCardXChanged: {
-        if (toCard !== undefined) {
-            arrowhead.x = toCardX - x
-            arrowhead.y = toCardY - y
+    // startCircle and arrowhead follow the fromCard and toCard according to directions
+    function updateStartCirclePos() {
+        if (fromCard !== undefined & fromDirection !== "") {
+            switch (fromDirection) {
+            case "northwest":
+                startCircle.x = fromCardX - x
+                startCircle.y = fromCardY - y
+                break
+            case "north":
+                startCircle.x = fromCardX - x + fromCard.width / 2
+                startCircle.y = fromCardY - y
+                break
+            case "northeast":
+                startCircle.x = fromCardX - x + fromCard.width
+                startCircle.y = fromCardY - y
+                break
+            case "east":
+                startCircle.x = fromCardX - x + fromCard.width
+                startCircle.y = fromCardY - y + fromCard.height / 2
+                break
+            case "southeast":
+                startCircle.x = fromCardX - x + fromCard.width
+                startCircle.y = fromCardY - y + fromCard.height
+                break
+            case "south":
+                startCircle.x = fromCardX - x + fromCard.width / 2
+                startCircle.y = fromCardY - y + fromCard.height
+                break
+            case "southwest":
+                startCircle.x = fromCardX - x
+                startCircle.y = fromCardY - y + fromCard.height
+                break
+            case "west":
+                startCircle.x = fromCardX - x
+                startCircle.y = fromCardY - y + fromCard.height / 2
+                break
+            default:
+                break
+            }
         }
     }
 
-    onToCardYChanged: {
-        if (toCard !== undefined) {
-            arrowhead.x = toCardX - x
-            arrowhead.y = toCardY - y
+    function updateArrowHeadPos() {
+        if (toCard !== undefined & toDirection !== "") {
+            switch (toDirection) {
+            case "northwest":
+                arrowhead.x = toCardX - x
+                arrowhead.y = toCardY - y
+                break
+            case "north":
+                arrowhead.x = toCardX - x + toCard.width / 2
+                arrowhead.y = toCardY - y
+                break
+            case "northeast":
+                arrowhead.x = toCardX - x + toCard.width
+                arrowhead.y = toCardY - y
+                break
+            case "east":
+                arrowhead.x = toCardX - x + toCard.width
+                arrowhead.y = toCardY - y + toCard.height / 2
+                break
+            case "southeast":
+                arrowhead.x = toCardX - x + toCard.width
+                arrowhead.y = toCardY - y + toCard.height
+                break
+            case "south":
+                arrowhead.x = toCardX - x + toCard.width / 2
+                arrowhead.y = toCardY - y + toCard.height
+                break
+            case "southwest":
+                arrowhead.x = toCardX - x
+                arrowhead.y = toCardY - y + toCard.height
+                break
+            case "west":
+                arrowhead.x = toCardX - x
+                arrowhead.y = toCardY - y + toCard.height / 2
+                break
+            default:
+                break
+            }
         }
+    }
+
+    onFromCardXChanged: {
+        updateStartCirclePos()
+    }
+
+    onFromCardYChanged: {
+        updateStartCirclePos()
+    }
+
+    onToCardXChanged: {
+        updateArrowHeadPos()
+    }
+
+    onToCardYChanged: {
+        updateArrowHeadPos()
     }
 
     property alias arrowFromX: arrow.x
@@ -98,7 +183,7 @@ Item {
     property int triangleHigh: 12
     property int triangleTheta: 30
     property string circleColor: "black"
-    property string arrowColor: "darkgray"
+    property string arrowColor: "gray"
     property string arrowHeadColor: "black"
     property int arrowWidth: 4
     property int arcRadiusX: 100
@@ -120,6 +205,16 @@ Item {
         z: 99
         width: triangleHigh
         height: triangleHigh
+
+        Drag.keys: ["startCircle"]
+        Drag.hotSpot.x: width / 2
+        Drag.hotSpot.y: height / 2
+        Drag.proposedAction: Qt.MoveAction
+        Drag.active: startCircleMouseArea.drag.active
+
+        property string cardID: ""
+        property string direction: ""
+
         Rectangle {
             x: -parent.width / 2
             y: -parent.height / 2
@@ -128,11 +223,38 @@ Item {
             color: circleColor
             radius: width / 2
             MouseArea {
-                scale: 2
+                id: startCircleMouseArea
+                scale: 4
                 anchors.fill: parent
                 drag.target: startCircle
                 hoverEnabled: true
+                property real initialX
+                property real initialY
+                property bool isDragging: false
                 onEntered: cursorShape = Qt.OpenHandCursor
+                onPressed: mouse => {
+                               initialX = mouse.x
+                               initialY = mouse.y
+                               isDragging = true
+                           }
+                onPositionChanged: mouse => {
+                                       if (isDragging) {
+                                           var distance = Math.sqrt(
+                                               Math.pow(mouse.x - initialX,
+                                                        2) + Math.pow(
+                                                   mouse.y - initialY, 2))
+                                           if (distance > 5) {
+                                               fromCardID = ""
+                                               fromCard = undefined
+                                           }
+                                       }
+                                   }
+
+                onReleased: {
+                    isDragging = false
+                    if (startCircle.Drag.drop() === Qt.MoveAction)
+                        fromCard = IO.getCardById(fromCardID)
+                }
             }
         }
     }
@@ -153,6 +275,7 @@ Item {
             color: circleColor
             radius: width / 2
             MouseArea {
+                scale: 4
                 anchors.fill: parent
                 drag.target: controlCircle
                 hoverEnabled: true
@@ -338,6 +461,9 @@ Item {
         Drag.proposedAction: Qt.MoveAction
         Drag.active: arrowheadMouseArea.drag.active
 
+        property string cardID: ""
+        property string direction: ""
+
         ShapePath {
             id: triangleShapePath
             strokeColor: arrowHeadColor
@@ -379,7 +505,7 @@ Item {
 
         MouseArea {
             id: arrowheadMouseArea
-            scale: 2
+            scale: 4
             anchors.fill: arrowhead
             drag.target: arrowhead
             hoverEnabled: true
