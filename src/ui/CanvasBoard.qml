@@ -10,7 +10,7 @@ Item {
     x: -parent.width / 2
     y: -parent.height / 2
 
-    property alias cardLayer: cardLayer
+    property alias nodeLayer: nodeLayer
     property real dotSize: Globals.dotSize
     property int dotInterval: Globals.dotInterval
     property string dotColor: "gainsboro"
@@ -112,64 +112,70 @@ Item {
         id: loseFocus
         z: 1
         anchors.fill: canvas
-        onClicked: cardLayer.forceActiveFocus()
+        onClicked: nodeLayer.forceActiveFocus()
     }
 
-    /*CardLayer is a container item where all cards are placed in it*/
-    CardLayer {
-        id: cardLayer
+    /*NodeLayer is a container item where all node-cards are placed in it*/
+    NodeLayer {
+        id: nodeLayer
         z: 3
         onLoadCanvasSignal: canvasID => {
                                 IO.loadCanvas(canvasID)
                             }
     }
 
+    /*EdgeLayer is a container item where all edge-cards are placed in it*/
+    EdgeLayer {
+        id: edgeLayer
+        z: 4
+    }
+
     /*command undo&redo*/
     Connections {
         target: CommandManager
         function onMoveCardSignal(cardID, x, y) {
-            for (var i = 0; i < cardLayer.children.length; i++) {
-                if (cardLayer.children[i].cardID === cardID) {
-                    cardLayer.children[i].x = x
-                    cardLayer.children[i].y = y
-                    IO.savePos(cardID, cardLayer.children[i], false)
+            for (var i = 0; i < nodeLayer.children.length; i++) {
+                if (nodeLayer.children[i].cardID === cardID) {
+                    nodeLayer.children[i].x = x
+                    nodeLayer.children[i].y = y
+                    IO.savePos(cardID, nodeLayer.children[i], false)
                 }
             }
         }
         function onResizeCardSignal(cardID, width, height) {
-            for (var i = 0; i < cardLayer.children.length; i++) {
-                if (cardLayer.children[i].cardID === cardID) {
-                    cardLayer.children[i].width = width
-                    cardLayer.children[i].height = height
-                    IO.saveSize(cardID, cardLayer.children[i], false)
+            for (var i = 0; i < nodeLayer.children.length; i++) {
+                if (nodeLayer.children[i].cardID === cardID) {
+                    nodeLayer.children[i].width = width
+                    nodeLayer.children[i].height = height
+                    IO.saveSize(cardID, nodeLayer.children[i], false)
                 }
             }
         }
         function onTransformCardSignal(cardID, x, y, width, height) {
-            for (var i = 0; i < cardLayer.children.length; i++) {
-                if (cardLayer.children[i].cardID === cardID) {
-                    cardLayer.children[i].x = x
-                    cardLayer.children[i].y = y
-                    cardLayer.children[i].width = width
-                    cardLayer.children[i].height = height
-                    IO.saveTransform(cardID, cardLayer.children[i], false)
+            for (var i = 0; i < nodeLayer.children.length; i++) {
+                if (nodeLayer.children[i].cardID === cardID) {
+                    nodeLayer.children[i].x = x
+                    nodeLayer.children[i].y = y
+                    nodeLayer.children[i].width = width
+                    nodeLayer.children[i].height = height
+                    IO.saveTransform(cardID, nodeLayer.children[i], false)
                 }
             }
         }
         function onChangeTextSignal(cardID, text) {
-            for (var i = 0; i < cardLayer.children.length; i++) {
-                if (cardLayer.children[i].cardID === cardID) {
-                    cardLayer.children[i].text = text
-                    IO.saveText(cardID, cardLayer.children[i], false)
+            for (var i = 0; i < nodeLayer.children.length; i++) {
+                if (nodeLayer.children[i].cardID === cardID) {
+                    nodeLayer.children[i].text = text
+                    IO.saveText(cardID, nodeLayer.children[i], false)
                 }
             }
         }
         function onChangeBackgroundColorSignal(cardID, color) {
-            for (var i = 0; i < cardLayer.children.length; i++) {
-                if (cardLayer.children[i].cardID === cardID) {
-                    cardLayer.children[i].backgroundColor = color
+            for (var i = 0; i < nodeLayer.children.length; i++) {
+                if (nodeLayer.children[i].cardID === cardID) {
+                    nodeLayer.children[i].backgroundColor = color
                     IO.saveCardBackgroundColor(cardID,
-                                               cardLayer.children[i], false)
+                                               nodeLayer.children[i], false)
                 }
             }
         }

@@ -90,7 +90,8 @@ qt_add_qml_module(MemoPad
         ui/preferences-popup/preferencesPage2.qml
         #[[miscellaneous]]
         ui/CanvasBoard.qml
-        ui/CardLayer.qml
+        ui/NodeLayer.qml
+        ui/EdgeLayer.qml
         ui/MShortCut.qml
 )
 

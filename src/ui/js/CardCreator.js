@@ -33,13 +33,13 @@ function createCard(mouse) {
     // create card from the loaded component
     if (cardComponent.status === Component.Ready && draggedCard == null) {
         // set card layer as its parent
-        draggedCard = cardComponent.createObject(bgCanvas.cardLayer, {
+        draggedCard = cardComponent.createObject(bgCanvas.nodeLayer, {
                                                      "x": root.mapToItem(
-                                                              bgCanvas.cardLayer,
+                                                              bgCanvas.nodeLayer,
                                                               mouse.x,
                                                               mouse.y).x - onPressedMouse.x,
                                                      "y": root.mapToItem(
-                                                              bgCanvas.cardLayer,
+                                                              bgCanvas.nodeLayer,
                                                               mouse.x,
                                                               mouse.y).y - onPressedMouse.y
                                                  })
@@ -51,9 +51,9 @@ function continueDrag(mouse) {
     if (draggedCard == null)
         return
 
-    draggedCard.x = root.mapToItem(bgCanvas.cardLayer, mouse.x,
+    draggedCard.x = root.mapToItem(bgCanvas.nodeLayer, mouse.x,
                                    mouse.y).x - onPressedMouse.x
-    draggedCard.y = root.mapToItem(bgCanvas.cardLayer, mouse.x,
+    draggedCard.y = root.mapToItem(bgCanvas.nodeLayer, mouse.x,
                                    mouse.y).y - onPressedMouse.y
 }
 

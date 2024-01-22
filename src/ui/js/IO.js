@@ -14,14 +14,14 @@ function loadCanvas(canvasID) {
     CommandManager.clearRedoStack()
 
     // unload previous canvas, load next canvas
-    unload(bgCanvas.cardLayer)
+    unload(bgCanvas.nodeLayer)
     load(canvasID)
 }
 
-// unload all cards inside the cardLayer, because cardLayer is the container of all cards
-function unload(cardLayer) {
-    for (var i = 0; i < cardLayer.children.length; i++)
-        cardLayer.children[i].destroy()
+// unload all cards inside the nodeLayer, because nodeLayer is the container of all cards
+function unload(nodeLayer) {
+    for (var i = 0; i < nodeLayer.children.length; i++)
+        nodeLayer.children[i].destroy()
 }
 
 function load(canvasID) {
@@ -66,7 +66,7 @@ function createCard(cardComponent, cardID) {
     // create card from the loaded component
     if (cardComponent.status === Component.Ready) {
         // set card layer as its parent
-        var card = cardComponent.createObject(bgCanvas.cardLayer, {
+        var card = cardComponent.createObject(bgCanvas.nodeLayer, {
                                                   "x": CardManager.x(cardID),
                                                   "y": CardManager.y(cardID),
                                                   "z": CardManager.z(cardID),
@@ -81,11 +81,11 @@ function createCard(cardComponent, cardID) {
 
 /*--------------------------query system---------------------------*/
 function getCardById(cardID) {
-    var cardLayer = bgCanvas.cardLayer
-    for (var i = 0; i < cardLayer.children.length; i++) {
-        var currentID = cardLayer.children[i].cardID
+    var nodeLayer = bgCanvas.nodeLayer
+    for (var i = 0; i < nodeLayer.children.length; i++) {
+        var currentID = nodeLayer.children[i].cardID
         if (currentID === cardID)
-            return cardLayer.children[i]
+            return nodeLayer.children[i]
     }
 }
 
