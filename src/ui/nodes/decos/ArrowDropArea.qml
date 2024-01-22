@@ -22,7 +22,7 @@ Item {
                                    drag.source.x = arrowDropArea.parent.x - drag.source.parent.x
                                    drag.source.y = arrowDropArea.parent.y - drag.source.parent.y
                                }
-            onEntered: parent.color = "#66000000"
+            onEntered: parent.color = "#22000000"
             onExited: parent.color = "transparent"
             onDropped: drop => {
                            parent.color = "transparent"

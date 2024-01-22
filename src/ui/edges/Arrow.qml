@@ -1,20 +1,22 @@
 import QtQuick
 import QtQuick.Shapes
+import Qt5Compat.GraphicalEffects
 import MemoPad.CardManager
 import "../js/IO.js" as IO
+import "decos"
 
-Shape {
+Item {
     id: arrow
-    width: Math.abs(arcToX - arcFromX)
-    height: Math.abs(arcToY - arcFromY)
-    antialiasing: true
-    smooth: true
+    containmentMask: arcArea
 
     property string cardID
     property bool created: false
     property bool loaded: false
-    property bool selected: false
+    property bool selected: arrow.focus
 
+    Component.onCompleted: {
+        arrowHeadDirection = east
+    }
     onCreatedChanged: {
         cardID = CardManager.createCard("arrow")
         IO.saveTransform(cardID, arrow, false)
@@ -23,7 +25,32 @@ Shape {
 
     }
     onSelectedChanged: {
+        controlCircle.visible = selected
+        editBar.visible = selected
+        arcAreaPath.fillColor = selected ? "#22000000" : "transparent"
+    }
 
+    HoverHandler {
+        id: hoverHandler
+        cursorShape: Qt.OpenHandCursor
+        onHoveredChanged: {
+            if (!selected) {
+                controlCircle.visible = hovered ? true : false
+                arcAreaPath.fillColor = hovered ? "#22000000" : "transparent"
+            }
+        }
+    }
+
+    TapHandler {
+        id: tapHandler
+        onTapped: {
+            arrow.forceActiveFocus()
+        }
+    }
+
+    DragHandler {
+        id: dragHandler
+        target: arrow
     }
 
     property string fromCardID: ""
@@ -53,8 +80,8 @@ Shape {
         }
     }
 
-    property alias arrowFromX: startCircle.x
-    property alias arrowFromY: startCircle.y
+    property alias arrowFromX: arrow.x
+    property alias arrowFromY: arrow.y
     property alias arrowToX: arrowhead.x
     property alias arrowToY: arrowhead.y
 
@@ -86,12 +113,11 @@ Shape {
     property int northeast: 315
     property alias arrowHeadDirection: rotation.angle
 
-    Component.onCompleted: arrowHeadDirection = east
-
     Item {
         id: startCircle
         x: arcFromX
         y: arcFromY
+        z: 99
         width: triangleHigh
         height: triangleHigh
         Rectangle {
@@ -115,8 +141,10 @@ Shape {
         id: controlCircle
         x: midwayX
         y: midwayY
+        z: 99
         width: triangleHigh
         height: triangleHigh
+        visible: hoverHandler.hovered
         Rectangle {
             x: -parent.width / 2
             y: -parent.height / 2
@@ -128,7 +156,11 @@ Shape {
                 anchors.fill: parent
                 drag.target: controlCircle
                 hoverEnabled: true
-                onEntered: cursorShape = Qt.OpenHandCursor
+                onEntered: {
+                    cursorShape = Qt.OpenHandCursor
+                    dragHandler.enabled = false
+                }
+                onExited: dragHandler.enabled = true
             }
         }
         onXChanged: {
@@ -149,24 +181,146 @@ Shape {
         }
     }
 
-    ShapePath {
-        id: arcShapePath
-        strokeColor: arrowColor
-        strokeWidth: arrowWidth
-        fillColor: "transparent"
-        capStyle: ShapePath.RoundCap
+    Shape {
+        id: arcShape
+        antialiasing: true
+        smooth: true
 
-        startX: startCircle.x
-        startY: startCircle.y
-        pathElements: [
-            PathQuad {
-                id: arc
-                x: arrowhead.x
-                y: arrowhead.y
-                controlX: controlCircle.x
-                controlY: controlCircle.y
-            }
-        ]
+        ShapePath {
+            id: arcShapePath
+            strokeColor: arrowColor
+            strokeWidth: arrowWidth
+            fillColor: "transparent"
+            capStyle: ShapePath.RoundCap
+
+            startX: startCircle.x
+            startY: startCircle.y
+            pathElements: [
+                PathQuad {
+                    id: arc
+                    x: arrowhead.x
+                    y: arrowhead.y
+                    controlX: controlCircle.x
+                    controlY: controlCircle.y
+                }
+            ]
+        }
+    }
+
+    function isPointNearArc(mouseX, mouseY) {
+        var numSamples = 10
+        var distanceThreshold = 10
+        for (var t = 0; t < 1; t += 1 / numSamples) {
+            var posX = arcShapePath.pointAtPercent(t).x
+            var posY = arcShapePath.pointAtPercent(t).y
+            var distance = Math.sqrt(Math.pow(posX - mouseX,
+                                              2) + Math.pow(posY - mouseY, 2))
+            if (distance < distanceThreshold)
+                return true
+        }
+        return false
+    }
+
+    property real radian1: Math.atan2(arrowhead.y - startCircle.y,
+                                      arrowhead.x - startCircle.x)
+    property real radian2: Math.atan2(arrowhead.y - controlCircle.y,
+                                      arrowhead.x - controlCircle.x)
+    property real radian3: Math.atan2(controlCircle.y - startCircle.y,
+                                      controlCircle.x - startCircle.x)
+    property real distance: Math.sqrt(Math.pow(arrowhead.x - startCircle.x,
+                                               2) + Math.pow(
+                                          arrowhead.y - startCircle.y, 2))
+    Shape {
+        id: arcArea
+        antialiasing: true
+        smooth: true
+        containsMode: Shape.FillContains
+
+        ShapePath {
+            id: arcAreaPath
+            strokeColor: "transparent"
+            strokeWidth: 1
+            fillColor: "transparent"
+            startX: startCircle.x
+            startY: startCircle.y
+
+            // when the control point cross through the segment between startCircle and arrowhead
+            // it is necessary to switch between different vertices
+            pathElements: [
+                PathLine {
+                    x: radian3 - radian1 >= 0 ? startCircle.x + 10 / 2 * Math.sin(
+                                                    radian1) : startCircle.x - 10 / 2 * Math.sin(
+                                                    radian3)
+                    y: radian3 - radian1 >= 0 ? startCircle.y - 10 / 2 * Math.cos(
+                                                    radian1) : startCircle.y + 10 / 2 * Math.cos(
+                                                    radian3)
+                },
+                PathLine {
+                    x: radian3 - radian1 >= 0 ? arrowhead.x + 10 / 2 * Math.sin(
+                                                    radian1) : arrowhead.x - 10 / 2 * Math.sin(
+                                                    radian2)
+                    y: radian3 - radian1 >= 0 ? arrowhead.y - 10 / 2 * Math.cos(
+                                                    radian1) : arrowhead.y + 10 / 2 * Math.cos(
+                                                    radian2)
+                },
+                PathLine {
+                    x: radian3 - radian1 >= 0 ? arrowhead.x - 10 / 2 * Math.sin(
+                                                    radian2) : arrowhead.x + 10 / 2 * Math.sin(
+                                                    radian1)
+                    y: radian3 - radian1 >= 0 ? arrowhead.y + 10 / 2 * Math.cos(
+                                                    radian2) : arrowhead.y - 10 / 2 * Math.cos(
+                                                    radian1)
+                },
+                PathLine {
+                    x: radian3 - radian1 >= 0 ? controlCircle.x - 10 / 2 * Math.sin(
+                                                    radian2) : controlCircle.x - 10 / 2 * Math.sin(
+                                                    radian3)
+                    y: radian3 - radian1 >= 0 ? controlCircle.y + 10 / 2 * Math.cos(
+                                                    radian2) : controlCircle.y + 10 / 2 * Math.cos(
+                                                    radian3)
+                },
+                PathLine {
+                    x: radian3 - radian1 >= 0 ? controlCircle.x - 10 / 2 * Math.sin(
+                                                    radian3) : controlCircle.x - 10 / 2 * Math.sin(
+                                                    radian2)
+                    y: radian3 - radian1 >= 0 ? controlCircle.y + 10 / 2 * Math.cos(
+                                                    radian3) : controlCircle.y + 10 / 2 * Math.cos(
+                                                    radian2)
+                },
+                PathLine {
+                    x: radian3 - radian1 >= 0 ? startCircle.x - 10 / 2 * Math.sin(
+                                                    radian3) : startCircle.x + 10 / 2 * Math.sin(
+                                                    radian1)
+                    y: radian3 - radian1 >= 0 ? startCircle.y + 10 / 2 * Math.cos(
+                                                    radian3) : startCircle.y - 10 / 2 * Math.cos(
+                                                    radian1)
+                }
+            ]
+        }
+
+        ShapePath {
+            id: arcAreaTriangle
+            strokeColor: "transparent"
+            strokeWidth: 1
+            fillColor: "transparent"
+            //fillColor: hoverHandler.hovered ? "#22000000" : "transparent"
+            startX: startCircle.x
+            startY: startCircle.y
+            pathElements: [
+                PathLine {
+                    x: controlCircle.x
+                    y: controlCircle.y
+                },
+                PathLine {
+                    x: arrowhead.x
+                    y: arrowhead.y
+                },
+                PathLine {
+                    x: startCircle.x
+                    y: startCircle.y
+                }
+            ]
+        }
     }
 
     Shape {
@@ -264,5 +418,11 @@ Shape {
         arrowHeadDirection = Math.atan2(
                     (arrowhead.y - controlCircle.y),
                     (arrowhead.x - controlCircle.x)) * 180 / Math.PI
+    }
+
+    ArrowEditBar {
+        id: editBar
+        x: controlCircle.x - width / 2
+        y: radian3 - radian1 >= 0 ? controlCircle.y + 20 : controlCircle.y - 20 - height
     }
 }
