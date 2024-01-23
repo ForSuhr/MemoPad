@@ -54,7 +54,10 @@ Pane {
             MouseArea {
                 anchors.fill: parent
                 hoverEnabled: true
-                onClicked: arrowStrokeStyle = "solid"
+                onClicked: {
+                    arrowStrokeStyle = "solid"
+                    IO.saveStrokeStyle(cardID, arrow)
+                }
                 onEntered: {
                     scaleUp.target = parent
                     scaleUp.start()
@@ -74,7 +77,10 @@ Pane {
             MouseArea {
                 anchors.fill: parent
                 hoverEnabled: true
-                onClicked: arrowStrokeStyle = "dash"
+                onClicked: {
+                    arrowStrokeStyle = "dash"
+                    IO.saveStrokeStyle(cardID, arrow)
+                }
                 onEntered: {
                     scaleUp.target = parent
                     scaleUp.start()

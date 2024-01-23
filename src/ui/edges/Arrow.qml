@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Shapes
 import Qt5Compat.GraphicalEffects
 import MemoPad.CardManager
+import MemoPad.CommandManager
 import "../js/IO.js" as IO
 import "decos"
 
@@ -22,7 +23,21 @@ Item {
         IO.saveTransform(cardID, arrow, false)
     }
     onLoadedChanged: {
-
+        fromCard = IO.getCardById(fromCardID)
+        fromDirection = CardManager.fromCardDirection(cardID)
+        toCard = IO.getCardById(toCardID)
+        toDirection = CardManager.toCardDirection(cardID)
+        arrowControlX = CardManager.controlX(cardID)
+        arrowControlY = CardManager.controlY(cardID)
+        if (fromCard === undefined) {
+            arrowFromX = CardManager.fromX(cardID)
+            arrowFromY = CardManager.fromY(cardID)
+        }
+        if (toCard === undefined) {
+            arrowToX = CardManager.toX(cardID)
+            arrowToY = CardManager.toY(cardID)
+        }
+        arrowStrokeStyle = CardManager.strokeStyle(cardID)
     }
     onSelectedChanged: {
         controlCircle.visible = selected
@@ -51,6 +66,12 @@ Item {
     DragHandler {
         id: dragHandler
         target: arrow
+        // onActiveChanged is equivalent to
+        // onPressed(active=true) and onReleased(active=false)
+        onActiveChanged: {
+            if (!active)
+                IO.savePos(cardID, arrow)
+        }
     }
 
     property alias fromCardID: startCircle.cardID
@@ -165,10 +186,12 @@ Item {
         updateArrowHeadPos()
     }
 
-    property alias arrowFromX: arrow.x
-    property alias arrowFromY: arrow.y
+    property alias arrowFromX: startCircle.x
+    property alias arrowFromY: startCircle.y
     property alias arrowToX: arrowhead.x
     property alias arrowToY: arrowhead.y
+    property alias arrowControlX: controlCircle.x
+    property alias arrowControlY: controlCircle.y
 
     property real arcFromX: 0
     property real arcFromY: 0
@@ -255,6 +278,8 @@ Item {
                     isDragging = false
                     if (startCircle.Drag.drop() === Qt.MoveAction)
                         fromCard = IO.getCardById(fromCardID)
+                    IO.saveFromCard(cardID, arrow)
+                    IO.saveArrowPos(cardID, arrow)
                 }
             }
         }
@@ -285,6 +310,7 @@ Item {
                     dragHandler.enabled = false
                 }
                 onExited: dragHandler.enabled = true
+                onReleased: IO.saveArrowPos(cardID, arrow)
             }
         }
         onXChanged: {
@@ -536,6 +562,8 @@ Item {
                 isDragging = false
                 if (arrowhead.Drag.drop() === Qt.MoveAction)
                     toCard = IO.getCardById(toCardID)
+                IO.saveToCard(cardID, arrow)
+                IO.saveArrowPos(cardID, arrow)
             }
         }
 

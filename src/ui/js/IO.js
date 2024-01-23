@@ -169,12 +169,37 @@ function saveCardBackgroundColor(cardID, card, stackCommand = true) {
     }
 }
 
+// canvas card
 function saveCanvasID(cardID, card, stackCommand = true) {
     CardManager.setCanvasID(cardID, card.canvasID)
 }
 
 function saveCanvasName(cardID, card, stackCommand = true) {
     CardManager.setCanvasName(cardID, card.canvasName)
+}
+
+// arrow card
+function saveFromCard(cardID, card, stackCommand = true) {
+    CardManager.setFromCardID(cardID, card.fromCardID)
+    CardManager.setFromCardDirection(cardID, card.fromCardDirection)
+}
+
+function saveToCard(cardID, card, stackCommand = true) {
+    CardManager.setToCardID(cardID, card.toCardID)
+    CardManager.setToCardDirection(cardID, card.toCardDirection)
+}
+
+function saveArrowPos(cardID, card, stackCommand = true) {
+    CardManager.setFromX(cardID, card.arrowFromX)
+    CardManager.setFromY(cardID, card.arrowFromY)
+    CardManager.setToX(cardID, card.arrowToX)
+    CardManager.setToY(cardID, card.arrowToY)
+    CardManager.setControlX(cardID, card.arrowControlX)
+    CardManager.setControlY(cardID, card.arrowControlY)
+}
+
+function saveStrokeStyle(cardID, card, stackCommand = true) {
+    CardManager.setStrokeStyle(cardID, card.arrowStrokeStyle)
 }
 
 /*--------------------------canvas------------------------------*/
