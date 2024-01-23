@@ -268,29 +268,30 @@ Item {
                 hoverEnabled: true
                 property real initialX
                 property real initialY
-                property bool isDragging: false
+                property bool isBeyond: false
                 onEntered: cursorShape = Qt.OpenHandCursor
                 onPressed: mouse => {
-                               initialX = mouse.x
-                               initialY = mouse.y
-                               isDragging = true
+                               initialX = arrowFromX
+                               initialY = arrowFromY
                            }
                 onPositionChanged: mouse => {
-                                       if (isDragging) {
+                                       if (drag.active) {
                                            var distance = Math.sqrt(
-                                               Math.pow(mouse.x - initialX,
+                                               Math.pow(arrowFromX - initialX,
                                                         2) + Math.pow(
-                                                   mouse.y - initialY, 2))
-                                           if (distance > 5) {
-                                               fromCardID = ""
-                                               fromDirection = ""
-                                               fromCard = undefined
+                                                   arrowFromY - initialY, 2))
+                                           if (distance > 20) {
+                                               isBeyond = true
                                            }
                                        }
                                    }
-
                 onReleased: {
-                    isDragging = false
+                    if (isBeyond) {
+                        isBeyond = false
+                        fromCardID = ""
+                        fromDirection = ""
+                        fromCard = undefined
+                    }
                     if (startCircle.Drag.drop() === Qt.MoveAction)
                         fromCard = IO.getNodeById(fromCardID)
                     IO.saveFromCard(cardID, arrow)
@@ -554,28 +555,30 @@ Item {
             hoverEnabled: true
             property real initialX
             property real initialY
-            property bool isDragging: false
+            property bool isBeyond: false
             onEntered: cursorShape = Qt.OpenHandCursor
             onPressed: mouse => {
-                           initialX = mouse.x
-                           initialY = mouse.y
-                           isDragging = true
+                           initialX = arrowToX
+                           initialY = arrowToY
                        }
             onPositionChanged: mouse => {
-                                   if (isDragging) {
+                                   if (drag.active) {
                                        var distance = Math.sqrt(
-                                           Math.pow(mouse.x - initialX,
+                                           Math.pow(arrowToX - initialX,
                                                     2) + Math.pow(
-                                               mouse.y - initialY, 2))
-                                       if (distance > 5) {
-                                           toCardID = ""
-                                           toDirection = ""
-                                           toCard = undefined
+                                               arrowToY - initialY, 2))
+                                       if (distance > 20) {
+                                           isBeyond = true
                                        }
                                    }
                                }
             onReleased: {
-                isDragging = false
+                if (isBeyond) {
+                    isBeyond = false
+                    toCardID = ""
+                    toDirection = ""
+                    toCard = undefined
+                }
                 if (arrowhead.Drag.drop() === Qt.MoveAction)
                     toCard = IO.getNodeById(toCardID)
                 IO.saveToCard(cardID, arrow)
