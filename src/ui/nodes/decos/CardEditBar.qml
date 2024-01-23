@@ -12,7 +12,7 @@ Pane {
     property int itemNum: 6
     property string borderColor: "gainsboro"
 
-    width: 32 * itemNum
+    width: 32 * itemNum + 16
     height: 32
     anchors.horizontalCenter: cardEditBar.parent.horizontalCenter
     anchors.bottom: cardEditBar.parent.top
@@ -41,7 +41,7 @@ Pane {
     }
 
     RowLayout {
-        width: 32 * itemNum - 16
+        width: 24 * itemNum + 16
         height: 24
         anchors.verticalCenter: parent.verticalCenter
         anchors.horizontalCenter: parent.horizontalCenter

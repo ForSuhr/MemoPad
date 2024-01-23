@@ -550,5 +550,6 @@ Item {
         id: editBar
         x: controlCircle.x - width / 2
         y: radian3 - radian1 >= 0 ? controlCircle.y + 20 : controlCircle.y - 20 - height
+        itemNum: 1
     }
 }
