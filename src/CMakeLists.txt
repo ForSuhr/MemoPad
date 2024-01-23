@@ -25,15 +25,17 @@ qt_add_qml_module(MemoPad
         ui/assets/themes/lumos/note.svg
         ui/assets/themes/lumos/image.svg
         ui/assets/themes/lumos/arrow.svg
+        ui/assets/themes/lumos/arrow-solid.svg
+        ui/assets/themes/lumos/arrow-dash.svg
         ui/assets/themes/lumos/trash.svg
-        ui/assets/themes/lumos/uploadImage.svg
+        ui/assets/themes/lumos/upload-image.svg
         ui/assets/themes/lumos/gear.svg
         ui/assets/themes/lumos/palette.svg
         ui/assets/themes/lumos/undo.svg
         ui/assets/themes/lumos/redo.svg
         ui/assets/themes/lumos/back.svg
-        ui/assets/themes/lumos/doorClosed.svg
-        ui/assets/themes/lumos/doorOpen.svg
+        ui/assets/themes/lumos/door-closed.svg
+        ui/assets/themes/lumos/door-open.svg
         #[[window icon]]
         ui/assets/icon/MemoPad.png
     SOURCES

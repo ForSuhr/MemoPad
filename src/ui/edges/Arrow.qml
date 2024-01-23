@@ -185,6 +185,7 @@ Item {
     property string circleColor: "black"
     property string arrowColor: "gray"
     property string arrowHeadColor: "black"
+    property string arrowStrokeStyle: "solid"
     property int arrowWidth: 4
     property int arcRadiusX: 100
     property int arcRadiusY: 100
@@ -315,6 +316,7 @@ Item {
             strokeWidth: arrowWidth
             fillColor: "transparent"
             capStyle: ShapePath.RoundCap
+            strokeStyle: arrowStrokeStyle === "dash" ? ShapePath.DashLine : ShapePath.SolidLine
 
             startX: startCircle.x
             startY: startCircle.y
@@ -550,6 +552,6 @@ Item {
         id: editBar
         x: controlCircle.x - width / 2
         y: radian3 - radian1 >= 0 ? controlCircle.y + 20 : controlCircle.y - 20 - height
-        itemNum: 1
+        itemNum: 3
     }
 }

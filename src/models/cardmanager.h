@@ -78,6 +78,8 @@ public:
     Q_INVOKABLE void setControlX(QString cardID, qreal controlX);
     Q_INVOKABLE qreal controlY(QString cardID);
     Q_INVOKABLE void setControlY(QString cardID, qreal controlY);
+    Q_INVOKABLE QString strokeStyle(QString cardID);
+    Q_INVOKABLE void setStrokeStyle(QString cardID, QString strokeStyle);
 
     QMap<QString, Card*> m_cardMap = {};
     QMap<QString, Canvas*> m_canvasMap = {};

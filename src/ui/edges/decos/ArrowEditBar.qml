@@ -50,6 +50,46 @@ Pane {
         ArrowEditBarItem {
             width: parent.height
             height: parent.height
+            imageSource: IconSet.arrowSolid
+            MouseArea {
+                anchors.fill: parent
+                hoverEnabled: true
+                onClicked: arrowStrokeStyle = "solid"
+                onEntered: {
+                    scaleUp.target = parent
+                    scaleUp.start()
+                    cursorShape = Qt.PointingHandCursor
+                }
+                onExited: {
+                    scaleDown.target = parent
+                    scaleDown.start()
+                    cursorShape = Qt.ArrowCursor
+                }
+            }
+        }
+        ArrowEditBarItem {
+            width: parent.height
+            height: parent.height
+            imageSource: IconSet.arrowDash
+            MouseArea {
+                anchors.fill: parent
+                hoverEnabled: true
+                onClicked: arrowStrokeStyle = "dash"
+                onEntered: {
+                    scaleUp.target = parent
+                    scaleUp.start()
+                    cursorShape = Qt.PointingHandCursor
+                }
+                onExited: {
+                    scaleDown.target = parent
+                    scaleDown.start()
+                    cursorShape = Qt.ArrowCursor
+                }
+            }
+        }
+        ArrowEditBarItem {
+            width: parent.height
+            height: parent.height
             imageSource: IconSet.trash
             MouseArea {
                 anchors.fill: parent

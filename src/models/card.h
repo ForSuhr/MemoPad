@@ -34,6 +34,7 @@ public:
     qreal m_toY;
     qreal m_controlX;
     qreal m_controlY;
+    QString m_strokeStyle;
 };
 
 #endif // CARD_H

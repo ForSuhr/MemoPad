@@ -331,6 +331,17 @@ void CardManager::setControlY(QString cardID, qreal controlY)
     m_IO->setValue(m_currentCanvasID + "/" + cardID + "/controlY", controlY);
 }
 
+QString CardManager::strokeStyle(QString cardID)
+{
+    return m_cardMap[cardID]->m_strokeStyle;
+}
+
+void CardManager::setStrokeStyle(QString cardID, QString strokeStyle)
+{
+    m_cardMap[cardID]->m_strokeStyle = strokeStyle;
+    m_IO->setValue(m_currentCanvasID + "/" + cardID + "/strokeStyle", strokeStyle);
+}
+
 QString CardManager::createCard(QString cardType)
 {
     QString cardID = uuid();
@@ -407,6 +418,7 @@ void CardManager::loadCards()
         card->m_toY = m_IO->value(cardID + "/toY").toReal();
         card->m_controlX = m_IO->value(cardID + "/controlX").toReal();
         card->m_controlY = m_IO->value(cardID + "/controlY").toReal();
+        card->m_strokeStyle = m_IO->value(cardID + "/strokeStyle").toString();
         m_cardMap[cardID] = card;
     }
     m_IO->endGroup();
