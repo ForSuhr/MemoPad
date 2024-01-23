@@ -27,7 +27,7 @@ ResizableItem {
     property alias selected: imageFrame.focus
 
     onCreatedChanged: {
-        id = CardManager.createCard("image")
+        cardID = CardManager.createCard("image")
         Snap.snap(root)
         IO.saveTransform(cardID, root, false)
         IO.saveCardBackgroundColor(cardID, root, false)
