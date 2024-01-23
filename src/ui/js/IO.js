@@ -28,6 +28,7 @@ function load(canvasID) {
     CardManager.loadCanvas(canvasID)
     var cardNum = CardManager.cardNum()
     var cardIDs = CardManager.cardIDs()
+    // load nodes firstly
     for (var i = 0; i < cardNum; i++) {
         var cardID = cardIDs[i]
         var cardType = CardManager.cardType(cardID)
@@ -41,6 +42,13 @@ function load(canvasID) {
         case "image":
             loadComponent(imageCardComponent, imageCardComponentFile, cardID)
             break
+        }
+    }
+    // load edges secondly
+    for (i = 0; i < cardNum; i++) {
+        cardID = cardIDs[i]
+        cardType = CardManager.cardType(cardID)
+        switch (cardType) {
         case "arrow":
             loadComponent(arrowComponent, arrowComponentFile, cardID)
             break
@@ -63,10 +71,14 @@ function loadComponent(cardComponent, cardComponentFile, cardID) {
 }
 
 function createCard(cardComponent, cardID) {
+    // determine parent item, which is the container for nodes and edges
+    var cardType = CardManager.cardType(cardID)
+    var parentItem = cardType === "arrow" ? bgCanvas.edgeLayer : bgCanvas.nodeLayer
+
     // create card from the loaded component
     if (cardComponent.status === Component.Ready) {
         // set card layer as its parent
-        var card = cardComponent.createObject(bgCanvas.nodeLayer, {
+        var card = cardComponent.createObject(parentItem, {
                                                   "x": CardManager.x(cardID),
                                                   "y": CardManager.y(cardID),
                                                   "z": CardManager.z(cardID),
@@ -80,12 +92,21 @@ function createCard(cardComponent, cardID) {
 }
 
 /*--------------------------query system---------------------------*/
-function getCardById(cardID) {
-    var nodeLayer = bgCanvas.nodeLayer
-    for (var i = 0; i < nodeLayer.children.length; i++) {
-        var currentID = nodeLayer.children[i].cardID
+function getNodeById(cardID) {
+    var parentItem = bgCanvas.nodeLayer
+    for (var i = 0; i < parentItem.children.length; i++) {
+        var currentID = parentItem.children[i].cardID
         if (currentID === cardID)
-            return nodeLayer.children[i]
+            return parentItem.children[i]
+    }
+}
+
+function getEdgeById(cardID) {
+    var parentItem = bgCanvas.edgeLayer
+    for (var i = 0; i < parentItem.children.length; i++) {
+        var currentID = parentItem.children[i].cardID
+        if (currentID === cardID)
+            return parentItem.children[i]
     }
 }
 
@@ -181,12 +202,12 @@ function saveCanvasName(cardID, card, stackCommand = true) {
 // arrow card
 function saveFromCard(cardID, card, stackCommand = true) {
     CardManager.setFromCardID(cardID, card.fromCardID)
-    CardManager.setFromCardDirection(cardID, card.fromCardDirection)
+    CardManager.setFromCardDirection(cardID, card.fromDirection)
 }
 
 function saveToCard(cardID, card, stackCommand = true) {
     CardManager.setToCardID(cardID, card.toCardID)
-    CardManager.setToCardDirection(cardID, card.toCardDirection)
+    CardManager.setToCardDirection(cardID, card.toDirection)
 }
 
 function saveArrowPos(cardID, card, stackCommand = true) {

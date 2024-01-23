@@ -11,6 +11,8 @@ Item {
     y: -parent.height / 2
 
     property alias nodeLayer: nodeLayer
+    property alias edgeLayer: edgeLayer
+
     property real dotSize: Globals.dotSize
     property int dotInterval: Globals.dotInterval
     property string dotColor: "gainsboro"

@@ -23,9 +23,11 @@ Item {
         IO.saveTransform(cardID, arrow, false)
     }
     onLoadedChanged: {
-        fromCard = IO.getCardById(fromCardID)
+        fromCardID = CardManager.fromCardID(cardID)
+        fromCard = IO.getNodeById(fromCardID)
         fromDirection = CardManager.fromCardDirection(cardID)
-        toCard = IO.getCardById(toCardID)
+        toCardID = CardManager.toCardID(cardID)
+        toCard = IO.getNodeById(toCardID)
         toDirection = CardManager.toCardDirection(cardID)
         arrowControlX = CardManager.controlX(cardID)
         arrowControlY = CardManager.controlY(cardID)
@@ -38,6 +40,8 @@ Item {
             arrowToY = CardManager.toY(cardID)
         }
         arrowStrokeStyle = CardManager.strokeStyle(cardID)
+        updateStartCirclePos()
+        updateArrowHeadPos()
     }
     onSelectedChanged: {
         controlCircle.visible = selected
@@ -69,8 +73,18 @@ Item {
         // onActiveChanged is equivalent to
         // onPressed(active=true) and onReleased(active=false)
         onActiveChanged: {
-            if (!active)
+            if (!active) {
+                fromCardID = ""
+                fromDirection = ""
+                fromCard = undefined
+                toCardID = ""
+                toDirection = ""
+                toCard = undefined
                 IO.savePos(cardID, arrow)
+                IO.saveArrowPos(cardID, arrow)
+                IO.saveFromCard(cardID, arrow)
+                IO.saveToCard(cardID, arrow)
+            }
         }
     }
 
@@ -269,6 +283,7 @@ Item {
                                                    mouse.y - initialY, 2))
                                            if (distance > 5) {
                                                fromCardID = ""
+                                               fromDirection = ""
                                                fromCard = undefined
                                            }
                                        }
@@ -277,7 +292,7 @@ Item {
                 onReleased: {
                     isDragging = false
                     if (startCircle.Drag.drop() === Qt.MoveAction)
-                        fromCard = IO.getCardById(fromCardID)
+                        fromCard = IO.getNodeById(fromCardID)
                     IO.saveFromCard(cardID, arrow)
                     IO.saveArrowPos(cardID, arrow)
                 }
@@ -554,6 +569,7 @@ Item {
                                                mouse.y - initialY, 2))
                                        if (distance > 5) {
                                            toCardID = ""
+                                           toDirection = ""
                                            toCard = undefined
                                        }
                                    }
@@ -561,7 +577,7 @@ Item {
             onReleased: {
                 isDragging = false
                 if (arrowhead.Drag.drop() === Qt.MoveAction)
-                    toCard = IO.getCardById(toCardID)
+                    toCard = IO.getNodeById(toCardID)
                 IO.saveToCard(cardID, arrow)
                 IO.saveArrowPos(cardID, arrow)
             }

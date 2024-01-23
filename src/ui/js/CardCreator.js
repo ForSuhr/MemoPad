@@ -30,16 +30,20 @@ function loadComponent(mouse) {
 }
 
 function createCard(mouse) {
+    // determine parent item, which is the container for nodes and edges
+    var parentItem = root.componentFile
+            === "../edges/Arrow.qml" ? bgCanvas.edgeLayer : bgCanvas.nodeLayer
+
     // create card from the loaded component
     if (cardComponent.status === Component.Ready && draggedCard == null) {
         // set card layer as its parent
-        draggedCard = cardComponent.createObject(bgCanvas.nodeLayer, {
+        draggedCard = cardComponent.createObject(parentItem, {
                                                      "x": root.mapToItem(
-                                                              bgCanvas.nodeLayer,
+                                                              parentItem,
                                                               mouse.x,
                                                               mouse.y).x - onPressedMouse.x,
                                                      "y": root.mapToItem(
-                                                              bgCanvas.nodeLayer,
+                                                              parentItem,
                                                               mouse.x,
                                                               mouse.y).y - onPressedMouse.y
                                                  })
