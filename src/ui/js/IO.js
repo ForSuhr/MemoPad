@@ -14,14 +14,15 @@ function loadCanvas(canvasID) {
     CommandManager.clearRedoStack()
 
     // unload previous canvas, load next canvas
+    unload(bgCanvas.edgeLayer)
     unload(bgCanvas.nodeLayer)
     load(canvasID)
 }
 
 // unload all cards inside the nodeLayer, because nodeLayer is the container of all cards
-function unload(nodeLayer) {
-    for (var i = 0; i < nodeLayer.children.length; i++)
-        nodeLayer.children[i].destroy()
+function unload(layer) {
+    for (var i = 0; i < layer.children.length; i++)
+        layer.children[i].destroy()
 }
 
 function load(canvasID) {
