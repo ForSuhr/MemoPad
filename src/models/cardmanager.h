@@ -53,6 +53,8 @@ public:
     Q_INVOKABLE void setCanvasName(QString cardID, QString canvasName);
     Q_INVOKABLE QString currentCanvasID();
     Q_INVOKABLE QString upperCanvasID();
+    Q_INVOKABLE void setCanvasColor(QString canvasID, QString canvasColor);
+    Q_INVOKABLE QString canvasColor(QString canvasID);
     Q_INVOKABLE void setCurrentCanvasColor(QString canvasColor);
     Q_INVOKABLE QString currentCanvasColor();
 

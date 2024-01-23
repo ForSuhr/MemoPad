@@ -27,6 +27,8 @@ ResizableItem {
     property int borderWidth: 2
     property int cornerRadius: 10
 
+    property string newCanvasColor: "floralwhite"
+
     property bool created: false
     property bool loaded: false
     property alias selected: teleport.focus
@@ -39,6 +41,7 @@ ResizableItem {
         IO.saveCanvasID(cardID, root, false)
         IO.saveCanvasName(cardID, root, false)
         IO.saveCardBackgroundColor(cardID, root, false)
+        IO.saveCanvasColor(canvasID, newCanvasColor)
     }
     onLoadedChanged: {
         root.width = CardManager.width(cardID)
@@ -152,6 +155,7 @@ ResizableItem {
     CardEditBar {
         id: editBar
         borderColor: borderColor
+        itemNum: 1
     }
 
     CardPalette {

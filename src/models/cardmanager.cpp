@@ -201,14 +201,24 @@ QString CardManager::upperCanvasID()
     return m_upperCanvasID;
 }
 
+void CardManager::setCanvasColor(QString canvasID, QString canvasColor)
+{
+    m_IO->setValue(canvasID + "/" + "canvasColor", canvasColor);
+}
+
+QString CardManager::canvasColor(QString canvasID)
+{
+    return m_IO->value(canvasID + "/" + "canvasColor").toString();
+}
+
 void CardManager::setCurrentCanvasColor(QString canvasColor)
 {
-    m_IO->setValue(m_currentCanvasID + "/" + "/canvasColor", canvasColor);
+    m_IO->setValue(m_currentCanvasID + "/" + "canvasColor", canvasColor);
 }
 
 QString CardManager::currentCanvasColor()
 {
-    return m_IO->value(m_currentCanvasID + "/" + "/canvasColor").toString();
+    return m_IO->value(m_currentCanvasID + "/" + "canvasColor").toString();
 }
 
 QString CardManager::fromCardID(QString cardID)

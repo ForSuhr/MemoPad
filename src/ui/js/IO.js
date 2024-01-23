@@ -182,6 +182,10 @@ function saveCurrentCanvasColor(color, stackCommand = true) {
     CardManager.setCurrentCanvasColor(color)
 }
 
+function saveCanvasColor(canvasID, color, stackCommand = true) {
+    CardManager.setCanvasColor(canvasID, color)
+}
+
 /*---------------------------delete--------------------------------------*/
 function deleteCard(cardID, card) {
     CardManager.deleteCard(cardID)
