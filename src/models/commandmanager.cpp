@@ -87,3 +87,24 @@ void CommandManager::changeBackgroundColor(QString cardID, QString lastColor, QS
     execute(command);
     connect(command, &CommandChangeBackgroundColor::changeBackgroundColorSignal, this, &CommandManager::changeBackgroundColorSignal);
 }
+
+void CommandManager::changeFromCard(QString cardID, QString lastFromCardID, QString lastFromDirection, qreal lastFromX, qreal lastFromY, QString currentFromCardID, QString currentFromDirection, qreal currentFromX, qreal currentFromY)
+{
+    CommandChangeFromCard* command = new CommandChangeFromCard(cardID, lastFromCardID, lastFromDirection, lastFromX, lastFromY, currentFromCardID, currentFromDirection, currentFromX, currentFromY, this);
+    execute(command);
+    connect(command, &CommandChangeFromCard::changeFromCardSignal, this, &CommandManager::changeFromCardSignal);
+}
+
+void CommandManager::changeToCard(QString cardID, QString lastToCardID, QString lastToDirection, qreal lastToX, qreal lastToY, QString currentToCardID, QString currentToDirection, qreal currentToX, qreal currentToY)
+{
+    CommandChangeToCard* command = new CommandChangeToCard(cardID, lastToCardID, lastToDirection, lastToX, lastToY, currentToCardID, currentToDirection, currentToX, currentToY, this);
+    execute(command);
+    connect(command, &CommandChangeToCard::changeToCardSignal, this, &CommandManager::changeToCardSignal);
+}
+
+void CommandManager::changeArrowPos(QString cardID, qreal lastFromX, qreal lastFromY, qreal lastToX, qreal lastToY, qreal lastControlX, qreal lastControlY, qreal currentFromX, qreal currentFromY, qreal currentToX, qreal currentToY, qreal currentControlX, qreal currentControlY)
+{
+    CommandChangeArrowPos* command = new CommandChangeArrowPos(cardID, lastFromX, lastFromY, lastToX, lastToY, lastControlX, lastControlY, currentFromX, currentFromY, currentToX, currentToY, currentControlX, currentControlY, this);
+    execute(command);
+    connect(command, &CommandChangeArrowPos::changeArrowPosSignal, this, &CommandManager::changeArrowPosSignal);
+}

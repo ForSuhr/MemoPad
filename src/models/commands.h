@@ -182,4 +182,135 @@ private:
     QString m_currentColor;
 };
 
+class CommandChangeFromCard : public Command {
+    Q_OBJECT
+public:
+    CommandChangeFromCard(QString cardID, QString lastFromCardID, QString lastFromDirection, qreal lastFromX, qreal lastFromY, QString currentFromCardID, QString currentFromDirection, qreal currentFromX, qreal currentFromY, QObject* parent = nullptr)
+        : Command { cardID, parent }
+    {
+        m_cardID = cardID;
+        m_lastFromCardID = lastFromCardID;
+        m_lastFromDirection = lastFromDirection;
+        m_currentFromCardID = currentFromCardID;
+        m_currentFromDirection = currentFromDirection;
+        m_lastFromX = lastFromX;
+        m_lastFromY = lastFromY;
+        m_currentFromX = currentFromX;
+        m_currentFromY = currentFromY;
+    };
+
+    void undo() override
+    {
+        emit changeFromCardSignal(m_cardID, m_lastFromCardID, m_lastFromDirection, m_lastFromX, m_lastFromY);
+    };
+    void redo() override
+    {
+        emit changeFromCardSignal(m_cardID, m_currentFromCardID, m_currentFromDirection, m_currentFromX, m_currentFromY);
+    };
+
+signals:
+    void changeFromCardSignal(QString cardID, QString fromCardID, QString fromDirection, qreal fromX, qreal fromY);
+
+private:
+    QString m_cardID;
+    QString m_lastFromCardID;
+    QString m_lastFromDirection;
+    QString m_currentFromCardID;
+    QString m_currentFromDirection;
+    qreal m_lastFromX;
+    qreal m_lastFromY;
+    qreal m_currentFromX;
+    qreal m_currentFromY;
+};
+
+class CommandChangeToCard : public Command {
+    Q_OBJECT
+public:
+    CommandChangeToCard(QString cardID, QString lastToCardID, QString lastToDirection, qreal lastToX, qreal lastToY, QString currentToCardID, QString currentToDirection, qreal currentToX, qreal currentToY, QObject* parent = nullptr)
+        : Command { cardID, parent }
+    {
+        m_cardID = cardID;
+        m_lastToCardID = lastToCardID;
+        m_lastToDirection = lastToDirection;
+        m_currentToCardID = currentToCardID;
+        m_currentToDirection = currentToDirection;
+        m_lastToX = lastToX;
+        m_lastToY = lastToY;
+        m_currentToX = currentToX;
+        m_currentToY = currentToY;
+    };
+
+    void undo() override
+    {
+        emit changeToCardSignal(m_cardID, m_lastToCardID, m_lastToDirection, m_lastToX, m_lastToY);
+    };
+    void redo() override
+    {
+        emit changeToCardSignal(m_cardID, m_currentToCardID, m_currentToDirection, m_currentToX, m_currentToY);
+    };
+
+signals:
+    void changeToCardSignal(QString cardID, QString lastToCardID, QString lastToDirection, qreal toX, qreal toY);
+
+private:
+    QString m_cardID;
+    QString m_lastToCardID;
+    QString m_lastToDirection;
+    QString m_currentToCardID;
+    QString m_currentToDirection;
+    qreal m_lastToX;
+    qreal m_lastToY;
+    qreal m_currentToX;
+    qreal m_currentToY;
+};
+
+class CommandChangeArrowPos : public Command {
+    Q_OBJECT
+public:
+    CommandChangeArrowPos(QString cardID, qreal lastFromX, qreal lastFromY, qreal lastToX, qreal lastToY, qreal lastControlX, qreal lastControlY, qreal currentFromX, qreal currentFromY, qreal currentToX, qreal currentToY, qreal currentControlX, qreal currentControlY, QObject* parent = nullptr)
+        : Command { cardID, parent }
+    {
+        m_cardID = cardID;
+        m_lastFromX = lastFromX;
+        m_lastFromY = lastFromY;
+        m_lastToX = lastToX;
+        m_lastToY = lastToY;
+        m_lastControlX = lastControlX;
+        m_lastControlY = lastControlY;
+        m_currentFromX = currentFromX;
+        m_currentFromY = currentFromY;
+        m_currentToX = currentToX;
+        m_currentToY = currentToY;
+        m_currentControlX = currentControlX;
+        m_currentControlY = currentControlY;
+    };
+
+    void undo() override
+    {
+        emit changeArrowPosSignal(m_cardID, m_lastFromX, m_lastFromY, m_lastToX, m_lastToY, m_lastControlX, m_lastControlY);
+    };
+    void redo() override
+    {
+        emit changeArrowPosSignal(m_cardID, m_currentFromX, m_currentFromY, m_currentToX, m_currentToY, m_currentControlX, m_currentControlY);
+    };
+
+signals:
+    void changeArrowPosSignal(QString cardID, qreal fromX, qreal fromY, qreal toX, qreal toY, qreal controlX, qreal controlY);
+
+private:
+    QString m_cardID;
+    qreal m_lastFromX;
+    qreal m_lastFromY;
+    qreal m_lastToX;
+    qreal m_lastToY;
+    qreal m_lastControlX;
+    qreal m_lastControlY;
+    qreal m_currentFromX;
+    qreal m_currentFromY;
+    qreal m_currentToX;
+    qreal m_currentToY;
+    qreal m_currentControlX;
+    qreal m_currentControlY;
+};
+
 #endif // COMMANDS_H

@@ -143,6 +143,13 @@ Item {
                     IO.savePos(cardID, nodeLayer.children[i], false)
                 }
             }
+            for (var j = 0; j < edgeLayer.children.length; j++) {
+                if (edgeLayer.children[j].cardID === cardID) {
+                    edgeLayer.children[j].x = x
+                    edgeLayer.children[j].y = y
+                    IO.savePos(cardID, edgeLayer.children[j], false)
+                }
+            }
         }
         function onResizeCardSignal(cardID, width, height) {
             for (var i = 0; i < nodeLayer.children.length; i++) {
@@ -178,6 +185,47 @@ Item {
                     nodeLayer.children[i].backgroundColor = color
                     IO.saveCardBackgroundColor(cardID,
                                                nodeLayer.children[i], false)
+                }
+            }
+        }
+        function onChangeFromCardSignal(cardID, fromCardID, fromDirection, fromX, fromY) {
+            for (var i = 0; i < edgeLayer.children.length; i++) {
+                if (edgeLayer.children[i].cardID === cardID) {
+                    edgeLayer.children[i].fromCardID = fromCardID
+                    edgeLayer.children[i].fromCard = IO.getNodeById(fromCardID)
+                    edgeLayer.children[i].fromDirection = fromDirection
+                    edgeLayer.children[i].arrowFromX = fromX
+                    edgeLayer.children[i].arrowFromY = fromY
+                    edgeLayer.children[i].updateStartCirclePos()
+                    IO.saveFromCard(cardID, edgeLayer.children[i], false)
+                }
+            }
+        }
+        function onChangeToCardSignal(cardID, toCardID, toDirection, toX, toY) {
+            for (var i = 0; i < edgeLayer.children.length; i++) {
+                if (edgeLayer.children[i].cardID === cardID) {
+                    edgeLayer.children[i].toCardID = toCardID
+                    edgeLayer.children[i].toCard = IO.getNodeById(toCardID)
+                    edgeLayer.children[i].toDirection = toDirection
+                    edgeLayer.children[i].arrowToX = toX
+                    edgeLayer.children[i].arrowToY = toY
+                    edgeLayer.children[i].updateArrowHeadPos()
+                    IO.saveToCard(cardID, edgeLayer.children[i], false)
+                }
+            }
+        }
+        function onChangeArrowPosSignal(cardID, fromX, fromY, toX, toY, controlX, controlY) {
+            console.log("onChangeArrowPosSignal")
+            for (var i = 0; i < edgeLayer.children.length; i++) {
+                if (edgeLayer.children[i].cardID === cardID) {
+                    edgeLayer.children[i].toCard = undefined
+                    edgeLayer.children[i].arrowFromX = fromX
+                    edgeLayer.children[i].arrowFromY = fromY
+                    edgeLayer.children[i].arrowToX = toX
+                    edgeLayer.children[i].arrowToY = toY
+                    edgeLayer.children[i].arrowControlX = controlX
+                    edgeLayer.children[i].arrowControlY = controlY
+                    IO.saveArrowPos(cardID, edgeLayer.children[i], false)
                 }
             }
         }

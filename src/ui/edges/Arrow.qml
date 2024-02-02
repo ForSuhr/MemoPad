@@ -81,9 +81,8 @@ Item {
                 toDirection = ""
                 toCard = undefined
                 IO.savePos(cardID, arrow)
-                IO.saveArrowPos(cardID, arrow)
-                IO.saveFromCard(cardID, arrow)
-                IO.saveToCard(cardID, arrow)
+                IO.saveFromCard(cardID, arrow, false)
+                IO.saveToCard(cardID, arrow, false)
             }
         }
     }
@@ -294,8 +293,20 @@ Item {
                     }
                     if (startCircle.Drag.drop() === Qt.MoveAction)
                         fromCard = IO.getNodeById(fromCardID)
+
+                    var lastFromCardID = CardManager.fromCardID(cardID)
+                    var currentFromCardID = fromCardID
+                    var lastFromDirection = CardManager.fromCardDirection(
+                                cardID)
+                    var currentFromDirection = fromDirection
+
                     IO.saveFromCard(cardID, arrow)
-                    IO.saveArrowPos(cardID, arrow)
+
+                    if (lastFromCardID !== currentFromCardID | lastFromDirection
+                            !== currentFromDirection)
+                        IO.saveArrowPos(cardID, arrow, false)
+                    else
+                        IO.saveArrowPos(cardID, arrow, true)
                 }
             }
         }
@@ -326,7 +337,7 @@ Item {
                     dragHandler.enabled = false
                 }
                 onExited: dragHandler.enabled = true
-                onReleased: IO.saveArrowPos(cardID, arrow)
+                onReleased: IO.saveArrowPos(cardID, arrow, false)
             }
         }
         onXChanged: {
@@ -579,10 +590,21 @@ Item {
                     toDirection = ""
                     toCard = undefined
                 }
-                if (arrowhead.Drag.drop() === Qt.MoveAction)
+                if (arrowhead.Drag.drop() === Qt.MoveAction) {
                     toCard = IO.getNodeById(toCardID)
+                }
+
+                var lastToCardID = CardManager.toCardID(cardID)
+                var currentToCardID = toCardID
+                var lastToDirection = CardManager.toCardDirection(cardID)
+                var currentToDirection = toDirection
+
                 IO.saveToCard(cardID, arrow)
-                IO.saveArrowPos(cardID, arrow)
+
+                if (lastToCardID !== currentToCardID | lastToDirection !== currentToDirection)
+                    IO.saveArrowPos(cardID, arrow, false)
+                else
+                    IO.saveArrowPos(cardID, arrow, true)
             }
         }
 

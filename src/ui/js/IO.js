@@ -202,22 +202,77 @@ function saveCanvasName(cardID, card, stackCommand = true) {
 
 // arrow card
 function saveFromCard(cardID, card, stackCommand = true) {
-    CardManager.setFromCardID(cardID, card.fromCardID)
-    CardManager.setFromCardDirection(cardID, card.fromDirection)
+    var lastFromCardID = CardManager.fromCardID(cardID)
+    var currentFromCardID = card.fromCardID
+    var lastFromDirection = CardManager.fromCardDirection(cardID)
+    var currentFromDirection = card.fromDirection
+    var lastFromX = CardManager.fromX(cardID)
+    var currentFromX = card.arrowFromX
+    var lastFromY = CardManager.fromY(cardID)
+    var currentFromY = card.arrowFromY
+    if (lastFromCardID !== currentFromCardID | lastFromDirection !== currentFromDirection) {
+        if (stackCommand)
+            CommandManager.changeFromCard(cardID, lastFromCardID,
+                                          lastFromDirection, lastFromX,
+                                          lastFromY, currentFromCardID,
+                                          currentFromDirection, currentFromX,
+                                          currentFromY)
+        CardManager.setFromCardID(cardID, currentFromCardID)
+        CardManager.setFromCardDirection(cardID, currentFromDirection)
+    }
 }
 
 function saveToCard(cardID, card, stackCommand = true) {
-    CardManager.setToCardID(cardID, card.toCardID)
-    CardManager.setToCardDirection(cardID, card.toDirection)
+    var lastToCardID = CardManager.toCardID(cardID)
+    var currentToCardID = card.toCardID
+    var lastToDirection = CardManager.toCardDirection(cardID)
+    var currentToDirection = card.toDirection
+    var lastToX = CardManager.toX(cardID)
+    var currentToX = card.arrowToX
+    var lastToY = CardManager.toY(cardID)
+    var currentToY = card.arrowToY
+    if (lastToCardID !== currentToCardID | lastToDirection !== currentToDirection) {
+        if (stackCommand)
+            CommandManager.changeToCard(cardID, lastToCardID, lastToDirection,
+                                        lastToX, lastToY, currentToCardID,
+                                        currentToDirection, currentToX,
+                                        currentToY)
+        CardManager.setToCardID(cardID, currentToCardID)
+        CardManager.setToCardDirection(cardID, currentToDirection)
+    }
 }
 
 function saveArrowPos(cardID, card, stackCommand = true) {
-    CardManager.setFromX(cardID, card.arrowFromX)
-    CardManager.setFromY(cardID, card.arrowFromY)
-    CardManager.setToX(cardID, card.arrowToX)
-    CardManager.setToY(cardID, card.arrowToY)
-    CardManager.setControlX(cardID, card.arrowControlX)
-    CardManager.setControlY(cardID, card.arrowControlY)
+    var lastFromX = CardManager.fromX(cardID)
+    var currentFromX = card.arrowFromX
+    var lastFromY = CardManager.fromY(cardID)
+    var currentFromY = card.arrowFromY
+    var lastToX = CardManager.toX(cardID)
+    var currentToX = card.arrowToX
+    var lastToY = CardManager.toY(cardID)
+    var currentToY = card.arrowToY
+    var lastControlX = CardManager.controlX(cardID)
+    var currentControlX = card.arrowControlX
+    var lastControlY = CardManager.controlY(cardID)
+    var currentControlY = card.arrowControlY
+    if (lastFromX !== currentFromX | lastFromY !== currentFromY | lastToX
+            !== currentToX | lastToY !== currentToY | lastControlX
+            !== currentControlX | lastControlY !== currentControlY) {
+        if (stackCommand)
+            CommandManager.changeArrowPos(cardID, lastFromX,
+                                          lastFromY, lastToX,
+                                          lastToY, lastControlX,
+                                          lastControlY, currentFromX,
+                                          currentFromY, currentToX,
+                                          currentToY, currentControlX,
+                                          currentControlY)
+        CardManager.setFromX(cardID, currentFromX)
+        CardManager.setFromY(cardID, currentFromY)
+        CardManager.setToX(cardID, currentToX)
+        CardManager.setToY(cardID, currentToY)
+        CardManager.setControlX(cardID, currentControlX)
+        CardManager.setControlY(cardID, currentControlY)
+    }
 }
 
 function saveStrokeStyle(cardID, card, stackCommand = true) {
