@@ -1,10 +1,31 @@
 #include "preferencesmanager.h"
 
-PreferencesManager::PreferencesManager(QObject* parent)
-    : QObject { parent }
+PreferencesManager::PreferencesManager(QQmlApplicationEngine* engine, QObject* parent)
+    : m_engine(engine)
+    , QObject { parent }
 {
     QString path = QCoreApplication::applicationDirPath() + "/config/settings.json";
     m_settings = new QSettings(path, JsonFormat);
+}
+
+QJSValue PreferencesManager::camera()
+{
+    QJSValue camera = m_engine->newArray(3);
+    camera.setProperty("x", m_settings->value("view/camera/x").toReal());
+    camera.setProperty("y", m_settings->value("view/camera/y").toReal());
+    camera.setProperty("zoomFactor", m_settings->value("view/camera/zoomFactor").toReal());
+    return camera;
+}
+
+void PreferencesManager::setCamera(QJSValue camera)
+{
+    qreal x = camera.property("x").toNumber();
+    qreal y = camera.property("y").toNumber();
+    qreal zoomFactor = camera.property("zoomFactor").toNumber();
+    m_settings->setValue("view/camera/x", x);
+    m_settings->setValue("view/camera/y", y);
+    m_settings->setValue("view/camera/zoomFactor", zoomFactor);
+    emit cameraChanged();
 }
 
 QString PreferencesManager::floatingBarArea()

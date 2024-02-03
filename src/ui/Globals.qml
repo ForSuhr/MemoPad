@@ -5,6 +5,12 @@ import MemoPad.PreferencesManager
 
 QtObject {
     /*canvas*/
+    property var camera: {
+        "x": -window.width / 2,
+        "y": -window.height / 2,
+        "zoomFactor": 1.0
+    }
+
     property string initialCanvasID: "canvas 0"
     property string currentCanvasID: initialCanvasID
     property real dotSize: 1.0
@@ -28,6 +34,7 @@ QtObject {
     property int fontSize: 20
 
     Component.onCompleted: {
+        camera = PreferencesManager.camera
         floatingBarArea = PreferencesManager.floatingBarArea
         cardSizeAutoAdjust = PreferencesManager.cardSizeAutoAdjust
         fullScreenMode = PreferencesManager.fullScreenMode

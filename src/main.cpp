@@ -9,18 +9,18 @@
 int main(int argc, char* argv[])
 {
     QGuiApplication app(argc, argv);
+    QQmlApplicationEngine engine;
 
     /*qml register*/
     qmlRegisterSingletonType(QUrl(QStringLiteral("qrc:/MemoPad/ui/Globals.qml")), "MemoPad.Globals", 1, 0, "Globals");
     qmlRegisterSingletonType(QUrl(QStringLiteral("qrc:/MemoPad/ui/IconSet.qml")), "MemoPad.IconSet", 1, 0, "IconSet");
     QScopedPointer<CardManager> scopedPointer1(new CardManager);
     qmlRegisterSingletonInstance("MemoPad.CardManager", 1, 0, "CardManager", scopedPointer1.get());
-    QScopedPointer<PreferencesManager> scopedPointer2(new PreferencesManager);
+    QScopedPointer<PreferencesManager> scopedPointer2(new PreferencesManager(&engine));
     qmlRegisterSingletonInstance("MemoPad.PreferencesManager", 1, 0, "PreferencesManager", scopedPointer2.get());
     QScopedPointer<CommandManager> scopedPointer3(new CommandManager);
     qmlRegisterSingletonInstance("MemoPad.CommandManager", 1, 0, "CommandManager", scopedPointer3.get());
 
-    QQmlApplicationEngine engine;
     const QUrl url(u"qrc:/MemoPad/ui/Main.qml"_qs);
     QObject::connect(
         &engine, &QQmlApplicationEngine::objectCreated, &app,

@@ -3,12 +3,13 @@ import QtQuick.Controls
 import Qt5Compat.GraphicalEffects
 import MemoPad.CardManager
 import MemoPad.CommandManager
+import MemoPad.PreferencesManager
 import "js/IO.js" as IO
 
 Item {
     id: root
-    x: -parent.width / 2
-    y: -parent.height / 2
+    x: Globals.camera.x
+    y: Globals.camera.y
 
     property alias nodeLayer: nodeLayer
     property alias edgeLayer: edgeLayer
@@ -18,7 +19,7 @@ Item {
     property string dotColor: "gainsboro"
     property bool hasBorder: true // indicate if the canvas has border
     property string borderColor: "gainsboro"
-    property real zoomFactor: 1.0
+    property real zoomFactor: Globals.camera.zoomFactor
     property real zoomMin: 0.5 // zoom out
     property real zoomMax: 2.0 // zoom in
 
@@ -92,6 +93,11 @@ Item {
                                   root.zoomFactor + 0.1 * scrollAngleDelta))
                      if (newZoomFactor !== root.zoomFactor) {
                          root.zoomFactor = newZoomFactor
+                         PreferencesManager.camera = {
+                             "x": root.x,
+                             "y": root.y,
+                             "zoomFactor": zoomFactor
+                         }
                      }
                  }
     }
@@ -104,7 +110,14 @@ Item {
         drag.target: root // drag the whole item instead of canvas
         acceptedButtons: Qt.RightButton
         onPressed: cursorShape = Qt.ClosedHandCursor
-        onReleased: cursorShape = Qt.ArrowCursor
+        onReleased: {
+            cursorShape = Qt.ArrowCursor
+            PreferencesManager.camera = {
+                "x": root.x,
+                "y": root.y,
+                "zoomFactor": zoomFactor
+            }
+        }
     }
 
     /*lose focus*/
