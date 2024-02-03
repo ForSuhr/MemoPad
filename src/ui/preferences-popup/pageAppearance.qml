@@ -58,9 +58,22 @@ Page {
                             PreferencesManager.fontSize = value
                         }
                         ToolTip {
+                            width: 32
+                            height: width
                             parent: slider.handle
                             visible: slider.pressed
-                            text: slider.value
+                            background: Rectangle {
+                                width: parent.width
+                                height: width
+                                radius: 5
+                                color: "white"
+                                border.color: "gainsboro"
+                            }
+                            contentItem: Text {
+                                text: slider.value
+                                color: "black"
+                                font.pixelSize: Globals.fontPixelSize16
+                            }
                         }
                     }
                 }
