@@ -124,4 +124,15 @@ Item {
             }
         }
     }
+
+    /*shut down*/
+    FloatingButton {
+        id: shutdown
+        x: root.width - width - 42
+        y: 42
+        width: 32
+        height: 32
+        imageSource: IconSet.shutdown
+        buttonAction: "shutdown"
+    }
 }

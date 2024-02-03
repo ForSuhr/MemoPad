@@ -17,6 +17,7 @@ QtObject {
     property string undo: "qrc:/MemoPad/ui/assets/themes/lumos/undo.svg"
     property string redo: "qrc:/MemoPad/ui/assets/themes/lumos/redo.svg"
     property string back: "qrc:/MemoPad/ui/assets/themes/lumos/back.svg"
+    property string shutdown: "qrc:/MemoPad/ui/assets/themes/lumos/shutdown.svg"
     property string doorClosed: "qrc:/MemoPad/ui/assets/themes/lumos/door-closed.svg"
     property string doorOpen: "qrc:/MemoPad/ui/assets/themes/lumos/door-open.svg"
 }

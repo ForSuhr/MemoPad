@@ -44,6 +44,8 @@ Item {
                 CommandManager.redo()
             else if (buttonAction === "back")
                 IO.loadCanvas(CardManager.upperCanvasID())
+            else if (buttonAction === "shutdown")
+                Qt.quit()
         }
     }
 }

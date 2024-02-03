@@ -34,6 +34,7 @@ qt_add_qml_module(MemoPad
         ui/assets/themes/lumos/undo.svg
         ui/assets/themes/lumos/redo.svg
         ui/assets/themes/lumos/back.svg
+        ui/assets/themes/lumos/shutdown.svg
         ui/assets/themes/lumos/door-closed.svg
         ui/assets/themes/lumos/door-open.svg
         #[[window icon]]
