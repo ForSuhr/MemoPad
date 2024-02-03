@@ -215,7 +215,6 @@ Item {
             }
         }
         function onChangeArrowPosSignal(cardID, fromX, fromY, toX, toY, controlX, controlY) {
-            console.log("onChangeArrowPosSignal")
             for (var i = 0; i < edgeLayer.children.length; i++) {
                 if (edgeLayer.children[i].cardID === cardID) {
                     edgeLayer.children[i].toCard = undefined

@@ -5,8 +5,6 @@ import MemoPad.Globals
 
 Popup {
     id: root
-
-    property int fontPixelSize: Globals.fontPixelSize16
     width: 510
     height: 400
     anchors.centerIn: parent
@@ -22,6 +20,10 @@ Popup {
         border.width: 2
         border.color: "lightgray"
     }
+
+    property int fontPixelSize: Globals.fontPixelSize16
+    property string selectedColor: "lightsteelblue"
+    property string hoveredColor: "gainsboro"
 
     RowLayout {
         anchors.verticalCenter: parent.verticalCenter
@@ -51,7 +53,7 @@ Popup {
                 Rectangle {
                     width: 80
                     height: 36
-                    color: listView.currentIndex === index ? "lightsteelblue" : "transparent"
+                    color: "transparent"
                     radius: 10
                     MouseArea {
                         anchors.fill: parent
@@ -59,15 +61,15 @@ Popup {
                         onClicked: {
                             listView.currentIndex = index
                             stackView.push(model.page)
+                            parent.color = "transparent"
                         }
-                        //                        onEntered: {
-                        //                            if (listView.currentIndex !== index)
-                        //                                parent.color = "aliceblue"
-                        //                        }
-                        //                        onExited: {
-                        //                            if (listView.currentIndex !== index)
-                        //                                parent.color = "transparent"
-                        //                        }
+                        onContainsMouseChanged: {
+                            if (listView.currentIndex !== index)
+                                if (containsMouse)
+                                    parent.color = hoveredColor
+                                else
+                                    parent.color = "transparent"
+                        }
                     }
                     Text {
                         anchors.centerIn: parent
@@ -76,6 +78,17 @@ Popup {
                     }
                 }
             }
+            highlight: HighlightBar {}
+            highlightFollowsCurrentItem: false
+        }
+
+        component HighlightBar: Rectangle {
+            width: 80
+            height: 36
+            radius: 10
+            color: selectedColor
+            x: listView.currentItem.x
+            y: listView.currentItem.y
         }
 
         Rectangle {
