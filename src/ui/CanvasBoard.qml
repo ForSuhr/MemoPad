@@ -23,6 +23,14 @@ Item {
     property real zoomMin: 0.5 // zoom out
     property real zoomMax: 2.0 // zoom in
 
+    function saveCamera() {
+        PreferencesManager.camera = {
+            "x": root.x,
+            "y": root.y,
+            "zoomFactor": zoomFactor
+        }
+    }
+
     transform: [
         Scale {
             id: itemScale
@@ -82,6 +90,7 @@ Item {
                        root.zoomFactor = 1.0 // reset scale
                        root.x = -root.parent.width / 2
                        root.y = -root.parent.height / 2
+                       saveCamera()
                    }
         onWheel: wheel => {
                      // zoom in & out
@@ -92,12 +101,8 @@ Item {
                          Math.max(zoomMin,
                                   root.zoomFactor + 0.1 * scrollAngleDelta))
                      if (newZoomFactor !== root.zoomFactor) {
-                         root.zoomFactor = newZoomFactor
-                         PreferencesManager.camera = {
-                             "x": root.x,
-                             "y": root.y,
-                             "zoomFactor": zoomFactor
-                         }
+                         root.zoomFactor = newZoomFactor.toFixed(1)
+                         saveCamera()
                      }
                  }
     }
@@ -112,11 +117,7 @@ Item {
         onPressed: cursorShape = Qt.ClosedHandCursor
         onReleased: {
             cursorShape = Qt.ArrowCursor
-            PreferencesManager.camera = {
-                "x": root.x,
-                "y": root.y,
-                "zoomFactor": zoomFactor
-            }
+            saveCamera()
         }
     }
 
