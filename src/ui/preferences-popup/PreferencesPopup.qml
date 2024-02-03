@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import MemoPad.Globals
+import MemoPad.Style
 
 Popup {
     id: root

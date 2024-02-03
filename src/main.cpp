@@ -14,6 +14,7 @@ int main(int argc, char* argv[])
     /*qml register*/
     qmlRegisterSingletonType(QUrl(QStringLiteral("qrc:/MemoPad/ui/Globals.qml")), "MemoPad.Globals", 1, 0, "Globals");
     qmlRegisterSingletonType(QUrl(QStringLiteral("qrc:/MemoPad/ui/IconSet.qml")), "MemoPad.IconSet", 1, 0, "IconSet");
+    qmlRegisterSingletonType(QUrl(QStringLiteral("qrc:/MemoPad/ui/style/Style.qml")), "MemoPad.Style", 1, 0, "Style");
     QScopedPointer<CardManager> scopedPointer1(new CardManager);
     qmlRegisterSingletonInstance("MemoPad.CardManager", 1, 0, "CardManager", scopedPointer1.get());
     QScopedPointer<PreferencesManager> scopedPointer2(new PreferencesManager(&engine));

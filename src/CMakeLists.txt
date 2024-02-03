@@ -60,6 +60,8 @@ qt_add_qml_module(MemoPad
         #[[singleton]]
         ui/Globals.qml
         ui/IconSet.qml
+        #[[style]]
+        ui/style/Style.qml
         #[[javascript]]
         ui/js/CardCreator.js
         ui/js/Snap.js
