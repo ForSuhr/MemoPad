@@ -88,8 +88,9 @@ qt_add_qml_module(MemoPad
         ui/overlay/CanvasPalette.qml
         #[[preferences-popup]]
         ui/preferences-popup/PreferencesPopup.qml
-        ui/preferences-popup/preferencesPage1.qml
-        ui/preferences-popup/preferencesPage2.qml
+        ui/preferences-popup/pageCommon.qml
+        ui/preferences-popup/pageAppearance.qml
+        ui/preferences-popup/pageAbout.qml
         #[[miscellaneous]]
         ui/CanvasBoard.qml
         ui/NodeLayer.qml

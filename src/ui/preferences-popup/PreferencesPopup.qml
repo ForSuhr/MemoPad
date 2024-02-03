@@ -39,19 +39,23 @@ Popup {
             model: ListModel {
                 ListElement {
                     title: qsTr("Common")
-                    page: "preferencesPage1.qml"
+                    page: "pageCommon.qml"
+                }
+                ListElement {
+                    title: qsTr("Appearance")
+                    page: "pageAppearance.qml"
                 }
                 ListElement {
                     title: qsTr("About")
-                    page: "preferencesPage2.qml"
+                    page: "pageAbout.qml"
                 }
             }
             delegate: Item {
-                width: 80
+                width: 90
                 height: 40
                 anchors.horizontalCenter: parent.horizontalCenter
                 Rectangle {
-                    width: 80
+                    width: 90
                     height: 36
                     color: "transparent"
                     radius: 10
@@ -83,7 +87,7 @@ Popup {
         }
 
         component HighlightBar: Rectangle {
-            width: 80
+            width: 90
             height: 36
             radius: 10
             color: selectedColor
@@ -102,7 +106,7 @@ Popup {
             id: stackView
             width: 400
             height: 400
-            initialItem: "preferencesPage1.qml"
+            initialItem: "pageCommon.qml"
             pushEnter: Transition {
                 PropertyAnimation {
                     property: "opacity"

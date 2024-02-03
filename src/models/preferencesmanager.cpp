@@ -39,3 +39,14 @@ void PreferencesManager::setFullScreenMode(bool fullScreenMode)
     m_settings->setValue("common/fullScreenMode", fullScreenMode);
     emit fullScreenModeChanged();
 }
+
+int PreferencesManager::fontSize()
+{
+    return m_settings->value("appearance/fontSize").toInt();
+}
+
+void PreferencesManager::setFontSize(int fontSize)
+{
+    m_settings->setValue("appearance/fontSize", fontSize);
+    emit fontSizeChanged();
+}

@@ -20,13 +20,17 @@ QtObject {
     property int fontPixelSize36: 36
 
     /*----------preferences----------*/
-    /*page1*/
+    /*page commom*/
     property bool cardSizeAutoAdjust: false
     property bool fullScreenMode: false
+
+    /*page appearance*/
+    property int fontSize: 20
 
     Component.onCompleted: {
         floatingBarArea = PreferencesManager.floatingBarArea
         cardSizeAutoAdjust = PreferencesManager.cardSizeAutoAdjust
         fullScreenMode = PreferencesManager.fullScreenMode
+        fontSize = PreferencesManager.fontSize
     }
 }

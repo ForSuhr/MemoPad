@@ -133,7 +133,7 @@ ResizableItem {
             rightPadding: 10
             text: rawTextArea.text
             textFormat: Text.MarkdownText
-            font.pixelSize: 24
+            font.pixelSize: Globals.fontSize
             readOnly: true
             color: "black"
             activeFocusOnPress: false
