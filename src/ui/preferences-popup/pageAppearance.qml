@@ -30,7 +30,7 @@ Page {
             spacing: 30
 
             Item {
-                id: cardSizeAutoAdjust
+                id: fontSize
                 width: 300
                 height: 30
                 RowLayout {
@@ -62,6 +62,29 @@ Page {
                             visible: slider.pressed
                             text: slider.value
                         }
+                    }
+                }
+            }
+
+            Item {
+                id: textFont
+                width: 300
+                height: 30
+                RowLayout {
+                    width: parent.width
+                    height: parent.height
+                    Label {
+                        Layout.alignment: Qt.AlignVCenter
+                        text: qsTr("Text Font")
+                        color: "black"
+                        font.pixelSize: fontPixelSize
+                    }
+                    Item {
+                        Layout.fillWidth: true
+                        Layout.fillHeight: true
+                    }
+                    ComboBox {
+                        model: Qt.fontFamilies()
                     }
                 }
             }
