@@ -8,7 +8,7 @@ Popup {
     id: root
     width: 510
     height: 400
-    anchors.centerIn: parent
+    anchors.centerIn: Overlay.overlay
     modal: true
     focus: true
     closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutside

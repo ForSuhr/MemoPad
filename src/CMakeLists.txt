@@ -94,6 +94,11 @@ qt_add_qml_module(MemoPad
         ui/preferences-popup/pageCommon.qml
         ui/preferences-popup/pageAppearance.qml
         ui/preferences-popup/pageAbout.qml
+        #[[custom-components]]
+        ui/custom-components/LayoutSpacer.qml
+        ui/custom-components/SearchableComboBox.qml
+        ui/custom-components/CustomButton.qml
+        ui/custom-components/CustomComboBox.qml
         #[[miscellaneous]]
         ui/CanvasBoard.qml
         ui/NodeLayer.qml

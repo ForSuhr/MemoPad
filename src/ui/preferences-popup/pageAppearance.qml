@@ -4,6 +4,7 @@ import QtQuick.Controls.Basic
 import QtQuick.Layouts
 import MemoPad.PreferencesManager
 import MemoPad.Globals
+import "../custom-components"
 
 Page {
     id: commonPage
@@ -92,11 +93,16 @@ Page {
                         color: "black"
                         font.pixelSize: fontPixelSize
                     }
-                    Item {
-                        Layout.fillWidth: true
-                        Layout.fillHeight: true
+
+                    LayoutSpacer {}
+
+                    CustomButton {
+                        onClicked: popup.open()
+                        text: "to be written"
                     }
-                    ComboBox {
+
+                    SearchableComboBox {
+                        id: popup
                         model: Qt.fontFamilies()
                     }
                 }
