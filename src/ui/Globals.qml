@@ -17,13 +17,8 @@ QtObject {
     property int dotInterval: 20
     property string canvasColor: "floralwhite"
 
-    /*floating bar*/
+    //floating bar
     property string floatingBarArea: "top area"
-
-    /*font*/
-    property int fontPixelSize16: 16
-    property int fontPixelSize24: 24
-    property int fontPixelSize36: 36
 
     /*----------preferences----------*/
     /*page commom*/
@@ -32,12 +27,17 @@ QtObject {
 
     /*page appearance*/
     property int fontSize: 20
+    property string fontName: "Arial"
 
     Component.onCompleted: {
+        /*canvas*/
         camera = PreferencesManager.camera
         floatingBarArea = PreferencesManager.floatingBarArea
+        /*page commom*/
         cardSizeAutoAdjust = PreferencesManager.cardSizeAutoAdjust
         fullScreenMode = PreferencesManager.fullScreenMode
-        fontSize = PreferencesManager.fontSize
+        /*page appearance*/
+        fontSize = PreferencesManager.fontSize !== "" ? PreferencesManager.fontSize : 20
+        fontName = PreferencesManager.fontName !== "" ? PreferencesManager.fontName : "Arial"
     }
 }

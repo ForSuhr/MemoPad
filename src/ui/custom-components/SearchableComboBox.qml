@@ -2,6 +2,8 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Controls.Basic
 import QtQuick.Layouts
+import MemoPad.Globals
+import MemoPad.PreferencesManager
 
 Popup {
     id: root
@@ -45,7 +47,7 @@ Popup {
     ColumnLayout {
         Label {
             height: rowHeight
-            text: qsTr("Font name :  ") + comboBox.currentText
+            text: qsTr("Font name :  ") + Globals.fontName
             color: "black"
             font.pixelSize: 16
         }
@@ -95,6 +97,10 @@ Popup {
                 height: rowHeight
                 model: comboboxListModel
                 Component.onCompleted: resetListModel()
+                onActivated: {
+                    Globals.fontName = textAt(currentIndex)
+                    PreferencesManager.fontName = textAt(currentIndex)
+                }
             }
         }
     }

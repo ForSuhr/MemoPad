@@ -22,7 +22,7 @@ Popup {
         border.color: "lightgray"
     }
 
-    property int fontPixelSize: Globals.fontPixelSize16
+    property int fontPixelSize: 16
     property string selectedColor: "lightsteelblue"
     property string hoveredColor: "gainsboro"
 

@@ -7,6 +7,8 @@ import Qt5Compat.GraphicalEffects
 Button {
     id: control
     font.pixelSize: 16
+    width: 120
+    height: 30
 
     property string iconPath: ""
     property string themeType: "light"
@@ -25,6 +27,8 @@ Button {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.verticalCenter: parent.verticalCenter
         Text {
+            width: control.width
+            height: control.height
             Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
             text: control.text
             font: control.font
@@ -94,7 +98,7 @@ Button {
     DropShadow {
         anchors.fill: backgroundRect
         source: backgroundRect
-        radius: 2
+        radius: 5
         color: "gainsboro"
     }
 

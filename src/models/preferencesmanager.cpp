@@ -71,3 +71,14 @@ void PreferencesManager::setFontSize(int fontSize)
     m_settings->setValue("appearance/fontSize", fontSize);
     emit fontSizeChanged();
 }
+
+QString PreferencesManager::fontName()
+{
+    return m_settings->value("appearance/fontName").toString();
+}
+
+void PreferencesManager::setFontName(QString fontName)
+{
+    m_settings->setValue("appearance/fontName", fontName);
+    emit fontNameChanged();
+}

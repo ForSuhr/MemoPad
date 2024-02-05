@@ -93,6 +93,7 @@ ResizableItem {
             }
             wrapMode: TextArea.Wrap
             textFormat: Text.PlainText
+            font.family: Globals.fontName
             font.pixelSize: 24
             color: "black"
             visible: false
@@ -133,6 +134,7 @@ ResizableItem {
             rightPadding: 10
             text: rawTextArea.text
             textFormat: Text.MarkdownText
+            font.family: Globals.fontName
             font.pixelSize: Globals.fontSize
             readOnly: true
             color: "black"

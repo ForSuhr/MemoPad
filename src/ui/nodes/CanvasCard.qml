@@ -135,6 +135,7 @@ ResizableItem {
             radius: cornerRadius
         }
         text: canvasName
+        font.family: Globals.fontName
         font.pixelSize: 16
         horizontalAlignment: TextInput.AlignHCenter
         color: "black"

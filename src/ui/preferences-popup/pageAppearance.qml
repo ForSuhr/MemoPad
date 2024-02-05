@@ -9,7 +9,7 @@ import "../custom-components"
 Page {
     id: commonPage
 
-    property int fontPixelSize: Globals.fontPixelSize16
+    property int fontPixelSize: 16
     width: 400
     height: 400
     background: Rectangle {
@@ -73,7 +73,7 @@ Page {
                             contentItem: Text {
                                 text: slider.value
                                 color: "black"
-                                font.pixelSize: Globals.fontPixelSize16
+                                font.pixelSize: 16
                             }
                         }
                     }
@@ -98,9 +98,12 @@ Page {
 
                     CustomButton {
                         id: fontPopupBtn
-                        onClicked: popup.open()
-                        text: qsTr("Font Name")
+                        width: 120
+                        text: Globals.fontName.length
+                              <= 20 ? Globals.fontName : Globals.fontName.substring(
+                                          0, 17) + "..."
                         themeType: "light"
+                        onClicked: popup.open()
                     }
 
                     SearchableComboBox {

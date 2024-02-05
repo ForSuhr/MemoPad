@@ -11,6 +11,7 @@ ComboBox {
 
     contentItem: Text {
         height: contentHeight
+        leftPadding: 20
         verticalAlignment: Text.AlignVCenter
         horizontalAlignment: Text.AlignHCenter
         text: currentText

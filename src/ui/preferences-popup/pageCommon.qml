@@ -8,7 +8,7 @@ import MemoPad.Globals
 Page {
     id: commonPage
 
-    property int fontPixelSize: Globals.fontPixelSize16
+    property int fontPixelSize: 16
     width: 400
     height: 400
     background: Rectangle {

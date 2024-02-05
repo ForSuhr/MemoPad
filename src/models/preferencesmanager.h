@@ -15,6 +15,7 @@ class PreferencesManager : public QObject {
     Q_PROPERTY(bool cardSizeAutoAdjust READ cardSizeAutoAdjust WRITE setCardSizeAutoAdjust NOTIFY cardSizeAutoAdjustChanged FINAL)
     Q_PROPERTY(bool fullScreenMode READ fullScreenMode WRITE setFullScreenMode NOTIFY fullScreenModeChanged FINAL)
     Q_PROPERTY(int fontSize READ fontSize WRITE setFontSize NOTIFY fontSizeChanged FINAL)
+    Q_PROPERTY(QString fontName READ fontName WRITE setFontName NOTIFY fontNameChanged FINAL)
 public:
     explicit PreferencesManager(QQmlApplicationEngine* engine, QObject* parent = nullptr);
 
@@ -28,6 +29,8 @@ public:
     void setFullScreenMode(bool fullScreenMode);
     int fontSize();
     void setFontSize(int fontSize);
+    QString fontName();
+    void setFontName(QString fontName);
 
 signals:
     void cameraChanged();
@@ -35,6 +38,7 @@ signals:
     void cardSizeAutoAdjustChanged();
     void fullScreenModeChanged();
     void fontSizeChanged();
+    void fontNameChanged();
 
 private:
     QQmlApplicationEngine* m_engine = nullptr;

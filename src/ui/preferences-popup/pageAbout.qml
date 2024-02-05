@@ -6,7 +6,7 @@ import MemoPad.Globals
 Page {
     id: aboutPage
 
-    property int fontPixelSize: Globals.fontPixelSize16
+    property int fontPixelSize: 16
     property string creatorText: "<b>Creator</b>" + "<br><br>"
                                  + "ForSuhr - <a href=https://github.com/ForSuhr/MemoPad>GitHub</a>"
     property string qtText: "<b>Third Party Licenses</b>" + "<br><br>"
