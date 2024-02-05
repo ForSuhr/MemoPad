@@ -4,6 +4,8 @@ import QtQuick.Controls.Basic
 import QtQuick.Layouts
 import MemoPad.PreferencesManager
 import MemoPad.Globals
+import MemoPad.IconSet
+import "../custom-components"
 
 Page {
     id: commonPage
@@ -88,11 +90,35 @@ Page {
                     }
                 }
             }
-
             Item {
-                Layout.fillWidth: true
-                Layout.fillHeight: true
+                id: openSaveDir
+                width: 300
+                height: 30
+                RowLayout {
+                    width: parent.width
+                    height: parent.height
+                    Label {
+                        Layout.alignment: Qt.AlignVCenter
+                        text: qsTr("Open Save Directory")
+                        color: "black"
+                        font.pixelSize: fontPixelSize
+                    }
+                    Item {
+                        Layout.fillWidth: true
+                        Layout.fillHeight: true
+                    }
+                    CustomButton {
+                        id: openSaveDirBtn
+                        width: 50
+                        hasIcon: true
+                        themeType: "light"
+                        iconPath: IconSet.folder
+                        iconScale: 0.5
+                        onClicked: PreferencesManager.openSaveDir()
+                    }
+                }
             }
+            LayoutSpacer {}
         }
     }
 }

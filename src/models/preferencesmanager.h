@@ -32,6 +32,8 @@ public:
     QString fontName();
     void setFontName(QString fontName);
 
+    Q_INVOKABLE void openSaveDir();
+
 signals:
     void cameraChanged();
     void floatingBarAreaChanged();

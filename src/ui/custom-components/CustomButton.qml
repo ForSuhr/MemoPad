@@ -10,8 +10,12 @@ Button {
     width: 120
     height: 30
 
+    property bool hasIcon: false
+    property bool hasText: false
+
     property string iconPath: ""
     property string themeType: "light"
+    property real iconScale: 1
 
     MouseArea {
         id: mouseArea
@@ -26,9 +30,17 @@ Button {
         height: parent.height
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.verticalCenter: parent.verticalCenter
+        Image {
+            visible: hasIcon
+            fillMode: Image.PreserveAspectCrop
+            mipmap: true
+            Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
+            sourceSize: Qt.size(control.implicitWidth * iconScale,
+                                control.implicitHeight * iconScale)
+            source: iconPath
+        }
         Text {
-            width: control.width
-            height: control.height
+            visible: hasText
             Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
             text: control.text
             font: control.font
@@ -38,18 +50,12 @@ Button {
             verticalAlignment: Text.AlignVCenter
             elide: Text.ElideRight
         }
-        Image {
-            Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
-            sourceSize: Qt.size(control.implicitWidth * 0.5,
-                                control.implicitHeight * 0.5)
-            source: iconPath
-        }
     }
 
     background: Rectangle {
         id: backgroundRect
-        implicitWidth: 120
-        implicitHeight: 30
+        implicitWidth: control.width
+        implicitHeight: control.height
         color: "ghostwhite"
         radius: 5
         border.width: 1

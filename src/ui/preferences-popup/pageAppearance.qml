@@ -99,6 +99,7 @@ Page {
                     CustomButton {
                         id: fontPopupBtn
                         width: 120
+                        hasText: true
                         text: Globals.fontName.length
                               <= 20 ? Globals.fontName : Globals.fontName.substring(
                                           0, 17) + "..."

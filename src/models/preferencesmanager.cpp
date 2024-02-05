@@ -1,5 +1,7 @@
 #include "preferencesmanager.h"
 
+#include <QDesktopServices>
+
 PreferencesManager::PreferencesManager(QQmlApplicationEngine* engine, QObject* parent)
     : m_engine(engine)
     , QObject { parent }
@@ -81,4 +83,10 @@ void PreferencesManager::setFontName(QString fontName)
 {
     m_settings->setValue("appearance/fontName", fontName);
     emit fontNameChanged();
+}
+
+void PreferencesManager::openSaveDir()
+{
+    QString path = QCoreApplication::applicationDirPath() + "/save";
+    QDesktopServices::openUrl("file:///" + path);
 }
