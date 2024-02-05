@@ -45,6 +45,7 @@ function load(canvasID) {
             break
         }
     }
+
     // load edges secondly
     for (i = 0; i < cardNum; i++) {
         cardID = cardIDs[i]
@@ -287,9 +288,28 @@ function saveCurrentCanvasColor(color, stackCommand = true) {
 function saveCanvasColor(canvasID, color, stackCommand = true) {
     CardManager.setCanvasColor(canvasID, color)
 }
-
 /*---------------------------delete--------------------------------------*/
 function deleteCard(cardID, card) {
+    // delete card in backend
     CardManager.deleteCard(cardID)
+    // delete card in frontend
     card.destroy()
+    // inform edges that the card is deleted
+    var edgeLayer = bgCanvas.edgeLayer
+    for (var j = 0; j < edgeLayer.children.length; j++) {
+        if (edgeLayer.children[j].fromCardID === cardID) {
+            edgeLayer.children[j].fromCardID = ""
+            edgeLayer.children[j].fromDirection = ""
+            edgeLayer.children[j].fromCard = undefined
+            saveFromCard(edgeLayer.children[j].cardID,
+                         edgeLayer.children[j], false)
+        }
+        if (edgeLayer.children[j].toCardID === cardID) {
+            edgeLayer.children[j].toCardID = ""
+            edgeLayer.children[j].toDirection = ""
+            edgeLayer.children[j].toCard = undefined
+            saveToCard(edgeLayer.children[j].cardID,
+                       edgeLayer.children[j], false)
+        }
+    }
 }
