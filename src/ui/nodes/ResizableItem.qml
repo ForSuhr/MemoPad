@@ -56,7 +56,7 @@ Item {
             onExited: cursorShape = Qt.ArrowCursor
             onReleased: {
                 Snap.snap(root)
-                IO.saveTransform(id, root)
+                IO.saveTransform(cardID, root)
             }
             onMouseYChanged: {
                 if (drag.active) {
@@ -93,7 +93,7 @@ Item {
             onExited: cursorShape = Qt.ArrowCursor
             onReleased: {
                 Snap.snap(root)
-                IO.saveTransform(id, root)
+                IO.saveTransform(cardID, root)
             }
             onMouseYChanged: {
                 if (drag.active) {
@@ -127,7 +127,7 @@ Item {
             onExited: cursorShape = Qt.ArrowCursor
             onReleased: {
                 Snap.snap(root)
-                IO.saveTransform(id, root)
+                IO.saveTransform(cardID, root)
             }
             onMouseXChanged: {
                 if (drag.active) {
@@ -164,7 +164,7 @@ Item {
             onExited: cursorShape = Qt.ArrowCursor
             onReleased: {
                 Snap.snap(root)
-                IO.saveTransform(id, root)
+                IO.saveTransform(cardID, root)
             }
             onMouseXChanged: {
                 if (drag.active) {
@@ -198,7 +198,7 @@ Item {
             onExited: cursorShape = Qt.ArrowCursor
             onReleased: {
                 Snap.snap(root)
-                IO.saveTransform(id, root)
+                IO.saveTransform(cardID, root)
             }
             onMouseXChanged: {
                 if (drag.active) {
@@ -247,7 +247,7 @@ Item {
             onExited: cursorShape = Qt.ArrowCursor
             onReleased: {
                 Snap.snap(root)
-                IO.saveTransform(id, root)
+                IO.saveTransform(cardID, root)
             }
             onMouseXChanged: {
                 if (drag.active) {
@@ -293,7 +293,7 @@ Item {
             onExited: cursorShape = Qt.ArrowCursor
             onReleased: {
                 Snap.snap(root)
-                IO.saveTransform(id, root)
+                IO.saveTransform(cardID, root)
             }
             onMouseXChanged: {
                 if (drag.active) {
@@ -339,7 +339,7 @@ Item {
             onExited: cursorShape = Qt.ArrowCursor
             onReleased: {
                 Snap.snap(root)
-                IO.saveTransform(id, root)
+                IO.saveTransform(cardID, root)
             }
             onMouseXChanged: {
                 if (drag.active) {

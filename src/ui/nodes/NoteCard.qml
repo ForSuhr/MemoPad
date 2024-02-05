@@ -94,7 +94,7 @@ ResizableItem {
             wrapMode: TextArea.Wrap
             textFormat: Text.PlainText
             font.family: Globals.fontName
-            font.pixelSize: 24
+            font.pixelSize: Globals.fontSize
             color: "black"
             visible: false
             selectByMouse: true
