@@ -97,8 +97,10 @@ Page {
                     LayoutSpacer {}
 
                     CustomButton {
+                        id: fontPopupBtn
                         onClicked: popup.open()
-                        text: "to be written"
+                        text: qsTr("Font Name")
+                        themeType: "light"
                     }
 
                     SearchableComboBox {
