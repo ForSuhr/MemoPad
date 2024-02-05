@@ -1,5 +1,5 @@
 # Changelog
-## [v0.2.0] - 2024-02-05
+## [v0.3.0] - 2024-02-05
 ### Add
 - Arrow
 - Palette for canvas
