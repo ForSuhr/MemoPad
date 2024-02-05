@@ -354,7 +354,8 @@ QString CardManager::createCard(QString cardType)
 void CardManager::deleteCard(QString cardID)
 {
     /*remove all sub-canvases that the cardID refers to recursively (in case this cardID belongs to a card of type "canvas")*/
-    deleteCanvasByCanvasCard(cardID, m_currentCanvasID);
+    if (m_cardMap[cardID]->m_cardType == "canvas")
+        deleteCanvasByCanvasCard(cardID, m_currentCanvasID);
 
     /*remove it from memory*/
     m_cardMap.remove(cardID);
