@@ -69,24 +69,44 @@ ComboBox {
             border.color: "lightgray"
             clip: true
         }
-        onOpened: fadeIn.start()
-    }
 
-    ParallelAnimation {
-        id: fadeIn
-        PropertyAnimation {
-            target: popup
-            property: "scale"
-            from: 0.9
-            to: 1
-            duration: 50
+        enter: Transition {
+            ParallelAnimation {
+                id: popIn
+                PropertyAnimation {
+                    target: popup
+                    property: "scale"
+                    from: 0.9
+                    to: 1
+                    duration: 50
+                }
+                PropertyAnimation {
+                    target: popup
+                    property: "opacity"
+                    from: 0.9
+                    to: 1
+                    duration: 50
+                }
+            }
         }
-        PropertyAnimation {
-            target: popup
-            property: "opacity"
-            from: 0.9
-            to: 1
-            duration: 50
+        exit: Transition {
+            ParallelAnimation {
+                id: popOut
+                PropertyAnimation {
+                    target: popup
+                    property: "scale"
+                    from: 1
+                    to: 0.9
+                    duration: 50
+                }
+                PropertyAnimation {
+                    target: popup
+                    property: "opacity"
+                    from: 1
+                    to: 0.9
+                    duration: 50
+                }
+            }
         }
     }
 }
