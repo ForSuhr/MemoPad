@@ -18,9 +18,7 @@ Unzip and run!
 
 Run and read!
 
-<img src="https://github.com/ForSuhr/MemoPad/assets/105584788/1d84f4b9-5577-46d3-9017-528ca3e6aab1" width="600"/>
-
-As you can see, the user guide is already written inside.
+<img src="https://github.com/ForSuhr/MemoPad/assets/105584788/22828744-6295-40e2-ba2c-876c66bb26d0" width="600"/>
 
 ## Features
 
@@ -28,8 +26,7 @@ As you can see, the user guide is already written inside.
 - [x] Primitive Markdown
 - [ ] Advanced Markdown
 - [x] Image Embedding
-- [ ] Arrow
-- [ ] More Settings...
+- [x] Arrow
 
 ## Requirements & Dependencies
 
