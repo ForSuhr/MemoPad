@@ -20,5 +20,7 @@ QtObject {
     property string shutdown: "qrc:/MemoPad/ui/assets/themes/lumos/shutdown.svg"
     property string doorClosed: "qrc:/MemoPad/ui/assets/themes/lumos/door-closed.svg"
     property string doorOpen: "qrc:/MemoPad/ui/assets/themes/lumos/door-open.svg"
+    property string bookClosed: "qrc:/MemoPad/ui/assets/themes/lumos/book-closed.svg"
+    property string bookOpen: "qrc:/MemoPad/ui/assets/themes/lumos/book-open.svg"
     property string folder: "qrc:/MemoPad/ui/assets/themes/lumos/folder.svg"
 }

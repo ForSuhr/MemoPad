@@ -85,23 +85,23 @@ ResizableItem {
     }
 
     Image {
-        id: door
+        id: book
         z: 2
         width: root.width - Globals.dotInterval * 2
         height: root.height - Globals.dotInterval * 2
         fillMode: Qt.KeepAspectRatio
         mipmap: true
         anchors.centerIn: teleport
-        source: IconSet.doorClosed
+        source: IconSet.bookClosed
         MouseArea {
             anchors.fill: parent
             hoverEnabled: true
             onEntered: {
-                door.source = IconSet.doorOpen
+                book.source = IconSet.bookOpen
                 cursorShape = Qt.PointingHandCursor
             }
             onExited: {
-                door.source = IconSet.doorClosed
+                book.source = IconSet.bookClosed
                 cursorShape = Qt.OpenHandCursor
             }
             onClicked: {
